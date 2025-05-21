@@ -1,0 +1,22 @@
+{
+  "name": "imaginary-health",
+  "version": "1.0.0",
+  "workspaces": [
+    "frontend",
+    "studio"
+  ],
+  "scripts": {
+    "build": "npm run build:studio && npm run build:frontent",
+    "build:studio": "cd studio && npm run build",
+    "build:frontend": "cd studio && npm run build",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:studio\"",
+    "dev:frontend": "npm --workspace frontend run dev",
+    "dev:studio": "npm --workspace studio run dev"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
