@@ -1,40 +1,22 @@
-import { sanityClient, resolveLinkURL } from "@/sanity/client";
-import { pageBySlugQuery } from "@/sanity/queries";
 import PageTemplate from "@/components/templates/PageTemplate";
 import { PageBuilder } from "@/lib/pageBuilder";
-import { CardType, Link } from "@/types";
+import { sanityClient, resolveLinkURL } from "@/sanity/client";
+import { pageBySlugQuery } from "@/sanity/queries";
+import { notFound } from "next/navigation";
+import { Link } from "@/types";
 
-export default async function Home() {
-  const page = await sanityClient.fetch(pageBySlugQuery, { slug: "home" });
+export default async function Page({ params }: { params: { slug: string } }) {
+  const { slug } = await params;
+  const page = await sanityClient.fetch(pageBySlugQuery, { slug: slug });
 
-  if (!page) {
-    return <div>404 - Page not found</div>;
-  }
+  if (!page) return notFound();
 
   const { pageBuilder = [], hideHeader = false, hideFooter = false } = page;
 
   //Pre-resolve CallToAction links in any block
   const resolvedSections = await Promise.all(
     pageBuilder.map(async (section: any) => {
-      const { callToAction, cards } = section;
-
-      if (cards) {
-        const resolvedCards = await Promise.all(
-          cards.map(async (card: CardType) => {
-            if (card.callToAction) {
-              return {
-                ...card,
-                callToAction: {
-                  ...card.callToAction,
-                  resolvedUrl: await resolveLinkURL(card.callToAction),
-                },
-              };
-            }
-            return card;
-          })
-        );
-        return { ...section, cards: resolvedCards };
-      }
+      const { callToAction } = section;
 
       if (callToAction) {
         const callToActionsArray = Array.isArray(callToAction)

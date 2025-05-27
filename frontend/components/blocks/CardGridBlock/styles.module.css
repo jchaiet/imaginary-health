@@ -1,0 +1,19 @@
+.cardGrid {
+  width: 100%;
+}
+
+.container {
+  max-width: var(--layout-width);
+  margin: 0 auto;
+  padding: var(--spacing-md);
+}
+
+.grid {
+  margin-top: var(--spacing-xl);
+}
+
+.title {
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}

@@ -1,0 +1,18 @@
+.fadeSlideX {
+  display: inline-block;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fadeSlideX.exit {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+.fadeSlideX.enter {
+  opacity: 0;
+  transform: translateX(10px);
+}

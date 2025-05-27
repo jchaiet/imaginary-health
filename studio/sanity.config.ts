@@ -1,18 +1,41 @@
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemaTypes'
+import {
+  defineConfig,
+  DocumentActionComponent,
+  DocumentActionsContext,
+  Template,
+} from "sanity";
+import { structureTool } from "sanity/structure";
+import { visionTool } from "@sanity/vision";
+import { media } from "sanity-plugin-media";
+import { schemaTypes } from "./schemaTypes";
+import { deskContent } from "./deskStructure";
+import { slugPrefixTpl } from "./lib/slugPrefixTemplate";
+import { SetSlugAndPublishAction } from "./lib/setSlugAndPublishAction";
+import { customStudioStyles } from "./plugins/customStudioStyles";
 
 export default defineConfig({
-  name: 'default',
-  title: 'Imaginary Health',
+  name: "default",
+  title: "Imaginary Health",
 
-  projectId: 'm4mnm2dh',
-  dataset: 'production',
+  projectId: "m4mnm2dh",
+  dataset: "production",
 
-  plugins: [structureTool(), visionTool()],
-
+  plugins: [deskContent, visionTool(), media(), customStudioStyles()],
+  actions: (
+    prev: DocumentActionComponent[],
+    context: DocumentActionsContext
+  ) => {
+    switch (context.schemaType) {
+      case "page":
+        return [SetSlugAndPublishAction, ...prev];
+      default:
+        return prev;
+    }
+  },
   schema: {
     types: schemaTypes,
+    templates: (prev: Template<any, any>[]) => {
+      return [...prev, slugPrefixTpl("page")];
+    },
   },
-})
+});
