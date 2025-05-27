@@ -1,10 +1,10 @@
 import { defineType, defineField } from "sanity";
 import { ThLargeIcon } from "@sanity/icons";
 
-export const cardGridType = defineType({
-  name: "cardGrid",
+export const carouselType = defineType({
+  name: "carousel",
   type: "object",
-  title: "Card Grid",
+  title: "Carousel",
   icon: ThLargeIcon,
   fields: [
     defineField({
@@ -21,36 +21,17 @@ export const cardGridType = defineType({
       ],
     }),
     defineField({
-      name: "columns",
-      title: "Columns",
-      type: "object",
-      fields: [
-        { name: "xs", title: "XS", type: "number" },
-        { name: "sm", title: "SM (480px)", type: "number" },
-        { name: "md", title: "MD (768px)", type: "number" },
-        { name: "lg", title: "LG (1024px)", type: "number" },
-        { name: "xl", title: "XL (1280px)", type: "number" },
-      ],
-      description: "Set the number of columns per breakpoint",
-      options: { collapsible: true, collapsed: true },
-    }),
-    defineField({
       name: "gap",
       title: "Gap",
       type: "string",
       description: "Gap between grid items (e.g. '1rem')",
     }),
     defineField({
-      name: "autoFitMinMax",
-      title: "AutoFit MinMax",
-      type: "string",
-      description: "Auto-fit cards with min size",
-    }),
-    defineField({
       name: "items",
       title: "Items",
       type: "array",
       of: [
+        { type: "segmentCard" },
         { type: "productCard" },
         { type: "serviceCard" },
         { type: "customCard" },
@@ -69,7 +50,7 @@ export const cardGridType = defineType({
         subtitle = block?.children?.map((c: any) => c.text).join(" ");
       }
       return {
-        title: "Card Grid",
+        title: "Carousel",
         subtitle: subtitle,
       };
     },

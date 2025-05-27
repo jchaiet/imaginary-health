@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import {
   PortableText,
   PortableTextBlock,
@@ -47,8 +47,9 @@ const getBlockComponents = (
   return blockComponents;
 };
 
-const getPortableTextComponents = (
+const createPortableTextComponents = (
   baseClassName?: string,
+  previousTextRef?: React.RefObject<string | undefined>,
   textOverride?: string,
   animateText?: boolean
 ): PortableTextComponents => {
@@ -56,12 +57,20 @@ const getPortableTextComponents = (
   const coloredText = ({ children, value }: any) => {
     const { colorClass } = value;
 
+    const previousTextOverride = previousTextRef?.current;
+
     if (animateText && textOverride) {
       console.log("ANIMATE", textOverride);
-      return <AnimatedSpan className={colorClass} text={textOverride} />;
+      return (
+        <AnimatedSpan
+          className={colorClass}
+          text={textOverride}
+          prevText={previousTextOverride}
+        />
+      );
     }
 
-    return <span className={colorClass}>{textOverride || children}</span>;
+    return <span className={colorClass}>{children}</span>;
   };
 
   return {
@@ -96,10 +105,21 @@ export const RichText: React.FC<RichTextProps> = ({
     return <Text className={className}>{blocks}</Text>;
   }
 
-  const components = getPortableTextComponents(
-    className,
-    textOverride,
-    animateText
+  const previousTextRef = useRef(textOverride);
+
+  useEffect(() => {
+    previousTextRef.current = textOverride;
+  }, [textOverride]);
+
+  const components = useMemo(
+    () =>
+      createPortableTextComponents(
+        className,
+        previousTextRef,
+        textOverride,
+        animateText
+      ),
+    [className, previousTextRef, textOverride, animateText]
   );
 
   return <PortableText value={blocks} components={components} />;

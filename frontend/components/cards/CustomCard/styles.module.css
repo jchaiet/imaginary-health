@@ -4,8 +4,8 @@
 
 .card {
   background-color: #e0eaf9;
-  padding: var(--spacing-md);
-  height: 75px;
+  padding: var(--spacing-xl);
+  height: 100px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
@@ -54,14 +54,14 @@
 .image {
   position: relative;
   height: 100%;
-  width: 65px;
+  width: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
 
   img {
     position: absolute;
-    width: 65px;
+    width: 80px;
     height: auto;
   }
 }

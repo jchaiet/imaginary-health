@@ -1,18 +1,57 @@
-.fadeSlideX {
+.animatedSpan {
+  position: relative;
   display: inline-block;
+  min-height: 29px;
+  height: 100%;
+  width: 100%;
+}
+
+.previous,
+.current {
+  display: block;
+  position: absolute;
   transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
+    transform 0.3s ease,
+    opacity 0.3s ease;
+
+  color: var(--color-primary);
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
+
+.previous {
   opacity: 1;
   transform: translateX(0);
 }
 
-.fadeSlideX.exit {
+.current {
   opacity: 0;
-  transform: translateX(-10px);
+  transform: translateX(100px);
 }
 
-.fadeSlideX.enter {
+.slideOff {
   opacity: 0;
-  transform: translateX(10px);
+  transform: translateX(-100px);
 }
+
+.slideOn {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reset {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: none;
+}
+
+/* .exit {
+  transform: translateX(-30px);
+  opacity: 0;
+}
+
+.enter {
+  transform: translateX(0);
+  opacity: 1;
+} */

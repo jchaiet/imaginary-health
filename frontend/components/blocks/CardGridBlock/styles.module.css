@@ -5,7 +5,7 @@
 .container {
   max-width: var(--layout-width);
   margin: 0 auto;
-  padding: var(--spacing-md);
+  padding: var(--spacing-xl) var(--spacing-md);
 }
 
 .grid {

@@ -3,32 +3,26 @@ import styles from "./styles.module.css";
 
 export function AnimatedSpan({
   text,
+  prevText,
   className,
 }: {
   text: string;
+  prevText?: string;
   className?: string;
 }) {
-  const [currentText, setCurrentText] = useState<string | null>(null);
-  const [prevText, setPrevText] = useState<string | null>(null);
-
-  const currentTextRef = useRef<string | null>(null);
-  const prevTextRef = useRef<string | null>(null);
+  const [prevAnimClass, setPrevAnimClass] = useState<string | null>(null);
+  const [currentAnimClass, setCurrentAnimClass] = useState<string | null>(null);
 
   useEffect(() => {
-    setPrevText(currentText);
-
-    const timeout = setTimeout(() => {
-      setCurrentText(text);
-      prevTextRef.current = text;
-    }, 3000);
-
-    return () => clearTimeout(timeout);
-  }, [text, currentText]);
+    //Slide left
+    setPrevAnimClass(styles.slideOff);
+    setCurrentAnimClass(styles.slideOn);
+  }, [text]);
 
   return (
-    <span className={styles.animatedSpan}>
-      <span>P: {prevText}</span>
-      <span>C: {currentText}</span>
+    <span className={`${styles.animatedSpan} ${className ?? ""}`}>
+      <span className={`${styles.previous} ${prevAnimClass}`}>{prevText}</span>
+      <span className={`${styles.current} ${currentAnimClass}`}>{text}</span>
     </span>
   );
 }

@@ -5,7 +5,7 @@
 .container {
   max-width: var(--layout-width);
   margin: 0 auto;
-  padding: var(--spacing-md);
+  padding: var(--spacing-xl) var(--spacing-md);
 }
 
 .textLeft {
@@ -30,7 +30,7 @@
   }
 
   .image {
-    flex: 1;
+    flex: 0.75;
 
     img {
       border-radius: var(--radius-md);

@@ -13,7 +13,7 @@ export function CardGridBlock({
   columns,
   gap,
   autoFitMinMax,
-  cards,
+  items,
   textReplaceOnHover = true,
 }: CardGridProps) {
   const [hoveredText, setHoveredText] = useState<string | null>(null);
@@ -65,14 +65,14 @@ export function CardGridBlock({
         </div>
         <div className={styles.grid}>
           <Grid columns={columns} gap={gap}>
-            {cards?.map((card) => {
-              const titleText = extractSpanText(card.title);
-              switch (card._type) {
+            {items?.map((item) => {
+              const titleText = extractSpanText(item.title);
+              switch (item._type) {
                 case "customCard":
                   return (
                     <CustomCard
-                      key={card._key}
-                      {...card}
+                      key={item._key}
+                      {...item}
                       onHover={() => {
                         if (textReplaceOnHover) setHoveredText(titleText);
                       }}
@@ -80,7 +80,7 @@ export function CardGridBlock({
                   );
                 default:
                   return (
-                    <div key={card._key}>Unknown card type: {card._type}</div>
+                    <div key={item._key}>Unknown item type: {item._type}</div>
                   );
               }
             })}

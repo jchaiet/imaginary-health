@@ -1,4 +1,4 @@
-import { CardType } from "./card";
+import { ItemType } from "./item";
 import { PortableTextBlock } from "@portabletext/types";
 
 export interface CardGridProps {
@@ -10,6 +10,6 @@ export interface CardGridProps {
   columns?: number | string;
   gap?: string;
   autoFitMinMax?: string;
-  cards?: CardType[];
+  items?: ItemType[];
   textReplaceOnHover: boolean;
 }
