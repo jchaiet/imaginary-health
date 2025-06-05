@@ -1,5 +1,10 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
-import { DocumentsIcon, InlineIcon, ThLargeIcon } from "@sanity/icons";
+import {
+  DocumentsIcon,
+  InlineElementIcon,
+  InlineIcon,
+  ThLargeIcon,
+} from "@sanity/icons";
 import asyncSlugifier from "../lib/asyncSlugifier";
 
 export const pageType = defineType({
@@ -55,16 +60,28 @@ export const pageType = defineType({
       title: "Page Content",
       of: [
         defineArrayMember({
-          type: "hero",
-          name: "hero",
+          type: "heroBlock",
+          name: "heroBlock",
           title: "Hero",
           icon: InlineIcon,
         }),
         defineArrayMember({
-          type: "cardGrid",
-          name: "cardGrid",
+          type: "cardGridBlock",
+          name: "cardGridBlock",
           title: "Card Grid",
           icon: ThLargeIcon,
+        }),
+        defineArrayMember({
+          type: "carouselBlock",
+          name: "carouselBlock",
+          title: "Carousel",
+          icon: InlineElementIcon,
+        }),
+        defineArrayMember({
+          type: "contentBlock",
+          name: "contentBlock",
+          title: "Content Block",
+          icon: InlineIcon,
         }),
       ],
     }),

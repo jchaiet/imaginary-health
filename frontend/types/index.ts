@@ -1,5 +1,6 @@
 export * from "./hero";
 export * from "./link";
 export * from "./cardGrid";
-export * from "./item";
+export * from "./card";
 export * from "./image";
+export * from "./carousel";

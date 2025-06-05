@@ -2,20 +2,20 @@ import { pageType } from "./pageType";
 import { pageMetadataType } from "./pageMetadataType";
 import { linkType } from "./objects/linkType";
 import { richTextType } from "./objects/richTextType";
-import { heroType } from "./heroType";
-import { cardGridType } from "./cardGridType";
-import { productCardType } from "./productCardType";
-import { serviceCardType } from "./serviceCardType";
-import { customCardType } from "./customCardType";
+import { heroBlockType } from "./blocks/heroBlockType";
+import { cardGridBlockType } from "./blocks/cardGridBlockType";
+import { carouselBlockType } from "./blocks/carouselBlockType";
+import { contentBlockType } from "./blocks/contentBlockType";
+import { cardType } from "./cards/cardType";
 
 export const schemaTypes = [
   pageType,
   pageMetadataType,
   linkType,
   richTextType,
-  heroType,
-  cardGridType,
-  productCardType,
-  serviceCardType,
-  customCardType,
+  heroBlockType,
+  cardGridBlockType,
+  carouselBlockType,
+  contentBlockType,
+  cardType,
 ];

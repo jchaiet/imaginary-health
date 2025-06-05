@@ -4,6 +4,8 @@ import PageTemplate from "@/components/templates/PageTemplate";
 import { PageBuilder } from "@/lib/pageBuilder";
 import { CardType, Link } from "@/types";
 
+import "./globals.css";
+
 export default async function Home() {
   const page = await sanityClient.fetch(pageBySlugQuery, { slug: "home" });
 
@@ -16,24 +18,24 @@ export default async function Home() {
   //Pre-resolve CallToAction links in any block
   const resolvedSections = await Promise.all(
     pageBuilder.map(async (section: any) => {
-      const { callToAction, cards } = section;
+      const { callToAction, items } = section;
 
-      if (cards) {
-        const resolvedCards = await Promise.all(
-          cards.map(async (card: CardType) => {
-            if (card.callToAction) {
+      if (items) {
+        const resolvedItems = await Promise.all(
+          items.map(async (item: CardType) => {
+            if (item.callToAction) {
               return {
-                ...card,
+                ...item,
                 callToAction: {
-                  ...card.callToAction,
-                  resolvedUrl: await resolveLinkURL(card.callToAction),
+                  ...item.callToAction,
+                  resolvedUrl: await resolveLinkURL(item.callToAction),
                 },
               };
             }
-            return card;
+            return item;
           })
         );
-        return { ...section, cards: resolvedCards };
+        return { ...section, items: resolvedItems };
       }
 
       if (callToAction) {

@@ -1,0 +1,97 @@
+.card {
+  background-color: var(--color-background);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    box-shadow 0.3s,
+    transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+  min-height: 400px;
+}
+
+.card:hover {
+  .text {
+    max-height: 200px;
+  }
+}
+
+.imageBackgroundContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  flex-grow: 1;
+
+  img {
+    transition:
+      width 0.3s ease,
+      height 0.3s ease;
+  }
+}
+
+.backgroundImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--spacing-md);
+  /* align-items: center;
+  text-align: center; */
+}
+
+.title {
+  background-color: #fff;
+  border-radius: 50px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--color-primary);
+  width: fit-content;
+  font-weight: var(--font-weight-semibold);
+}
+
+.text {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  max-height: 0;
+  margin-top: var(--spacing-sm);
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  transform-origin: bottom;
+  text-wrap: balance;
+  max-width: 300px;
+
+  @media (max-width: 768px) {
+    max-height: 300px;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}

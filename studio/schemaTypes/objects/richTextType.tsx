@@ -1,5 +1,30 @@
 import { defineField } from "sanity";
 import { ColorWheelIcon, ComposeIcon } from "@sanity/icons";
+import { AlignLeft, AlignCenter, AlignRight } from "lucide-react";
+
+const AlignLeftIcon = (
+  <span
+    style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+  >
+    <AlignLeft size={21} />
+  </span>
+);
+
+const AlignCenterIcon = (
+  <span
+    style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+  >
+    <AlignCenter size={21} />
+  </span>
+);
+
+const AlignRightIcon = (
+  <span
+    style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+  >
+    <AlignRight size={21} />
+  </span>
+);
 
 export const richTextType = defineField({
   name: "richText",
@@ -23,6 +48,21 @@ export const richTextType = defineField({
         decorators: [
           { title: "Strong", value: "strong" },
           { title: "Emphasis", value: "em" },
+          {
+            title: "left",
+            value: "left",
+            icon: AlignLeftIcon,
+          },
+          {
+            title: "center",
+            value: "center",
+            icon: AlignCenterIcon,
+          },
+          {
+            title: "right",
+            value: "right",
+            icon: AlignRightIcon,
+          },
         ],
         annotations: [
           {

@@ -1,19 +1,29 @@
 import React from "react";
-import { CallToAction, Modal } from "quirk-ui";
+import { ButtonGroup, CallToAction, Modal } from "quirk-ui";
 import { Link } from "@/types";
 
-export function CallToActions(ctas: Link[]) {
-  if (!ctas?.length) return null;
+type CallToActionsProps = {
+  items: Link[];
+  alignment: "left" | "center" | "right";
+  className: string;
+};
+
+export function CallToActions({
+  items,
+  alignment,
+  className,
+}: CallToActionsProps) {
+  if (!items?.length) return null;
   return (
-    <>
-      {ctas.slice(0, 3).map((cta, index) => {
+    <ButtonGroup className={className} alignment={alignment}>
+      {items.slice(0, 3).map((cta, index) => {
         switch (cta.type) {
           case "link":
             return (
               <CallToAction
                 key={index}
                 as="a"
-                variant="primary"
+                variant={cta.variant ?? "primary"}
                 href={cta.resolvedUrl || "#"}
                 target={
                   cta.linkOptions?.linkType === "external" ? "_blank" : "_self"
@@ -23,6 +33,7 @@ export function CallToActions(ctas: Link[]) {
                     ? "noopener noreferrer"
                     : ""
                 }
+                aria-label={cta.ariaLabel || cta.label}
               >
                 {cta.label}
               </CallToAction>
@@ -32,7 +43,7 @@ export function CallToActions(ctas: Link[]) {
               <Modal
                 key={index}
                 trigger={
-                  <CallToAction as="button" variant="ghost">
+                  <CallToAction as="button" variant={cta.variant ?? "primary"}>
                     {cta.label}
                   </CallToAction>
                 }
@@ -44,7 +55,7 @@ export function CallToActions(ctas: Link[]) {
               <Modal
                 key={index}
                 trigger={
-                  <CallToAction as="button" variant="ghost">
+                  <CallToAction as="button" variant={cta.variant ?? "primary"}>
                     {cta.label}
                   </CallToAction>
                 }
@@ -56,17 +67,18 @@ export function CallToActions(ctas: Link[]) {
               <CallToAction
                 key={index}
                 as="a"
-                variant="ghost"
+                variant={cta.variant ?? "primary"}
                 href={cta.resolvedUrl || "#"}
                 download
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={cta.ariaLabel || cta.label}
               >
                 {cta.label}
               </CallToAction>
             );
         }
       })}
-    </>
+    </ButtonGroup>
   );
 }

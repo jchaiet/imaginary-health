@@ -2,21 +2,31 @@
 import React, { useMemo, useState } from "react";
 import { Grid } from "quirk-ui";
 import { RichText } from "@/lib/portableTextRenderer";
-import { CardGridProps } from "@/types";
-import { CustomCard } from "@/components/cards/CustomCard";
+import { CardGridBlockProps } from "@/types";
 import styles from "./styles.module.css";
 import { PortableTextBlock } from "next-sanity";
+import { ProductCard } from "@/components/cards/ProductCard";
+import { GridCard } from "@/components/cards/GridCard";
+import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
+import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
 
 export function CardGridBlock({
   titleOptions,
   description,
   columns,
   gap,
+  areas,
   autoFitMinMax,
   items,
+  className,
   textReplaceOnHover = true,
-}: CardGridProps) {
+  options,
+  styleOptions,
+}: CardGridBlockProps) {
   const [hoveredText, setHoveredText] = useState<string | null>(null);
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const classNames = useStyleClasses(styleOptions);
 
   function extractSpanText(blocks: PortableTextBlock[]): string | null {
     for (const block of blocks) {
@@ -38,23 +48,30 @@ export function CardGridBlock({
     return null;
   }
 
+  const gridAreas = useMemo(() => {
+    if (!areas) return undefined;
+    if (isMobile) return undefined;
+
+    return areas.map((row) => row.trim().split(/\s+/));
+  }, [areas, isMobile]);
+
   const titleBlock = useMemo(
     () => (
       <RichText
         className={styles.title}
-        textOverride={hoveredText || ""}
-        animateText={titleOptions.animateText}
-        blocks={titleOptions.title}
+        textOverride={hoveredText ?? ""}
+        animateText={titleOptions?.animateText ?? false}
+        blocks={titleOptions?.title}
       />
     ),
-    [titleOptions.title, hoveredText, titleOptions.animateText]
+    [titleOptions?.title, hoveredText, titleOptions?.animateText]
   );
 
   return (
-    <section className={`${styles.cardGrid}`}>
-      <article className={styles.container}>
+    <section className={styles.cardGrid}>
+      <article className={`${classNames} ${styles.container}`}>
         <div className={styles.text}>
-          {titleBlock}
+          {titleOptions && titleBlock}
           {/* <RichText
             className={styles.title}
             textOverride={hoveredText || ""}
@@ -63,21 +80,28 @@ export function CardGridBlock({
           /> */}
           <RichText className={styles.title} blocks={description} />
         </div>
-        <div className={styles.grid}>
-          <Grid columns={columns} gap={gap}>
+        <div
+          className={`${styles.grid} ${className && styles[className] ? styles[className] : (className ?? "")}`}
+        >
+          <Grid columns={columns} gap={gap} areas={gridAreas}>
             {items?.map((item) => {
-              const titleText = extractSpanText(item.title);
-              switch (item._type) {
-                case "customCard":
-                  return (
-                    <CustomCard
-                      key={item._key}
-                      {...item}
-                      onHover={() => {
-                        if (textReplaceOnHover) setHoveredText(titleText);
-                      }}
-                    />
-                  );
+              const titleText = item.title ? extractSpanText(item.title) : "";
+
+              const commonProps = {
+                gridArea: item.gridArea,
+                onHover: () => {
+                  if (textReplaceOnHover) setHoveredText(titleText);
+                },
+                ...item,
+              };
+              switch (item.variant) {
+                case "image":
+                case "grid":
+                  return <GridCard key={item._key} {...commonProps} />;
+                case "image":
+                  return <GridCard key={item._key} {...commonProps} />;
+                case "product":
+                  return <ProductCard key={item._key} {...commonProps} />;
                 default:
                   return (
                     <div key={item._key}>Unknown item type: {item._type}</div>

@@ -9,7 +9,7 @@
 }
 
 .grid {
-  margin-top: var(--spacing-xl);
+  margin-top: var(--spacing-md);
 }
 
 .title {
@@ -17,3 +17,31 @@
     text-transform: capitalize;
   }
 }
+
+/* Style Options Override */
+:global(.split) .grid {
+  margin-top: 0;
+  flex: 1;
+}
+
+/* Style Options
+
+.removePaddingTop {
+  padding-top: 0;
+}
+
+.removePaddingBottom {
+  padding-bottom: 0;
+}
+
+.split {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 3rem;
+
+  .grid {
+    margin-top: 0;
+    flex: 1;
+  }
+} */

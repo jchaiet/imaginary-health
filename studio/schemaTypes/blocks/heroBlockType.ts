@@ -1,8 +1,10 @@
 import { defineType, defineField } from "sanity";
 import { ImageIcon } from "@sanity/icons";
+import { paddingOptionType } from "../styles/paddingOptionType";
+import { backgroundOptionType } from "../styles/backgroundOptionType";
 
-export const heroType = defineType({
-  name: "hero",
+export const heroBlockType = defineType({
+  name: "heroBlock",
   title: "Hero",
   type: "object",
   icon: ImageIcon,
@@ -40,9 +42,30 @@ export const heroType = defineType({
     defineField({
       name: "callToAction",
       title: "Call to Action",
-      type: "array",
-      of: [{ type: "link" }],
-      validation: (Rule) => Rule.max(3),
+      type: "object",
+      fields: [
+        defineField({
+          name: "items",
+          title: "Items",
+          type: "array",
+          of: [{ type: "link" }],
+          validation: (Rule) => Rule.max(3),
+        }),
+        defineField({
+          name: "alignment",
+          title: "Alignment",
+          type: "string",
+          options: {
+            list: [
+              { title: "Left", value: "left" },
+              { title: "Center", value: "center" },
+              { title: "Right", value: "right" },
+            ],
+            layout: "radio",
+          },
+          initialValue: "left",
+        }),
+      ],
     }),
     defineField({
       name: "alignment",
@@ -53,6 +76,16 @@ export const heroType = defineType({
         layout: "radio",
       },
       initialValue: "center",
+    }),
+    defineField({
+      name: "styleOptions",
+      title: "Style Options",
+      type: "object",
+      groups: [
+        { name: "padding", title: "Padding" },
+        { name: "background", title: "Background" },
+      ],
+      fields: [...paddingOptionType, ...backgroundOptionType],
     }),
   ],
   preview: {

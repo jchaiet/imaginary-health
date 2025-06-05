@@ -4,7 +4,7 @@ import { RichText } from "@/lib/portableTextRenderer";
 import { CallToActions } from "@/components/ui/CallToActions";
 import Image from "next/image";
 import { urlForImage } from "@/sanity/client";
-import { HeroProps } from "@/types";
+import { HeroBlockProps } from "@/types";
 import styles from "./styles.module.css";
 
 export function HeroBlock({
@@ -14,7 +14,7 @@ export function HeroBlock({
   image,
   callToAction,
   alignment = "left",
-}: HeroProps) {
+}: HeroBlockProps) {
   const imageUrl = image ? urlForImage(image).quality(100).url() : null;
 
   const textAlignClass = {
@@ -48,12 +48,17 @@ export function HeroBlock({
       <section className={`${styles.hero} ${styles.split} ${textAlignClass}`}>
         <article className={styles.container}>
           <div className={styles.text}>
-            <RichText className={styles.title} blocks={heading} />
-            {subheading && (
-              <RichText className={styles.subheading} blocks={subheading} />
-            )}
+            <div>
+              <RichText className={styles.title} blocks={heading} />
+              {subheading && (
+                <RichText className={styles.subheading} blocks={subheading} />
+              )}
+            </div>
             {callToAction && (
-              <div className={styles.cta}>{CallToActions(callToAction)}</div>
+              <CallToActions
+                items={callToAction.items}
+                alignment={callToAction.alignment}
+              />
             )}
           </div>
           {ImageBlock()}
@@ -74,7 +79,10 @@ export function HeroBlock({
             <RichText className={styles.subheading} blocks={subheading} />
           )}
           {callToAction && (
-            <div className={styles.cta}>{CallToActions(callToAction)}</div>
+            <CallToActions
+              items={callToAction.items}
+              alignment={callToAction.alignment}
+            />
           )}
         </div>
       </article>

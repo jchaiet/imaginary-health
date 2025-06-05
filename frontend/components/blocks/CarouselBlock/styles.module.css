@@ -1,0 +1,29 @@
+.carousel {
+  width: 100%;
+}
+
+.container {
+  max-width: var(--layout-width);
+  margin: 0 auto;
+  padding: var(--spacing-xl) 0;
+
+  @media (min-width: 768px) {
+    padding: var(--spacing-xl) calc(var(--spacing-md) - 10px);
+  }
+}
+
+.heading {
+  padding: 0 var(--spacing-md);
+}
+
+/* Style Options Override */
+:global(.split) .carousel {
+  margin-top: 0;
+  flex: 1;
+}
+
+:global(.backgroundPrimary) .carouselComponent {
+  .indicator {
+    background-color: red;
+  }
+}

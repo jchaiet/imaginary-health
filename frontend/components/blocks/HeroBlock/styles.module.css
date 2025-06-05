@@ -27,6 +27,9 @@
 
   .text {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .image {
@@ -49,19 +52,9 @@
   }
 }
 
-.title {
-  margin-block: 0 var(--spacing-sm);
-  line-height: 1;
-}
-
-.subheading {
-  margin-block: 0 var(--spacing-md);
-  line-height: var(--line-height-tight);
-}
-
-.cta {
+/* .cta {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
   margin-top: var(--spacing-md);
-}
+} */

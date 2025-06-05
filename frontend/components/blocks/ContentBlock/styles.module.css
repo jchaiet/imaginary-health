@@ -1,0 +1,147 @@
+.content {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 5rem;
+  max-width: var(--layout-width);
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+
+  @media (max-width: 768px) {
+    gap: var(--spacing-xl);
+  }
+}
+
+.layoutHImageRight {
+  flex-direction: row;
+
+  .heading {
+    gap: 0;
+    flex: 0.5;
+  }
+
+  .image {
+    flex: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.layoutHImageLeft {
+  flex-direction: row-reverse;
+
+  .heading {
+    gap: 0;
+    flex: 0.5;
+  }
+
+  .image {
+    flex: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.layoutVImageTop {
+  flex-direction: column-reverse;
+  gap: 3rem;
+}
+
+.layoutVImageBottom {
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    gap: 2rem;
+  }
+}
+
+.title {
+  flex: 0.5;
+  text-wrap: balance;
+}
+
+.text {
+  flex: 0.5;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.headingHorizontal {
+  flex-direction: row;
+  justify-content: space-between;
+
+  .title {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.headingVertical {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.image {
+  display: block;
+  flex: 1;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 0;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.default {
+  display: block;
+}
+
+.maxWidth {
+  margin: 0 auto;
+  max-width: var(--max-width);
+}
+
+.fullWidth {
+  width: 100%;
+  max-width: unset;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* Style Options Override */
+:global(.centered) .heading {
+  gap: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+:global(.backgroundPrimary) .cta {
+  .secondary {
+    background-color: #fff;
+  }
+}

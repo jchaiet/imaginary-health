@@ -13,7 +13,7 @@ export function urlForImage(source: SanityImageSource) {
 }
 
 export async function resolveLinkURL(cta: Link) {
-  if (cta.type !== "link") return "#";
+  if (cta.type !== "link") return undefined;
 
   const options = cta.linkOptions;
 

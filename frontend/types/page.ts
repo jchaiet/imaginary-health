@@ -1,6 +1,10 @@
-import { HeroProps } from "./hero";
-import { CardGridProps } from "./cardGrid";
+import { HeroBlockProps } from "./hero";
+import { CardGridBlockProps } from "./cardGrid";
+import { CarouselBlockProps } from "./carousel";
+import { ContentBlockProps } from "./content";
 
 export type PageSection =
-  | ({ _type: "hero" } & HeroProps)
-  | ({ _type: "cardGrid" } & CardGridProps);
+  | ({ _type: "heroBlock" } & HeroBlockProps)
+  | ({ _type: "cardGridBlock" } & CardGridBlockProps)
+  | ({ _type: "carouselBlock" } & CarouselBlockProps)
+  | ({ _type: "contentBlock" } & ContentBlockProps);

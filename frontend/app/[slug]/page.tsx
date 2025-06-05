@@ -5,6 +5,8 @@ import { pageBySlugQuery } from "@/sanity/queries";
 import { notFound } from "next/navigation";
 import { Link } from "@/types";
 
+import "../globals.css";
+
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = await params;
   const page = await sanityClient.fetch(pageBySlugQuery, { slug: slug });

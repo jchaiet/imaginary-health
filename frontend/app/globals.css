@@ -1,5 +1,6 @@
 :root {
-  --layout-width: 1280px;
+  --layout-width: 1200px;
+  --spacing-section: 4rem;
 }
 
 html,
@@ -30,4 +31,89 @@ body {
 /* Text Color Overrides */
 .textPrimary {
   color: var(--color-primary);
+}
+
+.textLeft {
+  text-align: left;
+  display: block;
+}
+
+.textCenter {
+  text-align: center;
+  display: block;
+}
+
+.textRight {
+  text-align: right;
+  display: block;
+}
+
+/* Style Options */
+body .paddingBanner {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+body .paddingTop4 {
+  padding-top: 4rem;
+}
+
+body .paddingBottom4 {
+  padding-bottom: 4rem;
+}
+
+body .paddingTop2 {
+  padding-top: 2rem;
+}
+
+body .paddingBottom2 {
+  padding-bottom: 2rem;
+}
+
+body .paddingTop1 {
+  padding-top: 1rem;
+}
+
+body .paddingBottom4 {
+  padding-bottom: 1rem;
+}
+
+body .removePaddingTop {
+  padding-top: 0;
+}
+
+body .removePaddingBottom {
+  padding-bottom: 0;
+}
+
+body .split {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    gap: 3rem;
+  }
+}
+
+body .centered {
+  align-items: center;
+  justify-content: center;
+}
+
+body .backgroundPrimary {
+  background-color: var(--color-primary);
+
+  .textPrimary,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    color: #fff;
+  }
 }

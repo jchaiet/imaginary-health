@@ -2,6 +2,8 @@
 
 import { HeroBlock } from "@/components/blocks/HeroBlock";
 import { CardGridBlock } from "@/components/blocks/CardGridBlock";
+import { CarouselBlock } from "@/components/blocks/CarouselBlock";
+import { ContentBlock } from "@/components/blocks/ContentBlock";
 import { PageSection } from "@/types/page";
 
 export function PageBuilder({ sections }: { sections: PageSection[] }) {
@@ -10,10 +12,14 @@ export function PageBuilder({ sections }: { sections: PageSection[] }) {
     <>
       {sections?.map((section, i) => {
         switch (section._type) {
-          case "hero":
+          case "heroBlock":
             return <HeroBlock key={i} {...section} />;
-          case "cardGrid":
+          case "cardGridBlock":
             return <CardGridBlock key={i} {...section} />;
+          case "carouselBlock":
+            return <CarouselBlock key={i} {...section} />;
+          case "contentBlock":
+            return <ContentBlock key={i} {...section} />;
           default:
             const unknownSection = section as { _type?: string };
             console.warn("Unknown block type", unknownSection._type, section);

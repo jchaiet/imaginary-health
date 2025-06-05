@@ -7,11 +7,20 @@ import {
 import { AnimatedSpan } from "@/components/ui/AnimatedSpan";
 import { Heading, Text } from "quirk-ui";
 
+// const getAlignClass = (value: PortableTextBlock) => {
+//   const markSet = value.children?.[0]?.marks ?? [];
+
+//   if (markSet.includes("left")) return "textLeft";
+//   if (markSet.includes("center")) return "textCenter";
+//   if (markSet.includes("right")) return "textRight";
+//   return "";
+// };
+
 const getBlockComponents = (
   baseClassName?: string
 ): PortableTextComponents["block"] => {
   const blockComponents: PortableTextComponents["block"] = {
-    normal: ({ children }) => <Text>{children}</Text>,
+    normal: ({ children }) => <Text className={baseClassName}>{children}</Text>,
     h1: ({ children }) => (
       <Heading className={baseClassName} level={1}>
         {children}
@@ -60,7 +69,6 @@ const createPortableTextComponents = (
     const previousTextOverride = previousTextRef?.current;
 
     if (animateText && textOverride) {
-      console.log("ANIMATE", textOverride);
       return (
         <AnimatedSpan
           className={colorClass}
@@ -78,6 +86,9 @@ const createPortableTextComponents = (
       coloredText,
       strong: ({ children }) => <strong>{children}</strong>,
       em: ({ children }) => <em>{children}</em>,
+      left: ({ children }) => <span className="textLeft">{children}</span>,
+      center: ({ children }) => <span className="textCenter">{children}</span>,
+      right: ({ children }) => <span className="textRight">{children}</span>,
     },
     block,
   };

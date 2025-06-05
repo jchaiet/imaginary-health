@@ -2,12 +2,16 @@ import { Link } from "./link";
 import { PortableTextBlock } from "@portabletext/types";
 import { SanityImage } from "./image";
 
-export type ItemType = {
+export type CardType = {
   _key: string;
   _type: string;
-  title: PortableTextBlock[];
+  variant: string;
+  style?: string;
+  metricValue?: string;
+  title?: PortableTextBlock[];
   description?: PortableTextBlock[];
   image?: SanityImage;
-  icon: string;
-  callToAction: Link;
+  icon?: string;
+  callToAction?: Link;
+  gridArea?: string;
 };
