@@ -8,7 +8,7 @@ import { CardType, Link, PageSection } from "@/types";
 import "../globals.css";
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = await params;
+  const { slug } = params;
   const page = await sanityClient.fetch(pageBySlugQuery, { slug: slug });
 
   if (!page) return notFound();
