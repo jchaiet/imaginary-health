@@ -5,7 +5,7 @@ import { Link } from "@/types";
 type CallToActionsProps = {
   items: Link[];
   alignment: "left" | "center" | "right";
-  className: string;
+  className?: string;
 };
 
 export function CallToActions({
