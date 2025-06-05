@@ -3,7 +3,11 @@ import {
   PortableText,
   PortableTextBlock,
   PortableTextComponents,
+  type PortableTextComponentProps,
+  type PortableTextMarkComponent,
 } from "@portabletext/react";
+import type { TypedObject } from "@portabletext/types";
+
 import { AnimatedSpan } from "@/components/ui/AnimatedSpan";
 import { Heading, Text } from "quirk-ui";
 
@@ -15,6 +19,11 @@ import { Heading, Text } from "quirk-ui";
 //   if (markSet.includes("right")) return "textRight";
 //   return "";
 // };
+
+type ColoredTextValue = TypedObject & {
+  _type: "coloredText";
+  colorClass: string;
+};
 
 const getBlockComponents = (
   baseClassName?: string
@@ -63,7 +72,11 @@ const createPortableTextComponents = (
   animateText?: boolean
 ): PortableTextComponents => {
   const block = getBlockComponents(baseClassName);
-  const coloredText = ({ children, value }: any) => {
+  const coloredText: PortableTextMarkComponent<ColoredTextValue> = ({
+    children,
+    value,
+  }) => {
+    if (!value) return <>{children}</>;
     const { colorClass } = value;
 
     const previousTextOverride = previousTextRef?.current;
@@ -107,15 +120,6 @@ export const RichText: React.FC<RichTextProps> = ({
   textOverride,
   animateText,
 }) => {
-  if (!blocks) return null;
-
-  if (typeof blocks === "string") {
-    console.warn(
-      "RichText component received a string. Expected PortableTextBlock[]"
-    );
-    return <Text className={className}>{blocks}</Text>;
-  }
-
   const previousTextRef = useRef(textOverride);
 
   useEffect(() => {
@@ -132,6 +136,15 @@ export const RichText: React.FC<RichTextProps> = ({
       ),
     [className, previousTextRef, textOverride, animateText]
   );
+
+  if (!blocks) return null;
+
+  if (typeof blocks === "string") {
+    console.warn(
+      "RichText component received a string. Expected PortableTextBlock[]"
+    );
+    return <Text className={className}>{blocks}</Text>;
+  }
 
   return <PortableText value={blocks} components={components} />;
 };

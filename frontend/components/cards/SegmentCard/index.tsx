@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { RichText } from "@/lib/portableTextRenderer";
 import { urlForImage } from "@/sanity/client";
 import Image from "next/image";
@@ -15,8 +15,8 @@ export function SegmentCard({
   title,
   description,
   image,
-  icon,
-  callToAction,
+  // icon,
+  // callToAction,
   onHover,
   onLeave,
 }: CustomCardProps) {

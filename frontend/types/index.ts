@@ -4,3 +4,4 @@ export * from "./cardGrid";
 export * from "./card";
 export * from "./image";
 export * from "./carousel";
+export * from "./page";

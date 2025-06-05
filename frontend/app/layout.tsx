@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Roboto_Flex } from "next/font/google";
+import { Roboto_Flex } from "next/font/google";
 import "./globals.css";
 import "quirk-ui/styles.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-});
 
 const roboto = Roboto_Flex({
   subsets: ["latin"],

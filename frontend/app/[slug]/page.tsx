@@ -3,7 +3,7 @@ import { PageBuilder } from "@/lib/pageBuilder";
 import { sanityClient, resolveLinkURL } from "@/sanity/client";
 import { pageBySlugQuery } from "@/sanity/queries";
 import { notFound } from "next/navigation";
-import { Link } from "@/types";
+import { CardType, Link, PageSection } from "@/types";
 
 import "../globals.css";
 
@@ -17,10 +17,32 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   //Pre-resolve CallToAction links in any block
   const resolvedSections = await Promise.all(
-    pageBuilder.map(async (section: any) => {
-      const { callToAction } = section;
+    pageBuilder.map(async (section: PageSection) => {
+      if ("items" in section) {
+        const items = section.items;
 
-      if (callToAction) {
+        if (items) {
+          const resolvedItems = await Promise.all(
+            items.map(async (item: CardType) => {
+              if (item.callToAction) {
+                return {
+                  ...item,
+                  callToAction: {
+                    ...item.callToAction,
+                    resolvedUrl: await resolveLinkURL(item.callToAction),
+                  },
+                };
+              }
+              return item;
+            })
+          );
+          return { ...section, items: resolvedItems };
+        }
+      }
+
+      if ("callToAction" in section) {
+        const callToAction = section.callToAction;
+
         const callToActionsArray = Array.isArray(callToAction)
           ? callToAction
           : [callToAction];

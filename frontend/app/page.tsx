@@ -2,7 +2,7 @@ import { sanityClient, resolveLinkURL } from "@/sanity/client";
 import { pageBySlugQuery } from "@/sanity/queries";
 import PageTemplate from "@/components/templates/PageTemplate";
 import { PageBuilder } from "@/lib/pageBuilder";
-import { CardType, Link } from "@/types";
+import { CardType, Link, PageSection } from "@/types";
 
 import "./globals.css";
 
@@ -17,28 +17,32 @@ export default async function Home() {
 
   //Pre-resolve CallToAction links in any block
   const resolvedSections = await Promise.all(
-    pageBuilder.map(async (section: any) => {
-      const { callToAction, items } = section;
+    pageBuilder.map(async (section: PageSection) => {
+      if ("items" in section) {
+        const items = section.items;
 
-      if (items) {
-        const resolvedItems = await Promise.all(
-          items.map(async (item: CardType) => {
-            if (item.callToAction) {
-              return {
-                ...item,
-                callToAction: {
-                  ...item.callToAction,
-                  resolvedUrl: await resolveLinkURL(item.callToAction),
-                },
-              };
-            }
-            return item;
-          })
-        );
-        return { ...section, items: resolvedItems };
+        if (items) {
+          const resolvedItems = await Promise.all(
+            items.map(async (item: CardType) => {
+              if (item.callToAction) {
+                return {
+                  ...item,
+                  callToAction: {
+                    ...item.callToAction,
+                    resolvedUrl: await resolveLinkURL(item.callToAction),
+                  },
+                };
+              }
+              return item;
+            })
+          );
+          return { ...section, items: resolvedItems };
+        }
       }
 
-      if (callToAction) {
+      if ("callToAction" in section) {
+        const callToAction = section.callToAction;
+
         const callToActionsArray = Array.isArray(callToAction)
           ? callToAction
           : [callToAction];

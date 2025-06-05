@@ -17,10 +17,10 @@ export function TestimonialCard({
   title,
   description,
   image,
-  icon,
+  //icon,
   callToAction,
-  onHover,
-  onLeave,
+  // onHover,
+  // onLeave,
 }: CustomCardProps) {
   const imageUrl = image ? urlForImage(image).quality(100).url() : null;
 

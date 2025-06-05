@@ -20,7 +20,7 @@ export function GridCard({
   title,
   description,
   image,
-  icon,
+  //icon,
   callToAction,
   onHover,
   onLeave,

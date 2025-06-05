@@ -13,9 +13,9 @@ type ProductCardProps = CardType & {
 
 export function ProductCard({
   title,
-  description,
+  //description,
   image,
-  icon,
+  //icon,
   callToAction,
   onHover,
   onLeave,

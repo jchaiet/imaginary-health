@@ -16,11 +16,10 @@ export function CardGridBlock({
   columns,
   gap,
   areas,
-  autoFitMinMax,
+  //autoFitMinMax,
   items,
   className,
   textReplaceOnHover = true,
-  options,
   styleOptions,
 }: CardGridBlockProps) {
   const [hoveredText, setHoveredText] = useState<string | null>(null);
