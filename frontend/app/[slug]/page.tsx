@@ -2,7 +2,6 @@ import PageTemplate from "@/components/templates/PageTemplate";
 import { PageBuilder } from "@/lib/pageBuilder";
 import { sanityClient, resolveLinkURL } from "@/sanity/client";
 import { pageBySlugQuery } from "@/sanity/queries";
-import { notFound } from "next/navigation";
 import { CardType, Link, PageSection } from "@/types";
 
 import "../globals.css";
@@ -15,7 +14,9 @@ export default async function Page({ params }: PageProps) {
   const { slug } = await params;
   const page = await sanityClient.fetch(pageBySlugQuery, { slug: slug });
 
-  if (!page) return notFound();
+  if (!page) {
+    return <div>404 - Page not found</div>;
+  }
 
   const { pageBuilder = [], hideHeader = false, hideFooter = false } = page;
 
