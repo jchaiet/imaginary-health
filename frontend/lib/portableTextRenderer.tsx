@@ -3,7 +3,6 @@ import {
   PortableText,
   PortableTextBlock,
   PortableTextComponents,
-  type PortableTextComponentProps,
   type PortableTextMarkComponent,
 } from "@portabletext/react";
 import type { TypedObject } from "@portabletext/types";
