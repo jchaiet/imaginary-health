@@ -1,23 +1,38 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
+import { parseBody } from "next-sanity/webhook";
+
+type WebhookPayload = { path?: string };
 
 export async function POST(req: NextRequest) {
-  const secret = req.nextUrl.searchParams.get("secret");
-  if (secret !== process.env.REVALIDATION_SECRET) {
-    return NextResponse.json({ message: "Invalid secret" }, { status: 401 });
-  }
-
   try {
-    console.log("Revalidating site...");
+    if (!process.env.SANITY_REVALIDATE_SECRET) {
+      return new Response(
+        "Missing environment variable SANITY_REVALIDATE_SECRET",
+        { status: 500 }
+      );
+    }
 
-    await fetch("https://imaginary-health.vercel.app", {
-      next: { revalidate: 0 },
-    });
-    return NextResponse.json({ revalidated: true });
-  } catch (error) {
-    console.log("Error revalidating:", error);
-    return NextResponse.json(
-      { message: "Error revalidating" },
-      { status: 500 }
+    const { isValidSignature, body } = await parseBody<WebhookPayload>(
+      req,
+      process.env.SANITY_REVALIDATE_SECRET
     );
+
+    if (!isValidSignature) {
+      const message = "Invalid signature";
+      return new Response(JSON.stringify({ message, isValidSignature, body }), {
+        status: 401,
+      });
+    } else if (!body?.path) {
+      const message = "Bad request";
+      return new Response(JSON.stringify({ message, body }), { status: 400 });
+    }
+
+    revalidatePath(body.path);
+    const message = `Updated route: ${body.path}`;
+    return NextResponse.json({ body, message });
+  } catch (error) {
+    console.error(error);
+    return new Response((error as Error).message, { status: 500 });
   }
 }
