@@ -94,7 +94,6 @@ export function CardGridBlock({
                 ...item,
               };
               switch (item.variant) {
-                case "image":
                 case "grid":
                   return <GridCard key={item._key} {...commonProps} />;
                 case "image":

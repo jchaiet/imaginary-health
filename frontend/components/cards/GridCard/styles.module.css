@@ -296,7 +296,7 @@
 
 /* Variant Styles */
 .image {
-  background-color: var(--color-secondary);
+  /* background-color: var(--color-secondary); */
   width: 100%;
   min-height: unset;
 
