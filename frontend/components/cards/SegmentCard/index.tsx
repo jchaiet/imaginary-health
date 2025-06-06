@@ -25,25 +25,27 @@ export function SegmentCard({
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   useEffect(() => {
-    const handleResize = () => {
-      const cardParent = cardRef.current?.parentElement;
-      const cardParents = cardParent?.parentElement?.children;
+    if (typeof window !== "undefined") {
+      const handleResize = () => {
+        const cardParent = cardRef.current?.parentElement;
+        const cardParents = cardParent?.parentElement?.children;
 
-      if (!cardParent || !cardParents) return;
+        if (!cardParent || !cardParents) return;
 
-      if (window.innerWidth < 768) {
-        Array.from(cardParents).forEach((slide) => {
-          (slide as HTMLElement).style.flexBasis = "100%";
-        });
-      } else {
-        Array.from(cardParents).forEach((slide) => {
-          (slide as HTMLElement).style.flexBasis = "calc(100% / 3)";
-        });
-      }
-    };
+        if (window.innerWidth < 768) {
+          Array.from(cardParents).forEach((slide) => {
+            (slide as HTMLElement).style.flexBasis = "100%";
+          });
+        } else {
+          Array.from(cardParents).forEach((slide) => {
+            (slide as HTMLElement).style.flexBasis = "calc(100% / 3)";
+          });
+        }
+      };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
   }, []);
 
   const applyTransitionToSiblings = (siblings: HTMLCollection) => {

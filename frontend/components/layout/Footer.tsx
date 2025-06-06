@@ -25,10 +25,6 @@ export default function Footer() {
   ];
 
   return (
-    <FooterNav
-      logo={<span>LOGO</span>}
-      items={navItems}
-      copyright={`${new Date().getFullYear()}`}
-    />
+    <FooterNav logo={<span>LOGO</span>} items={navItems} copyright="2025" />
   );
 }

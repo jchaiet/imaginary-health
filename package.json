@@ -16,6 +16,10 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
   "devDependencies": {
     "concurrently": "^9.1.2"
   }
