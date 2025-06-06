@@ -28,13 +28,15 @@ export async function POST(req: NextRequest) {
       return new Response(JSON.stringify({ message, body }), { status: 400 });
     }
 
+    let message;
     if (body.slug.current === "home") {
       revalidatePath("/");
+      message = `Updated route: Home Page`;
     } else {
       revalidatePath(body.slug.current);
+      message = `Updated route: ${body.slug.current}`;
     }
 
-    const message = `Updated route: ${body.slug.current}`;
     return NextResponse.json({ body, message });
   } catch (error) {
     console.error(error);
