@@ -28,7 +28,12 @@ export async function POST(req: NextRequest) {
       return new Response(JSON.stringify({ message, body }), { status: 400 });
     }
 
-    revalidatePath(body.slug.current);
+    if (body.slug.current === "home") {
+      revalidatePath("/");
+    } else {
+      revalidatePath(body.slug.current);
+    }
+
     const message = `Updated route: ${body.slug.current}`;
     return NextResponse.json({ body, message });
   } catch (error) {
