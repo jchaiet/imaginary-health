@@ -37,10 +37,22 @@ export function TestimonialCard({
 
   const text = (
     <div className={styles.content}>
-      {title && <RichText className={styles.title} blocks={title} />}
+      {callToAction?.type === "video" ? (
+        <>
+          {title && <RichText className={styles.title} blocks={title} />}
 
-      {description && (
-        <RichText className={styles.description} blocks={description} />
+          {description && (
+            <RichText className={styles.description} blocks={description} />
+          )}
+        </>
+      ) : (
+        <>
+          {title && <RichText className={styles.title} blocks={title} />}
+
+          {description && (
+            <RichText className={styles.description} blocks={description} />
+          )}
+        </>
       )}
     </div>
   );
@@ -104,11 +116,7 @@ export function TestimonialCard({
               )}
 
               <div className={styles.person}>
-                <Avatar
-                  src={imageUrl ?? ""}
-                  borderColor="transparent"
-                  size="lg"
-                />
+                <Avatar src={imageUrl ?? ""} size="lg" />
                 {title && <RichText className={styles.title} blocks={title} />}
               </div>
             </div>
@@ -117,7 +125,7 @@ export function TestimonialCard({
       case "image-top":
         return (
           <div className={styles.container}>
-            <Avatar src={imageUrl ?? ""} borderColor="transparent" size="xl" />
+            <Avatar src={imageUrl ?? ""} size="xl" />
             <div className={styles.content}>
               {description && (
                 <RichText className={styles.description} blocks={description} />
