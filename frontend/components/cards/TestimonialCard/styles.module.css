@@ -159,6 +159,7 @@
 
   @media (max-width: 767px) {
     max-width: unset;
+    padding: 0;
   }
 
   .container {
@@ -187,6 +188,10 @@
     gap: var(--spacing-md);
     position: relative;
     padding: var(--spacing-xl);
+
+    @media (max-width: 767px) {
+      padding: 0;
+    }
   }
 
   .image {
@@ -265,6 +270,7 @@
 
   @media (max-width: 767px) {
     max-width: unset;
+    padding: 0;
   }
 
   .container {
@@ -286,6 +292,10 @@
     gap: var(--spacing-md);
     position: relative;
     padding: var(--spacing-xl);
+
+    @media (max-width: 767px) {
+      padding: 0;
+    }
   }
 
   .image {
