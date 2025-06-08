@@ -67,6 +67,7 @@ export function TestimonialCard({
             width={600}
             height={658}
             priority={true}
+            draggable={false}
           />
         </div>
       ) : null}
@@ -89,6 +90,7 @@ export function TestimonialCard({
               fill
               priority={false}
               style={{ objectFit: "cover" }}
+              draggable={false}
             />
             <div className={styles.overlay}>{text}</div>
           </div>

@@ -40,8 +40,9 @@ export const cardType = defineType({
         ],
         layout: "radio",
       },
-      initialValue: "grid",
-      hidden: ({ parent }) => parent?.variant !== "grid",
+      initialValue: "text",
+      hidden: ({ parent }) =>
+        parent?.variant !== "grid" && parent?.variant !== "testimonial",
     }),
     defineField({
       name: "metricValue",
