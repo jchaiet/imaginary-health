@@ -62,10 +62,10 @@
   line-height: var(--line-height-tight);
   text-decoration: none;
   flex: 1;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease-in-out;
 
   span {
-    transition: color 0.3s ease;
+    transition: color 0.3s ease-in-out;
   }
 }
 
@@ -106,7 +106,7 @@
   cursor: pointer;
 
   .image {
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease-in-out;
   }
 
   &:hover {
@@ -143,9 +143,9 @@
     border: 5px solid #fff;
     border-radius: var(--radius-full);
     transition:
-      color 0.3s ease,
-      background-color 0.3s ease,
-      border-color 0.3s ease;
+      color 0.3s ease-in-out,
+      background-color 0.3s ease-in-out,
+      border-color 0.3s ease-in-out;
   }
 
   .label {
@@ -154,8 +154,8 @@
     opacity: 0;
     transform: translateY(-10px);
     transition:
-      opacity 0.3s ease,
-      transform 0.3s ease;
+      opacity 0.3s ease-in-out,
+      transform 0.3s ease-in-out;
   }
 }
 

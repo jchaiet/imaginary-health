@@ -39,18 +39,21 @@ export function GridCard({
     "image-bottom": styles.imageBottom,
   }[style || "text"];
 
-  const ImageBlock = () =>
-    image && imageUrl ? (
-      <div className={styles.image}>
-        <Image
-          src={imageUrl}
-          alt={image?.alt || image?.description || "Card image"}
-          width={600}
-          height={658}
-          priority={true}
-        />
-      </div>
-    ) : null;
+  const ImageBlock = (
+    <>
+      {image && imageUrl ? (
+        <div className={styles.image}>
+          <Image
+            src={imageUrl}
+            alt={image?.alt || image?.description || "Card image"}
+            width={600}
+            height={658}
+            priority={true}
+          />
+        </div>
+      ) : null}
+    </>
+  );
 
   const Metric = ({ value }: { value: string }) => {
     if (value && value.includes("%")) {
@@ -106,7 +109,7 @@ export function GridCard({
             )}
           </div>
         )}
-        {ImageBlock()}
+        {ImageBlock}
       </div>
 
       {callToAction?.videoUrl && (

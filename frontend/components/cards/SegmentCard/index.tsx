@@ -50,7 +50,7 @@ export function SegmentCard({
 
   const applyTransitionToSiblings = (siblings: HTMLCollection) => {
     Array.from(siblings).forEach((slide) => {
-      (slide as HTMLElement).style.transition = "flex-basis 300ms ease";
+      (slide as HTMLElement).style.transition = "flex-basis 300ms ease-in-out";
     });
   };
 

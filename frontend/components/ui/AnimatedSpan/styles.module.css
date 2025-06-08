@@ -11,8 +11,8 @@
   display: block;
   position: absolute;
   transition:
-    transform 0.3s ease,
-    opacity 0.3s ease;
+    transform 0.3s ease-in-out,
+    opacity 0.3s ease-in-out;
 
   color: var(--color-primary);
   &::first-letter {

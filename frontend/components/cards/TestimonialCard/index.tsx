@@ -3,7 +3,7 @@ import { RichText } from "@/lib/portableTextRenderer";
 import { urlForImage } from "@/sanity/client";
 import Image from "next/image";
 import { CardType } from "@/types";
-import { Modal } from "quirk-ui";
+import { Modal, Avatar } from "quirk-ui";
 import { Play } from "lucide-react";
 
 import styles from "./styles.module.css";
@@ -21,33 +21,113 @@ export function TestimonialCard({
   callToAction,
   // onHover,
   // onLeave,
+  style,
+  variant,
 }: CustomCardProps) {
   const imageUrl = image ? urlForImage(image).quality(100).url() : null;
 
-  const content = (
-    <div className={styles.imageBackgroundContainer}>
-      {callToAction?.type === "video" && (
-        <div className={styles.cardIcon}>
-          <Play size={45} />
-        </div>
+  const styleClass = {
+    "full-bleed": styles.fullBleed,
+    text: styles.textOnly,
+    "image-left": styles.imageLeft,
+    "image-right": styles.imageRight,
+    "image-top": styles.imageTop,
+    "image-bottom": styles.imageBottom,
+  }[style || "text"];
+
+  const text = (
+    <div className={styles.content}>
+      {title && <RichText className={styles.title} blocks={title} />}
+
+      {description && (
+        <RichText className={styles.description} blocks={description} />
       )}
-      <Image
-        src={imageUrl ?? ""}
-        alt={image?.alt || image?.description || "Card image"}
-        fill
-        priority={false}
-        style={{ objectFit: "cover" }}
-      />
-      <div className={styles.overlay}>
-        <div>
-          {title && <RichText className={styles.title} blocks={title} />}
-          {description && (
-            <RichText className={styles.text} blocks={description} />
-          )}
-        </div>{" "}
-      </div>
     </div>
   );
+
+  const ImageBlock = (
+    <>
+      {image && imageUrl ? (
+        <div className={styles.image}>
+          <Image
+            src={imageUrl}
+            alt={image?.alt || image?.description || "Card image"}
+            width={600}
+            height={658}
+            priority={true}
+          />
+        </div>
+      ) : null}
+    </>
+  );
+
+  const content = () => {
+    switch (style) {
+      case "full-bleed":
+        return (
+          <div className={styles.imageBackgroundContainer}>
+            {callToAction?.type === "video" && (
+              <div className={styles.cardIcon}>
+                <Play size={45} />
+              </div>
+            )}
+            <Image
+              src={imageUrl ?? ""}
+              alt={image?.alt || image?.description || "Card image"}
+              fill
+              priority={false}
+              style={{ objectFit: "cover" }}
+            />
+            <div className={styles.overlay}>{text}</div>
+          </div>
+        );
+      case "image-right":
+      case "image-left":
+        return (
+          <div className={styles.container}>
+            {ImageBlock}
+
+            <div className={styles.content}>
+              {description && (
+                <RichText className={styles.description} blocks={description} />
+              )}
+              {title && <RichText className={styles.title} blocks={title} />}
+            </div>
+          </div>
+        );
+      case "image-bottom":
+        return (
+          <div className={styles.container}>
+            <div className={styles.content}>
+              {description && (
+                <RichText className={styles.description} blocks={description} />
+              )}
+
+              <div className={styles.person}>
+                <Avatar
+                  src={imageUrl ?? ""}
+                  borderColor="transparent"
+                  size="lg"
+                />
+                {title && <RichText className={styles.title} blocks={title} />}
+              </div>
+            </div>
+          </div>
+        );
+      case "image-top":
+        return (
+          <div className={styles.container}>
+            <Avatar src={imageUrl ?? ""} borderColor="transparent" size="xl" />
+            <div className={styles.content}>
+              {description && (
+                <RichText className={styles.description} blocks={description} />
+              )}
+              {title && <RichText className={styles.title} blocks={title} />}
+            </div>
+          </div>
+        );
+    }
+  };
 
   const typeClass =
     callToAction?.type === "video" ? styles.video : styles.default;
@@ -107,11 +187,13 @@ export function TestimonialCard({
   };
 
   return (
-    <article className={`${styles.card} ${typeClass}`}>
+    <article
+      className={`${styles.card} ${styleClass ?? ""} ${styles[variant]} ${typeClass}`}
+    >
       {callToAction?.type !== "none" ? (
-        <Container>{content}</Container>
+        <Container>{content()}</Container>
       ) : (
-        <>{content}</>
+        <>{content()}</>
       )}
     </article>
   );
