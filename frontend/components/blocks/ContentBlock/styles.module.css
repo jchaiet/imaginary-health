@@ -8,6 +8,7 @@
   justify-content: space-between;
   flex-direction: column;
   gap: 5rem;
+  width: 100%;
   max-width: var(--layout-width);
   margin: 0 auto;
   padding: var(--spacing-xl) var(--spacing-md);
