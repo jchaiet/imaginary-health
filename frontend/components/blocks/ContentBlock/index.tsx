@@ -92,7 +92,7 @@ export function ContentBlock({
           <RichText className={styles.title} blocks={heading.title} />
 
           {(heading.description || callToAction.items) && (
-            <div className={styles.text}>
+            <>
               {heading.description && (
                 <RichText
                   className={styles.description}
@@ -127,7 +127,7 @@ export function ContentBlock({
               {disclaimer && (
                 <RichText className={styles.disclaimer} blocks={disclaimer} />
               )}
-            </div>
+            </>
           )}
         </div>
         {video

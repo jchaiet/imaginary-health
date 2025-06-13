@@ -217,7 +217,7 @@
 
 /* Style Options Override */
 :global(.centered) .heading {
-  gap: 0;
+  gap: var(--spacing-md);
   align-items: center;
   justify-content: center;
 }
