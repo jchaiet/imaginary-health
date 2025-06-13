@@ -1,7 +1,6 @@
 import React from "react";
 import { RichText } from "@/lib/portableTextRenderer";
 import { urlForImage } from "@/sanity/client";
-import Image from "next/image";
 import { ItemType } from "@/types";
 import styles from "./styles.module.css";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
@@ -15,13 +14,13 @@ export function ServiceCard({
   variant,
   title,
   description,
-  image,
+  //image,
   //icon,
   onHover,
   onLeave,
   gridArea,
 }: ServiceCardProps) {
-  const imageUrl = image ? urlForImage(image).quality(100).url() : null;
+  //const imageUrl = image ? urlForImage(image).quality(100).url() : null;
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
