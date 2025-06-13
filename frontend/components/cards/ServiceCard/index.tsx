@@ -1,6 +1,6 @@
 import React from "react";
 import { RichText } from "@/lib/portableTextRenderer";
-import { urlForImage } from "@/sanity/client";
+//import { urlForImage } from "@/sanity/client";
 import { ItemType } from "@/types";
 import styles from "./styles.module.css";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
