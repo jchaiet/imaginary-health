@@ -4,10 +4,16 @@
 
 .container {
   display: flex;
+  flex-direction: column;
   max-width: var(--layout-width);
   padding: var(--spacing-xl) var(--spacing-md);
   gap: var(--spacing-xl);
   position: relative;
+}
+
+.scroll {
+  display: flex;
+  gap: var(--spacing-xl);
 }
 
 .sidebar {
@@ -19,6 +25,10 @@
   display: flex;
   align-items: center;
   padding: 0 var(--spacing-xl);
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 }
 
 .sidebar ul {
@@ -110,6 +120,18 @@
       width: 100%;
       max-width: 200px;
       height: auto;
+    }
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column-reverse;
+    height: auto;
+
+    .image {
+      flex: 1;
+      width: 100%;
+      max-width: 150px;
+      align-self: flex-start;
     }
   }
 }

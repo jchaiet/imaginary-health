@@ -30,8 +30,8 @@ dependencies:
     specifier: ^9.11.1
     version: 9.12.0(@sanity/client@7.4.1)(@sanity/icons@3.7.0)(@sanity/types@3.91.0)(@sanity/ui@2.15.18)(next@15.3.2)(react-dom@19.1.0)(react-is@19.1.0)(react@19.1.0)(sanity@3.91.0)(styled-components@6.1.18)(typescript@5.8.3)
   quirk-ui:
-    specifier: ^0.0.93
-    version: 0.0.93(path@0.12.7)(react-dom@19.1.0)(react@19.1.0)
+    specifier: ^0.0.94
+    version: 0.0.94(path@0.12.7)(react-dom@19.1.0)(react@19.1.0)
 
 devDependencies:
   '@eslint/eslintrc':
@@ -8350,8 +8350,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /quirk-ui@0.0.93(path@0.12.7)(react-dom@19.1.0)(react@19.1.0):
-    resolution: {integrity: sha512-JhASjZTfEzHt5/pQ+VbDHpL/3Ea4Ff+MwFaZYoim68i6CRv+Jxq937C8KEFuTXEf895xBLae+cqflUMDgi7/Rg==}
+  /quirk-ui@0.0.94(path@0.12.7)(react-dom@19.1.0)(react@19.1.0):
+    resolution: {integrity: sha512-kTwSh1hljmYwRRWQzEi/csPY7WIGM/RaqdgEM3YNB8ZITG0u6uCAug6SXiwy1tvjiw7TTdEDO/Ah6UGeNQrszA==}
     peerDependencies:
       path: ^0.12.7
       react: ^19.0.0

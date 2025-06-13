@@ -21,7 +21,7 @@
     margin-block: 0;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     gap: var(--spacing-xl);
   }
 }
@@ -31,7 +31,11 @@
   align-items: flex-start;
   flex-wrap: wrap;
   gap: var(--spacing-md);
-  padding: 0 var(--spacing-md);
+  padding: var(--spacing-md);
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 }
 
 .metric {
@@ -99,7 +103,7 @@
 
 .layoutVImageTop {
   flex-direction: column-reverse;
-  gap: 3rem;
+  gap: var(--spacing-md);
 
   .heading {
     gap: var(--spacing-md);
@@ -108,7 +112,7 @@
 
 .layoutVImageBottom {
   flex-direction: column;
-  gap: 3rem;
+  gap: var(--spacing-md);
 
   .heading {
     gap: var(--spacing-md);

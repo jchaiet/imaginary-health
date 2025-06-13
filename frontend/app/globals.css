@@ -107,7 +107,7 @@ body .split {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  gap: 0;
+  gap: var(--spacing-md);
 
   @media (min-width: 768px) {
     flex-direction: row;

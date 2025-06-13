@@ -1,8 +1,12 @@
 .carousel {
   width: 100%;
+  overflow-x: hidden;
 }
 
 .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
   max-width: var(--layout-width);
   margin: 0 auto;
   padding: var(--spacing-xl) 0;
@@ -14,12 +18,25 @@
 
 .heading {
   padding: 0 var(--spacing-md);
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 0;
+  }
 }
 
 /* Style Options Override */
 :global(.split) .carousel {
   margin-top: 0;
   flex: 1;
+
+  @media (max-width: 767px) {
+    gap: var(--spacing-md);
+  }
 }
 
 :global(.backgroundPrimary) .carouselComponent {
