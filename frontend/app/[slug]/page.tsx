@@ -3,7 +3,7 @@ import { PageBuilder } from "@/lib/pageBuilder";
 import { sanityClient, resolveLinkURL } from "@/sanity/client";
 import { pageBySlugQuery } from "@/sanity/queries";
 import { notFound } from "next/navigation";
-import { FaqItem, ItemType, Link, PageSection } from "@/types";
+import { ItemType, Link, PageSection } from "@/types";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
