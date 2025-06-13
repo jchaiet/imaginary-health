@@ -8,10 +8,8 @@ import { StickyScrollBlockProps } from "@/types";
 import styles from "./styles.module.css";
 
 export function StickyScrollBlock({
-  heading,
   items,
   showNumbers,
-  styleOptions,
 }: StickyScrollBlockProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);

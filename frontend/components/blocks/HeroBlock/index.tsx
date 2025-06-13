@@ -20,6 +20,8 @@ export function HeroBlock({
   const imageUrl = image ? urlForImage(image).quality(100).url() : null;
   const prefersReducedMotion = usePrefersReducedMotion();
 
+  console.log(prefersReducedMotion);
+
   const [isPlaying, setIsPlaying] = useState(!prefersReducedMotion);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -39,7 +41,11 @@ export function HeroBlock({
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
-      prefersReducedMotion ? video.pause() : video.play();
+      if (prefersReducedMotion) {
+        video.pause();
+      } else {
+        video.play();
+      }
     }
   }, [prefersReducedMotion]);
 
