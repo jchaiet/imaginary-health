@@ -2,13 +2,13 @@ import React from "react";
 import { RichText } from "@/lib/portableTextRenderer";
 import { urlForImage } from "@/sanity/client";
 import Image from "next/image";
-import { CardType } from "@/types";
+import { ItemType } from "@/types";
 import { Modal, Avatar } from "quirk-ui";
 import { Play } from "lucide-react";
 
 import styles from "./styles.module.css";
 
-type CustomCardProps = CardType & {
+type CustomCardProps = ItemType & {
   onHover?: () => void;
   onLeave?: () => void;
 };

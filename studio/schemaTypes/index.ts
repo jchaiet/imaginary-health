@@ -6,6 +6,8 @@ import { heroBlockType } from "./blocks/heroBlockType";
 import { cardGridBlockType } from "./blocks/cardGridBlockType";
 import { carouselBlockType } from "./blocks/carouselBlockType";
 import { contentBlockType } from "./blocks/contentBlockType";
+import { stickyScrollBlockType } from "./blocks/stickyScrollBlockType";
+import { faqBlockType } from "./blocks/faqBlockType";
 import { cardType } from "./cards/cardType";
 
 export const schemaTypes = [
@@ -17,5 +19,7 @@ export const schemaTypes = [
   cardGridBlockType,
   carouselBlockType,
   contentBlockType,
+  stickyScrollBlockType,
+  faqBlockType,
   cardType,
 ];

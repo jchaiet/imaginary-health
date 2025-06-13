@@ -28,6 +28,23 @@ body {
   }
 }
 
+ul {
+  padding-inline-start: var(--spacing-lg);
+  -webkit-columns: 2;
+  -moz-columns: 2;
+  columns: 2;
+  list-style-position: inside;
+  /* display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 100px; */
+
+  li {
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
 /* Text Color Overrides */
 .textPrimary {
   color: var(--color-primary);
@@ -74,7 +91,7 @@ body .paddingTop1 {
   padding-top: 1rem;
 }
 
-body .paddingBottom4 {
+body .paddingBottom1 {
   padding-bottom: 1rem;
 }
 

@@ -1,19 +1,19 @@
-import { CardType } from "./card";
+import { ItemType } from "./item";
 import { Styles } from "./styles";
 import { PortableTextBlock } from "@portabletext/types";
 
 export interface CarouselBlockProps {
-  titleOptions: {
+  heading: {
     title: PortableTextBlock[];
+    description: PortableTextBlock[];
     animateText?: boolean;
   };
-  description: PortableTextBlock[];
   carouselOptions: {
     itemsPerPage?: number;
     itemsPerRow?: number;
     autoplay?: boolean;
     autoplayInterval?: number;
   };
-  items?: CardType[];
+  items?: ItemType[];
   styleOptions: Styles;
 }

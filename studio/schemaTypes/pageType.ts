@@ -83,6 +83,18 @@ export const pageType = defineType({
           title: "Content Block",
           icon: InlineIcon,
         }),
+        defineArrayMember({
+          type: "stickyScrollBlock",
+          name: "stickyScrollBlock",
+          title: "Sticky Scroll Block",
+          icon: InlineElementIcon,
+        }),
+        defineArrayMember({
+          type: "faqBlock",
+          name: "faqBlock",
+          title: "FAQ Block",
+          icon: InlineElementIcon,
+        }),
       ],
     }),
   ],

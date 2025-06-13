@@ -12,17 +12,63 @@
   margin: 0 auto;
   padding: var(--spacing-xl) var(--spacing-md);
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-block: 0;
+  }
+
   @media (max-width: 768px) {
     gap: var(--spacing-xl);
   }
+}
+
+.metrics {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  padding: 0 var(--spacing-md);
+}
+
+.metric {
+  flex: 1;
+}
+
+.metricValue {
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-bold);
+  position: relative;
+  z-index: 1;
+
+  &:after {
+    content: "";
+    display: block;
+    background-color: purple;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: -3px;
+    left: -0.5rem;
+    z-index: -1;
+    border-radius: var(--radius-md);
+  }
+}
+
+.disclaimer {
+  color: var(--color-muted);
+  font-size: var(--font-size-sm);
 }
 
 .layoutHImageRight {
   flex-direction: row;
 
   .heading {
-    gap: 0;
-    flex: 0.5;
+    gap: var(--spacing-md);
+    flex: 0.65;
   }
 
   .image {
@@ -30,7 +76,7 @@
   }
 
   @media (max-width: 768px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 }
 
@@ -38,8 +84,8 @@
   flex-direction: row-reverse;
 
   .heading {
-    gap: 0;
-    flex: 0.5;
+    gap: var(--spacing-md);
+    flex: 0.65;
   }
 
   .image {
@@ -54,11 +100,19 @@
 .layoutVImageTop {
   flex-direction: column-reverse;
   gap: 3rem;
+
+  .heading {
+    gap: var(--spacing-md);
+  }
 }
 
 .layoutVImageBottom {
   flex-direction: column;
-  gap: 3rem;
+  gap: var(--spacing-md);
+
+  .heading {
+    gap: var(--spacing-md);
+  }
 }
 
 .heading {
@@ -67,7 +121,7 @@
   gap: 5rem;
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     gap: 2rem;
   }
 }
@@ -117,16 +171,44 @@
   }
 }
 
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  flex: 1;
+}
+
+.videoWrapper iframe,
+.videoWrapper video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .default {
   display: block;
+
+  img {
+    border-radius: var(--radius-md);
+  }
 }
 
 .maxWidth {
   margin: 0 auto;
-  max-width: var(--max-width);
+  max-width: var(--max-width, var(--layout-width));
+
+  img {
+    border-radius: var(--radius-md);
+  }
 }
 
-.fullWidth {
+.fullBleed {
   width: 100%;
   max-width: unset;
   border-radius: var(--radius-md);

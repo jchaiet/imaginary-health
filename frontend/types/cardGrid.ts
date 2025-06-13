@@ -1,13 +1,13 @@
-import { CardType } from "./card";
+import { ItemType } from "./item";
 import { Styles } from "./styles";
 import { PortableTextBlock } from "@portabletext/types";
 
 export interface CardGridBlockProps {
-  titleOptions: {
+  heading: {
     title: PortableTextBlock[];
+    description?: PortableTextBlock[];
     animateText?: boolean;
   };
-  description: PortableTextBlock[];
   columns?: {
     xs?: number | string;
     sm?: number | string;
@@ -18,7 +18,7 @@ export interface CardGridBlockProps {
   areas?: string[];
   gap?: string;
   autoFitMinMax?: string;
-  items?: CardType[];
+  items?: ItemType[];
   className?: string;
   textReplaceOnHover: boolean;
   options?: string[];

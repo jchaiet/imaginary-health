@@ -2,7 +2,7 @@ import { sanityClient, resolveLinkURL } from "@/sanity/client";
 import { pageBySlugQuery } from "@/sanity/queries";
 import PageTemplate from "@/components/templates/PageTemplate";
 import { PageBuilder } from "@/lib/pageBuilder";
-import { CardType, Link, PageSection } from "@/types";
+import { ItemType, Link, PageSection } from "@/types";
 
 import { notFound } from "next/navigation";
 
@@ -21,7 +21,7 @@ export default async function Home() {
 
         if (items) {
           const resolvedItems = await Promise.all(
-            items.map(async (item: CardType) => {
+            items.map(async (item: ItemType) => {
               if (item.callToAction) {
                 return {
                   ...item,

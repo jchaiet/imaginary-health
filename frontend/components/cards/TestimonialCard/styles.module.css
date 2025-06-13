@@ -211,57 +211,6 @@
   }
 }
 
-.imageRight,
-.imageLeft,
-.imageBottom,
-.imageTop {
-  .title {
-    strong {
-      font-size: var(--font-size-lg);
-    }
-  }
-
-  .description {
-    display: block;
-    position: relative;
-    font-size: var(--font-size-lg);
-    text-wrap: pretty;
-
-    &::before {
-      content: open-quote;
-      font-size: 2.5rem;
-      display: inline-block;
-      position: relative;
-      /* margin-left: -15px; */
-      top: 0.35rem;
-      left: -3px;
-      /* position: absolute;
-      top: calc(var(--spacing-sm) * -1);
-      left: calc(var(--spacing-xl) * -1); */
-      color: var(--color-primary);
-      font-family: "Times New Roman", Times, serif;
-      font-weight: var(--font-weight-bold);
-      line-height: 0;
-    }
-
-    &::after {
-      content: close-quote;
-      font-size: 2.5rem;
-      display: inline-block;
-      position: relative;
-      top: 0.35rem;
-      right: -3px;
-      /* position: absolute;
-      bottom: calc(var(--spacing-xl) * -1);
-      right: calc(var(--spacing-xl) * -1); */
-      color: var(--color-primary);
-      font-family: "Times New Roman", Times, serif;
-      font-weight: var(--font-weight-bold);
-      line-height: 0;
-    }
-  }
-}
-
 .imageRight {
   padding: var(--spacing-xl);
   max-width: 800px;
@@ -369,5 +318,56 @@
     align-items: center;
     justify-content: center;
     gap: var(--spacing-md);
+  }
+}
+
+.imageRight,
+.imageLeft,
+.imageBottom,
+.imageTop {
+  @media (max-width: 767px) {
+    max-width: unset;
+    padding: 0;
+  }
+
+  .title {
+    strong {
+      font-size: var(--font-size-lg);
+    }
+  }
+
+  .description {
+    display: block;
+    position: relative;
+    font-size: var(--font-size-lg);
+    text-wrap: pretty;
+    overflow: visible;
+
+    &::before {
+      content: open-quote;
+      font-size: 2.5rem;
+      display: inline-block;
+      position: relative;
+      top: 0.35rem;
+      left: -1px;
+
+      color: var(--color-primary);
+      font-family: "Times New Roman", Times, serif;
+      font-weight: var(--font-weight-bold);
+      line-height: 0;
+    }
+
+    &::after {
+      content: close-quote;
+      font-size: 2.5rem;
+      display: inline-block;
+      position: relative;
+      top: 0.35rem;
+      right: -1px;
+      color: var(--color-primary);
+      font-family: "Times New Roman", Times, serif;
+      font-weight: var(--font-weight-bold);
+      line-height: 0;
+    }
   }
 }

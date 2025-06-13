@@ -3,7 +3,7 @@ import { PageBuilder } from "@/lib/pageBuilder";
 import { sanityClient, resolveLinkURL } from "@/sanity/client";
 import { pageBySlugQuery } from "@/sanity/queries";
 import { notFound } from "next/navigation";
-import { CardType, Link, PageSection } from "@/types";
+import { ItemType, Link, PageSection } from "@/types";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -25,7 +25,7 @@ export default async function Page({ params }: PageProps) {
 
         if (items) {
           const resolvedItems = await Promise.all(
-            items.map(async (item: CardType) => {
+            items.map(async (item: ItemType) => {
               if (item.callToAction) {
                 return {
                   ...item,

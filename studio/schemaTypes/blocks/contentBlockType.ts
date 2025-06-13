@@ -33,7 +33,7 @@ export const contentBlockType = defineType({
       type: "object",
       title: "Heading",
       fields: [
-        defineField({ name: "title", type: "richText", title: "Title Text" }),
+        defineField({ name: "title", type: "richText", title: "Title" }),
         defineField({
           name: "description",
           type: "richText",
@@ -76,7 +76,7 @@ export const contentBlockType = defineType({
             list: [
               { title: "Default", value: "default" },
               { title: "Max Width", value: "max-width" },
-              { title: "Full Width", value: "full-width" },
+              { title: "Full Bleed", value: "full-bleed" },
             ],
             layout: "radio",
           },
@@ -88,6 +88,34 @@ export const contentBlockType = defineType({
           type: "string",
           hidden: ({ parent }) => parent?.display !== "max-width",
         }),
+      ],
+    }),
+    defineField({
+      name: "video",
+      title: "Video",
+      type: "string",
+    }),
+    defineField({
+      name: "metrics",
+      title: "Metrics",
+      type: "array",
+      of: [
+        {
+          name: "metricItem",
+          type: "object",
+          fields: [
+            defineField({
+              name: "metricDescription",
+              title: "Description",
+              type: "richText",
+            }),
+            defineField({
+              name: "metricValue",
+              title: "Metric Value",
+              type: "string",
+            }),
+          ],
+        },
       ],
     }),
     defineField({
@@ -119,6 +147,11 @@ export const contentBlockType = defineType({
       ],
     }),
     defineField({
+      name: "disclaimer",
+      title: "Disclaimer",
+      type: "richText",
+    }),
+    defineField({
       name: "styleOptions",
       title: "Style Options",
       type: "object",
@@ -136,7 +169,7 @@ export const contentBlockType = defineType({
   ],
   preview: {
     select: {
-      titleBlock: "heading",
+      titleBlock: "title",
       media: "image",
     },
     prepare({ titleBlock, media }) {

@@ -2,7 +2,7 @@ import { Link } from "./link";
 import { PortableTextBlock } from "@portabletext/types";
 import { SanityImage } from "./image";
 
-export type CardType = {
+export type ItemType = {
   _key: string;
   _type: string;
   variant: string;

@@ -2,13 +2,13 @@ import React from "react";
 import { RichText } from "@/lib/portableTextRenderer";
 import { urlForImage } from "@/sanity/client";
 import Image from "next/image";
-import { CardType } from "@/types";
+import { ItemType } from "@/types";
 import { ArrowRight, Play } from "lucide-react";
 import styles from "./styles.module.css";
 import { Modal } from "quirk-ui";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 
-type CustomCardProps = CardType & {
+type CustomCardProps = ItemType & {
   onHover?: () => void;
   onLeave?: () => void;
 };

@@ -11,11 +11,11 @@ export const carouselBlockType = defineType({
   icon: InlineElementIcon,
   fields: [
     defineField({
-      name: "titleOptions",
+      name: "heading",
       type: "object",
-      title: "Title",
+      title: "Heading",
       fields: [
-        defineField({ name: "title", type: "richText", title: "Title Text" }),
+        defineField({ name: "title", type: "richText", title: "Title" }),
         defineField({
           name: "animateText",
           type: "boolean",

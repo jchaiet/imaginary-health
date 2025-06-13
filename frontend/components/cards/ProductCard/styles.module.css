@@ -34,6 +34,7 @@
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   text-decoration: none;
+  line-height: var(--line-height-tight);
   flex: 1;
   transition: color 0.3s ease-in-out;
 
@@ -54,6 +55,14 @@
     position: absolute;
     width: 80px;
     height: auto;
+  }
+
+  @media (max-width: 767px) {
+    width: 70px;
+
+    img {
+      width: 70px;
+    }
   }
 }
 

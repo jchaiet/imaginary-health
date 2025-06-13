@@ -1,0 +1,24 @@
+.faq {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 5rem;
+  max-width: var(--layout-width);
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-md);
+
+  @media (max-width: 768px) {
+    gap: var(--spacing-xl);
+  }
+}
+
+/* Style Options Override */
+:global(.split) .content {
+  margin-top: 0;
+  flex: 1;
+}

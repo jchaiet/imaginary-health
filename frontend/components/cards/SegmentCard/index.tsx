@@ -2,11 +2,11 @@ import React, { useRef, useEffect } from "react";
 import { RichText } from "@/lib/portableTextRenderer";
 import { urlForImage } from "@/sanity/client";
 import Image from "next/image";
-import { CardType } from "@/types";
+import { ItemType } from "@/types";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 import styles from "./styles.module.css";
 
-type CustomCardProps = CardType & {
+type CustomCardProps = ItemType & {
   onHover?: () => void;
   onLeave?: () => void;
 };

@@ -9,10 +9,10 @@ import { ProductCard } from "@/components/cards/ProductCard";
 import { GridCard } from "@/components/cards/GridCard";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
+import { ServiceCard } from "@/components/cards/ServiceCard";
 
 export function CardGridBlock({
-  titleOptions,
-  description,
+  heading,
   columns,
   gap,
   areas,
@@ -59,25 +59,24 @@ export function CardGridBlock({
       <RichText
         className={styles.title}
         textOverride={hoveredText ?? ""}
-        animateText={titleOptions?.animateText ?? false}
-        blocks={titleOptions?.title}
+        animateText={heading?.animateText ?? false}
+        blocks={heading?.title}
       />
     ),
-    [titleOptions?.title, hoveredText, titleOptions?.animateText]
+    [heading?.title, hoveredText, heading?.animateText]
   );
 
   return (
     <section className={styles.cardGrid}>
       <article className={`${classNames} ${styles.container}`}>
         <div className={styles.text}>
-          {titleOptions && titleBlock}
-          {/* <RichText
-            className={styles.title}
-            textOverride={hoveredText || ""}
-            animateText={titleOptions.animateText}
-            blocks={titleOptions.title}
-          /> */}
-          <RichText className={styles.title} blocks={description} />
+          {heading.title && titleBlock}
+          {heading.description && (
+            <RichText
+              className={styles.description}
+              blocks={heading.description}
+            />
+          )}
         </div>
         <div
           className={`${styles.grid} ${className && styles[className] ? styles[className] : (className ?? "")}`}
@@ -94,6 +93,8 @@ export function CardGridBlock({
                 ...item,
               };
               switch (item.variant) {
+                case "service":
+                  return <ServiceCard key={item._key} {...commonProps} />;
                 case "grid":
                   return <GridCard key={item._key} {...commonProps} />;
                 case "image":

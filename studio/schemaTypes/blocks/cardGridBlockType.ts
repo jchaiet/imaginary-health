@@ -11,22 +11,22 @@ export const cardGridBlockType = defineType({
   icon: ThLargeIcon,
   fields: [
     defineField({
-      name: "titleOptions",
+      name: "heading",
       type: "object",
-      title: "Title",
+      title: "Heading",
       fields: [
-        defineField({ name: "title", type: "richText", title: "Title Text" }),
+        defineField({ name: "title", type: "richText", title: "Title" }),
+        defineField({
+          name: "description",
+          type: "richText",
+          title: "Description",
+        }),
         defineField({
           name: "animateText",
           type: "boolean",
           title: "Animate text?",
         }),
       ],
-    }),
-    defineField({
-      name: "description",
-      type: "richText",
-      title: "Description",
     }),
     defineField({
       name: "columns",

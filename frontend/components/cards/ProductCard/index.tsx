@@ -2,11 +2,11 @@ import React from "react";
 import { RichText } from "@/lib/portableTextRenderer";
 import { urlForImage } from "@/sanity/client";
 import Image from "next/image";
-import { CardType } from "@/types";
+import { ItemType } from "@/types";
 import { ArrowRight } from "lucide-react";
 import styles from "./styles.module.css";
 
-type ProductCardProps = CardType & {
+type ProductCardProps = ItemType & {
   onHover?: () => void;
   onLeave?: () => void;
 };

@@ -10,8 +10,7 @@ import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
 import styles from "./styles.module.css";
 
 export function CarouselBlock({
-  titleOptions,
-  description,
+  heading,
   carouselOptions,
   items,
   styleOptions,
@@ -43,8 +42,8 @@ export function CarouselBlock({
   }, [containerRef]);
 
   const titleBlock = useMemo(
-    () => <RichText className={styles.title} blocks={titleOptions?.title} />,
-    [titleOptions?.title]
+    () => <RichText className={styles.title} blocks={heading?.title} />,
+    [heading?.title]
   );
 
   const mappedItems: React.ReactNode[] = (items ?? []).map((item) => {
@@ -70,14 +69,16 @@ export function CarouselBlock({
         className={` ${classNames.includes("split") ? "split" : "default"} ${styles.container}`}
       >
         <div ref={siblingRef} className={styles.heading}>
-          {titleOptions?.title && titleBlock}
+          {heading?.title && titleBlock}
           {/* <RichText
             className={styles.title}
             textOverride={hoveredText || ""}
-            animateText={titleOptions.animateText}
-            blocks={titleOptions.title}
+            animateText={heading.animateText}
+            blocks={heading.title}
           /> */}
-          <RichText className={styles.title} blocks={description} />
+          {heading.description && (
+            <RichText className={styles.title} blocks={heading.description} />
+          )}
         </div>
         <Carousel
           autoplay={carouselOptions?.autoplay}

@@ -3,26 +3,12 @@ import { ImageIcon } from "@sanity/icons";
 import { paddingOptionType } from "../styles/paddingOptionType";
 import { backgroundOptionType } from "../styles/backgroundOptionType";
 
-export const heroBlockType = defineType({
-  name: "heroBlock",
-  title: "Hero",
+export const stickyScrollBlockType = defineType({
+  name: "stickyScrollBlock",
+  title: "Sticky Scroll Block",
   type: "object",
   icon: ImageIcon,
   fields: [
-    defineField({
-      name: "style",
-      title: "Style",
-      type: "string",
-      options: {
-        list: [
-          { title: "Default", value: "default" },
-          { title: "Full bleed", value: "full-bleed" },
-          { title: "Split layout", value: "split" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "default",
-    }),
     defineField({
       name: "heading",
       type: "object",
@@ -78,43 +64,66 @@ export const heroBlockType = defineType({
       ],
     }),
     defineField({
-      name: "image",
-      title: "Image",
-      type: "image",
-      options: { hotspot: true },
-    }),
-    defineField({
-      name: "video",
-      title: "Video",
-      type: "string",
-    }),
-    defineField({
-      name: "callToAction",
-      title: "Call to Action",
-      type: "object",
-      fields: [
-        defineField({
-          name: "items",
-          title: "Items",
-          type: "array",
-          of: [{ type: "link" }],
-          validation: (Rule) => Rule.max(3),
-        }),
-        defineField({
-          name: "alignment",
-          title: "Alignment",
-          type: "string",
-          options: {
-            list: [
-              { title: "Left", value: "left" },
-              { title: "Center", value: "center" },
-              { title: "Right", value: "right" },
-            ],
-            layout: "radio",
-          },
-          initialValue: "left",
-        }),
+      name: "items",
+      title: "Items",
+      type: "array",
+      of: [
+        {
+          name: "stickyScrollSection",
+          type: "object",
+          fields: [
+            defineField({
+              name: "title",
+              title: "Title",
+              type: "richText",
+            }),
+            defineField({
+              name: "description",
+              title: "Description",
+              type: "richText",
+            }),
+            defineField({
+              name: "image",
+              title: "Image",
+              type: "image",
+              options: { hotspot: true },
+            }),
+            defineField({
+              name: "callToAction",
+              title: "Call to Action",
+              type: "object",
+              fields: [
+                defineField({
+                  name: "items",
+                  title: "Items",
+                  type: "array",
+                  of: [{ type: "link" }],
+                  validation: (Rule) => Rule.max(3),
+                }),
+                defineField({
+                  name: "alignment",
+                  title: "Alignment",
+                  type: "string",
+                  options: {
+                    list: [
+                      { title: "Left", value: "left" },
+                      { title: "Center", value: "center" },
+                      { title: "Right", value: "right" },
+                    ],
+                    layout: "radio",
+                  },
+                  initialValue: "left",
+                }),
+              ],
+            }),
+          ],
+        },
       ],
+    }),
+    defineField({
+      name: "showNumbers",
+      type: "boolean",
+      title: "Show item numbers",
     }),
     defineField({
       name: "styleOptions",
@@ -129,7 +138,7 @@ export const heroBlockType = defineType({
   ],
   preview: {
     select: {
-      titleBlock: "heading",
+      titleBlock: "title",
       media: "image",
     },
     prepare({ titleBlock, media }) {
@@ -140,7 +149,7 @@ export const heroBlockType = defineType({
         subtitle = block?.children?.map((c: any) => c.text).join(" ");
       }
       return {
-        title: "Hero",
+        title: "Sticky Scroll Block",
         subtitle: subtitle,
         media: media,
       };

@@ -7,6 +7,6 @@ export interface SanityImage {
     _type: string;
   };
   description?: string;
-  display?: "default" | "max-width" | "full-width";
+  display?: "default" | "max-width" | "full-bleed";
   maxWidth?: number | string;
 }

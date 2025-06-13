@@ -4,8 +4,9 @@ import {
   DocumentActionsContext,
   Template,
 } from "sanity";
-import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
+import { codeInput } from "@sanity/code-input";
+
 import { media } from "sanity-plugin-media";
 import { schemaTypes } from "./schemaTypes";
 import { deskContent } from "./deskStructure";
@@ -20,7 +21,13 @@ export default defineConfig({
   projectId: "m4mnm2dh",
   dataset: "production",
 
-  plugins: [deskContent, visionTool(), media(), customStudioStyles()],
+  plugins: [
+    codeInput(),
+    deskContent,
+    visionTool(),
+    media(),
+    customStudioStyles(),
+  ],
   actions: (
     prev: DocumentActionComponent[],
     context: DocumentActionsContext

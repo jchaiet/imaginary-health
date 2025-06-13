@@ -1,5 +1,6 @@
-fieldset[data-testid*=".heading"] div[data-testid="pt-editor"],
-fieldset[data-testid*=".title"] div[data-testid="pt-editor"] {
+/* fieldset[data-testid*=".heading"] div[data-testid="pt-editor"], */
+fieldset[data-testid*=".title"] div[data-testid="pt-editor"],
+fieldset[data-testid*=".eyebrow"] div[data-testid="pt-editor"] {
   min-height: 110px !important; /* Adjust this value as needed */
   max-height: 125px !important; /* Prevents it from growing too tall */
   resize: none !important; /* Removes the resize handle */

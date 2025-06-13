@@ -1,5 +1,12 @@
-import { defineField } from "sanity";
-import { ColorWheelIcon, ComposeIcon } from "@sanity/icons";
+import { defineArrayMember, defineField } from "sanity";
+import {
+  CodeBlockIcon,
+  CodeIcon,
+  ColorWheelIcon,
+  ComposeIcon,
+  ImageIcon,
+  LinkIcon,
+} from "@sanity/icons";
 import { AlignLeft, AlignCenter, AlignRight } from "lucide-react";
 
 const AlignLeftIcon = (
@@ -32,7 +39,7 @@ export const richTextType = defineField({
   icon: ComposeIcon,
   type: "array",
   of: [
-    {
+    defineArrayMember({
       type: "block",
       styles: [
         { title: "Normal", value: "normal" },
@@ -42,8 +49,8 @@ export const richTextType = defineField({
         { title: "Heading 4", value: "h4" },
         { title: "Heading 5", value: "h5" },
         { title: "Heading 6", value: "h6" },
+        { title: "Quote", value: "blockquote" },
       ],
-      lists: [],
       marks: {
         decorators: [
           { title: "Strong", value: "strong" },
@@ -63,8 +70,32 @@ export const richTextType = defineField({
             value: "right",
             icon: AlignRightIcon,
           },
+          {
+            title: "Inline Code",
+            value: "inlineCode",
+            icon: CodeBlockIcon,
+          },
         ],
         annotations: [
+          {
+            name: "link",
+            type: "object",
+            title: "Link",
+            icon: LinkIcon,
+            fields: [
+              defineField({
+                name: "href",
+                type: "url",
+                title: "URL",
+              }),
+              defineField({
+                name: "blank",
+                type: "boolean",
+                title: "Open in new tab",
+                initialValue: false,
+              }),
+            ],
+          },
           {
             name: "coloredText",
             title: "Colored Text",
@@ -87,6 +118,20 @@ export const richTextType = defineField({
           },
         ],
       },
-    },
+    }),
+    defineArrayMember({
+      type: "image",
+      icon: ImageIcon,
+      options: { hotspot: true },
+    }),
+    defineArrayMember({
+      type: "code",
+      icon: CodeIcon,
+      options: {
+        theme: "github",
+        language: "javascript",
+        withFilename: true,
+      },
+    }),
   ],
 });
