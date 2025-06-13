@@ -3,7 +3,7 @@ import { PageBuilder } from "@/lib/pageBuilder";
 import { sanityClient, resolveLinkURL } from "@/sanity/client";
 import { pageBySlugQuery } from "@/sanity/queries";
 import { notFound } from "next/navigation";
-import { ItemType, Link, PageSection } from "@/types";
+import { FaqItem, ItemType, Link, PageSection } from "@/types";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -20,7 +20,8 @@ export default async function Page({ params }: PageProps) {
   //Pre-resolve CallToAction links in any block
   const resolvedSections = await Promise.all(
     pageBuilder.map(async (section: PageSection) => {
-      if ("items" in section) {
+      console.log(section);
+      if ("items" in section && section._type !== "faqBlock") {
         const items = section.items;
 
         if (items) {
