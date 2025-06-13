@@ -20,8 +20,6 @@ export function HeroBlock({
   const imageUrl = image ? urlForImage(image).quality(100).url() : null;
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  console.log(prefersReducedMotion);
-
   const [isPlaying, setIsPlaying] = useState(!prefersReducedMotion);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);

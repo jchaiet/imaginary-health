@@ -18,6 +18,7 @@
   h4,
   h5,
   h6 {
+    width: 100%;
     margin-block: 0;
   }
 
@@ -141,6 +142,11 @@
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
+
+  @media (max-width: 767px) {
+    flex: 1;
+    width: 100%;
+  }
 }
 
 .headingHorizontal {

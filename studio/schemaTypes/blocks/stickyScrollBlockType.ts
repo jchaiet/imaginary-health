@@ -117,6 +117,23 @@ export const stickyScrollBlockType = defineType({
               ],
             }),
           ],
+          preview: {
+            select: {
+              titleBlock: "title",
+              media: "image",
+            },
+            prepare({ titleBlock, media }) {
+              let subtitle = "";
+
+              if (Array.isArray(titleBlock)) {
+                const block = titleBlock.find((b) => b._type === "block");
+                subtitle = block?.children?.map((c: any) => c.text).join(" ");
+              }
+              return {
+                title: subtitle,
+              };
+            },
+          },
         },
       ],
     }),
@@ -138,7 +155,7 @@ export const stickyScrollBlockType = defineType({
   ],
   preview: {
     select: {
-      titleBlock: "title",
+      titleBlock: "heading",
       media: "image",
     },
     prepare({ titleBlock, media }) {

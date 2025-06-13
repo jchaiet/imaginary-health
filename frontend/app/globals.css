@@ -33,7 +33,8 @@ ul {
   -webkit-columns: 2;
   -moz-columns: 2;
   columns: 2;
-  list-style-position: inside;
+  /* list-style-position: inside; */
+  list-style: disc;
   /* display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -58,6 +59,10 @@ ul {
 .textCenter {
   text-align: center;
   display: block;
+
+  @media (max-width: 767px) {
+    text-align: left;
+  }
 }
 
 .textRight {
