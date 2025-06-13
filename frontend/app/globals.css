@@ -121,8 +121,13 @@ body .split {
 }
 
 body .centered {
+  display: flex;
   align-items: center;
   justify-content: center;
+
+  .textCenter {
+    text-align: center;
+  }
 }
 
 body .backgroundPrimary {

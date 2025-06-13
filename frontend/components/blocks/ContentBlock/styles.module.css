@@ -146,6 +146,15 @@
   @media (max-width: 767px) {
     flex: 1;
     width: 100%;
+    align-items: flex-start;
+  }
+}
+
+.cta {
+  width: 100%;
+
+  @media (max-width: 767px) {
+    justify-content: flex-start;
   }
 }
 
@@ -229,6 +238,14 @@
 :global(.centered) .heading {
   gap: var(--spacing-md);
   align-items: center;
+  justify-content: center;
+}
+
+:global(.centered) .text {
+  align-items: center;
+}
+
+:global(.centered) .cta {
   justify-content: center;
 }
 
