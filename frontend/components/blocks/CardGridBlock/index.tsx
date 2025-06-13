@@ -70,11 +70,11 @@ export function CardGridBlock({
     <section className={styles.cardGrid}>
       <article className={`${classNames} ${styles.container}`}>
         <div className={styles.text}>
-          {heading.title && titleBlock}
-          {heading.description && (
+          {heading?.title && titleBlock}
+          {heading?.description && (
             <RichText
               className={styles.description}
-              blocks={heading.description}
+              blocks={heading?.description}
             />
           )}
         </div>

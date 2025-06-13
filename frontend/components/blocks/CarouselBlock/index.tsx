@@ -70,14 +70,8 @@ export function CarouselBlock({
       >
         <div ref={siblingRef} className={styles.heading}>
           {heading?.title && titleBlock}
-          {/* <RichText
-            className={styles.title}
-            textOverride={hoveredText || ""}
-            animateText={heading.animateText}
-            blocks={heading.title}
-          /> */}
-          {heading.description && (
-            <RichText className={styles.title} blocks={heading.description} />
+          {heading?.description && (
+            <RichText className={styles.title} blocks={heading?.description} />
           )}
         </div>
         <Carousel

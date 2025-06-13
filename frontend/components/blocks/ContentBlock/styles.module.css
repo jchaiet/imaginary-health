@@ -108,7 +108,7 @@
 
 .layoutVImageBottom {
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: 3rem;
 
   .heading {
     gap: var(--spacing-md);
