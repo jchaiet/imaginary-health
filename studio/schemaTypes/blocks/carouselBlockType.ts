@@ -67,6 +67,10 @@ export const carouselBlockType = defineType({
       name: "styleOptions",
       title: "Style Options",
       type: "object",
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
       groups: [
         { name: "padding", title: "Padding" },
         { name: "layout", title: "Layout" },
