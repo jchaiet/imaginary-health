@@ -15,10 +15,10 @@ type CustomCardProps = ItemType & {
 };
 
 export function ReviewCard({
-  style,
+  //style,
   variant,
-  metricValue,
-  title,
+  // metricValue,
+  // title,
   description,
   rating,
   image,

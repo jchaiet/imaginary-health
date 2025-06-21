@@ -3,7 +3,7 @@ import React from "react";
 import { RichText } from "@/lib/portableTextRenderer";
 import Image from "next/image";
 import { urlForImage } from "@/sanity/client";
-import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
+//import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
 import styles from "./styles.module.css";
 import { TabsBlockProps } from "@/types/tabs";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
