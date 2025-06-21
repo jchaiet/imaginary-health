@@ -18,6 +18,10 @@ export const layoutOptionType = [
           value: "centered",
         },
         {
+          title: "Full Bleed",
+          value: "full-bleed",
+        },
+        {
           title: "Split Layout",
           value: "split",
         },

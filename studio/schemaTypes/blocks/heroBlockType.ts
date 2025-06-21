@@ -2,6 +2,7 @@ import { defineType, defineField } from "sanity";
 import { ImageIcon } from "@sanity/icons";
 import { paddingOptionType } from "../styles/paddingOptionType";
 import { backgroundOptionType } from "../styles/backgroundOptionType";
+import { layoutOptionType } from "../styles/layoutOptionType";
 
 export const heroBlockType = defineType({
   name: "heroBlock",
@@ -10,72 +11,9 @@ export const heroBlockType = defineType({
   icon: ImageIcon,
   fields: [
     defineField({
-      name: "style",
-      title: "Style",
-      type: "string",
-      options: {
-        list: [
-          { title: "Default", value: "default" },
-          { title: "Full bleed", value: "full-bleed" },
-          { title: "Split layout", value: "split" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "default",
-    }),
-    defineField({
       name: "heading",
-      type: "object",
+      type: "heading",
       title: "Heading",
-      fields: [
-        defineField({
-          name: "eyebrow",
-          title: "Eyebrow",
-          type: "richText",
-        }),
-        defineField({ name: "title", type: "richText", title: "Title" }),
-        defineField({
-          name: "description",
-          type: "richText",
-          title: "Description",
-        }),
-        defineField({
-          name: "disclaimer",
-          title: "Disclaimer",
-          type: "richText",
-        }),
-        defineField({
-          name: "animateText",
-          type: "boolean",
-          title: "Animate text?",
-        }),
-        defineField({
-          name: "headingLayout",
-          title: "Heading Layout",
-          type: "string",
-          options: {
-            list: [
-              { title: "Vertical", value: "vertical" },
-              {
-                title: "Horizontal",
-                value: "horizontal",
-              },
-            ],
-            layout: "radio",
-          },
-          initialValue: "vertical",
-        }),
-        defineField({
-          name: "alignment",
-          title: "Text Alignment",
-          type: "string",
-          options: {
-            list: ["left", "center", "right"],
-            layout: "radio",
-          },
-          initialValue: "center",
-        }),
-      ],
     }),
     defineField({
       name: "image",
@@ -125,10 +63,15 @@ export const heroBlockType = defineType({
         collapsed: true,
       },
       groups: [
+        { name: "layout", title: "Layout" },
         { name: "padding", title: "Padding" },
         { name: "background", title: "Background" },
       ],
-      fields: [...paddingOptionType, ...backgroundOptionType],
+      fields: [
+        ...layoutOptionType,
+        ...paddingOptionType,
+        ...backgroundOptionType,
+      ],
     }),
   ],
   preview: {

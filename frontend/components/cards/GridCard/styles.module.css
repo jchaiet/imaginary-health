@@ -69,6 +69,17 @@
   }
 }
 
+.description:has(:global(.inlineNumber)) {
+  display: flex;
+  gap: var(--spacing-md);
+
+  @media (max-width: 767px) {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
 .image {
   position: relative;
   height: 100%;
@@ -197,14 +208,14 @@
 }
 
 .textOnly {
-  background-color: var(--color-primary);
+  background-color: transparent;
 
   .title {
-    color: #fff;
+    color: var(--color-primary);
   }
 
   .description {
-    color: #fff;
+    color: var(--color-text-primary);
     font-size: var(--font-size-lg);
   }
 
@@ -252,6 +263,29 @@
   }
 }
 
+.imageTop {
+  background-color: transparent;
+
+  .container {
+    height: auto;
+    gap: var(--spacing-lg);
+    justify-content: flex-start;
+    flex-direction: column-reverse;
+  }
+
+  .image {
+    height: auto;
+    max-width: 225px;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      position: relative;
+      width: 100%;
+    }
+  }
+}
+
 .imageLeft,
 .imageRight {
   .container {
@@ -263,7 +297,6 @@
   }
 
   .title {
-    color: var(--color-primary);
     font-size: 2rem;
   }
 
@@ -309,5 +342,28 @@
     img {
       position: relative;
     }
+  }
+}
+
+/* Cust ClassName Styles */
+:global(.homeGrid) .textOnly {
+  background-color: var(--color-primary);
+
+  .title {
+    color: #fff;
+  }
+
+  .description {
+    color: #fff;
+    font-size: var(--font-size-lg);
+  }
+}
+
+:global(.startMetricGrid) .textOnly {
+  max-width: 300px;
+  margin: 0 auto;
+
+  .title {
+    font-size: 3rem;
   }
 }

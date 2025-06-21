@@ -8,10 +8,14 @@ export type FaqItem = {
   answer: PortableTextBlock[];
 };
 
-export interface faqBlockProps {
+export interface FaqBlockProps {
   heading: {
+    eyebrow?: PortableTextBlock[];
     title: PortableTextBlock[];
-    description: PortableTextBlock[];
+    description?: PortableTextBlock[];
+    disclaimer?: PortableTextBlock[];
+    animateText?: boolean;
+    headingLayout?: "horizontal" | "vertical";
   };
   items?: FaqItem[];
   className?: string;

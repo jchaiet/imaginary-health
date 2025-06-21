@@ -39,22 +39,26 @@ export const linkType = defineType({
         layout: "radio",
       },
       initialValue: "primary",
+      hidden: ({ parent }) => parent?.type === "none",
     }),
     defineField({
       name: "label",
       title: "Label",
       type: "string",
+      hidden: ({ parent }) => parent?.type === "none",
     }),
     defineField({
       name: "ariaLabel",
       title: "ARIA Label",
       type: "string",
+      hidden: ({ parent }) => parent?.type === "none",
     }),
     defineField({
       name: "linkOptions",
       title: "Link Options",
       type: "object",
-      hidden: ({ parent }) => parent?.type !== "link",
+      hidden: ({ parent }) =>
+        parent?.type !== "link" || parent?.type === "none",
       fields: [
         defineField({
           name: "linkType",

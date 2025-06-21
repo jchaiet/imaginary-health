@@ -4,6 +4,10 @@ export const headingType = defineType({
   name: "heading",
   type: "object",
   title: "Heading",
+  options: {
+    collapsible: true,
+    collapsed: true,
+  },
   fields: [
     defineField({
       name: "eyebrow",
@@ -41,16 +45,6 @@ export const headingType = defineType({
         layout: "radio",
       },
       initialValue: "vertical",
-    }),
-    defineField({
-      name: "alignment",
-      title: "Text Alignment",
-      type: "string",
-      options: {
-        list: ["left", "center", "right"],
-        layout: "radio",
-      },
-      initialValue: "center",
     }),
   ],
 });

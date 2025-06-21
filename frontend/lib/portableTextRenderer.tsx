@@ -3,6 +3,7 @@ import {
   PortableText,
   PortableTextBlock,
   PortableTextComponents,
+  PortableTextListComponent,
   type PortableTextMarkComponent,
 } from "@portabletext/react";
 import type { TypedObject } from "@portabletext/types";
@@ -59,6 +60,9 @@ const getBlockComponents = (
         {children}
       </Heading>
     ),
+    quote: ({ children }) => (
+      <blockquote className={baseClassName}>{children}</blockquote>
+    ),
   };
 
   return blockComponents;
@@ -93,16 +97,37 @@ const createPortableTextComponents = (
     return <span className={colorClass}>{children}</span>;
   };
 
+  const CustomUL: PortableTextListComponent = ({ children = [] }) => {
+    const itemCount = React.Children.count(children);
+
+    return (
+      <ul
+        style={{
+          columnCount: itemCount > 5 ? 2 : 1,
+        }}
+        className={baseClassName}
+      >
+        {children}
+      </ul>
+    );
+  };
+
   return {
     marks: {
       coloredText,
       strong: ({ children }) => <strong>{children}</strong>,
       em: ({ children }) => <em>{children}</em>,
+      number: ({ children }) => (
+        <span className="inlineNumber">{children}</span>
+      ),
       left: ({ children }) => <span className="textLeft">{children}</span>,
       center: ({ children }) => <span className="textCenter">{children}</span>,
       right: ({ children }) => <span className="textRight">{children}</span>,
     },
     block,
+    list: {
+      bullet: CustomUL,
+    },
   };
 };
 

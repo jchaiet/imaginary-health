@@ -12,6 +12,71 @@
   min-height: 400px;
 }
 
+.imageBackgroundContainer {
+  position: relative;
+  height: 450px;
+}
+
+.modalTrigger {
+  cursor: pointer;
+}
+
+.callToAction {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  z-index: 5;
+
+  .cardIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    padding: var(--spacing-xs);
+
+    background-color: #fff;
+    color: var(--color-primary);
+    border: 5px solid #fff;
+    border-radius: var(--radius-full);
+    transition:
+      color 0.3s ease-in-out,
+      background-color 0.3s ease-in-out,
+      border-color 0.3s ease-in-out;
+  }
+
+  .label {
+    color: #fff;
+    font-weight: var(--font-weight-semibold);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.3s ease-in-out,
+      transform 0.3s ease-in-out;
+  }
+}
+
+.card.video:hover {
+  .image img {
+    opacity: 0.75;
+  }
+
+  .label {
+    opacity: 1;
+    transform: translateY(0);
+    color: var(--color-primary);
+  }
+
+  .cardIcon {
+    background-color: var(--color-primary);
+    color: #fff;
+    border: 5px solid var(--color-primary);
+  }
+}
+
 .fullBleed {
   max-width: 380px;
   margin: 0 auto;
@@ -253,6 +318,7 @@
     max-height: 450px;
     max-width: 275px;
     margin: 0 auto;
+    position: relative;
 
     img {
       border-radius: var(--radius-md);
@@ -328,6 +394,10 @@
   @media (max-width: 767px) {
     max-width: unset;
     padding: 0;
+  }
+
+  .image img {
+    transition: opacity 0.3s ease-in-out;
   }
 
   .title {

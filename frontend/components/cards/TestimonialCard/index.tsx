@@ -61,6 +61,14 @@ export function TestimonialCard({
     <>
       {image && imageUrl ? (
         <div className={styles.image}>
+          {callToAction?.videoUrl && (
+            <div className={styles.callToAction}>
+              <div className={styles.label}>{callToAction.label}</div>
+              <div className={styles.cardIcon}>
+                <Play size={45} />
+              </div>
+            </div>
+          )}
           <Image
             src={imageUrl}
             alt={image?.alt || image?.description || "Card image"}
@@ -91,6 +99,7 @@ export function TestimonialCard({
               priority={false}
               style={{ objectFit: "cover" }}
               draggable={false}
+              sizes="(min-width: 500px) 500px, 100vw"
             />
             <div className={styles.overlay}>{text}</div>
           </div>

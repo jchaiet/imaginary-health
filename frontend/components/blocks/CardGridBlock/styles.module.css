@@ -1,14 +1,18 @@
 .cardGrid {
   width: 100%;
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
 }
 
 .container {
+  width: 100%;
   max-width: var(--layout-width);
   margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-md);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
 }
 
 .heading {
@@ -27,6 +31,24 @@
   }
 }
 
+.headingHorizontal {
+  flex-direction: row;
+  justify-content: space-between;
+
+  .title {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.headingVertical {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .title {
   &::first-letter {
     text-transform: capitalize;
@@ -36,6 +58,12 @@
 h3.description {
   font-size: var(--font-size-xl);
   margin-top: var(--spacing-md);
+}
+
+.disclaimer {
+  font-size: var(--font-size-sm);
+  color: var(--color-muted);
+  line-height: var(--line-height-tight);
 }
 
 /* Style Options Override */

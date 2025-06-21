@@ -2,6 +2,7 @@
 import React, { useMemo, useState } from "react";
 import { Grid } from "quirk-ui";
 import { RichText } from "@/lib/portableTextRenderer";
+import { CallToActions } from "@/components/ui/CallToActions";
 import { CardGridBlockProps } from "@/types";
 import styles from "./styles.module.css";
 import { PortableTextBlock } from "next-sanity";
@@ -10,22 +11,25 @@ import { GridCard } from "@/components/cards/GridCard";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
 import { ServiceCard } from "@/components/cards/ServiceCard";
+import { TestimonialCard } from "@/components/cards/TestimonialCard";
+import { ReviewCard } from "@/components/cards/ReviewCard";
 
 export function CardGridBlock({
   heading,
-  columns,
-  gap,
-  areas,
-  //autoFitMinMax,
-  items,
-  className,
+  grid,
   textReplaceOnHover = true,
+  callToAction,
   styleOptions,
 }: CardGridBlockProps) {
   const [hoveredText, setHoveredText] = useState<string | null>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const classNames = useStyleClasses(styleOptions);
+
+  const headingLayoutClass = {
+    horizontal: styles.headingHorizontal,
+    vertical: styles.headingVertical,
+  }[heading?.headingLayout ?? "vertical"];
 
   function extractSpanText(blocks: PortableTextBlock[]): string | null {
     for (const block of blocks) {
@@ -48,11 +52,11 @@ export function CardGridBlock({
   }
 
   const gridAreas = useMemo(() => {
-    if (!areas) return undefined;
+    if (!grid?.areas) return undefined;
     if (isMobile) return undefined;
 
-    return areas.map((row) => row.trim().split(/\s+/));
-  }, [areas, isMobile]);
+    return grid?.areas.map((row) => row.trim().split(/\s+/));
+  }, [grid?.areas, isMobile]);
 
   const titleBlock = useMemo(
     () => (
@@ -67,9 +71,11 @@ export function CardGridBlock({
   );
 
   return (
-    <section className={styles.cardGrid}>
-      <article className={`${classNames} ${styles.container}`}>
-        <div className={styles.heading}>
+    <section
+      className={`${styles.cardGrid} ${grid?.className ?? ""} ${classNames}`}
+    >
+      <article className={styles.container}>
+        <div className={`${styles.heading} ${headingLayoutClass ?? ""}`}>
           {heading?.title && titleBlock}
           {heading?.description && (
             <RichText
@@ -79,10 +85,10 @@ export function CardGridBlock({
           )}
         </div>
         <div
-          className={`${styles.grid} ${className && styles[className] ? styles[className] : (className ?? "")}`}
+          className={`${styles.grid} ${grid?.className && styles[grid?.className] ? styles[grid?.className] : (grid?.className ?? "")}`}
         >
-          <Grid columns={columns} gap={gap} areas={gridAreas}>
-            {items?.map((item) => {
+          <Grid columns={grid?.columns} gap={grid?.gap} areas={gridAreas}>
+            {grid?.items?.map((item) => {
               const titleText = item.title ? extractSpanText(item.title) : "";
 
               const commonProps = {
@@ -101,6 +107,10 @@ export function CardGridBlock({
                   return <GridCard key={item._key} {...commonProps} />;
                 case "product":
                   return <ProductCard key={item._key} {...commonProps} />;
+                case "testimonial":
+                  return <TestimonialCard key={item._key} {...commonProps} />;
+                case "review":
+                  return <ReviewCard key={item._key} {...commonProps} />;
                 default:
                   return (
                     <div key={item._key}>Unknown item type: {item._type}</div>
@@ -108,6 +118,20 @@ export function CardGridBlock({
               }
             })}
           </Grid>
+        </div>
+        {callToAction && (
+          <CallToActions
+            items={callToAction.items}
+            alignment={callToAction.alignment}
+          />
+        )}
+        <div className={styles.footer}>
+          {heading?.disclaimer && (
+            <RichText
+              className={styles.disclaimer}
+              blocks={heading?.disclaimer}
+            />
+          )}
         </div>
       </article>
     </section>

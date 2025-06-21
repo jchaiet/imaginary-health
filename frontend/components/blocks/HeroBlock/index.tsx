@@ -10,12 +10,11 @@ import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
 import styles from "./styles.module.css";
 
 export function HeroBlock({
-  style = "default",
   heading,
   image,
   video,
   callToAction,
-  alignment = "left",
+  styleOptions,
 }: HeroBlockProps) {
   const imageUrl = image ? urlForImage(image).quality(100).url() : null;
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -24,17 +23,13 @@ export function HeroBlock({
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const textAlignClass = {
-    left: styles.textLeft,
-    center: styles.textCenter,
-    right: styles.textRight,
-  }[alignment];
+  const layout = styleOptions?.layout ?? "default";
 
   const styleClass = {
     default: styles.default,
     split: styles.split,
     "full-bleed": styles.fullBleed,
-  }[style];
+  }[layout ?? "default"];
 
   useEffect(() => {
     const video = videoRef.current;
@@ -128,9 +123,9 @@ export function HeroBlock({
     ) : null;
 
   //For split layouts
-  if (style === "split") {
+  if (layout === "split") {
     return (
-      <section className={`${styles.hero} ${styles.split} ${textAlignClass}`}>
+      <section className={`${styles.hero} ${styles.split}`}>
         <article className={styles.container}>
           <div className={styles.text}>
             <div>
@@ -165,9 +160,9 @@ export function HeroBlock({
     );
   }
 
-  if (style === "default") {
+  if (layout === "default") {
     return (
-      <section className={`${styles.hero} ${styleClass} ${textAlignClass}`}>
+      <section className={`${styles.hero} ${styleClass}`}>
         <article className={styles.container}>
           {video ? VideoBlock() : ImageBlock()}
           <div className={styles.text}>
@@ -191,9 +186,9 @@ export function HeroBlock({
     );
   }
 
-  if (style === "full-bleed") {
+  if (layout === "full-bleed") {
     return (
-      <section className={`${styles.hero} ${styleClass} ${textAlignClass}`}>
+      <section className={`${styles.hero} ${styleClass}`}>
         <article className={styles.container}>
           {video ? (
             video.includes("vimeo.com") ||
@@ -232,9 +227,10 @@ export function HeroBlock({
               src={imageUrl ?? ""}
               alt={image?.alt || image?.description || "Card image"}
               fill
-              priority={false}
+              priority={true}
               style={{ objectFit: "cover" }}
               draggable={false}
+              sizes="(min-width: 500px) 500px, 100vw"
             />
           )}
 

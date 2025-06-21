@@ -7,6 +7,8 @@ import { ContentBlock } from "@/components/blocks/ContentBlock";
 import { StickyScrollBlock } from "@/components/blocks/StickyScrollBlock";
 import { PageSection } from "@/types/page";
 import { FaqBlock } from "@/components/blocks/FaqBlock";
+import { TabsBlock } from "@/components/blocks/TabsBlock";
+import { DisclaimerBlock } from "@/components/blocks/DisclaimerBlock";
 
 export function PageBuilder({ sections }: { sections: PageSection[] }) {
   console.log("SECTIONS", sections);
@@ -26,6 +28,10 @@ export function PageBuilder({ sections }: { sections: PageSection[] }) {
             return <StickyScrollBlock key={i} {...section} />;
           case "faqBlock":
             return <FaqBlock key={i} {...section} />;
+          case "tabsBlock":
+            return <TabsBlock key={i} {...section} />;
+          case "disclaimerBlock":
+            return <DisclaimerBlock key={i} {...section} />;
           default:
             const unknownSection = section as { _type?: string };
             console.warn("Unknown block type", unknownSection._type, section);

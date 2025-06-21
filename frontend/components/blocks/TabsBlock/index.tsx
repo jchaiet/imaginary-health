@@ -1,0 +1,231 @@
+"use client";
+import React from "react";
+import { RichText } from "@/lib/portableTextRenderer";
+import Image from "next/image";
+import { urlForImage } from "@/sanity/client";
+import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
+import styles from "./styles.module.css";
+import { TabsBlockProps } from "@/types/tabs";
+import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
+import { CallToAction, Tabs } from "quirk-ui";
+
+export function TabsBlock({
+  heading,
+  image,
+  items,
+  styleOptions,
+}: TabsBlockProps) {
+  const imageUrl = image ? urlForImage(image).quality(100).url() : null;
+  //const prefersReducedMotion = usePrefersReducedMotion();
+  const classNames = useStyleClasses(styleOptions);
+
+  const layout = styleOptions?.layout ?? "default";
+
+  const styleClass = {
+    default: styles.default,
+    split: styles.split,
+    "full-bleed": styles.fullBleed,
+  }[styleOptions?.layout ?? "default"];
+
+  const ImageBlock = () =>
+    image && imageUrl ? (
+      <div className={styles.image}>
+        <Image
+          src={imageUrl}
+          alt={image?.alt || image?.description || "Tabs image"}
+          width={600}
+          height={658}
+          priority={true}
+        />
+      </div>
+    ) : null;
+
+  const TabsBlock = (
+    <Tabs defaultIndex={0} align="center">
+      <Tabs.List>
+        {items.map((item, index) => (
+          <Tabs.Trigger key={item.title} index={index}>
+            {item.title}
+          </Tabs.Trigger>
+        ))}
+      </Tabs.List>
+
+      {items.map((item, index) => (
+        <Tabs.Panel key={item.title} index={index}>
+          <div className={styles.tabContent} key={index}>
+            {item.content?.tabImage && (
+              <div className={styles.tabImage}>
+                <Image
+                  src={urlForImage(item.content?.tabImage).width(250).url()}
+                  alt={item.content?.tabImage.alt || "Tab item image"}
+                  width={250}
+                  height={250}
+                />
+              </div>
+            )}
+            <div className={styles.tabText}>
+              {item.content?.tabText && (
+                <RichText blocks={item.content.tabText} />
+              )}
+
+              {item.content?.tabGridItem &&
+                Array.isArray(item.content?.tabGridItem) && (
+                  <div className={styles.gridItems}>
+                    {item.content.tabGridItem.map((gridItem, i) => (
+                      <div key={i} className={styles.gridItem}>
+                        {gridItem.itemImage && (
+                          <Image
+                            src={urlForImage(gridItem.itemImage)
+                              .width(200)
+                              .url()}
+                            alt={gridItem.itemImage.alt || "Grid item image"}
+                            width={200}
+                            height={200}
+                          />
+                        )}
+                        {gridItem.itemText && (
+                          <RichText blocks={gridItem.itemText} />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+              {item.content?.tabLink && (
+                <CallToAction
+                  key={index}
+                  as="a"
+                  variant={item.content?.tabLink.variant ?? "primary"}
+                  href={item.content?.tabLink.resolvedUrl || "#"}
+                  target={
+                    item.content?.tabLink.linkOptions?.linkType === "external"
+                      ? "_blank"
+                      : "_self"
+                  }
+                  rel={
+                    item.content?.tabLink.linkOptions?.linkType === "external"
+                      ? "noopener noreferrer"
+                      : ""
+                  }
+                  aria-label={
+                    item.content?.tabLink.ariaLabel ||
+                    item.content?.tabLink.label
+                  }
+                >
+                  {item.content?.tabLink.label}
+                </CallToAction>
+              )}
+
+              {item.content?.tabDisclaimer && (
+                <RichText blocks={item.content.tabDisclaimer} />
+              )}
+            </div>
+          </div>
+        </Tabs.Panel>
+      ))}
+    </Tabs>
+  );
+
+  //For split layouts
+  if (layout === "split") {
+    return (
+      <section className={`${styles.tabs} ${styles.split} ${classNames}`}>
+        <article className={styles.container}>
+          <div className={styles.text}>
+            <div>
+              {heading.eyebrow && (
+                <RichText className={styles.eyebrow} blocks={heading.eyebrow} />
+              )}
+              <RichText className={styles.title} blocks={heading.title} />
+            </div>
+
+            {heading.description && (
+              <RichText
+                className={styles.subheading}
+                blocks={heading.description}
+              />
+            )}
+            {heading.disclaimer && (
+              <RichText
+                className={styles.disclaimer}
+                blocks={heading.disclaimer}
+              />
+            )}
+
+            <div className={styles.tabsContainer}>{TabsBlock}</div>
+          </div>
+          {ImageBlock()}
+        </article>
+      </section>
+    );
+  }
+
+  if (layout === "default") {
+    return (
+      <section className={`${styles.tabs} ${styleClass} ${classNames}`}>
+        <article className={styles.container}>
+          {ImageBlock()}
+          <div className={styles.text}>
+            <RichText className={styles.title} blocks={heading.title} />
+
+            {heading.description && (
+              <RichText
+                className={styles.subheading}
+                blocks={heading.description}
+              />
+            )}
+          </div>
+          <div className={styles.tabsContainer}>{TabsBlock}</div>
+          {heading.disclaimer && (
+            <RichText
+              className={styles.disclaimer}
+              blocks={heading.disclaimer}
+            />
+          )}
+        </article>
+      </section>
+    );
+  }
+
+  if (layout === "full-bleed") {
+    return (
+      <section className={`${styles.tabs} ${styleClass} ${classNames}`}>
+        <article className={styles.container}>
+          {imageUrl && (
+            <Image
+              src={imageUrl ?? ""}
+              alt={image?.alt || image?.description || "Card image"}
+              fill
+              priority={true}
+              style={{ objectFit: "cover" }}
+              draggable={false}
+              sizes="(min-width: 500px) 500px, 100vw"
+            />
+          )}
+
+          <div className={styles.overlay}>
+            <div className={styles.text}>
+              <RichText className={styles.title} blocks={heading.title} />
+
+              {heading.description && (
+                <RichText
+                  className={styles.subheading}
+                  blocks={heading.description}
+                />
+              )}
+
+              <div className={styles.tabsContainer}>{TabsBlock}</div>
+            </div>
+
+            {heading.disclaimer && (
+              <RichText
+                className={styles.disclaimer}
+                blocks={heading.disclaimer}
+              />
+            )}
+          </div>
+        </article>
+      </section>
+    );
+  }
+}

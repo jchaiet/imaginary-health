@@ -105,6 +105,7 @@ export function SegmentCard({
           fill
           priority={false}
           style={{ objectFit: "cover" }}
+          sizes="(min-width: 500px) 500px, 100vw"
         />
         <div className={styles.overlay}>
           <div>

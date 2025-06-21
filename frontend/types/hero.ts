@@ -4,8 +4,6 @@ import { SanityImage } from "./image";
 import { PortableTextBlock } from "@portabletext/types";
 
 export interface HeroBlockProps {
-  style?: "default" | "full-bleed" | "split";
-  eyebrow?: PortableTextBlock[];
   heading: {
     eyebrow?: PortableTextBlock[];
     title: PortableTextBlock[];

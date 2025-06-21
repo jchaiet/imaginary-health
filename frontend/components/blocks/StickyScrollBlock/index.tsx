@@ -47,8 +47,8 @@ export function StickyScrollBlock({
   }, []);
 
   return (
-    <div className={styles.layout}>
-      <div className={styles.container}>
+    <section className={styles.layout}>
+      <article className={styles.container}>
         <div className={styles.heading}>
           <RichText className={styles.title} blocks={heading.title} />
 
@@ -134,7 +134,7 @@ export function StickyScrollBlock({
             })}
           </div>
         </div>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }

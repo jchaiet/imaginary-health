@@ -11,8 +11,10 @@ export interface ContentBlockProps {
     | "horizontal-image-right"
     | "horizontal-image-left";
   heading: {
+    eyebrow?: PortableTextBlock[];
     title: PortableTextBlock[];
     description?: PortableTextBlock[];
+    disclaimer?: PortableTextBlock[];
     animateText?: boolean;
     headingLayout?: "horizontal" | "vertical";
   };

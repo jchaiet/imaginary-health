@@ -5,7 +5,7 @@ import type { AccordionItem } from "quirk-ui";
 import { RichText } from "@/lib/portableTextRenderer";
 import styles from "./styles.module.css";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
-import { faqBlockProps, FaqItem } from "@/types/faq";
+import { FaqBlockProps, FaqItem } from "@/types/faq";
 
 function mapSanityToAccordionItems(items: FaqItem[]): AccordionItem[] {
   return items.map((item) => ({
@@ -20,14 +20,14 @@ export function FaqBlock({
   items,
   className,
   styleOptions,
-}: faqBlockProps) {
+}: FaqBlockProps) {
   const classNames = useStyleClasses(styleOptions);
 
   const accordionItems = mapSanityToAccordionItems(items ?? []);
 
   return (
-    <section className={styles.faq}>
-      <article className={`${classNames} ${styles.container}`}>
+    <section className={`${styles.faq} ${classNames}`}>
+      <article className={styles.container}>
         <div className={styles.text}>
           {heading.title && (
             <RichText className={styles.title} blocks={heading?.title} />

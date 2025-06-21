@@ -1,8 +1,10 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import {
   DocumentsIcon,
+  InfoOutlineIcon,
   InlineElementIcon,
   InlineIcon,
+  TextIcon,
   ThLargeIcon,
 } from "@sanity/icons";
 import asyncSlugifier from "../lib/asyncSlugifier";
@@ -94,6 +96,18 @@ export const pageType = defineType({
           name: "faqBlock",
           title: "FAQ Block",
           icon: InlineElementIcon,
+        }),
+        defineArrayMember({
+          type: "tabsBlock",
+          name: "tabsBlock",
+          title: "Tabs Block",
+          icon: InlineElementIcon,
+        }),
+        defineArrayMember({
+          type: "disclaimerBlock",
+          name: "disclaimerBlock",
+          title: "Disclaimer Block",
+          icon: InfoOutlineIcon,
         }),
       ],
     }),

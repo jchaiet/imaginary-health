@@ -30,37 +30,8 @@ export const contentBlockType = defineType({
     }),
     defineField({
       name: "heading",
-      type: "object",
+      type: "heading",
       title: "Heading",
-      fields: [
-        defineField({ name: "title", type: "richText", title: "Title" }),
-        defineField({
-          name: "description",
-          type: "richText",
-          title: "Description",
-        }),
-        defineField({
-          name: "animateText",
-          type: "boolean",
-          title: "Animate text?",
-        }),
-        defineField({
-          name: "headingLayout",
-          title: "Heading Layout",
-          type: "string",
-          options: {
-            list: [
-              { title: "Vertical", value: "vertical" },
-              {
-                title: "Horizontal",
-                value: "horizontal",
-              },
-            ],
-            layout: "radio",
-          },
-          initialValue: "vertical",
-        }),
-      ],
     }),
     defineField({
       name: "image",

@@ -24,7 +24,7 @@ export function ContentBlock({
   const classNames = useStyleClasses(styleOptions);
 
   const style = {
-    "--max-width": image?.maxWidth,
+    "--max-width": image?.display === "max-width" ? image?.maxWidth : "unset",
   } as React.CSSProperties;
 
   const layoutClass = {
@@ -87,7 +87,7 @@ export function ContentBlock({
 
   return (
     <section className={`${classNames} ${styles.content}`}>
-      <div className={`${styles.container} ${layoutClass}`}>
+      <article className={`${styles.container} ${layoutClass}`}>
         <div className={`${styles.heading} ${headingLayoutClass}`}>
           <RichText className={styles.title} blocks={heading.title} />
 
@@ -147,7 +147,7 @@ export function ContentBlock({
                 />
               </div>
             )}
-      </div>
+      </article>
     </section>
   );
 }

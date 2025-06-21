@@ -4,7 +4,9 @@ import { CarouselBlockProps } from "./carousel";
 import { ContentBlockProps } from "./content";
 import { StickyScrollBlockProps } from "./stickyScroll";
 import { Link } from "./link";
-import { faqBlockProps } from "./faq";
+import { FaqBlockProps } from "./faq";
+import { TabsBlockProps } from "./tabs";
+import { DisclaimerBlockProps } from "./disclaimer";
 
 type CallToActionSection = { callToAction?: Link[] | Link };
 export type PageSection =
@@ -13,4 +15,6 @@ export type PageSection =
   | ({ _type: "carouselBlock" } & CarouselBlockProps)
   | ({ _type: "contentBlock" } & ContentBlockProps & CallToActionSection)
   | ({ _type: "stickyScrollBlock" } & StickyScrollBlockProps)
-  | ({ _type: "faqBlock" } & faqBlockProps);
+  | ({ _type: "faqBlock" } & FaqBlockProps)
+  | ({ _type: "tabsBlock" } & TabsBlockProps)
+  | ({ _type: "disclaimerBlock" } & DisclaimerBlockProps);

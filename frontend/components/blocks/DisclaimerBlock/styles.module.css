@@ -1,0 +1,14 @@
+.disclaimer {
+  width: 100%;
+  padding: var(--spacing-xl);
+}
+
+.container {
+  max-width: var(--layout-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.disclaimerText {
+  font-size: var(--font-size-sm);
+}

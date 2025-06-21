@@ -10,6 +10,7 @@ export type ItemType = {
   metricValue?: string;
   title?: PortableTextBlock[];
   description?: PortableTextBlock[];
+  rating: number;
   image?: SanityImage;
   icon?: string;
   callToAction?: Link;

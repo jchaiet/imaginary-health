@@ -39,9 +39,6 @@ h6 {
 
 ul {
   padding-inline-start: var(--spacing-lg);
-  -webkit-columns: 2;
-  -moz-columns: 2;
-  columns: 2;
   /* list-style-position: inside; */
   list-style: disc;
   /* display: flex;
@@ -58,6 +55,24 @@ ul {
 /* Text Color Overrides */
 .textPrimary {
   color: var(--color-primary);
+}
+
+/* Text Styles */
+.inlineNumber {
+  border-radius: var(--radius-full);
+  background-color: var(--color-muted);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  width: 35px;
+  height: 35px;
+  flex: 1 0 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    color 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
 }
 
 .textLeft {
@@ -117,7 +132,7 @@ body .removePaddingBottom {
   padding-bottom: 0;
 }
 
-body .split {
+body .split > article {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -129,7 +144,7 @@ body .split {
   }
 }
 
-body .centered {
+body .centered > article {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,4 +167,10 @@ body .backgroundPrimary {
   p {
     color: #fff;
   }
+}
+
+/* Custom ClassNames */
+body .homeGrid,
+body .startMetricGrid {
+  position: relative;
 }

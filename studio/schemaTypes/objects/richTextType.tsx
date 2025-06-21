@@ -6,6 +6,7 @@ import {
   ComposeIcon,
   ImageIcon,
   LinkIcon,
+  NumberIcon,
 } from "@sanity/icons";
 import { AlignLeft, AlignCenter, AlignRight } from "lucide-react";
 
@@ -56,20 +57,22 @@ export const richTextType = defineField({
           { title: "Strong", value: "strong" },
           { title: "Emphasis", value: "em" },
           {
-            title: "left",
+            title: "Left",
             value: "left",
             icon: AlignLeftIcon,
           },
           {
-            title: "center",
+            title: "Center",
             value: "center",
             icon: AlignCenterIcon,
           },
           {
-            title: "right",
+            title: "Right",
             value: "right",
             icon: AlignRightIcon,
           },
+          { title: "Number", value: "number", icon: NumberIcon },
+
           {
             title: "Inline Code",
             value: "inlineCode",

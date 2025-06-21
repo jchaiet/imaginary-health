@@ -20,7 +20,11 @@ export default async function Page({ params }: PageProps) {
   //Pre-resolve CallToAction links in any block
   const resolvedSections = await Promise.all(
     pageBuilder.map(async (section: PageSection) => {
-      if ("items" in section && section._type !== "faqBlock") {
+      if (
+        "items" in section &&
+        section._type !== "faqBlock" &&
+        section._type !== "tabsBlock"
+      ) {
         const items = section.items;
 
         if (items) {

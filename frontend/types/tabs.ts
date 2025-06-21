@@ -1,8 +1,21 @@
 import { ItemType } from "./item";
+import { SanityImage } from "./image";
+import { Link } from "./link";
 import { Styles } from "./styles";
 import { PortableTextBlock } from "@portabletext/types";
 
-export interface CarouselBlockProps {
+export type TabItem = {
+  title: string;
+  content: {
+    tabText?: PortableTextBlock[];
+    tabImage?: SanityImage;
+    tabLink?: Link;
+    tabGridItem?: {};
+    tabDisclaimer?: PortableTextBlock[];
+  };
+};
+
+export interface TabsBlockProps {
   heading: {
     eyebrow?: PortableTextBlock[];
     title: PortableTextBlock[];
@@ -11,12 +24,7 @@ export interface CarouselBlockProps {
     animateText?: boolean;
     headingLayout?: "horizontal" | "vertical";
   };
-  carouselOptions: {
-    itemsPerPage?: number;
-    itemsPerRow?: number;
-    autoplay?: boolean;
-    autoplayInterval?: number;
-  };
-  items?: ItemType[];
+  items: TabItem[];
+  image?: SanityImage;
   styleOptions: Styles;
 }

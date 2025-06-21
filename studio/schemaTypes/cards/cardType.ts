@@ -19,6 +19,7 @@ export const cardType = defineType({
           { title: "Service", value: "service" },
           { title: "Testimonial", value: "testimonial" },
           { title: "Image", value: "image" },
+          { title: "Review", value: "review" },
         ],
         layout: "radio",
       },
@@ -45,6 +46,12 @@ export const cardType = defineType({
         parent?.variant !== "grid" && parent?.variant !== "testimonial",
     }),
     defineField({
+      name: "rating",
+      title: "Rating (out of 5)",
+      type: "number",
+      hidden: ({ parent }) => parent?.variant !== "review",
+    }),
+    defineField({
       name: "metricValue",
       title: "Metric Value",
       type: "string",
@@ -54,6 +61,7 @@ export const cardType = defineType({
       name: "title",
       title: "Title",
       type: "richText",
+      hidden: ({ parent }) => parent?.variant === "review",
     }),
     defineField({
       name: "description",

@@ -12,16 +12,8 @@ export const carouselBlockType = defineType({
   fields: [
     defineField({
       name: "heading",
-      type: "object",
+      type: "heading",
       title: "Heading",
-      fields: [
-        defineField({ name: "title", type: "richText", title: "Title" }),
-        defineField({
-          name: "animateText",
-          type: "boolean",
-          title: "Animate text?",
-        }),
-      ],
     }),
     defineField({
       name: "description",

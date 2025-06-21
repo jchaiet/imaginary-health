@@ -1,5 +1,7 @@
 .content {
   width: 100%;
+  padding-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
 }
 
 .container {
@@ -11,7 +13,8 @@
   width: 100%;
   max-width: var(--layout-width);
   margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
 
   h1,
   h2,
@@ -250,8 +253,15 @@
   justify-content: center;
 }
 
-:global(.backgroundPrimary) .cta {
-  .secondary {
-    background-color: #fff;
+:global(.backgroundPrimary) {
+  .text p,
+  .text p a {
+    color: #fff;
+  }
+
+  .cta {
+    .secondary {
+      background-color: #fff;
+    }
   }
 }
