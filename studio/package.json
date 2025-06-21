@@ -22,17 +22,17 @@
     "groq": "^3.89.0",
     "lodash.isequal": "^4.5.0",
     "lucide-react": "^0.512.0",
-    "next-sanity": "^9.11.1",
+    "next-sanity": "^9.12.0",
     "rxjs": "^7.8.2",
     "sanity": "^3.89.0",
-    "sanity-plugin-media": "^3.0.2",
+    "sanity-plugin-media": "^3.0.3",
     "slugify": "^1.6.6",
-    "styled-components": "^6.1.15"
+    "styled-components": "^6.1.18"
   },
   "devDependencies": {
     "@eslint/js": "^9.27.0",
     "@sanity/eslint-config-studio": "^5.0.2",
-    "@types/react": "^18.0.25",
+    "@types/react": "^18.3.22",
     "eslint": "^9.27.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",

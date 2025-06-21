@@ -48,7 +48,7 @@ export function ReviewCard({
   );
 
   const RatingStars = () => {
-    let width = (Number(rating) / 5) * 100;
+    const width = (Number(rating) / 5) * 100;
 
     return (
       <div className={styles.ratingOuter}>
