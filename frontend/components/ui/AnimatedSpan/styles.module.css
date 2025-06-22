@@ -23,21 +23,23 @@
 .previous {
   opacity: 1;
   transform: translateX(0);
+  top: 0;
+  left: 0;
 }
 
 .current {
-  opacity: 0;
-  transform: translateX(100px);
+  opacity: 1;
+  transform: translateX(0);
+  top: 0;
+  left: 0;
 }
 
 .slideOff {
-  opacity: 0;
-  transform: translateX(-100px);
+  animation: slideOff 0.3s ease-in-out forwards;
 }
 
 .slideOn {
-  opacity: 1;
-  transform: translateX(0);
+  animation: slideOn 0.3s ease-in-out forwards;
 }
 
 .reset {
@@ -46,12 +48,26 @@
   transition: none;
 }
 
-/* .exit {
-  transform: translateX(-30px);
-  opacity: 0;
+@keyframes slideOn {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
 
-.enter {
-  transform: translateX(0);
-  opacity: 1;
-} */
+@keyframes slideOff {
+  from {
+    opacity: 1;
+    transform: translate(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+}

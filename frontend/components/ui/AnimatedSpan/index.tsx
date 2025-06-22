@@ -16,20 +16,24 @@ export function AnimatedSpan({
 
   const [displayedText, setDisplayedText] = useState(text);
   const [prevText, setPrevText] = useState<string | null>(null);
-  // const [isAnimating, setIsAnimating] = useState(false);
+
+  const [isAnimating, setIsAnimating] = useState(false);
   const rafRef = useRef<number>(0);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     setPrevText(displayedText);
+    setIsAnimating(true);
 
-    rafRef.current = requestAnimationFrame(() => {
+    timeoutRef.current = setTimeout(() => {
       setDisplayedText(text);
-    });
+      setIsAnimating(false);
+    }, 300);
 
     return () => {
-      cancelAnimationFrame(rafRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [text, displayedText]);
+  }, [text]);
 
   useEffect(() => {
     //Slide left
@@ -39,8 +43,14 @@ export function AnimatedSpan({
 
   return (
     <span className={`${styles.animatedSpan} ${className ?? ""}`}>
-      <span className={`${styles.previous} ${prevAnimClass}`}>{prevText}</span>
-      <span className={`${styles.current} ${currentAnimClass}`}>
+      {isAnimating && (
+        <span className={`${styles.previous} ${prevAnimClass}`}>
+          {prevText}
+        </span>
+      )}
+      <span
+        className={`${styles.current} ${isAnimating ? currentAnimClass : ""}`}
+      >
         {displayedText}
       </span>
     </span>
