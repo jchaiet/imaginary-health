@@ -8,17 +8,71 @@
   transition:
     box-shadow 0.3s,
     transform 0.3s;
+}
+
+.cardLink {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  box-sizing: border-box;
   min-height: 400px;
+  box-sizing: border-box;
 }
 
 .card:hover {
   .text {
     max-height: 200px;
+  }
+
+  .callToAction {
+    .label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cardIcon {
+      background-color: #e0eaf9;
+      color: var(--color-primary);
+      border: 5px solid #e0eaf9;
+    }
+  }
+}
+
+.callToAction {
+  position: absolute;
+  z-index: 5;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+
+  .cardIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    padding: var(--spacing-xs);
+
+    background-color: #fff;
+    color: var(--color-primary);
+    border: 5px solid #fff;
+    border-radius: var(--radius-full);
+    transition:
+      color 0.3s ease-in-out,
+      background-color 0.3s ease-in-out,
+      border-color 0.3s ease-in-out;
+  }
+
+  .label {
+    color: #fff;
+    font-weight: var(--font-weight-semibold);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.3s ease-in-out,
+      transform 0.3s ease-in-out;
   }
 }
 

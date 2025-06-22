@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from "react";
 import { RichText } from "@/lib/portableTextRenderer";
 import { urlForImage } from "@/sanity/client";
 import Image from "next/image";
+import { ArrowRight, Play } from "lucide-react";
+import { Modal } from "quirk-ui";
 import { ItemType } from "@/types";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 import styles from "./styles.module.css";
@@ -16,7 +18,7 @@ export function SegmentCard({
   description,
   image,
   // icon,
-  // callToAction,
+  callToAction,
   onHover,
   onLeave,
 }: CustomCardProps) {
@@ -91,6 +93,98 @@ export function SegmentCard({
     if (onLeave) onLeave();
   };
 
+  const Container = ({ children }: { children: React.ReactNode }) => {
+    switch (callToAction?.type) {
+      case "link":
+        return (
+          <a
+            className={styles.cardLink}
+            aria-label={callToAction.ariaLabel || callToAction.label}
+            href={callToAction.resolvedUrl || undefined}
+            target={
+              callToAction.linkOptions?.linkType === "external"
+                ? "_blank"
+                : "_self"
+            }
+            rel={
+              callToAction.linkOptions?.linkType === "external"
+                ? "noopener noreferrer"
+                : ""
+            }
+          >
+            {children}
+          </a>
+        );
+      case "modal":
+        return (
+          <Modal
+            className={styles.modalTrigger}
+            trigger={children}
+            content={callToAction.modalContent}
+          />
+        );
+      case "video":
+        return (
+          <Modal
+            className={styles.modalTrigger}
+            trigger={children}
+            content={<video src={callToAction.videoUrl} controls autoPlay />}
+          />
+        );
+      case "download":
+        return (
+          <a
+            className={styles.cardLink}
+            aria-label={callToAction.ariaLabel || callToAction.label}
+            href={callToAction.resolvedUrl || undefined}
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {children}
+          </a>
+        );
+    }
+  };
+
+  const content = (
+    <div className={styles.imageBackgroundContainer}>
+      {callToAction?.videoUrl && (
+        <div className={styles.callToAction}>
+          <div className={styles.label}>{callToAction.label}</div>
+          <div className={styles.cardIcon}>
+            <Play size={45} />
+          </div>
+        </div>
+      )}
+
+      {callToAction?.type === "link" && (
+        <div className={styles.callToAction}>
+          <div className={styles.label}>{callToAction.label}</div>
+          <div className={styles.cardIcon}>
+            <ArrowRight size={45} />
+          </div>
+        </div>
+      )}
+      <Image
+        src={imageUrl ?? ""}
+        alt={image?.alt || image?.description || "Card image"}
+        fill
+        priority={false}
+        style={{ objectFit: "cover" }}
+        sizes="(min-width: 500px) 500px, 100vw"
+      />
+      <div className={styles.overlay}>
+        <div>
+          {title && <RichText className={styles.title} blocks={title} />}
+          {description && (
+            <RichText className={styles.text} blocks={description} />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <article
       className={styles.card}
@@ -98,24 +192,11 @@ export function SegmentCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={styles.imageBackgroundContainer}>
-        <Image
-          src={imageUrl ?? ""}
-          alt={image?.alt || image?.description || "Card image"}
-          fill
-          priority={false}
-          style={{ objectFit: "cover" }}
-          sizes="(min-width: 500px) 500px, 100vw"
-        />
-        <div className={styles.overlay}>
-          <div>
-            {title && <RichText className={styles.title} blocks={title} />}
-            {description && (
-              <RichText className={styles.text} blocks={description} />
-            )}
-          </div>
-        </div>
-      </div>
+      {callToAction?.type !== "none" ? (
+        <Container>{content}</Container>
+      ) : (
+        <>{content}</>
+      )}
     </article>
   );
 }
