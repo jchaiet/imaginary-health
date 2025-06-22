@@ -16,6 +16,7 @@ export function HeroBlock({
   callToAction,
   styleOptions,
 }: HeroBlockProps) {
+  console.log(callToAction);
   const imageUrl = image ? urlForImage(image).quality(100).url() : null;
   const prefersReducedMotion = usePrefersReducedMotion();
 

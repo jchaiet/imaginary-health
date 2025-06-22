@@ -54,15 +54,10 @@ export default async function Page({ params }: PageProps) {
           : [callToAction];
 
         const resolvedCtas = await Promise.all(
-          callToActionsArray
-            .filter(
-              (cta): cta is Link =>
-                !!cta && "_type" in cta && cta._type === "link"
-            )
-            .map(async (cta) => ({
-              ...cta,
-              resolvedUrl: await resolveLinkURL(cta),
-            }))
+          callToActionsArray.map(async (cta) => ({
+            ...cta,
+            resolvedUrl: await resolveLinkURL(cta as Link),
+          }))
         );
         return {
           ...section,
