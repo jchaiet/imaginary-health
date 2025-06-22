@@ -16,7 +16,7 @@ export function AnimatedSpan({
 
   const [displayedText, setDisplayedText] = useState(text);
   // const [prevText, setPrevText] = useState<string | null>(null);
-  const [isAnimating, setIsAnimating] = useState(false);
+  // const [isAnimating, setIsAnimating] = useState(false);
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
@@ -24,11 +24,6 @@ export function AnimatedSpan({
 
     rafRef.current = requestAnimationFrame(() => {
       setDisplayedText(text);
-      setIsAnimating(true);
-
-      setTimeout(() => {
-        setIsAnimating(false);
-      }, 300);
     });
 
     return () => {
