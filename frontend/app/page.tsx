@@ -50,10 +50,15 @@ export default async function Home() {
           : [callToAction];
 
         const resolvedCtas = await Promise.all(
-          callToActionsArray.map(async (cta: Link) => ({
-            ...cta,
-            resolvedUrl: await resolveLinkURL(cta),
-          }))
+          callToActionsArray
+            .filter(
+              (cta): cta is Link =>
+                !!cta && "_type" in cta && cta._type === "link"
+            )
+            .map(async (cta) => ({
+              ...cta,
+              resolvedUrl: await resolveLinkURL(cta),
+            }))
         );
         return {
           ...section,
