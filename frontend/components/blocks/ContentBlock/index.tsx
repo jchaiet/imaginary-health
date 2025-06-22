@@ -91,7 +91,7 @@ export function ContentBlock({
         <div className={`${styles.heading} ${headingLayoutClass}`}>
           <RichText className={styles.title} blocks={heading.title} />
 
-          {(heading.description || callToAction.items) && (
+          {(heading?.description || callToAction?.items) && (
             <div className={styles.text}>
               {heading.description && (
                 <RichText
