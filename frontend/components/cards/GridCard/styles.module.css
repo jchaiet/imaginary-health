@@ -24,7 +24,7 @@
   gap: 1.5rem;
   height: 100%;
   width: 100%;
-  padding: 2.5rem var(--spacing-xl);
+  padding: 3rem var(--spacing-xl);
 }
 
 .cardLink:hover,
@@ -310,7 +310,7 @@
     img {
       width: 100%;
       height: auto;
-      object-fit: cover;
+      object-fit: scale-down;
     }
   }
 }

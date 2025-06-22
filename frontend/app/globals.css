@@ -132,7 +132,7 @@ body .removePaddingBottom {
   padding-bottom: 0;
 }
 
-body .split > article {
+body .split {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -144,7 +144,7 @@ body .split > article {
   }
 }
 
-body .centered > article {
+body .centered {
   display: flex;
   align-items: center;
   justify-content: center;
