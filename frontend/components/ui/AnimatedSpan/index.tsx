@@ -4,23 +4,23 @@ import styles from "./styles.module.css";
 
 export function AnimatedSpan({
   text,
-  prevText,
+  // prevText,
   className,
 }: {
   text: string;
-  prevText?: string;
+  // prevText?: string;
   className?: string;
 }) {
   const [prevAnimClass, setPrevAnimClass] = useState<string | null>(null);
   const [currentAnimClass, setCurrentAnimClass] = useState<string | null>(null);
 
   const [displayedText, setDisplayedText] = useState(text);
-  // const [prevText, setPrevText] = useState<string | null>(null);
+  const [prevText, setPrevText] = useState<string | null>(null);
   // const [isAnimating, setIsAnimating] = useState(false);
   const rafRef = useRef<number>(0);
 
   useEffect(() => {
-    // setPrevText(displayedText);
+    setPrevText(displayedText);
 
     rafRef.current = requestAnimationFrame(() => {
       setDisplayedText(text);
@@ -29,7 +29,7 @@ export function AnimatedSpan({
     return () => {
       cancelAnimationFrame(rafRef.current);
     };
-  }, [text]);
+  }, [text, displayedText]);
 
   useEffect(() => {
     //Slide left
