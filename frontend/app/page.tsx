@@ -21,7 +21,7 @@ export default async function Home() {
         section._type !== "faqBlock" &&
         section._type !== "tabsBlock"
       ) {
-        const items = section.items;
+        const items = section?.items;
 
         if (items) {
           const resolvedItems = await Promise.all(
