@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "./styles.module.css";
 
 export function AnimatedSpan({
@@ -14,6 +14,28 @@ export function AnimatedSpan({
   const [prevAnimClass, setPrevAnimClass] = useState<string | null>(null);
   const [currentAnimClass, setCurrentAnimClass] = useState<string | null>(null);
 
+  const [displayedText, setDisplayedText] = useState(text);
+  // const [prevText, setPrevText] = useState<string | null>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const rafRef = useRef<number>(0);
+
+  useEffect(() => {
+    // setPrevText(displayedText);
+
+    rafRef.current = requestAnimationFrame(() => {
+      setDisplayedText(text);
+      setIsAnimating(true);
+
+      setTimeout(() => {
+        setIsAnimating(false);
+      }, 300);
+    });
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, [text]);
+
   useEffect(() => {
     //Slide left
     setPrevAnimClass(styles.slideOff);
@@ -23,7 +45,9 @@ export function AnimatedSpan({
   return (
     <span className={`${styles.animatedSpan} ${className ?? ""}`}>
       <span className={`${styles.previous} ${prevAnimClass}`}>{prevText}</span>
-      <span className={`${styles.current} ${currentAnimClass}`}>{text}</span>
+      <span className={`${styles.current} ${currentAnimClass}`}>
+        {displayedText}
+      </span>
     </span>
   );
 }
