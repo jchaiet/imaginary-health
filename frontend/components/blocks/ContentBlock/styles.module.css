@@ -238,7 +238,7 @@
   overflow: hidden;
 }
 
-/* Style Options override */
+/* Style Options Override */
 :global(.centered) .heading {
   gap: var(--spacing-md);
   align-items: center;
