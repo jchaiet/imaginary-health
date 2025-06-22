@@ -18,7 +18,7 @@ export function AnimatedSpan({
   const [prevText, setPrevText] = useState<string | null>(null);
 
   const [isAnimating, setIsAnimating] = useState(false);
-  const rafRef = useRef<number>(0);
+  // const rafRef = useRef<number>(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
