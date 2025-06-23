@@ -7,16 +7,18 @@ import { ItemType, Link, PageSection } from "@/types";
 import { draftMode } from "next/headers";
 
 interface PageProps {
-  params: { slug?: string[] };
+  params: Promise<{ slug: string[] }>;
 }
 
 export default async function Page({ params }: PageProps) {
-  const slug = params.slug?.join("/") ?? "/";
+  const { slug } = await params;
   const { isEnabled } = await draftMode();
+
+  const formattedSlug = slug.join("/") ?? "/";
 
   const page = await sanityClient.fetch(
     pageBySlugQuery,
-    { slug: slug },
+    { slug: formattedSlug },
     isEnabled
       ? {
           perspective: "drafts",
