@@ -7,11 +7,11 @@ import { ItemType, Link, PageSection } from "@/types";
 import { draftMode } from "next/headers";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug?: string[] };
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug } = await params;
+  const slug = params.slug?.join("/") ?? "/";
   const { isEnabled } = await draftMode();
 
   const page = await sanityClient.fetch(
