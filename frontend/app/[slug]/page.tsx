@@ -19,7 +19,7 @@ export default async function Page({ params }: PageProps) {
     { slug: slug },
     isEnabled
       ? {
-          perspective: "previewDrafts",
+          perspective: "drafts",
           useCdn: false,
           stega: true,
         }

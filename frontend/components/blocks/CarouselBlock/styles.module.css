@@ -14,7 +14,7 @@
   margin: 0 auto;
 
   @media (min-width: 768px) {
-    padding: var(--spacing-xl) calc(var(--spacing-md) - 10px);
+    padding: var(--spacing-xl) calc(var(--spacing-md) - var(--spacing-sm));
   }
 }
 
@@ -29,6 +29,10 @@
   h6 {
     width: 100%;
     margin-bottom: 0;
+  }
+
+  @media (min-width: 768px) {
+    padding: 0 calc(var(--spacing-md) - var(--spacing-sm));
   }
 }
 

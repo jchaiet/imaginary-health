@@ -166,8 +166,12 @@ export function HeroBlock({
         <article className={styles.container}>
           {video ? VideoBlock() : ImageBlock()}
           <div className={styles.text}>
-            <RichText className={styles.title} blocks={heading.title} />
-
+            <div>
+              {heading.eyebrow && (
+                <RichText className={styles.eyebrow} blocks={heading.eyebrow} />
+              )}
+              <RichText className={styles.title} blocks={heading.title} />
+            </div>
             {heading.description && (
               <RichText
                 className={styles.subheading}
@@ -236,8 +240,16 @@ export function HeroBlock({
 
           <div className={styles.overlay}>
             <div className={styles.text}>
-              <RichText className={styles.title} blocks={heading.title} />
+              <div>
+                {heading.eyebrow && (
+                  <RichText
+                    className={styles.eyebrow}
+                    blocks={heading.eyebrow}
+                  />
+                )}
 
+                <RichText className={styles.title} blocks={heading.title} />
+              </div>
               {heading.description && (
                 <RichText
                   className={styles.subheading}

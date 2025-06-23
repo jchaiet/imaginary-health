@@ -4,6 +4,7 @@
   min-height: 29px;
   height: 100%;
   width: 100%;
+  margin-bottom: 0 !important;
 }
 
 .previous,

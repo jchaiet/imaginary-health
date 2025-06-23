@@ -30,9 +30,12 @@ export default defineConfig({
     customStudioStyles(),
     presentationTool({
       previewUrl: {
-        origin: process.env.SANITY_STUDIO_PREVIEW_ORIGIN,
+        origin:
+          process.env.SANITY_STUDIO_PREVIEW_ORIGIN || "http://localhost:300",
         preview: "/",
-        previewMode: { enable: "/api/draft-mode/enable" },
+        previewMode: {
+          enable: "/api/draft-mode/enable",
+        },
       },
     }),
   ],

@@ -9,13 +9,12 @@ import { notFound } from "next/navigation";
 
 export default async function Home() {
   const { isEnabled } = await draftMode();
-
   const page = await sanityClient.fetch(
     pageBySlugQuery,
     { slug: "home" },
     isEnabled
       ? {
-          perspective: "previewDrafts",
+          perspective: "drafts",
           useCdn: false,
           stega: true,
         }

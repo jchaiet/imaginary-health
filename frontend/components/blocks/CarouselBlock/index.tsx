@@ -74,6 +74,7 @@ export function CarouselBlock({
             <RichText className={styles.title} blocks={heading?.description} />
           )}
         </div>
+
         <Carousel
           autoplay={carouselOptions?.autoplay}
           autoplayInterval={carouselOptions?.autoplayInterval}

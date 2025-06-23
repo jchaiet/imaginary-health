@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Roboto_Flex } from "next/font/google";
 import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
-import { DisableDraftMode } from "@/components/DisableDraftMode";
+import { DisableDraftMode } from "@/components/preview/DisableDraftMode";
 import "./globals.css";
 import "quirk-ui/styles.css";
+import { SanityLiveVisualEditing } from "@/components/preview/SanityLiveVisualEditing";
 
 const roboto = Roboto_Flex({
   subsets: ["latin"],
@@ -23,13 +24,14 @@ export default async function RootLayout({
   return (
     <html lang="en" style={{ overflow: "visible", scrollBehavior: "smooth" }}>
       <body className={roboto.className}>
-        {children}
         {(await draftMode()).isEnabled && (
           <>
-            <VisualEditing />
+            {/* <SanityLiveVisualEditing /> */}
             <DisableDraftMode />
+            <VisualEditing />
           </>
         )}
+        {children}
       </body>
     </html>
   );

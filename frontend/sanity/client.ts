@@ -1,4 +1,4 @@
-import { createClient } from "next-sanity";
+import { createClient, defineLive } from "next-sanity";
 import { sanityConfig } from "./config";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
@@ -35,3 +35,9 @@ export async function resolveLinkURL(cta: Link) {
 
   return "#";
 }
+
+// export const { sanityFetch, SanityLive} = defineLive({
+//   client: sanityClient,
+//   serverToken: process.env.SANITY_API_READ_TOKEN,
+//   browserToken: process.env.SANITY_API_READ_TOKEN,
+// })
