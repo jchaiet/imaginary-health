@@ -55,12 +55,6 @@ export function AnimatedSpan({
     }
   });
 
-  // useEffect(() => {
-  //   //Slide left
-  //   setPrevAnimClass(styles.slideOff);
-  //   setCurrentAnimClass(styles.slideOn);
-  // }, [text]);
-
   return (
     <span className={`${styles.animatedSpan} ${className ?? ""}`}>
       {displayedPrevText !== undefined && (

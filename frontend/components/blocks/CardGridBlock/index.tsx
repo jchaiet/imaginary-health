@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Grid } from "quirk-ui";
 import { RichText } from "@/lib/portableTextRenderer";
 import { CallToActions } from "@/components/ui/CallToActions";
@@ -51,6 +51,12 @@ export function CardGridBlock({
     return null;
   }
 
+  useEffect(() => {
+    if (heading && heading.title) {
+      setHoveredText(extractSpanText(heading.title));
+    }
+  }, [heading]);
+
   const gridAreas = useMemo(() => {
     if (!grid?.areas) return undefined;
     if (isMobile) return undefined;
@@ -94,7 +100,9 @@ export function CardGridBlock({
               const commonProps = {
                 gridArea: item.gridArea,
                 onHover: () => {
-                  if (textReplaceOnHover) setHoveredText(titleText);
+                  if (textReplaceOnHover) {
+                    setHoveredText(titleText);
+                  }
                 },
                 ...item,
               };

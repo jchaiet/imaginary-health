@@ -135,7 +135,7 @@ const createPortableTextComponents = (
 interface RichTextProps {
   blocks: PortableTextBlock[] | string;
   className?: string;
-  textOverride?: string;
+  textOverride?: string | undefined;
   animateText?: boolean;
 }
 
@@ -146,6 +146,8 @@ export const RichText: React.FC<RichTextProps> = ({
   animateText,
 }) => {
   const previousTextRef = useRef(textOverride);
+
+  console.log("TEXT", textOverride);
 
   useEffect(() => {
     previousTextRef.current = textOverride;
