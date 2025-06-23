@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { Grid } from "quirk-ui";
-import { RichText } from "@/lib/portableTextRenderer";
+import { RichText } from "@/lib/PortableTextRenderer";
 import { CallToActions } from "@/components/ui/CallToActions";
 import { CardGridBlockProps } from "@/types";
 import styles from "./styles.module.css";
@@ -80,7 +80,9 @@ export function CardGridBlock({
     <section
       className={`${styles.cardGrid} ${grid?.className ?? ""} ${classNames}`}
     >
-      <article className={styles.container}>
+      <article
+        className={`${styles.container} ${classNames.includes("split") ? "split" : "default"}`}
+      >
         <div className={`${styles.heading} ${headingLayoutClass ?? ""}`}>
           {heading?.title && titleBlock}
           {heading?.description && (

@@ -1,0 +1,7 @@
+.container :global(*) {
+  margin-bottom: 1rem;
+}
+
+.container :global(*:last-child) {
+  margin-bottom: 0;
+}

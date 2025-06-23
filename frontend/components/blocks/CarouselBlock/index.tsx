@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo, useRef, useEffect, useState } from "react";
 import { Carousel } from "quirk-ui";
-import { RichText } from "@/lib/portableTextRenderer";
+import { RichText } from "@/lib/PortableTextRenderer";
 import { CarouselBlockProps } from "@/types";
 import { SegmentCard } from "@/components/cards/SegmentCard";
 import { TestimonialCard } from "@/components/cards/TestimonialCard";
@@ -66,7 +66,7 @@ export function CarouselBlock({
     >
       <article
         ref={containerRef}
-        className={` ${classNames.includes("split") ? "split" : "default"} ${styles.container}`}
+        className={`${classNames.includes("split") ? "split" : "default"} ${styles.container}`}
       >
         <div ref={siblingRef} className={styles.heading}>
           {heading?.title && titleBlock}

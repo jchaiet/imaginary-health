@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { RichText } from "@/lib/portableTextRenderer";
+import { RichText } from "@/lib/PortableTextRenderer";
 import styles from "./styles.module.css";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
 import { DisclaimerBlockProps } from "@/types/disclaimer";

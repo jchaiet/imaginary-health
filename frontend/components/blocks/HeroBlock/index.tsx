@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { RichText } from "@/lib/portableTextRenderer";
+import { RichText } from "@/lib/PortableTextRenderer";
 import { CallToActions } from "@/components/ui/CallToActions";
 import Image from "next/image";
 import { Pause, Play } from "lucide-react";
@@ -16,7 +16,6 @@ export function HeroBlock({
   callToAction,
   styleOptions,
 }: HeroBlockProps) {
-  console.log(callToAction);
   const imageUrl = image ? urlForImage(image).quality(100).url() : null;
   const prefersReducedMotion = usePrefersReducedMotion();
 

@@ -11,6 +11,8 @@ import type { TypedObject } from "@portabletext/types";
 import { AnimatedSpan } from "@/components/ui/AnimatedSpan";
 import { Heading, Text } from "quirk-ui";
 
+import styles from "./styles.module.css";
+
 // const getAlignClass = (value: PortableTextBlock) => {
 //   const markSet = value.children?.[0]?.marks ?? [];
 
@@ -146,9 +148,6 @@ export const RichText: React.FC<RichTextProps> = ({
   animateText,
 }) => {
   const previousTextRef = useRef(textOverride);
-
-  console.log("TEXT", textOverride);
-
   useEffect(() => {
     previousTextRef.current = textOverride;
   }, [textOverride]);
@@ -173,5 +172,9 @@ export const RichText: React.FC<RichTextProps> = ({
     return <Text className={className}>{blocks}</Text>;
   }
 
-  return <PortableText value={blocks} components={components} />;
+  return (
+    <div className={styles.container}>
+      <PortableText value={blocks} components={components} />
+    </div>
+  );
 };

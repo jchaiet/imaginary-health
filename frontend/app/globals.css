@@ -58,6 +58,10 @@ ul {
 }
 
 /* Text Styles */
+.mbText {
+  margin-bottom: 1rem;
+}
+
 .inlineNumber {
   border-radius: var(--radius-full);
   background-color: var(--color-muted);

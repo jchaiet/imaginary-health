@@ -4,6 +4,7 @@ import { sanityClient, resolveLinkURL } from "@/sanity/client";
 import { pageBySlugQuery } from "@/sanity/queries";
 import { notFound } from "next/navigation";
 import { ItemType, Link, PageSection } from "@/types";
+import { draftMode } from "next/headers";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -11,7 +12,19 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
-  const page = await sanityClient.fetch(pageBySlugQuery, { slug: slug });
+  const { isEnabled } = await draftMode();
+
+  const page = await sanityClient.fetch(
+    pageBySlugQuery,
+    { slug: slug },
+    isEnabled
+      ? {
+          perspective: "previewDrafts",
+          useCdn: false,
+          stega: true,
+        }
+      : undefined
+  );
 
   if (!page) notFound();
 

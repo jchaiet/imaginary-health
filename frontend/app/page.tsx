@@ -3,11 +3,24 @@ import { pageBySlugQuery } from "@/sanity/queries";
 import PageTemplate from "@/components/templates/PageTemplate";
 import { PageBuilder } from "@/lib/pageBuilder";
 import { ItemType, Link, PageSection } from "@/types";
+import { draftMode } from "next/headers";
 
 import { notFound } from "next/navigation";
 
 export default async function Home() {
-  const page = await sanityClient.fetch(pageBySlugQuery, { slug: "home" });
+  const { isEnabled } = await draftMode();
+
+  const page = await sanityClient.fetch(
+    pageBySlugQuery,
+    { slug: "home" },
+    isEnabled
+      ? {
+          perspective: "previewDrafts",
+          useCdn: false,
+          stega: true,
+        }
+      : undefined
+  );
 
   if (!page) notFound();
 

@@ -2,7 +2,7 @@
 import React from "react";
 import { Accordion } from "quirk-ui";
 import type { AccordionItem } from "quirk-ui";
-import { RichText } from "@/lib/portableTextRenderer";
+import { RichText } from "@/lib/PortableTextRenderer";
 import styles from "./styles.module.css";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
 import { FaqBlockProps, FaqItem } from "@/types/faq";
@@ -27,7 +27,9 @@ export function FaqBlock({
 
   return (
     <section className={`${styles.faq} ${classNames}`}>
-      <article className={styles.container}>
+      <article
+        className={`${classNames.includes("split") ? "split" : "default"} ${styles.container}`}
+      >
         <div className={styles.text}>
           {heading.title && (
             <RichText className={styles.title} blocks={heading?.title} />
