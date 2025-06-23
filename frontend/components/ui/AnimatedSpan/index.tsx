@@ -53,7 +53,7 @@ export function AnimatedSpan({
       setCurrentTextToDisplay(text);
       setCurrentAnimClass(null);
     }
-  });
+  }, [displayedPrevText, currentTextToDisplay, text]);
 
   return (
     <span className={`${styles.animatedSpan} ${className ?? ""}`}>

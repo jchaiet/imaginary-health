@@ -5,7 +5,7 @@ import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/preview/DisableDraftMode";
 import "./globals.css";
 import "quirk-ui/styles.css";
-import { SanityLiveVisualEditing } from "@/components/preview/SanityLiveVisualEditing";
+// import { SanityLiveVisualEditing } from "@/components/preview/SanityLiveVisualEditing";
 
 const roboto = Roboto_Flex({
   subsets: ["latin"],
