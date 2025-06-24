@@ -1,9 +1,6 @@
 "use client";
 import { Navbar } from "quirk-ui";
 import type { NavItem } from "quirk-ui";
-import Image from "next/image";
-import { SanityImage } from "@/types";
-import { ReactNode } from "react";
 
 type Props = {
   logo?: React.ReactNode;
