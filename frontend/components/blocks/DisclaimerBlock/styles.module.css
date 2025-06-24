@@ -1,6 +1,6 @@
 .disclaimer {
   width: 100%;
-  padding: var(--spacing-xl);
+  padding: var(--spacing-xl) 0;
 }
 
 .container {
