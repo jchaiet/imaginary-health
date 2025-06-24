@@ -131,7 +131,7 @@
   .text {
     z-index: 3;
     position: relative;
-    max-width: 650px;
+    max-width: 665px;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);

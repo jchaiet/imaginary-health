@@ -87,6 +87,7 @@
 
   @media (max-width: 768px) {
     flex-direction: column-reverse;
+    gap: var(--spacing-lg);
   }
 }
 
@@ -109,6 +110,7 @@
 
   @media (max-width: 768px) {
     flex-direction: column-reverse;
+    gap: var(--spacing-lg);
   }
 }
 
@@ -119,6 +121,10 @@
   .heading {
     gap: var(--spacing-md);
   }
+
+  @media (max-width: 768px) {
+    gap: var(--spacing-lg);
+  }
 }
 
 .layoutVImageBottom {
@@ -127,6 +133,10 @@
 
   .heading {
     gap: var(--spacing-md);
+  }
+
+  @media (max-width: 768px) {
+    gap: var(--spacing-lg);
   }
 }
 
