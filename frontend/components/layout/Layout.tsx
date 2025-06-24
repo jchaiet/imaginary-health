@@ -8,7 +8,7 @@ type LayoutProps = {
   hideFooter?: boolean;
 };
 
-export default function Layout({
+export default async function Layout({
   children,
   hideHeader,
   hideFooter,

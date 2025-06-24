@@ -1,6 +1,7 @@
 import { pageType } from "./pageType";
 import { pageMetadataType } from "./pageMetadataType";
-
+import { navigationType } from "./navigation/navigationType";
+import { navigationItemType } from "./navigation/navigationItemType";
 import { heroBlockType } from "./blocks/heroBlockType";
 import { cardGridBlockType } from "./blocks/cardGridBlockType";
 import { carouselBlockType } from "./blocks/carouselBlockType";
@@ -18,6 +19,8 @@ import { gridType } from "./objects/gridType";
 export const schemaTypes = [
   pageType,
   pageMetadataType,
+  navigationType,
+  navigationItemType,
   heroBlockType,
   cardGridBlockType,
   carouselBlockType,

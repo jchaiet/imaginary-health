@@ -35,6 +35,31 @@ export default async function Page({ params }: PageProps) {
   //Pre-resolve CallToAction links in any block
   const resolvedSections = await Promise.all(
     pageBuilder.map(async (section: PageSection) => {
+      if ("grid" in section) {
+        const items = section?.grid?.items;
+        if (items) {
+          const resolvedItems = await Promise.all(
+            items.map(async (item: ItemType) => {
+              if (item.callToAction) {
+                return {
+                  ...item,
+                  callToAction: {
+                    ...item.callToAction,
+                    resolvedUrl: await resolveLinkURL(item.callToAction),
+                  },
+                };
+              }
+              return item;
+            })
+          );
+
+          return {
+            ...section,
+            grid: { ...section.grid, items: resolvedItems },
+          };
+        }
+      }
+
       if (
         "items" in section &&
         section._type !== "faqBlock" &&

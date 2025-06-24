@@ -9,7 +9,7 @@ import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
 import styles from "./styles.module.css";
 
 export function ContentBlock({
-  layout = "horizontal-image-right",
+  layout,
   heading,
   image,
   video,
@@ -27,12 +27,17 @@ export function ContentBlock({
     "--max-width": image?.display === "max-width" ? image?.maxWidth : "unset",
   } as React.CSSProperties;
 
-  const layoutClass = {
+  const gap = {
+    "--gap": layout?.gap,
+  } as React.CSSProperties;
+
+  const orientationClass = {
+    "no-image": styles.noImage,
     "horizontal-image-right": styles.layoutHImageRight,
     "horizontal-image-left": styles.layoutHImageLeft,
     "vertical-image-top": styles.layoutVImageTop,
     "vertical-image-bottom": styles.layoutVImageBottom,
-  }[layout ?? "horizontal-image-right"];
+  }[layout?.orientation ?? "horizontal-image-right"];
 
   const headingLayoutClass = {
     horizontal: styles.headingHorizontal,
@@ -87,7 +92,10 @@ export function ContentBlock({
 
   return (
     <section className={`${classNames} ${styles.content}`}>
-      <article className={`${styles.container} ${layoutClass}`}>
+      <article
+        className={`${styles.container} ${orientationClass}`}
+        style={layout.gap ? gap : {}}
+      >
         <div className={`${styles.heading} ${headingLayoutClass}`}>
           <RichText className={styles.title} blocks={heading.title} />
 

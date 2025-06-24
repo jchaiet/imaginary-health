@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactNode } from "react";
 import Layout from "@/components/layout/Layout";
 
@@ -10,7 +8,7 @@ type PageTemplateProps = {
   hideFooter?: boolean;
 };
 
-export default function PageTemplate({
+export default async function PageTemplate({
   children,
   layoutType = "default",
   hideHeader = false,

@@ -1,0 +1,55 @@
+import type { Navigation } from "@/types/navigation";
+import type { NavigationItem } from "@/types/navigationItem";
+import type { NavItem } from "quirk-ui";
+
+async function resolveNavItemHref(item: NavigationItem): Promise<string> {
+  if (item.itemType === "external" && item.externalLink) {
+    return item.externalLink;
+  }
+
+  if (item.itemType === "internal" && item.internalLink?.slug?.current) {
+    if (item.internalLink?.slug?.current) {
+      return `/${item.internalLink.slug.current}`;
+    }
+  }
+
+  return "#";
+}
+
+export async function mapNavigation(navData: Navigation): Promise<NavItem[]> {
+  const navItems = await Promise.all(
+    navData.primaryItems.map(async (item) => {
+      const label = item.title;
+
+      if (item.itemType === "dropdown" && item.children?.length) {
+        const subLinks = await Promise.all(
+          item.children.map(async (child) => {
+            const href = await resolveNavItemHref(child);
+
+            if (!href) return null;
+            return { label: child.title, href };
+          })
+        );
+
+        const validSubLinks = subLinks.filter(Boolean) as {
+          label: string;
+          href: string;
+        }[];
+
+        return {
+          label,
+          sublinks: validSubLinks,
+        };
+      }
+
+      const href = await resolveNavItemHref(item);
+      if (href) {
+        return { label, href };
+      }
+
+      return null;
+    })
+  );
+
+  return navItems.filter(Boolean) as NavItem[];
+}

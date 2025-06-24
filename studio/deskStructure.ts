@@ -25,6 +25,12 @@ export const deskContent = structureTool({
     return S.list()
       .title("Website")
       .id("website-id")
-      .items([parentChild("page", S, context.documentStore)]);
+      .items([
+        parentChild("page", S, context.documentStore),
+
+        S.divider(),
+
+        S.documentTypeListItem("navigation").title("Navigation"),
+      ]);
   },
 });

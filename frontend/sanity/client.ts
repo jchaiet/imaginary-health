@@ -3,10 +3,15 @@ import { sanityConfig } from "./config";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { Link } from "@/types";
+import { navigationQuery } from "./queries";
 
 export const sanityClient = createClient(sanityConfig);
 
 const builder = imageUrlBuilder(sanityClient);
+
+export async function fetchNavigation(slug = "main-navigation") {
+  return sanityClient.fetch(navigationQuery, { slug });
+}
 
 export function urlForImage(source: SanityImageSource) {
   return builder.image(source);

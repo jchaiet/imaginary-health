@@ -13,20 +13,45 @@ export const contentBlockType = defineType({
     defineField({
       name: "layout",
       title: "Layout",
-      type: "string",
+      type: "object",
       options: {
-        list: [
-          { title: "Vertical (Image Top)", value: "vertical-image-top" },
-          { title: "Vertical (Image Bottom)", value: "vertical-image-bottom" },
-          {
-            title: "Horizontal (Image Right)",
-            value: "horizontal-image-right",
-          },
-          { title: "Horizontal (Image Left)", value: "horizontal-image-left" },
-        ],
-        layout: "radio",
+        collapsible: true,
+        collapsed: false,
       },
-      initialValue: "vertical-image-top",
+      fields: [
+        defineField({
+          name: "orientation",
+          title: "Orientation",
+          type: "string",
+          options: {
+            list: [
+              { title: "No Image", value: "no-image" },
+              { title: "Vertical (Image Top)", value: "vertical-image-top" },
+              {
+                title: "Vertical (Image Bottom)",
+                value: "vertical-image-bottom",
+              },
+              {
+                title: "Horizontal (Image Right)",
+                value: "horizontal-image-right",
+              },
+              {
+                title: "Horizontal (Image Left)",
+                value: "horizontal-image-left",
+              },
+            ],
+            layout: "radio",
+          },
+          initialValue: "no-image",
+        }),
+        defineField({
+          name: "gap",
+          title: "Custom Gap",
+          type: "string",
+          description:
+            "Gap between image and content (e.g. '1rem'). Default for vertical is 1rem, default for Horizonal is 5rem",
+        }),
+      ],
     }),
     defineField({
       name: "heading",
@@ -60,6 +85,7 @@ export const contentBlockType = defineType({
           hidden: ({ parent }) => parent?.display !== "max-width",
         }),
       ],
+      hidden: ({ parent }) => parent?.layout?.orientation === "no-image",
     }),
     defineField({
       name: "video",

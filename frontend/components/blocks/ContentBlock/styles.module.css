@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  gap: 5rem;
+  /* gap: 5rem; */
   width: 100%;
   max-width: var(--layout-width);
   margin: 0 auto;
@@ -74,6 +74,7 @@
 
 .layoutHImageRight {
   flex-direction: row;
+  gap: var(--gap, 5rem);
 
   .heading {
     gap: var(--spacing-md);
@@ -89,8 +90,13 @@
   }
 }
 
+.noImage {
+  flex-direction: column;
+}
+
 .layoutHImageLeft {
   flex-direction: row-reverse;
+  gap: var(--gap, 5rem);
 
   .heading {
     gap: var(--spacing-md);
@@ -108,7 +114,7 @@
 
 .layoutVImageTop {
   flex-direction: column-reverse;
-  gap: var(--spacing-md);
+  gap: var(--gap, var(--spacing-md));
 
   .heading {
     gap: var(--spacing-md);
@@ -117,7 +123,7 @@
 
 .layoutVImageBottom {
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--gap, var(--spacing-md));
 
   .heading {
     gap: var(--spacing-md);
