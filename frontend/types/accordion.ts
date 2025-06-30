@@ -1,20 +1,15 @@
 import { SanityImage } from "./image";
-import { Link } from "./link";
 import { Styles } from "./styles";
 import { PortableTextBlock } from "@portabletext/types";
 
-export type TabItem = {
+export type AccordionItem = {
+  _key: string;
   title: string;
-  content: {
-    tabText?: PortableTextBlock[];
-    tabImage?: SanityImage;
-    tabLink?: Link;
-    tabGridItem?: {};
-    tabDisclaimer?: PortableTextBlock[];
-  };
+  content: PortableTextBlock[];
+  image?: SanityImage;
 };
 
-export interface TabsBlockProps {
+export interface AccordionBlockProps {
   heading: {
     eyebrow?: PortableTextBlock[];
     title: PortableTextBlock[];
@@ -23,11 +18,7 @@ export interface TabsBlockProps {
     animateText?: boolean;
     headingLayout?: "horizontal" | "vertical";
   };
-  items: TabItem[];
-  image?: SanityImage;
-  callToAction: {
-    alignment: "left" | "center" | "right";
-    items: Link[];
-  };
+  items?: AccordionItem[];
+  className?: string;
   styleOptions: Styles;
 }

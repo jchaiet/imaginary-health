@@ -6,7 +6,7 @@ export const headingType = defineType({
   title: "Heading",
   options: {
     collapsible: true,
-    collapsed: true,
+    collapsed: false,
   },
   fields: [
     defineField({

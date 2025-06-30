@@ -1,4 +1,3 @@
-import type { AccordionItem } from "quirk-ui";
 import { Styles } from "./styles";
 import { PortableTextBlock } from "@portabletext/types";
 

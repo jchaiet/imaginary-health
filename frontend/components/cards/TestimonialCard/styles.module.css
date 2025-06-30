@@ -217,7 +217,7 @@
 
 /* Style Variations */
 .imageLeft {
-  padding: var(--spacing-xl);
+  /* padding: var(--spacing-xl); */
   max-width: 800px;
   margin: 0 auto;
   min-height: unset;
@@ -277,7 +277,7 @@
 }
 
 .imageRight {
-  padding: var(--spacing-xl);
+  /* padding: var(--spacing-xl); */
   max-width: 800px;
   margin: 0 auto;
   min-height: unset;
@@ -345,7 +345,7 @@
     gap: var(--spacing-xl);
   }
 
-  .person {
+  .personContainer {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -379,7 +379,7 @@
     gap: var(--spacing-md);
   }
 
-  .person {
+  .personContainer {
     display: flex;
     align-items: center;
     justify-content: center;

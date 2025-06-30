@@ -58,6 +58,12 @@ export const cardType = defineType({
       hidden: ({ parent }) => parent?.style !== "metric",
     }),
     defineField({
+      name: "eyebrow",
+      title: "Eyebrow",
+      type: "richText",
+      hidden: ({ parent }) => parent?.variant === "review",
+    }),
+    defineField({
       name: "title",
       title: "Title",
       type: "richText",
@@ -67,6 +73,12 @@ export const cardType = defineType({
       name: "description",
       title: "Description",
       type: "richText",
+    }),
+    defineField({
+      name: "person",
+      title: "Person",
+      type: "richText",
+      hidden: ({ parent }) => parent?.variant !== "testimonial",
     }),
     defineField({
       name: "image",

@@ -22,6 +22,55 @@
   }
 }
 
+.heading {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.text {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+
+  @media (max-width: 767px) {
+    flex: 1;
+    width: 100%;
+    align-items: flex-start;
+  }
+}
+
+.headingHorizontal {
+  flex-direction: row;
+  justify-content: space-between;
+
+  .container {
+    flex: 1;
+  }
+
+  .title {
+    margin-bottom: 0;
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.headingVertical {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* .tabsContainer {
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+} */
+
 .tabContent {
   display: flex;
   align-items: center;
@@ -43,6 +92,19 @@
     flex-direction: column;
     gap: var(--spacing-lg);
     align-items: flex-start;
+  }
+
+  &.vertical {
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+
+    .tabImage {
+      img {
+        width: auto;
+      }
+    }
   }
 }
 
@@ -128,7 +190,7 @@
     padding-right: var(--spacing-md);
   }
 
-  .text {
+  .heading {
     z-index: 3;
     position: relative;
     max-width: 665px;
@@ -139,6 +201,20 @@
     background-color: #fff;
     padding: var(--spacing-xl);
     border-radius: var(--radius-md);
+  }
+
+  .text {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+
+    @media (max-width: 767px) {
+      flex: 1;
+      width: 100%;
+      align-items: flex-start;
+    }
   }
 
   &:global(.paddingTopBanner),

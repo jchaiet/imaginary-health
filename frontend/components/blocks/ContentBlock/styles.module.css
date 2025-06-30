@@ -52,11 +52,12 @@
   font-weight: var(--font-weight-bold);
   position: relative;
   z-index: 1;
+  color: var(--color-text-primary);
 
   &:after {
     content: "";
     display: block;
-    background-color: purple;
+    background-color: var(--color-secondary);
     width: 35px;
     height: 35px;
     position: absolute;
@@ -182,7 +183,7 @@
   flex-direction: row;
   justify-content: space-between;
 
-  .container {
+  :global(.portableTextContainer) {
     flex: 1;
   }
 
@@ -277,6 +278,14 @@
   .text p,
   .text p a {
     color: #fff;
+  }
+
+  .metricValue {
+    color: #fff;
+
+    &:after {
+      background-color: var(--color-secondary);
+    }
   }
 
   .cta {

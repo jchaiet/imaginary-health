@@ -10,7 +10,9 @@ import { stickyScrollBlockType } from "./blocks/stickyScrollBlockType";
 import { faqBlockType } from "./blocks/faqBlockType";
 import { tabsBlockType } from "./blocks/tabsBlocktType";
 import { disclaimerBlockType } from "./blocks/disclaimerBlockType";
+import { accordionBlockType } from "./blocks/accordionBlockType";
 import { headingType } from "./objects/headingType";
+import { callToActionType } from "./objects/callToActionType";
 import { linkType } from "./objects/linkType";
 import { richTextType } from "./objects/richTextType";
 import { cardType } from "./cards/cardType";
@@ -29,7 +31,9 @@ export const schemaTypes = [
   faqBlockType,
   tabsBlockType,
   disclaimerBlockType,
+  accordionBlockType,
   headingType,
+  callToActionType,
   linkType,
   richTextType,
   cardType,

@@ -14,8 +14,10 @@ type CustomCardProps = ItemType & {
 };
 
 export function TestimonialCard({
+  eyebrow,
   title,
   description,
+  person,
   image,
   //icon,
   callToAction,
@@ -39,19 +41,21 @@ export function TestimonialCard({
     <div className={styles.content}>
       {callToAction?.type === "video" ? (
         <>
+          {eyebrow && <RichText className={styles.eyebrow} blocks={eyebrow} />}
           {title && <RichText className={styles.title} blocks={title} />}
-
           {description && (
             <RichText className={styles.description} blocks={description} />
           )}
+          {person && <RichText className={styles.person} blocks={person} />}
         </>
       ) : (
         <>
+          {eyebrow && <RichText className={styles.eyebrow} blocks={eyebrow} />}
           {title && <RichText className={styles.title} blocks={title} />}
-
           {description && (
             <RichText className={styles.description} blocks={description} />
           )}
+          {person && <RichText className={styles.person} blocks={person} />}
         </>
       )}
     </div>
@@ -63,7 +67,7 @@ export function TestimonialCard({
         <div className={styles.image}>
           {callToAction?.videoUrl && (
             <div className={styles.callToAction}>
-              <div className={styles.label}>{callToAction.label}</div>
+              {/* <div className={styles.label}>{callToAction.label}</div> */}
               <div className={styles.cardIcon}>
                 <Play size={45} />
               </div>
@@ -111,10 +115,14 @@ export function TestimonialCard({
             {ImageBlock}
 
             <div className={styles.content}>
+              {eyebrow && (
+                <RichText className={styles.eyebrow} blocks={eyebrow} />
+              )}
+              {title && <RichText className={styles.title} blocks={title} />}
               {description && (
                 <RichText className={styles.description} blocks={description} />
               )}
-              {title && <RichText className={styles.title} blocks={title} />}
+              {person && <RichText className={styles.person} blocks={person} />}
             </div>
           </div>
         );
@@ -122,13 +130,18 @@ export function TestimonialCard({
         return (
           <div className={styles.container}>
             <div className={styles.content}>
+              {eyebrow && (
+                <RichText className={styles.eyebrow} blocks={eyebrow} />
+              )}
+              {title && <RichText className={styles.title} blocks={title} />}
               {description && (
                 <RichText className={styles.description} blocks={description} />
               )}
-
-              <div className={styles.person}>
+              <div className={styles.personContainer}>
                 <Avatar src={imageUrl ?? ""} size="lg" />
-                {title && <RichText className={styles.title} blocks={title} />}
+                {person && (
+                  <RichText className={styles.person} blocks={person} />
+                )}
               </div>
             </div>
           </div>
@@ -138,10 +151,14 @@ export function TestimonialCard({
           <div className={styles.container}>
             <Avatar src={imageUrl ?? ""} size="xl" />
             <div className={styles.content}>
+              {eyebrow && (
+                <RichText className={styles.eyebrow} blocks={eyebrow} />
+              )}
+              {title && <RichText className={styles.title} blocks={title} />}
               {description && (
                 <RichText className={styles.description} blocks={description} />
               )}
-              {title && <RichText className={styles.title} blocks={title} />}
+              {person && <RichText className={styles.person} blocks={person} />}
             </div>
           </div>
         );

@@ -8,11 +8,13 @@ import styles from "./styles.module.css";
 import { TabsBlockProps } from "@/types/tabs";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
 import { CallToAction, Tabs } from "quirk-ui";
+import { CallToActions } from "@/components/ui/CallToActions";
 
 export function TabsBlock({
   heading,
   image,
   items,
+  callToAction,
   styleOptions,
 }: TabsBlockProps) {
   const imageUrl = image ? urlForImage(image).quality(100).url() : null;
@@ -21,11 +23,40 @@ export function TabsBlock({
 
   const layout = styleOptions?.layout ?? "default";
 
+  const headingLayoutClass = {
+    horizontal: styles.headingHorizontal,
+    vertical: styles.headingVertical,
+  }[heading.headingLayout ?? "horizontal"];
+
   const styleClass = {
     default: styles.default,
     split: styles.split,
     "full-bleed": styles.fullBleed,
   }[styleOptions?.layout ?? "default"];
+
+  const orientationMap = {
+    orientationHorizontal: "horizontal",
+    orientationVertical: "vertical",
+  } as const;
+
+  type OrientationKey = keyof typeof orientationMap;
+
+  const orientationValue =
+    orientationMap[
+      (styleOptions?.orientation ?? "orientationHorizontal") as OrientationKey
+    ];
+
+  const themeMap = {
+    themeDefault: "default",
+    themeLight: "light",
+    themeDark: "dark",
+    themeTransparent: "transparent",
+  } as const;
+
+  type ThemeKey = keyof typeof themeMap;
+
+  const themeValue =
+    themeMap[(styleOptions?.theme ?? "themeDefault") as ThemeKey];
 
   const ImageBlock = () =>
     image && imageUrl ? (
@@ -41,7 +72,12 @@ export function TabsBlock({
     ) : null;
 
   const TabsBlock = (
-    <Tabs defaultIndex={0} align="center">
+    <Tabs
+      defaultIndex={0}
+      align="center"
+      orientation={orientationValue}
+      theme={themeValue}
+    >
       <Tabs.List>
         {items.map((item, index) => (
           <Tabs.Trigger key={item.title} index={index}>
@@ -52,7 +88,10 @@ export function TabsBlock({
 
       {items.map((item, index) => (
         <Tabs.Panel key={item.title} index={index}>
-          <div className={styles.tabContent} key={index}>
+          <div
+            className={`${styles.tabContent} ${styles[orientationValue]}`}
+            key={index}
+          >
             {item.content?.tabImage && (
               <div className={styles.tabImage}>
                 <Image
@@ -91,7 +130,7 @@ export function TabsBlock({
                   </div>
                 )}
 
-              {item.content?.tabLink && (
+              {item.content?.tabLink?.resolvedUrl && (
                 <CallToAction
                   key={index}
                   as="a"
@@ -131,7 +170,7 @@ export function TabsBlock({
     return (
       <section className={`${styles.tabs} ${styles.split} ${classNames}`}>
         <article className={styles.container}>
-          <div className={styles.text}>
+          <div className={`${styles.heading} ${headingLayoutClass}`}>
             <div>
               {heading.eyebrow && (
                 <RichText className={styles.eyebrow} blocks={heading.eyebrow} />
@@ -143,6 +182,13 @@ export function TabsBlock({
               <RichText
                 className={styles.subheading}
                 blocks={heading.description}
+              />
+            )}
+            {callToAction && (
+              <CallToActions
+                className={styles.cta}
+                items={callToAction.items}
+                alignment={callToAction.alignment}
               />
             )}
             {heading.disclaimer && (
@@ -165,17 +211,28 @@ export function TabsBlock({
       <section className={`${styles.tabs} ${styleClass} ${classNames}`}>
         <article className={styles.container}>
           {ImageBlock()}
-          <div className={styles.text}>
+          <div className={`${styles.heading} ${headingLayoutClass}`}>
             <RichText className={styles.title} blocks={heading.title} />
 
-            {heading.description && (
-              <RichText
-                className={styles.subheading}
-                blocks={heading.description}
-              />
+            {(heading?.description || callToAction?.items) && (
+              <div className={styles.text}>
+                {heading.description && (
+                  <RichText
+                    className={styles.description}
+                    blocks={heading.description}
+                  />
+                )}
+              </div>
             )}
           </div>
           <div className={styles.tabsContainer}>{TabsBlock}</div>
+          {callToAction && (
+            <CallToActions
+              className={styles.cta}
+              items={callToAction.items}
+              alignment={callToAction.alignment}
+            />
+          )}
           {heading.disclaimer && (
             <RichText
               className={styles.disclaimer}
@@ -204,7 +261,7 @@ export function TabsBlock({
           )}
 
           <div className={styles.overlay}>
-            <div className={styles.text}>
+            <div className={`${styles.heading} ${headingLayoutClass}`}>
               <RichText className={styles.title} blocks={heading.title} />
 
               {heading.description && (
@@ -217,6 +274,13 @@ export function TabsBlock({
               <div className={styles.tabsContainer}>{TabsBlock}</div>
             </div>
 
+            {callToAction && (
+              <CallToActions
+                className={styles.cta}
+                items={callToAction.items}
+                alignment={callToAction.alignment}
+              />
+            )}
             {heading.disclaimer && (
               <RichText
                 className={styles.disclaimer}

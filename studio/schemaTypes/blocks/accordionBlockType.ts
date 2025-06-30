@@ -4,9 +4,9 @@ import { paddingOptionType } from "../styles/paddingOptionType";
 import { layoutOptionType } from "../styles/layoutOptionType";
 import { backgroundOptionType } from "../styles/backgroundOptionType";
 
-export const faqBlockType = defineType({
-  name: "faqBlock",
-  title: "FAQ Block",
+export const accordionBlockType = defineType({
+  name: "accordionBlock",
+  title: "Accordion Block",
   type: "object",
   icon: HelpCircleIcon,
   fields: [
@@ -21,26 +21,60 @@ export const faqBlockType = defineType({
       type: "array",
       of: [
         {
-          name: "faqItem",
+          name: "accordionItem",
           type: "object",
           fields: [
             defineField({
-              name: "question",
-              title: "Question",
+              name: "title",
+              title: "Title",
               type: "string",
             }),
             defineField({
-              name: "answer",
-              title: "Answer",
+              name: "content",
+              title: "Content",
               type: "richText",
+            }),
+            defineField({
+              name: "image",
+              title: "Image",
+              type: "image",
+              options: { hotspot: true },
             }),
           ],
           preview: {
             select: {
-              title: "question",
+              title: "title",
             },
           },
         },
+      ],
+    }),
+    defineField({
+      name: "callToAction",
+      title: "Call to Action",
+      type: "object",
+      fields: [
+        defineField({
+          name: "items",
+          title: "Items",
+          type: "array",
+          of: [{ type: "link" }],
+          validation: (Rule) => Rule.max(3),
+        }),
+        defineField({
+          name: "alignment",
+          title: "Alignment",
+          type: "string",
+          options: {
+            list: [
+              { title: "Left", value: "left" },
+              { title: "Center", value: "center" },
+              { title: "Right", value: "right" },
+            ],
+            layout: "radio",
+          },
+          initialValue: "left",
+        }),
       ],
     }),
     defineField({
@@ -66,9 +100,8 @@ export const faqBlockType = defineType({
   preview: {
     select: {
       titleBlock: "heading",
-      media: "image",
     },
-    prepare({ titleBlock, media }) {
+    prepare({ titleBlock }) {
       let subtitle = "";
 
       if (Array.isArray(titleBlock)) {
@@ -76,9 +109,8 @@ export const faqBlockType = defineType({
         subtitle = block?.children?.map((c: any) => c.text).join(" ");
       }
       return {
-        title: "FAQ Block",
+        title: "Accordion Block",
         subtitle: subtitle,
-        media: media,
       };
     },
   },

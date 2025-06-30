@@ -4,8 +4,9 @@ import {
   InfoOutlineIcon,
   InlineElementIcon,
   InlineIcon,
-  TextIcon,
+  HelpCircleIcon,
   ThLargeIcon,
+  DoubleChevronDownIcon,
 } from "@sanity/icons";
 import asyncSlugifier from "../lib/asyncSlugifier";
 
@@ -95,13 +96,19 @@ export const pageType = defineType({
           type: "faqBlock",
           name: "faqBlock",
           title: "FAQ Block",
-          icon: InlineElementIcon,
+          icon: HelpCircleIcon,
         }),
         defineArrayMember({
           type: "tabsBlock",
           name: "tabsBlock",
           title: "Tabs Block",
           icon: InlineElementIcon,
+        }),
+        defineArrayMember({
+          type: "accordionBlock",
+          name: "accordionBlock",
+          title: "Accordion Block",
+          icon: DoubleChevronDownIcon,
         }),
         defineArrayMember({
           type: "disclaimerBlock",

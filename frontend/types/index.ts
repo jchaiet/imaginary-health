@@ -12,3 +12,4 @@ export * from "./styles";
 export * from "./page";
 export * from "./navigation";
 export * from "./navigationItem";
+export * from "./accordion";

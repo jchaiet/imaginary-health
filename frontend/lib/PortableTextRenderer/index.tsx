@@ -173,7 +173,7 @@ export const RichText: React.FC<RichTextProps> = ({
   }
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} portableTextContainer`}>
       <PortableText value={blocks} components={components} />
     </div>
   );

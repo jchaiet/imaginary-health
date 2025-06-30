@@ -8,8 +8,10 @@ export type ItemType = {
   variant: string;
   style?: string;
   metricValue?: string;
+  eyebrow?: PortableTextBlock[];
   title?: PortableTextBlock[];
   description?: PortableTextBlock[];
+  person?: PortableTextBlock[];
   rating: number;
   image?: SanityImage;
   icon?: string;

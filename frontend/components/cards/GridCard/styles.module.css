@@ -24,7 +24,7 @@
   gap: 1.5rem;
   height: 100%;
   width: 100%;
-  padding: 3rem var(--spacing-xl);
+  padding: 3.25rem var(--spacing-xl);
 }
 
 .cardLink:hover,
@@ -135,8 +135,8 @@
 
 .callToAction {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 0.75rem;
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
@@ -167,6 +167,11 @@
     transition:
       opacity 0.3s ease-in-out,
       transform 0.3s ease-in-out;
+
+    /* @media (max-width: 767px) {
+      opacity: 1;
+      transform: translateY(0);
+    } */
   }
 }
 
@@ -286,6 +291,26 @@
   }
 }
 
+.imageLeft {
+  .container {
+    flex-direction: row-reverse;
+
+    @media (max-width: 767px) {
+      flex-direction: column-reverse;
+    }
+  }
+}
+
+.imageRight {
+  .container {
+    flex-direction: row;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+    }
+  }
+}
+
 .imageLeft,
 .imageRight {
   .container {
@@ -294,6 +319,7 @@
 
   .content {
     flex: 0.5;
+    width: 100%;
   }
 
   .title {
@@ -309,21 +335,22 @@
 
     img {
       width: 100%;
-      height: auto;
-      object-fit: scale-down;
+      height: 100%;
+      object-fit: contain;
     }
-  }
-}
 
-.imageLeft {
-  .container {
-    flex-direction: row-reverse;
-  }
-}
+    @media (max-width: 767px) {
+      flex: 1;
+      justify-content: flex-start;
+      max-height: 250px;
 
-.imageRight {
-  .container {
-    flex-direction: row;
+      img {
+        position: relative;
+        height: 100%;
+        width: auto;
+        min-width: 150px;
+      }
+    }
   }
 }
 
@@ -365,5 +392,25 @@
 
   .title {
     font-size: 3rem;
+  }
+}
+
+:global(.conditionManagementServicesGrid) .imageLeft {
+  min-height: 235px;
+
+  .content {
+    flex: 1;
+  }
+
+  .title {
+    font-size: var(--font-size-xl);
+  }
+
+  .image {
+    flex: 0.25;
+
+    @media (max-width: 767px) {
+      flex: 1;
+    }
   }
 }

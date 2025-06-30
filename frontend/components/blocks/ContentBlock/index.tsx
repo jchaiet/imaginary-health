@@ -59,7 +59,7 @@ export function ContentBlock({
 
     if (isVimeo || isYouTube) {
       return (
-        <div style={{ maxWidth: image?.maxWidth ?? "unset" }}>
+        <div style={{ maxWidth: image?.maxWidth ?? "unset", flex: 0.65 }}>
           <div className={styles.videoWrapper}>
             <iframe
               src={
@@ -77,7 +77,13 @@ export function ContentBlock({
     }
 
     return (
-      <div style={{ maxWidth: image?.maxWidth ?? "unset", width: "100%" }}>
+      <div
+        style={{
+          maxWidth: image?.maxWidth ?? "unset",
+          width: "100%",
+          flex: 0.65,
+        }}
+      >
         <div className={styles.videoWrapper}>
           <video
             className={styles.video}

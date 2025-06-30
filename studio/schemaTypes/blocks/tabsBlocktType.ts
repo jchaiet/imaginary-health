@@ -1,5 +1,7 @@
 import { defineType, defineField } from "sanity";
 import { ImageIcon } from "@sanity/icons";
+import { orientationOptionType } from "../styles/orientationOptionType";
+import { themeOptionType } from "../styles/themeOptionType";
 import { paddingOptionType } from "../styles/paddingOptionType";
 import { backgroundOptionType } from "../styles/backgroundOptionType";
 import { layoutOptionType } from "../styles/layoutOptionType";
@@ -116,6 +118,34 @@ export const tabsBlockType = defineType({
       ],
     }),
     defineField({
+      name: "callToAction",
+      title: "Call to Action",
+      type: "object",
+      fields: [
+        defineField({
+          name: "items",
+          title: "Items",
+          type: "array",
+          of: [{ type: "link" }],
+          validation: (Rule) => Rule.max(3),
+        }),
+        defineField({
+          name: "alignment",
+          title: "Alignment",
+          type: "string",
+          options: {
+            list: [
+              { title: "Left", value: "left" },
+              { title: "Center", value: "center" },
+              { title: "Right", value: "right" },
+            ],
+            layout: "radio",
+          },
+          initialValue: "left",
+        }),
+      ],
+    }),
+    defineField({
       name: "styleOptions",
       title: "Style Options",
       type: "object",
@@ -124,11 +154,15 @@ export const tabsBlockType = defineType({
         collapsed: true,
       },
       groups: [
+        { name: "orientation", title: "Orientation" },
+        { name: "theme", title: "Theme" },
         { name: "layout", title: "Layout" },
         { name: "padding", title: "Padding" },
         { name: "background", title: "Background" },
       ],
       fields: [
+        ...orientationOptionType,
+        ...themeOptionType,
         ...layoutOptionType,
         ...paddingOptionType,
         ...backgroundOptionType,

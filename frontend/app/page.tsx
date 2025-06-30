@@ -56,7 +56,8 @@ export default async function Home() {
       if (
         "items" in section &&
         section._type !== "faqBlock" &&
-        section._type !== "tabsBlock"
+        section._type !== "tabsBlock" &&
+        section._type !== "accordionBlock"
       ) {
         const items = section?.items;
 
