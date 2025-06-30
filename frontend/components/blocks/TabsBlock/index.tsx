@@ -72,12 +72,7 @@ export function TabsBlock({
     ) : null;
 
   const TabsBlock = (
-    <Tabs
-      defaultIndex={0}
-      align="center"
-      orientation={orientationValue}
-      theme={themeValue}
-    >
+    <Tabs defaultIndex={0} orientation={orientationValue} theme={themeValue}>
       <Tabs.List>
         {items.map((item, index) => (
           <Tabs.Trigger key={item.title} index={index}>
