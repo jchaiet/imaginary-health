@@ -27,8 +27,6 @@ export default async function PageTemplate({
     navigationData.logo?.alt || navigationData.logo?.description || "Logo";
   const logoLinkSlug = navigationData.logoLink?.slug?.current;
 
-  console.log("data", navigationData);
-
   //Layout variants
   if (layoutType === "minimal") {
     return <div>{children}</div>;
