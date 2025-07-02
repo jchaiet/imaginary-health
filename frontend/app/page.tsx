@@ -24,12 +24,7 @@ export default async function Home() {
 
   if (!page) notFound();
 
-  const {
-    _id: id,
-    pageBuilder = [],
-    hideHeader = false,
-    hideFooter = false,
-  } = page;
+  const { pageBuilder = [], hideHeader = false, hideFooter = false } = page;
 
   const resolvedSections = (await resolveSections(
     pageBuilder

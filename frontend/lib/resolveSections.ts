@@ -6,7 +6,7 @@ export async function resolveSections(sections: PageSection[]) {
     sections.map(async (section) => {
       if (section._type === "documentListBlock") {
         const filters: string[] = [];
-        const params: Record<string, any> = {};
+        const params: { categoryRef?: string } = {};
 
         if (section.filterByCategory?._ref) {
           filters.push("category._ref == $categoryRef");

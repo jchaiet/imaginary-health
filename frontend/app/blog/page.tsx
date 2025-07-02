@@ -1,7 +1,7 @@
 import PageTemplate from "@/components/templates/PageTemplate";
 import { PageBuilder } from "@/lib/pageBuilder";
 import { sanityClient } from "@/sanity/client";
-import { pageBySlugQuery, blogPageWithPostsQuery } from "@/sanity/queries";
+import { blogPageWithPostsQuery } from "@/sanity/queries";
 import { notFound } from "next/navigation";
 import { resolveSections } from "@/lib/resolveSections";
 import { PageSection } from "@/types";

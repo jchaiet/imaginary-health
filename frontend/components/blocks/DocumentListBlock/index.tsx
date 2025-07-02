@@ -10,8 +10,8 @@ import Image from "next/image";
 export function DocumentListBlock({
   heading,
   layout = "grid",
-  limit,
-  filterByCategory,
+  // limit,
+  // filterByCategory,
   styleOptions,
   articles,
 }: DocumentListBlockProps) {

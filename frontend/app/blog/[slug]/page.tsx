@@ -31,12 +31,7 @@ export default async function Page({ params }: PageProps) {
 
   if (!article) notFound();
 
-  const {
-    _id: id,
-    pageBuilder = [],
-    hideHeader = false,
-    hideFooter = false,
-  } = article;
+  const { pageBuilder = [], hideHeader = false, hideFooter = false } = article;
 
   const resolvedSections = (await resolveSections(
     pageBuilder
