@@ -21,17 +21,17 @@ export default function Header({
   logoAlt,
   logoLinkSlug,
 }: HeaderProps) {
-  const [isAtTop, setIsAtTop] = useState(true);
+  // const [isAtTop, setIsAtTop] = useState(true);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsAtTop(window.scrollY === 0);
-    };
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setIsAtTop(window.scrollY === 0);
+  //   };
+  //   if (typeof window !== "undefined") {
+  //     window.addEventListener("scroll", handleScroll);
+  //     return () => window.removeEventListener("scroll", handleScroll);
+  //   }
+  // }, []);
 
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
