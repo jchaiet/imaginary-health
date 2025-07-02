@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Link } from "@/types";
 import { Navbar, type NavItem } from "quirk-ui";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 type HeaderProps = {
   navItems: NavItem[];
