@@ -1,18 +1,18 @@
-import { sanityClient } from "@/sanity/client";
-import { pageBySlugQuery } from "@/sanity/queries";
 import PageTemplate from "@/components/templates/PageTemplate";
 import { PageBuilder } from "@/lib/pageBuilder";
+import { sanityClient } from "@/sanity/client";
+import { pageBySlugQuery, blogPageWithPostsQuery } from "@/sanity/queries";
+import { notFound } from "next/navigation";
+import { resolveSections } from "@/lib/resolveSections";
 import { PageSection } from "@/types";
 import { draftMode } from "next/headers";
 
-import { notFound } from "next/navigation";
-import { resolveSections } from "@/lib/resolveSections";
-
-export default async function Home() {
+export default async function Page() {
   const { isEnabled } = await draftMode();
+
   const page = await sanityClient.fetch(
-    pageBySlugQuery,
-    { slug: "home" },
+    blogPageWithPostsQuery,
+    { slug: "blog" },
     isEnabled
       ? {
           perspective: "drafts",
@@ -24,12 +24,9 @@ export default async function Home() {
 
   if (!page) notFound();
 
-  const {
-    _id: id,
-    pageBuilder = [],
-    hideHeader = false,
-    hideFooter = false,
-  } = page;
+  const { pageBuilder = [], hideHeader = false, hideFooter = false } = page;
+
+  // const articles = await sanityClient.fetch(blogPostsByParentQuery, {});
 
   const resolvedSections = (await resolveSections(
     pageBuilder

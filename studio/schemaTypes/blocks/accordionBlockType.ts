@@ -9,15 +9,22 @@ export const accordionBlockType = defineType({
   title: "Accordion Block",
   type: "object",
   icon: HelpCircleIcon,
+  groups: [
+    { name: "heading", title: "Heading" },
+    { name: "settings", title: "Settings" },
+    { name: "callToAction", title: "Call To Action" },
+  ],
   fields: [
     defineField({
       name: "heading",
       type: "heading",
+      group: "heading",
       title: "Heading",
     }),
     defineField({
       name: "items",
       title: "Items",
+      group: "settings",
       type: "array",
       of: [
         {
@@ -52,6 +59,7 @@ export const accordionBlockType = defineType({
     defineField({
       name: "callToAction",
       title: "Call to Action",
+      group: "callToAction",
       type: "object",
       fields: [
         defineField({

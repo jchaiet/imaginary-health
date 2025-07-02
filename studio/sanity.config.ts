@@ -44,6 +44,8 @@ export default defineConfig({
     context: DocumentActionsContext
   ) => {
     switch (context.schemaType) {
+      case "blog":
+      case "category":
       case "page":
         return [SetSlugAndPublishAction, ...prev];
       default:
@@ -53,7 +55,12 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
     templates: (prev: Template<any, any>[]) => {
-      return [...prev, slugPrefixTpl("page")];
+      return [
+        ...prev,
+        slugPrefixTpl("page"),
+        slugPrefixTpl("blog"),
+        slugPrefixTpl("category"),
+      ];
     },
   },
 });

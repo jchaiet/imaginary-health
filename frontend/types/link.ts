@@ -23,5 +23,13 @@ export type Link = {
   videoUrl?: string;
   assetUrl: string;
   resolvedUrl?: string;
-  variant?: "primary" | "secondary" | "link" | "underline";
+  variant:
+    | "primary"
+    | "primaryInverted"
+    | "secondary"
+    | "secondaryInverted"
+    | "link"
+    | "linkInverted"
+    | "underline"
+    | "underlineInverted";
 };

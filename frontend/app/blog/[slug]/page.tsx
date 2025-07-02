@@ -1,18 +1,25 @@
-import { sanityClient } from "@/sanity/client";
-import { pageBySlugQuery } from "@/sanity/queries";
 import PageTemplate from "@/components/templates/PageTemplate";
 import { PageBuilder } from "@/lib/pageBuilder";
+import { sanityClient } from "@/sanity/client";
+import { articleBySlugQuery } from "@/sanity/queries";
+import { notFound } from "next/navigation";
+import { resolveSections } from "@/lib/resolveSections";
 import { PageSection } from "@/types";
 import { draftMode } from "next/headers";
 
-import { notFound } from "next/navigation";
-import { resolveSections } from "@/lib/resolveSections";
+interface PageProps {
+  params: Promise<{ slug: string[] }>;
+}
 
-export default async function Home() {
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params;
   const { isEnabled } = await draftMode();
-  const page = await sanityClient.fetch(
-    pageBySlugQuery,
-    { slug: "home" },
+
+  const formattedSlug = slug;
+
+  const article = await sanityClient.fetch(
+    articleBySlugQuery,
+    { slug: formattedSlug },
     isEnabled
       ? {
           perspective: "drafts",
@@ -22,14 +29,14 @@ export default async function Home() {
       : undefined
   );
 
-  if (!page) notFound();
+  if (!article) notFound();
 
   const {
     _id: id,
     pageBuilder = [],
     hideHeader = false,
     hideFooter = false,
-  } = page;
+  } = article;
 
   const resolvedSections = (await resolveSections(
     pageBuilder

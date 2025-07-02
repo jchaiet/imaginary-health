@@ -1,9 +1,10 @@
 import PageTemplate from "@/components/templates/PageTemplate";
 import { PageBuilder } from "@/lib/pageBuilder";
-import { sanityClient, resolveLinkURL } from "@/sanity/client";
+import { sanityClient } from "@/sanity/client";
 import { pageBySlugQuery } from "@/sanity/queries";
 import { notFound } from "next/navigation";
-import { ItemType, Link, PageSection } from "@/types";
+import { resolveSections } from "@/lib/resolveSections";
+import { PageSection } from "@/types";
 import { draftMode } from "next/headers";
 
 interface PageProps {
@@ -32,85 +33,9 @@ export default async function Page({ params }: PageProps) {
 
   const { pageBuilder = [], hideHeader = false, hideFooter = false } = page;
 
-  //Pre-resolve CallToAction links in any block
-  const resolvedSections = await Promise.all(
-    pageBuilder.map(async (section: PageSection) => {
-      if ("grid" in section) {
-        const items = section?.grid?.items;
-        if (items) {
-          const resolvedItems = await Promise.all(
-            items.map(async (item: ItemType) => {
-              if (item.callToAction) {
-                return {
-                  ...item,
-                  callToAction: {
-                    ...item.callToAction,
-                    resolvedUrl: await resolveLinkURL(item.callToAction),
-                  },
-                };
-              }
-              return item;
-            })
-          );
-
-          return {
-            ...section,
-            grid: { ...section.grid, items: resolvedItems },
-          };
-        }
-      }
-
-      if (
-        "items" in section &&
-        section._type !== "faqBlock" &&
-        section._type !== "tabsBlock" &&
-        section._type !== "accordionBlock"
-      ) {
-        const items = section.items;
-
-        if (items) {
-          const resolvedItems = await Promise.all(
-            items.map(async (item: ItemType) => {
-              if (item.callToAction) {
-                return {
-                  ...item,
-                  callToAction: {
-                    ...item.callToAction,
-                    resolvedUrl: await resolveLinkURL(item.callToAction),
-                  },
-                };
-              }
-              return item;
-            })
-          );
-          return { ...section, items: resolvedItems };
-        }
-      }
-
-      if ("callToAction" in section) {
-        const callToAction = section.callToAction;
-
-        const callToActionsArray = Array.isArray(callToAction)
-          ? callToAction
-          : [callToAction];
-
-        const resolvedCtas = await Promise.all(
-          callToActionsArray.map(async (cta) => ({
-            ...cta,
-            resolvedUrl: await resolveLinkURL(cta as Link),
-          }))
-        );
-        return {
-          ...section,
-          callToAction: Array.isArray(callToAction)
-            ? resolvedCtas
-            : resolvedCtas[0],
-        };
-      }
-
-      return section;
-    })
-  );
+  const resolvedSections = (await resolveSections(
+    pageBuilder
+  )) as PageSection[];
 
   return (
     <PageTemplate hideHeader={hideHeader} hideFooter={hideFooter}>

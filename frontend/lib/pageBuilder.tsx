@@ -10,6 +10,7 @@ import { FaqBlock } from "@/components/blocks/FaqBlock";
 import { TabsBlock } from "@/components/blocks/TabsBlock";
 import { DisclaimerBlock } from "@/components/blocks/DisclaimerBlock";
 import { AccordionBlock } from "@/components/blocks/AccordionBlock";
+import { DocumentListBlock } from "@/components/blocks/DocumentListBlock";
 
 export function PageBuilder({ sections }: { sections: PageSection[] }) {
   console.log("SECTIONS", sections);
@@ -35,6 +36,8 @@ export function PageBuilder({ sections }: { sections: PageSection[] }) {
             return <DisclaimerBlock key={i} {...section} />;
           case "accordionBlock":
             return <AccordionBlock key={i} {...section} />;
+          case "documentListBlock":
+            return <DocumentListBlock key={i} {...section} />;
           default:
             const unknownSection = section as { _type?: string };
             console.warn("Unknown block type", unknownSection._type, section);

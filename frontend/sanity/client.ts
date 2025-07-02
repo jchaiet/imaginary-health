@@ -9,6 +9,10 @@ export const sanityClient = createClient(sanityConfig);
 
 const builder = imageUrlBuilder(sanityClient);
 
+export async function fetchSiteSettings() {
+  return await sanityClient.fetch(`*[_type == "siteSettings"][0]`);
+}
+
 export async function fetchNavigation(slug = "main-navigation") {
   return sanityClient.fetch(navigationQuery, { slug });
 }

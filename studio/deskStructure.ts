@@ -4,6 +4,13 @@ import {
   structureTool,
   DefaultDocumentNodeResolver,
 } from "sanity/structure";
+import {
+  ComposeSparklesIcon,
+  ControlsIcon,
+  DocumentsIcon,
+  FolderIcon,
+  TagsIcon,
+} from "@sanity/icons";
 import parentChild from "./lib/parentChild";
 
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (
@@ -26,11 +33,34 @@ export const deskContent = structureTool({
       .title("Website")
       .id("website-id")
       .items([
-        parentChild("page", S, context.documentStore),
+        S.listItem()
+          .title("Site Settings")
+          .icon(ControlsIcon)
+          .child(
+            S.document().schemaType("siteSettings").documentId("siteSettings")
+          ),
+
+        S.divider(),
+
+        parentChild("page", "Pages", DocumentsIcon, S, context.documentStore),
+        parentChild(
+          "blog",
+          "Articles",
+          ComposeSparklesIcon,
+          S,
+          context.documentStore
+        ),
 
         S.divider(),
 
         S.documentTypeListItem("navigation").title("Navigation"),
+        parentChild(
+          "category",
+          "Categories",
+          TagsIcon,
+          S,
+          context.documentStore
+        ),
       ]);
   },
 });

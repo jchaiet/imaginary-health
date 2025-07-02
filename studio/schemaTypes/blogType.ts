@@ -1,27 +1,25 @@
-import { defineArrayMember, defineField, defineType } from "sanity";
+import { defineType, defineField, defineArrayMember } from "sanity";
 import {
-  DocumentsIcon,
+  DocumentTextIcon,
   InfoOutlineIcon,
   InlineElementIcon,
   InlineIcon,
-  HelpCircleIcon,
   ThLargeIcon,
   DoubleChevronDownIcon,
-  ListIcon,
 } from "@sanity/icons";
 import asyncSlugifier from "../lib/asyncSlugifier";
 
-export const pageType = defineType({
-  name: "page",
-  title: "Page",
+export const blogType = defineType({
+  name: "blog",
+  title: "Blog Article",
   type: "document",
-  icon: DocumentsIcon,
+  icon: DocumentTextIcon,
   fields: [
     defineField({
       name: "title",
-      title: "Page Name",
+      title: "Article Title",
       type: "string",
-      validation: (rule) => rule.required(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "parent",
@@ -29,7 +27,7 @@ export const pageType = defineType({
       type: "reference",
       to: [
         {
-          type: "page",
+          type: "blog",
         },
       ],
     }),
@@ -59,16 +57,38 @@ export const pageType = defineType({
       hidden: true,
     }),
     defineField({
-      name: "pageBuilder",
+      name: "publishDate",
+      title: "Publish Date",
+      type: "date",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "excerpt",
+      title: "Excerpt",
+      description: "Short summary of the article for previews and SEO",
+      type: "text",
+      rows: 3,
+      validation: (Rule) => Rule.max(250),
+    }),
+    defineField({
+      name: "featuredImage",
+      title: "Featured Image",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: "categories",
+      title: "Categories",
       type: "array",
-      title: "Page Content",
+      of: [{ type: "reference", to: [{ type: "category" }] }],
+    }),
+    defineField({
+      name: "pageBuilder",
+      title: "Article Body",
+      type: "array",
       of: [
-        defineArrayMember({
-          type: "heroBlock",
-          name: "heroBlock",
-          title: "Hero",
-          icon: InlineIcon,
-        }),
         defineArrayMember({
           type: "cardGridBlock",
           name: "cardGridBlock",
@@ -86,30 +106,6 @@ export const pageType = defineType({
           name: "contentBlock",
           title: "Content Block",
           icon: InlineIcon,
-        }),
-        defineArrayMember({
-          type: "documentListBlock",
-          name: "documentListBlock",
-          title: "Document List Block",
-          icon: ListIcon,
-        }),
-        defineArrayMember({
-          type: "stickyScrollBlock",
-          name: "stickyScrollBlock",
-          title: "Sticky Scroll Block",
-          icon: InlineElementIcon,
-        }),
-        defineArrayMember({
-          type: "faqBlock",
-          name: "faqBlock",
-          title: "FAQ Block",
-          icon: HelpCircleIcon,
-        }),
-        defineArrayMember({
-          type: "tabsBlock",
-          name: "tabsBlock",
-          title: "Tabs Block",
-          icon: InlineElementIcon,
         }),
         defineArrayMember({
           type: "accordionBlock",

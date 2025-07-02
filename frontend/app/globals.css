@@ -1,5 +1,5 @@
 :root {
-  --layout-width: 1200px;
+  --layout-width: 1250px;
   --spacing-section: 4rem;
 }
 
@@ -50,6 +50,11 @@ ul {
     color: var(--color-text-primary);
     margin-bottom: var(--spacing-sm);
   }
+}
+/* Header */
+body header > div {
+  max-width: var(--layout-width);
+  margin: 0 auto;
 }
 
 /* Text Color Overrides */

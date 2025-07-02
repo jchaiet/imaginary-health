@@ -1,10 +1,10 @@
 "use client";
-import Layout from "@/components/layout/Layout";
+import PageTemplate from "@/components/templates/PageTemplate";
 
 export default function NotFound() {
   return (
-    <Layout>
+    <PageTemplate>
       <h1>Oops! Page not found</h1>
-    </Layout>
+    </PageTemplate>
   );
 }

@@ -1,11 +1,11 @@
 "use client";
 
-import Layout from "@/components/layout/Layout";
+import PageTemplate from "@/components/templates/PageTemplate";
 
 export default function Error() {
   return (
-    <Layout>
+    <PageTemplate>
       <h1>Something went wrong</h1>
-    </Layout>
+    </PageTemplate>
   );
 }

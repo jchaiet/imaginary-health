@@ -8,5 +8,6 @@ export interface Navigation {
   logo?: SanityImage;
   logoLink?: string;
   primaryItems: NavigationItem[];
+  alignment: "left" | "center" | "right";
   utilityItems: Link[];
 }

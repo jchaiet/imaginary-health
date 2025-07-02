@@ -8,6 +8,8 @@ import { viewsWithPreview } from "./viewsWithPreview";
 
 export default function parentChild(
   schemaType: string = "page",
+  title: string = "Pages",
+  icon: React.ComponentType = FolderIcon,
   S: StructureBuilder,
   documentStore: DocumentStore
 ) {
@@ -38,7 +40,7 @@ export default function parentChild(
                 .menuItems([
                   parent &&
                     S.menuItem()
-                      .title("Create new page")
+                      .title(`Create new ${schemaType}`)
                       .icon(AddIcon)
                       .intent({
                         type: "create",
@@ -88,13 +90,14 @@ export default function parentChild(
   };
 
   return S.listItem()
-    .title("Pages")
+    .title(title)
+    .icon(icon)
     .child(() =>
       documentStore.listenQuery(query, {}, options).pipe(
         distinctUntilChanged(isEqual),
         map((parents) =>
           S.list()
-            .title("Pages")
+            .title(title)
             .menuItems([
               S.menuItem()
                 .title("Add")

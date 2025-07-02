@@ -35,6 +35,29 @@ export const navigationType = defineType({
       of: [{ type: "navigationItem" }],
     }),
     defineField({
+      name: "alignment",
+      title: "Primary Nav Alignment",
+      type: "string",
+      options: {
+        list: [
+          {
+            title: "Left",
+            value: "left",
+          },
+          {
+            title: "Center",
+            value: "center",
+          },
+          {
+            title: "Right",
+            value: "right",
+          },
+        ],
+        layout: "radio",
+      },
+      initialValue: "left",
+    }),
+    defineField({
       name: "utilityItems",
       title: "Utility Items",
       description: 'Additional CTAs. e.g., "Sign in", "Sign up"',

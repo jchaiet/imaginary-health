@@ -16,10 +16,53 @@ export const pageBySlugQuery = `
   }
 }`;
 
+export const blogPageWithPostsQuery = `
+*[_type == "page" && slug.current == "blog"][0] {
+  ...,
+  "articles": *[_type == "blog" && parent._ref == ^.id] | order(publishDate desc) {
+    _id,
+    title,
+    slug,
+    excerpt,
+    publishDate,
+    categories[]->{
+      _id,
+      title,
+      slug
+    },
+    featuredImage {
+      asset->{
+        url,
+        altText,
+        title,
+        description
+      }
+    }
+  }
+}`;
+
+export const articleBySlugQuery = `
+*[_type == "blog" && slug.current == $slug][0]{
+  ...,
+  categories[]->{
+    _id,
+    title,
+    slug
+  },
+  image {
+    asset->{
+      _id,
+      url,
+      altText,
+      title,
+      description
+    }
+  }
+}`;
+
 export const navigationQuery = `
 *[_type == "navigation" && slug.current == $slug][0]{
-  title,
-  slug,
+  ...,
   logo {
     asset->{
       _id,
@@ -57,8 +100,12 @@ export const navigationQuery = `
     }
   },
   utilityItems[]{
-    title,
-    "url": link,
-    style
+    ...,  
+    _key,
+    linkOptions{
+      internalUrl->{
+        slug { current }
+      }
+    }
   }
 }`;

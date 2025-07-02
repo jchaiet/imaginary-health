@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
 import Layout from "@/components/layout/Layout";
+import { mapNavigation } from "@/lib/navigation";
+import { fetchNavigation, urlForImage } from "@/sanity/client";
 
 type PageTemplateProps = {
   children: ReactNode;
@@ -14,13 +16,35 @@ export default async function PageTemplate({
   hideHeader = false,
   hideFooter = false,
 }: PageTemplateProps) {
+  const navigationData = await fetchNavigation("main-navigation");
+  const navItems = await mapNavigation(navigationData);
+  const utilityItems = navigationData.utilityItems;
+
+  const logoUrl = navigationData.logo
+    ? urlForImage(navigationData.logo).quality(100).url()
+    : null;
+  const logoAlt =
+    navigationData.logo?.alt || navigationData.logo?.description || "Logo";
+  const logoLinkSlug = navigationData.logoLink?.slug?.current;
+
+  console.log("data", navigationData);
+
   //Layout variants
   if (layoutType === "minimal") {
     return <div>{children}</div>;
   }
 
   return (
-    <Layout hideHeader={hideHeader} hideFooter={hideFooter}>
+    <Layout
+      utilityItems={utilityItems}
+      navItems={navItems}
+      alignment={navigationData.alignment}
+      logoUrl={logoUrl}
+      logoAlt={logoAlt}
+      logoLinkSlug={logoLinkSlug}
+      hideHeader={hideHeader}
+      hideFooter={hideFooter}
+    >
       {children}
     </Layout>
   );

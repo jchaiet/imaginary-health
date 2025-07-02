@@ -71,7 +71,10 @@ export function CarouselBlock({
         <div ref={siblingRef} className={styles.heading}>
           {heading?.title && titleBlock}
           {heading?.description && (
-            <RichText className={styles.title} blocks={heading?.description} />
+            <RichText
+              className={styles.description}
+              blocks={heading?.description}
+            />
           )}
         </div>
 
