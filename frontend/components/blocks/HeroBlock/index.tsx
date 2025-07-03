@@ -45,7 +45,7 @@ export function HeroBlock({
 
       return () => window.removeEventListener("scroll", onScroll);
     }
-  }, []);
+  }, [layout]);
 
   useEffect(() => {
     const video = videoRef.current;

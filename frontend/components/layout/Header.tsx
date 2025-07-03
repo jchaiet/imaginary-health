@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Link } from "@/types";
 import { Navbar, type NavItem } from "quirk-ui";
-import { useHeroContext } from "@/context/HeroContext";
+// import { useHeroContext } from "@/context/HeroContext";
 // import { useEffect, useState } from "react";
 
 type HeaderProps = {
@@ -22,7 +22,7 @@ export default function Header({
   logoAlt,
   logoLinkSlug,
 }: HeaderProps) {
-  const { isFullbleedHeroAtTop } = useHeroContext();
+  // const { isFullbleedHeroAtTop } = useHeroContext();
 
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
