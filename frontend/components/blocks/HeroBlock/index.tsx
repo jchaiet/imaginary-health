@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useHeroContext } from "@/context/HeroContext";
 import { RichText } from "@/lib/PortableTextRenderer";
 import { CallToActions } from "@/components/ui/CallToActions";
 import Image from "next/image";
@@ -16,6 +17,8 @@ export function HeroBlock({
   callToAction,
   styleOptions,
 }: HeroBlockProps) {
+  const { setIsFullbleedHeroAtTop } = useHeroContext();
+
   const imageUrl = image ? urlForImage(image).quality(100).url() : null;
   const prefersReducedMotion = usePrefersReducedMotion();
 
@@ -30,6 +33,19 @@ export function HeroBlock({
     split: styles.split,
     "full-bleed": styles.fullBleed,
   }[layout ?? "default"];
+
+  useEffect(() => {
+    const onScroll = () => {
+      setIsFullbleedHeroAtTop(window.scrollY === 0);
+    };
+
+    if (layout === "full-bleed" && typeof window !== "undefined") {
+      setIsFullbleedHeroAtTop(true);
+      window.addEventListener("scroll", onScroll);
+
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;

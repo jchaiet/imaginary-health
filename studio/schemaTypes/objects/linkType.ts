@@ -35,6 +35,8 @@ export const linkType = defineType({
           { title: "Link Inverted", value: "linkInverted" },
           { title: "Underline", value: "underline" },
           { title: "Underline Inverted", value: "underlineInverted" },
+          { title: "Blurred", value: "blurred" },
+          { title: "Blurred Inverted", value: "blurredInverted" },
         ],
         layout: "radio",
       },

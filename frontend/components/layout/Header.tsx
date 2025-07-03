@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Link } from "@/types";
 import { Navbar, type NavItem } from "quirk-ui";
+import { useHeroContext } from "@/context/HeroContext";
 // import { useEffect, useState } from "react";
 
 type HeaderProps = {
@@ -21,17 +22,7 @@ export default function Header({
   logoAlt,
   logoLinkSlug,
 }: HeaderProps) {
-  // const [isAtTop, setIsAtTop] = useState(true);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     setIsAtTop(window.scrollY === 0);
-  //   };
-  //   if (typeof window !== "undefined") {
-  //     window.addEventListener("scroll", handleScroll);
-  //     return () => window.removeEventListener("scroll", handleScroll);
-  //   }
-  // }, []);
+  const { isFullbleedHeroAtTop } = useHeroContext();
 
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
@@ -64,6 +55,7 @@ export default function Header({
 
   return (
     <Navbar
+      isTransparent
       alignment={alignment}
       items={navItems ?? []}
       utilityItems={utilityItems ?? []}

@@ -1,6 +1,6 @@
 .hero {
   width: 100%;
-  padding-top: var(--spacing-xl);
+  padding-top: calc(var(--nav-height) + var(--spacing-xl));
   padding-bottom: var(--spacing-xl);
 }
 
@@ -40,9 +40,10 @@
 
 .fullBleed {
   position: relative;
-  padding: 0;
+  padding: 0 var(--spacing-md);
 
   .container {
+    max-width: var(--layout-width);
     position: relative;
     display: flex;
     align-items: flex-end;
@@ -51,7 +52,8 @@
     height: 100%;
     overflow: hidden;
     flex-grow: 1;
-    padding: 0 var(--spacing-md);
+    padding: var(--nav-height) 0 0;
+    margin-top: var(--spacing-sm);
     border-radius: var(--radius-md);
 
     img {
@@ -62,12 +64,18 @@
   }
 
   .overlay {
+    /* Aligned Left w/ space
     width: 100%;
     max-width: var(--layout-width);
     margin: 0 auto;
-    /* padding: var(--spacing-xl) var(--spacing-md); */
+    z-index: 3;
+    position: relative;*/
+
+    /* Aligned Left 
+    margin: 0;
     z-index: 3;
     position: relative;
+    */
 
     @media (max-width: 767px) {
       padding: 4rem var(--spacing-md);
@@ -77,25 +85,36 @@
   .text {
     z-index: 3;
     position: relative;
+    /* left: var(--spacing-md); */
     max-width: 650px;
     background-color: #fff;
     padding: var(--spacing-xl);
-
     border-radius: var(--radius-md);
 
     @media (min-width: 768px) {
       border-radius: var(--radius-md) var(--radius-md) 0 0;
 
       &::before {
+        /* Aligned Left w/ space
+
         content: "";
         position: absolute;
         bottom: 0px;
         left: -20px;
         height: 25px;
         width: 20px;
-        /* border-bottom-left-radius: var(--radius-md); */
         border-bottom-right-radius: var(--radius-md);
-        box-shadow: 10px 10px 0 10px white;
+        box-shadow: 10px 10px 0 10px white;*/
+
+        /* Aligned Left */
+        content: "";
+        position: absolute;
+        top: -25px;
+        left: 0px;
+        height: 25px;
+        width: 20px;
+        border-bottom-left-radius: var(--radius-md);
+        box-shadow: -20px 20px 0 20px white;
       }
 
       &::after {
@@ -128,7 +147,7 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     flex-direction: column-reverse;
     gap: var(--spacing-xl);
 

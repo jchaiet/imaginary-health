@@ -1,6 +1,7 @@
 :root {
   --layout-width: 1250px;
   --spacing-section: 4rem;
+  --nav-height: 65px;
 }
 
 html,

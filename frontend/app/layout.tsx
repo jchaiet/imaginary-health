@@ -6,6 +6,7 @@ import { DisableDraftMode } from "@/components/preview/DisableDraftMode";
 import { fetchSiteSettings, urlForImage } from "@/sanity/client";
 import "./globals.css";
 import "quirk-ui/styles.css";
+import { HeroProvider } from "@/context/HeroContext";
 // import { SanityLiveVisualEditing } from "@/components/preview/SanityLiveVisualEditing";
 
 const roboto = Roboto_Flex({
@@ -50,17 +51,19 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ overflow: "visible", scrollBehavior: "smooth" }}>
-      <body className={roboto.className}>
-        {(await draftMode()).isEnabled && (
-          <>
-            {/* <SanityLiveVisualEditing /> */}
-            <DisableDraftMode />
-            <VisualEditing />
-          </>
-        )}
-        {children}
-      </body>
-    </html>
+    <HeroProvider>
+      <html lang="en" style={{ overflow: "visible", scrollBehavior: "smooth" }}>
+        <body className={roboto.className}>
+          {(await draftMode()).isEnabled && (
+            <>
+              {/* <SanityLiveVisualEditing /> */}
+              <DisableDraftMode />
+              <VisualEditing />
+            </>
+          )}
+          {children}
+        </body>
+      </html>
+    </HeroProvider>
   );
 }
