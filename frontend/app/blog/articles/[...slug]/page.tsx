@@ -15,8 +15,6 @@ export default async function Page({ params }: PageProps) {
 
   const formattedSlug = slug.join("/") ?? "/";
 
-  console.log(formattedSlug);
-
   const page = await sanityClient.fetch(
     articleBySlugQuery,
     { slug: formattedSlug },

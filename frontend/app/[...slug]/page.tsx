@@ -43,7 +43,7 @@ export default async function Page({ params }: PageProps) {
       hideHeader={hideHeader}
       hideFooter={hideFooter}
     >
-      <PageBuilder sections={pageBuilder} />
+      <PageBuilder sections={pageBuilder} pageData={page} />
     </PageTemplate>
   );
 }
