@@ -26,7 +26,6 @@ export function PageBuilder({
       slug: { current: string };
     }[];
     articleType: string;
-    [key: string]: any;
   };
 }) {
   console.log("SECTIONS", sections);

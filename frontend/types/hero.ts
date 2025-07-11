@@ -27,7 +27,6 @@ export interface HeroBlockProps {
       slug: { current: string };
     }[];
     articleType: string;
-    [key: string]: any;
   };
   styleOptions: Styles;
 }
