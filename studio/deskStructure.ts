@@ -8,7 +8,6 @@ import {
   ComposeSparklesIcon,
   ControlsIcon,
   DocumentsIcon,
-  FolderIcon,
   TagsIcon,
 } from "@sanity/icons";
 import parentChild from "./lib/parentChild";

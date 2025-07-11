@@ -13,3 +13,6 @@ export * from "./page";
 export * from "./navigation";
 export * from "./navigationItem";
 export * from "./accordion";
+export * from "./documentList";
+export * from "./featuredDocuments";
+export * from "./article";

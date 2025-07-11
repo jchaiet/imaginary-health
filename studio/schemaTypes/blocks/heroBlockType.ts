@@ -3,6 +3,7 @@ import { ImageIcon } from "@sanity/icons";
 import { paddingOptionType } from "../styles/paddingOptionType";
 import { backgroundOptionType } from "../styles/backgroundOptionType";
 import { layoutOptionType } from "../styles/layoutOptionType";
+import { SyncedImageInput } from "../../components/SyncedImageInput";
 
 export const heroBlockType = defineType({
   name: "heroBlock",
@@ -20,6 +21,9 @@ export const heroBlockType = defineType({
       title: "Image",
       type: "image",
       options: { hotspot: true },
+      components: {
+        input: SyncedImageInput,
+      },
     }),
     defineField({
       name: "video",

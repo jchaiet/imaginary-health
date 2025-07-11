@@ -20,6 +20,7 @@ export async function mapNavigation(navData: Navigation): Promise<NavItem[]> {
   const navItems = await Promise.all(
     navData.primaryItems.map(async (item) => {
       const label = item.title;
+      const key = item._key;
 
       if (item.itemType === "dropdown" && item.children?.length) {
         const subLinks = await Promise.all(
@@ -27,16 +28,18 @@ export async function mapNavigation(navData: Navigation): Promise<NavItem[]> {
             const href = await resolveNavItemHref(child);
 
             if (!href) return null;
-            return { label: child.title, href };
+            return { _key: child._key, label: child.title, href };
           })
         );
 
         const validSubLinks = subLinks.filter(Boolean) as {
+          _key: string;
           label: string;
           href: string;
         }[];
 
         return {
+          _key: key,
           label,
           sublinks: validSubLinks,
         };
@@ -44,7 +47,7 @@ export async function mapNavigation(navData: Navigation): Promise<NavItem[]> {
 
       const href = await resolveNavItemHref(item);
       if (href) {
-        return { label, href };
+        return { _key: key, label, href };
       }
 
       return null;

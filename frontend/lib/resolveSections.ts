@@ -8,11 +8,6 @@ export async function resolveSections(sections: PageSection[]) {
         const filters: string[] = [];
         const params: { categoryRef?: string } = {};
 
-        if (section.filterByCategory?._ref) {
-          filters.push("category._ref == $categoryRef");
-          params.categoryRef = section.filterByCategory._ref;
-        }
-
         const query = `
           *[_type == "blog" ${filters.length ? `&& ${filters.join(" && ")}` : ""}] | order(publishDate desc) ${section.limit ? `[0...${section.limit}]` : ""} {
             ...,
@@ -38,6 +33,45 @@ export async function resolveSections(sections: PageSection[]) {
         return {
           ...section,
           articles,
+        };
+      }
+
+      if (section._type === "featuredDocumentsBlock") {
+        let resolvedDocuments = [];
+        if (section.manualArticles?.length) {
+          const manualRefs = section.manualArticles?.map((ref) =>
+            typeof ref === "string" ? ref : ref._ref
+          );
+
+          const manualQuery = `*[_type == "blog" && _id in $ids]{
+            _id,
+            title,
+            slug,
+            excerpt,
+            publishDate,
+            categories[]->{
+              _id,
+              title,
+              slug
+            },
+            featuredImage {
+              asset->{
+                url,
+                altText,
+                title,
+                description
+              }
+            }
+          }`;
+
+          resolvedDocuments = await sanityClient.fetch(manualQuery, {
+            ids: manualRefs,
+          });
+        }
+
+        return {
+          ...section,
+          manualArticles: resolvedDocuments,
         };
       }
 

@@ -16,6 +16,7 @@ type LayoutProps = {
   logoUrl: string | null;
   logoAlt: string;
   logoLinkSlug?: string;
+  variant: "default" | "minimal";
 };
 
 export default function Layout({
@@ -28,6 +29,7 @@ export default function Layout({
   logoUrl,
   logoAlt,
   logoLinkSlug,
+  variant,
 }: LayoutProps) {
   return (
     <>
@@ -39,6 +41,7 @@ export default function Layout({
           logoUrl={logoUrl}
           logoAlt={logoAlt}
           logoLinkSlug={logoLinkSlug}
+          variant={variant}
         />
       )}
       <main>{children}</main>

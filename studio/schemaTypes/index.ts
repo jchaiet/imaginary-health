@@ -26,15 +26,24 @@ import { tabsBlockType } from "./blocks/tabsBlocktType";
 import { disclaimerBlockType } from "./blocks/disclaimerBlockType";
 import { accordionBlockType } from "./blocks/accordionBlockType";
 import { documentBlockType } from "./blocks/documentListBlockType";
+import { featuredDocumentsBlockType } from "./blocks/featuredDocumentsBlockType";
 
 export const schemaTypes = [
   siteSettingsType,
   pageType,
   pageMetadataType,
   blogType,
-  categoryType,
   navigationType,
   navigationItemType,
+
+  categoryType,
+  headingType,
+  callToActionType,
+  linkType,
+  richTextType,
+  cardType,
+  gridType,
+
   heroBlockType,
   cardGridBlockType,
   carouselBlockType,
@@ -45,10 +54,5 @@ export const schemaTypes = [
   disclaimerBlockType,
   accordionBlockType,
   documentBlockType,
-  headingType,
-  callToActionType,
-  linkType,
-  richTextType,
-  cardType,
-  gridType,
+  featuredDocumentsBlockType,
 ];

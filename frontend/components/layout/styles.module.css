@@ -1,0 +1,6 @@
+.blogHeader {
+  position: relative;
+  margin-top: calc(var(--nav-height) + 1rem);
+  width: 100%;
+  padding: var(--spacing-xl) 0;
+}

@@ -15,6 +15,7 @@ export function HeroBlock({
   image,
   video,
   callToAction,
+  pageData,
   styleOptions,
 }: HeroBlockProps) {
   const { setIsFullbleedHeroAtTop } = useHeroContext();
@@ -32,7 +33,16 @@ export function HeroBlock({
     default: styles.default,
     split: styles.split,
     "full-bleed": styles.fullBleed,
+    blog: styles.blog,
   }[layout ?? "default"];
+
+  const mainCategory = pageData?.categories?.length
+    ? pageData?.categories[0]
+    : null;
+
+  const secondaryCategory = pageData?.categories?.length
+    ? pageData?.categories[1]
+    : null;
 
   useEffect(() => {
     const onScroll = () => {
@@ -262,6 +272,119 @@ export function HeroBlock({
                     className={styles.eyebrow}
                     blocks={heading.eyebrow}
                   />
+                )}
+
+                <RichText className={styles.title} blocks={heading.title} />
+              </div>
+              {heading.description && (
+                <RichText
+                  className={styles.subheading}
+                  blocks={heading.description}
+                />
+              )}
+              {callToAction && (
+                <CallToActions
+                  items={callToAction.items}
+                  alignment={callToAction.alignment}
+                />
+              )}
+            </div>
+          </div>
+        </article>
+      </section>
+    );
+  }
+
+  if (layout === "blog") {
+    return (
+      <section className={`${styles.hero} ${styleClass}`}>
+        <article className={styles.container}>
+          {video ? (
+            video.includes("vimeo.com") ||
+            video.includes("youtube.com") ||
+            video.includes("youtu.be") ? (
+              <div className={styles.videoBackground}>
+                <iframe
+                  src={
+                    video.includes("vimeo.com")
+                      ? `${video}?autoplay=1&muted=1&loop=1&background=1`
+                      : `${video}?autoplay=1&mute=1&loop=1&playlist=${getYouTubeVideoId(video)}`
+                  }
+                  className={styles.iframe}
+                  allow="autoplay; fullscreen"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <>
+                {videoControl}
+
+                <video
+                  ref={videoRef}
+                  className={styles.videoBackground}
+                  src={video}
+                  autoPlay={!prefersReducedMotion}
+                  loop
+                  muted
+                  playsInline
+                  poster={imageUrl || undefined}
+                />
+              </>
+            )
+          ) : (
+            <Image
+              src={imageUrl ?? ""}
+              alt={image?.alt || image?.description || "Card image"}
+              fill
+              priority={true}
+              style={{ objectFit: "cover" }}
+              draggable={false}
+              sizes="(min-width: 500px) 500px, 100vw"
+            />
+          )}
+
+          <div className={styles.overlay}>
+            <div className={styles.text}>
+              <div>
+                {heading.eyebrow && (
+                  <RichText
+                    className={styles.eyebrow}
+                    blocks={heading.eyebrow}
+                  />
+                )}
+
+                {pageData && (
+                  <div className={styles.articleDetails}>
+                    {pageData.articleType && (
+                      <div className={styles.articleType}>
+                        {pageData.articleType}
+                      </div>
+                    )}
+                    {mainCategory && (
+                      <span className={styles.mainCategory}>
+                        {mainCategory.title}
+                      </span>
+                    )}
+
+                    {secondaryCategory &&
+                      secondaryCategory.title.toLowerCase() !== "library" && (
+                        <>
+                          <span className={styles.pipe}>|</span>
+                          <span className={styles.category}>
+                            {secondaryCategory.title}
+                          </span>
+                        </>
+                      )}
+
+                    {pageData.timeToRead && (
+                      <>
+                        <span className={styles.pipe}>|</span>
+                        <span className={styles.timeToRead}>
+                          {pageData.timeToRead} min read
+                        </span>
+                      </>
+                    )}
+                  </div>
                 )}
 
                 <RichText className={styles.title} blocks={heading.title} />

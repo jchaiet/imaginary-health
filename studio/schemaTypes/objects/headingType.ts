@@ -1,4 +1,5 @@
 import { defineType, defineField } from "sanity";
+import { SyncedRichTextInput } from "../../components/SyncedRichTextInput";
 
 export const headingType = defineType({
   name: "heading",
@@ -14,7 +15,14 @@ export const headingType = defineType({
       title: "Eyebrow",
       type: "richText",
     }),
-    defineField({ name: "title", type: "richText", title: "Title" }),
+    defineField({
+      name: "title",
+      type: "richText",
+      title: "Title",
+      components: {
+        input: SyncedRichTextInput,
+      },
+    }),
     defineField({
       name: "description",
       type: "richText",

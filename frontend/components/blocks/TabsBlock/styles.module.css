@@ -174,19 +174,21 @@
 
 .fullBleed {
   position: relative;
-  padding: var(--nav-height) 0 0;
+  padding: 0;
 
   .container {
+    max-width: var(--layout-width);
     position: relative;
     display: flex;
-    align-items: flex-start;
+    align-items: flex-end;
     width: 100%;
+    min-height: 650px;
     height: 100%;
-    max-width: calc(var(--layout-width) + 2rem);
     overflow: hidden;
-    padding: 0 var(--spacing-md);
-    margin-top: var(--spacing-sm);
-    border-radius: var(--radius-md);
+    flex-grow: 1;
+    padding: var(--nav-height) 0 0;
+    /* margin-top: var(--spacing-sm); */
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
 
     img {
       transition:

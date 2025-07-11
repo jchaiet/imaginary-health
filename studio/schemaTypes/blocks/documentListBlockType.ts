@@ -35,6 +35,39 @@ export const documentBlockType = defineType({
       },
     }),
     defineField({
+      name: "documentType",
+      title: "Document Type",
+      type: "string",
+      description: "Select which type of documents to show",
+      group: "settings",
+      options: {
+        list: [
+          { title: "Blog", value: "blog" },
+          { title: "News", value: "news" },
+          { title: "Resource", value: "resource" },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "includeFilters",
+      title: "Include Filters",
+      description:
+        "Only documents assigned to the selected categories will be fetched on the server.",
+      group: "settings",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "category" }] }],
+    }),
+    defineField({
+      name: "excludeFilters",
+      title: "Exclude Filters",
+      description:
+        "Documents assigned to the selected categories will NOT be fetched on the server.",
+      group: "settings",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "category" }] }],
+    }),
+    defineField({
       name: "limit",
       title: "Maximum number of articles",
       group: "settings",
@@ -42,11 +75,26 @@ export const documentBlockType = defineType({
       description: "Optional: Limit the number of articles shown",
     }),
     defineField({
-      name: "filterByCategory",
-      title: "Filter by category",
+      name: "categoryFilters",
+      title: "Category Filters",
+      description:
+        "These categories appear in the sidebar as interactive filters for users to refine the displayed documents.",
       group: "settings",
-      type: "reference",
-      to: [{ type: "category" }],
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "category" }] }],
+    }),
+    defineField({
+      name: "filterMode",
+      title: "Filter Mode",
+      group: "settings",
+      type: "string",
+      options: {
+        list: [
+          { title: "Match Any", value: "any" },
+          { title: "Match All", value: "all" },
+        ],
+        layout: "radio",
+      },
     }),
     defineField({
       name: "styleOptions",
@@ -74,7 +122,7 @@ export const documentBlockType = defineType({
     },
     prepare({ title }) {
       return {
-        title: title || "Blog List Block",
+        title: title || "Document List Block",
       };
     },
   },

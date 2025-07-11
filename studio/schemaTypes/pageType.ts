@@ -8,6 +8,7 @@ import {
   ThLargeIcon,
   DoubleChevronDownIcon,
   ListIcon,
+  StarIcon,
 } from "@sanity/icons";
 import asyncSlugifier from "../lib/asyncSlugifier";
 
@@ -92,6 +93,12 @@ export const pageType = defineType({
           name: "documentListBlock",
           title: "Document List Block",
           icon: ListIcon,
+        }),
+        defineArrayMember({
+          type: "featuredDocumentsBlock",
+          name: "featuredDocumentsBlock",
+          title: "Featured Documents Block",
+          icon: StarIcon,
         }),
         defineArrayMember({
           type: "stickyScrollBlock",

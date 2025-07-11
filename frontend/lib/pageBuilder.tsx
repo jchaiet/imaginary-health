@@ -11,15 +11,31 @@ import { TabsBlock } from "@/components/blocks/TabsBlock";
 import { DisclaimerBlock } from "@/components/blocks/DisclaimerBlock";
 import { AccordionBlock } from "@/components/blocks/AccordionBlock";
 import { DocumentListBlock } from "@/components/blocks/DocumentListBlock";
+import { FeaturedDocumentsBlock } from "@/components/blocks/FeaturedDocumentsBlock";
 
-export function PageBuilder({ sections }: { sections: PageSection[] }) {
+export function PageBuilder({
+  sections,
+  pageData,
+}: {
+  sections: PageSection[];
+  pageData: {
+    timeToRead: number;
+    categories?: {
+      _id: string;
+      title: string;
+      slug: { current: string };
+    }[];
+    articleType: string;
+    [key: string]: any;
+  };
+}) {
   console.log("SECTIONS", sections);
   return (
     <>
       {sections?.map((section, i) => {
         switch (section._type) {
           case "heroBlock":
-            return <HeroBlock key={i} {...section} />;
+            return <HeroBlock key={i} {...section} pageData={pageData} />;
           case "cardGridBlock":
             return <CardGridBlock key={i} {...section} />;
           case "carouselBlock":
@@ -38,6 +54,8 @@ export function PageBuilder({ sections }: { sections: PageSection[] }) {
             return <AccordionBlock key={i} {...section} />;
           case "documentListBlock":
             return <DocumentListBlock key={i} {...section} />;
+          case "featuredDocumentsBlock":
+            return <FeaturedDocumentsBlock key={i} {...section} />;
           default:
             const unknownSection = section as { _type?: string };
             console.warn("Unknown block type", unknownSection._type, section);

@@ -79,16 +79,46 @@ export const blogType = defineType({
       },
     }),
     defineField({
+      name: "timeToRead",
+      title: "Time to Read",
+      type: "number",
+    }),
+    defineField({
+      name: "articleType",
+      title: "Article Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Article", value: "article" },
+          { title: "Recipe", value: "recipe" },
+          { title: "Video", value: "video" },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "categories",
       title: "Categories",
       type: "array",
       of: [{ type: "reference", to: [{ type: "category" }] }],
+      initialValue: [
+        {
+          _type: "reference",
+          _ref: "d685ac53-99d4-405c-8654-798b487eefac", //Library category
+        },
+      ],
     }),
     defineField({
       name: "pageBuilder",
       title: "Article Body",
       type: "array",
       of: [
+        defineArrayMember({
+          type: "heroBlock",
+          name: "heroBlock",
+          title: "Hero",
+          icon: InlineIcon,
+        }),
         defineArrayMember({
           type: "cardGridBlock",
           name: "cardGridBlock",
@@ -106,6 +136,11 @@ export const blogType = defineType({
           name: "contentBlock",
           title: "Content Block",
           icon: InlineIcon,
+          initialValue: {
+            styleOptions: {
+              padding: ["paddingTop4", "paddingBottom4"],
+            },
+          },
         }),
         defineArrayMember({
           type: "accordionBlock",
@@ -119,6 +154,14 @@ export const blogType = defineType({
           title: "Disclaimer Block",
           icon: InfoOutlineIcon,
         }),
+      ],
+      initialValue: [
+        {
+          _type: "heroBlock",
+        },
+        {
+          _type: "contentBlock",
+        },
       ],
     }),
   ],

@@ -2,8 +2,7 @@
 import Image from "next/image";
 import { Link } from "@/types";
 import { Navbar, type NavItem } from "quirk-ui";
-// import { useHeroContext } from "@/context/HeroContext";
-// import { useEffect, useState } from "react";
+// import styles from "./styles.module.css";
 
 type HeaderProps = {
   navItems: NavItem[];
@@ -12,6 +11,7 @@ type HeaderProps = {
   logoUrl: string | null;
   logoAlt: string;
   logoLinkSlug?: string;
+  variant: "default" | "minimal";
 };
 
 export default function Header({
@@ -21,6 +21,7 @@ export default function Header({
   logoUrl,
   logoAlt,
   logoLinkSlug,
+  // variant,
 }: HeaderProps) {
   // const { isFullbleedHeroAtTop } = useHeroContext();
 
@@ -56,6 +57,8 @@ export default function Header({
   return (
     <Navbar
       isTransparent
+      isSticky
+      variant="default"
       alignment={alignment}
       items={navItems ?? []}
       utilityItems={utilityItems ?? []}

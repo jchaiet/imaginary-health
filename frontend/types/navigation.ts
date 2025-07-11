@@ -10,4 +10,5 @@ export interface Navigation {
   primaryItems: NavigationItem[];
   alignment: "left" | "center" | "right";
   utilityItems: Link[];
+  variant: "default" | "minimal";
 }

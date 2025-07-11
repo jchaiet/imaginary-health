@@ -1,20 +1,6 @@
-import { SanityImage } from "./image";
 import { Styles } from "./styles";
 import { PortableTextBlock } from "@portabletext/types";
-
-export type ArticleItem = {
-  _id: string;
-  title: string;
-  slug: { current: string };
-  excerpt?: string;
-  categories?: {
-    _id: string;
-    title: string;
-    slug: { current: string };
-  }[];
-  publishDate?: string;
-  featuredImage?: SanityImage;
-};
+import { ArticleItem } from "./article";
 
 export interface DocumentListBlockProps {
   heading: {
@@ -26,10 +12,24 @@ export interface DocumentListBlockProps {
     headingLayout?: "horizontal" | "vertical";
   };
   layout: string;
+  includeFilters?: {
+    _id: string;
+    title: string;
+    slug: { current: string };
+  }[];
+  excludeFilters?: {
+    _id: string;
+    title: string;
+    slug: { current: string };
+  }[];
   limit?: number;
-  filterByCategory?: {
-    _ref: string;
-  };
+  categoryFilters?: {
+    _id: string;
+    title: string;
+    slug: { current: string };
+  }[];
+  documentType: string;
+  filterMode?: string;
   articles: ArticleItem[];
   styleOptions: Styles;
 }

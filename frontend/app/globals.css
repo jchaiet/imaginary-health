@@ -1,5 +1,6 @@
 :root {
   --layout-width: 1250px;
+  --blog-width: 1000px;
   --spacing-section: 4rem;
   --nav-height: 65px;
 }
@@ -36,6 +37,13 @@ h4,
 h5,
 h6 {
   text-wrap: pretty;
+}
+
+p {
+  font-family: inherit;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
 }
 
 ul {

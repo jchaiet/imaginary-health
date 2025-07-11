@@ -14,6 +14,10 @@ export const layoutOptionType = [
           value: "default",
         },
         {
+          title: "Blog",
+          value: "blog",
+        },
+        {
           title: "Centered Layout",
           value: "centered",
         },

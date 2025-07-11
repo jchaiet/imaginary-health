@@ -3,8 +3,6 @@ import { PageBuilder } from "@/lib/pageBuilder";
 import { sanityClient } from "@/sanity/client";
 import { pageBySlugQuery } from "@/sanity/queries";
 import { notFound } from "next/navigation";
-import { resolveSections } from "@/lib/resolveSections";
-import { PageSection } from "@/types";
 import { draftMode } from "next/headers";
 
 interface PageProps {
@@ -33,13 +31,19 @@ export default async function Page({ params }: PageProps) {
 
   const { pageBuilder = [], hideHeader = false, hideFooter = false } = page;
 
-  const resolvedSections = (await resolveSections(
-    pageBuilder
-  )) as PageSection[];
+  const isBlog = page?.slug?.current?.startsWith("blog");
+
+  // const resolvedSections = (await resolveSections(
+  //   pageBuilder
+  // )) as PageSection[];
 
   return (
-    <PageTemplate hideHeader={hideHeader} hideFooter={hideFooter}>
-      <PageBuilder sections={resolvedSections} />
+    <PageTemplate
+      isBlog={isBlog}
+      hideHeader={hideHeader}
+      hideFooter={hideFooter}
+    >
+      <PageBuilder sections={pageBuilder} />
     </PageTemplate>
   );
 }

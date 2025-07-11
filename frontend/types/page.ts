@@ -9,6 +9,7 @@ import { TabsBlockProps } from "./tabs";
 import { DisclaimerBlockProps } from "./disclaimer";
 import { AccordionBlockProps } from "./accordion";
 import { DocumentListBlockProps } from "./documentList";
+import { FeaturedDocumentsBlockProps } from "./featuredDocuments";
 
 type CallToActionSection = { callToAction?: Link[] | Link };
 export type PageSection =
@@ -21,4 +22,5 @@ export type PageSection =
   | ({ _type: "tabsBlock" } & TabsBlockProps)
   | ({ _type: "disclaimerBlock" } & DisclaimerBlockProps)
   | ({ _type: "accordionBlock" } & AccordionBlockProps)
-  | ({ _type: "documentListBlock" } & DocumentListBlockProps);
+  | ({ _type: "documentListBlock" } & DocumentListBlockProps)
+  | ({ _type: "featuredDocumentsBlock" } & FeaturedDocumentsBlockProps);

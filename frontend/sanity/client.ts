@@ -30,23 +30,9 @@ export async function resolveLinkURL(cta: Link) {
     return options.externalUrl;
   }
 
-  if (options?.linkType === "internal" && options.internalUrl?._ref) {
-    const refId = options.internalUrl._ref;
-
-    const result = await sanityClient.fetch(`*[_id == $refId][0]{ slug }`, {
-      refId,
-    });
-
-    if (result?.slug?.current) {
-      return `/${result.slug.current}`;
-    }
+  if (options?.linkType === "internal" && options.internalUrl?.slug) {
+    return `/${options.internalUrl?.slug.current}`;
   }
 
   return "#";
 }
-
-// export const { sanityFetch, SanityLive} = defineLive({
-//   client: sanityClient,
-//   serverToken: process.env.SANITY_API_READ_TOKEN,
-//   browserToken: process.env.SANITY_API_READ_TOKEN,
-// })

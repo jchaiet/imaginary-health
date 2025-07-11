@@ -1,8 +1,9 @@
 export type InternalLinkOptions = {
   linkType: "internal";
   internalUrl: {
-    _type: "reference";
-    _ref: string;
+    slug: {
+      current: string;
+    };
   };
 };
 

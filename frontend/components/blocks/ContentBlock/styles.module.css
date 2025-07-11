@@ -144,12 +144,8 @@
 .heading {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
   width: 100%;
-
-  @media (max-width: 767px) {
-    gap: 2rem;
-  }
+  gap: var(--spacing-md);
 }
 
 .title {
@@ -182,6 +178,11 @@
 .headingHorizontal {
   flex-direction: row;
   justify-content: space-between;
+  gap: 5rem;
+
+  @media (max-width: 767px) {
+    gap: var(--spacing-md);
+  }
 
   :global(.portableTextContainer) {
     flex: 1;
@@ -260,6 +261,10 @@
 }
 
 /* Style Options Override */
+:global(.blog) .container {
+  max-width: var(--blog-width);
+}
+
 :global(.centered) .heading {
   gap: var(--spacing-md);
   align-items: center;

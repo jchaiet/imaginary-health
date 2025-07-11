@@ -19,5 +19,15 @@ export interface HeroBlockProps {
     items: Link[];
   };
   alignment?: "left" | "center" | "right";
+  pageData?: {
+    timeToRead: number;
+    categories?: {
+      _id: string;
+      title: string;
+      slug: { current: string };
+    }[];
+    articleType: string;
+    [key: string]: any;
+  };
   styleOptions: Styles;
 }
