@@ -31,7 +31,7 @@ export default async function Home() {
 
   return (
     <PageTemplate hideHeader={hideHeader} hideFooter={hideFooter}>
-      <PageBuilder sections={pageBuilder} />
+      <PageBuilder sections={pageBuilder} pageData={page} />
     </PageTemplate>
   );
 }
