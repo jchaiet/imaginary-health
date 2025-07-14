@@ -27,6 +27,8 @@ export default async function Page({ params }: PageProps) {
       : undefined
   );
 
+  console.log(page);
+
   if (!page) notFound();
 
   const { pageBuilder = [], hideHeader = false, hideFooter = false } = page;

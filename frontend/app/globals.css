@@ -3,6 +3,8 @@
   --blog-width: 1000px;
   --spacing-section: 4rem;
   --nav-height: 65px;
+
+  --color-primary-light: #d9e2f4;
 }
 
 html,
@@ -16,6 +18,11 @@ body {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  position: relative;
+  overflow: hidden;
 }
 
 * {

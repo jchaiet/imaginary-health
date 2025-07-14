@@ -69,8 +69,6 @@ export async function GET(req: NextRequest) {
     categories[]->{ _id, title }
   }`;
 
-  console.log(query);
-
   const countQuery = `count(*[
     _type == "${documentType}" 
     ${categoryConditions}

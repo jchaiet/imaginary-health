@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { RichText } from "@/lib/PortableTextRenderer";
 import { DocumentListBlockProps } from "@/types/documentList";
 import { ArticleItem } from "@/types";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
-import { RefreshCw, XIcon } from "lucide-react";
+import { RefreshCw, XIcon, Settings2Icon } from "lucide-react";
 import styles from "./styles.module.css";
 import { CallToAction, Input, Select } from "quirk-ui";
 import { BlogArticleCard } from "@/components/cards/BlogArticleCard";
@@ -35,6 +35,7 @@ export function DocumentListBlock({
   // const [filterMode, setFilterMode] = useState<"any" | "all">("any");
   const [start, setStart] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -51,6 +52,23 @@ export function DocumentListBlock({
     setArticles([]);
     setStart(0);
     setHasMore(true);
+  };
+
+  const toggleFilters = () => {
+    if (showFilters) {
+      setShowFilters(false);
+    } else {
+      setShowFilters(true);
+    }
+  };
+
+  const resetFilters = () => {
+    setArticles([]);
+    setStart(0);
+    setHasMore(true);
+    setSelectedCategories([]);
+    setSearch("");
+    setShowFilters(false);
   };
 
   const fetchArticles = async () => {
@@ -103,6 +121,41 @@ export function DocumentListBlock({
     }
   };
 
+  const handleResize = useCallback(() => {
+    if (typeof window !== "undefined" && window.innerWidth > 768) {
+      //setIsMobile(false);
+      setShowFilters(false);
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "";
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const hasWindow = typeof window !== "undefined";
+    const hasDocument = typeof document !== "undefined";
+
+    if (hasWindow) {
+      window.addEventListener("resize", handleResize);
+    }
+
+    return () => {
+      if (hasWindow) {
+        window.removeEventListener("resize", handleResize);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.body.style.overflow = showFilters ? "hidden" : "";
+
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+  }, [showFilters]);
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(search);
@@ -131,30 +184,74 @@ export function DocumentListBlock({
         </div>
 
         <div className={styles.listContainer}>
+          {categoryFilters?.length && (
+            <div className={styles.filterToggle}>
+              <CallToAction
+                as="button"
+                variant="secondary"
+                onClick={toggleFilters}
+                disabled={isLoading}
+                icon={<Settings2Icon size={21} />}
+                iconAlignemnt="left"
+              >
+                Filters
+              </CallToAction>
+              <CallToAction
+                as="button"
+                variant="link"
+                onClick={resetFilters}
+                disabled={
+                  isLoading ||
+                  (selectedCategories.length === 0 && search.length === 0)
+                }
+              >
+                Reset
+              </CallToAction>
+            </div>
+          )}
           {categoryFilters && (
-            <div className={styles.listFilters}>
-              <h5>Filters</h5>
-              {categoryFilters?.map((filter) => (
-                <label key={filter._id}>
-                  <input
-                    type="checkbox"
-                    value={filter._id}
-                    checked={selectedCategories.includes(filter._id)}
-                    onChange={(e) => {
-                      const checked = e.target.checked;
-                      const newSelection = checked
-                        ? [...selectedCategories, filter._id]
-                        : selectedCategories.filter((f) => f !== filter._id);
+            <div
+              className={`${styles.listFilters} ${showFilters ? styles.show : styles.hide}`}
+            >
+              <div className={styles.filterHeader}>
+                <h5>Filters</h5>
+                <button onClick={() => toggleFilters()}>
+                  <XIcon size={24} />
+                </button>
+              </div>
+              <div className={styles.filterList}>
+                {categoryFilters?.map((filter) => (
+                  <label key={filter._id}>
+                    <input
+                      type="checkbox"
+                      value={filter._id}
+                      checked={selectedCategories.includes(filter._id)}
+                      onChange={(e) => {
+                        const checked = e.target.checked;
+                        const newSelection = checked
+                          ? [...selectedCategories, filter._id]
+                          : selectedCategories.filter((f) => f !== filter._id);
 
-                      setArticles([]);
-                      setStart(0);
-                      setHasMore(true);
-                      setSelectedCategories(newSelection);
-                    }}
-                  />
-                  {filter.title}
-                </label>
-              ))}
+                        setArticles([]);
+                        setStart(0);
+                        setHasMore(true);
+                        setSelectedCategories(newSelection);
+                      }}
+                    />
+                    {filter.title}
+                  </label>
+                ))}
+              </div>
+
+              <CallToAction
+                as="button"
+                variant="secondary"
+                onClick={toggleFilters}
+                disabled={isLoading}
+                className={styles.applyFilters}
+              >
+                Apply Filters
+              </CallToAction>
             </div>
           )}
 
@@ -193,7 +290,6 @@ export function DocumentListBlock({
                   )}
                 </div>
                 <div className={styles.listSort}>
-                  Sort by:
                   <Select
                     id="list-sort"
                     name="list-sort"

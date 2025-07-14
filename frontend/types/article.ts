@@ -3,6 +3,7 @@ import { SanityImage } from "./image";
 export type ArticleItem = {
   _ref?: string;
   _id: string;
+  _type: string;
   title: string;
   slug: { current: string };
   excerpt?: string;

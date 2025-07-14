@@ -50,7 +50,10 @@ export const pageBySlugQuery = `
           count(coalesce(^.^.includeFilters, [])) == 0 ||
           count(categories[@._ref in ^.^.includeFilters[]._ref]) > 0
         ) &&
+        (
+          count(coalesce(^.^.excludeFilters, [])) == 0 ||
           count(categories[@._ref in ^.^.excludeFilters[]._ref]) == 0
+        )
       ] | order(publishDate desc) {
         ${articleFragment}
       },
@@ -73,8 +76,11 @@ export const pageBySlugQuery = `
           count(coalesce(^.^.includeFilters, [])) == 0 ||
           count(categories[@._ref in ^.^.includeFilters[]._ref]) > 0
         ) &&
+        (
+          count(coalesce(^.^.excludeFilters, [])) == 0 ||
           count(categories[@._ref in ^.^.excludeFilters[]._ref]) == 0
-      ] | order(publishDate desc)[0...4] {
+        )
+      ] | order(publishDate desc)[0...25] {
         ${articleFragment}
       },
       manualArticles[]->{

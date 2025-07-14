@@ -1,14 +1,15 @@
+import { useRef } from "react";
 import { RichText } from "@/lib/PortableTextRenderer";
 import Link from "next/link";
 import { FeaturedDocumentsBlockProps } from "@/types";
 import { ArticleItem } from "@/types";
 
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
-import { urlForImage } from "@/sanity/client";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import Image from "next/image";
+import { BlogArticleCard } from "@/components/cards/BlogArticleCard";
 
 import styles from "./styles.module.css";
+import { Carousel } from "quirk-ui";
 
 export function FeaturedDocumentsBlock({
   heading,
@@ -17,10 +18,13 @@ export function FeaturedDocumentsBlock({
   limit = 4,
   articles,
   manualArticles,
+  documentType,
   // filterMode,
   callToAction,
   styleOptions,
 }: FeaturedDocumentsBlockProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const articlesToDisplay =
     selectionMode === "manual" ? manualArticles : articles;
   const displayLimit =
@@ -63,6 +67,31 @@ export function FeaturedDocumentsBlock({
       ? callToAction?.linkOptions?.externalUrl
       : undefined;
 
+  const getCardComponent = (type: string) => {
+    switch (documentType?.toLowerCase()) {
+      case "blog":
+        return BlogArticleCard;
+      default:
+        return null;
+    }
+  };
+
+  const CardComponent = documentType ? getCardComponent(documentType) : null;
+
+  const carouselItems =
+    CardComponent && articlesToDisplay
+      ? articlesToDisplay.map((article, index) => (
+          <CardComponent
+            key={article._id}
+            article={article}
+            className={styles.document}
+            index={index}
+            layout={layout}
+            limit={displayLimit}
+          />
+        ))
+      : [];
+
   return (
     <section
       className={`${styles.featuredDocuments} ${classNames} ${styleClass}`}
@@ -99,67 +128,41 @@ export function FeaturedDocumentsBlock({
           )}
         </div>
 
-        <div
-          className={`${styles.documents} ${layoutClassMap} ${columnClassMap}`}
-        >
-          {/* GROQ does not allow us to pass limit value dynamically, so we limit the query here */}
-          {articlesToDisplay?.length &&
-            articlesToDisplay
-              .slice(0, displayLimit)
-              .map((document: ArticleItem) => {
-                const imageUrl =
-                  document.featuredImage &&
-                  urlForImage(document.featuredImage).quality(100).url();
-                const alt = document.featuredImage?.alt;
-                const href = `/blog/${document.slug.current}`;
-                const mainCategory = document.categories?.length
-                  ? document.categories[0]
-                  : null;
-
-                return (
-                  <Link
-                    key={document._id}
-                    href={href}
-                    className={styles.document}
-                  >
-                    <div className={styles.documentImage}>
-                      <Image
-                        src={imageUrl ?? ""}
-                        alt={
-                          alt ||
-                          document?.featuredImage?.description ||
-                          "Content image"
-                        }
-                        width={600}
-                        height={400}
-                        priority={true}
+        {layout === "carousel" ? (
+          <div className={styles.carousel} ref={containerRef}>
+            <Carousel
+              autoplay={false}
+              itemsPerPage={4}
+              itemsPerRow={4}
+              items={carouselItems ?? []}
+              isSplit={false}
+              externalRef={containerRef as React.RefObject<HTMLElement>}
+            />
+          </div>
+        ) : (
+          <div
+            className={`${styles.documents} ${layoutClassMap} ${columnClassMap}`}
+          >
+            {/* GROQ does not allow us to pass limit value dynamically, so we limit the query here */}
+            {articlesToDisplay?.length &&
+              articlesToDisplay
+                .slice(0, displayLimit)
+                .map((document: ArticleItem, index) => {
+                  return (
+                    document?._type?.toLowerCase() === "blog" && (
+                      <BlogArticleCard
+                        key={document._id}
+                        article={document}
+                        className={styles.document}
+                        index={index}
+                        layout={layout}
+                        limit={displayLimit}
                       />
-                    </div>
-                    <div className={styles.documentContent}>
-                      {mainCategory && (
-                        <div className={styles.documentEyebrow}>
-                          {mainCategory.title}
-                        </div>
-                      )}
-                      <div className={styles.documentTitle}>
-                        <h3>{document.title}</h3>
-                        <div className={styles.callToAction}>
-                          {/* <div className={styles.label}>Read more</div> */}
-                          <div className={styles.icon}>
-                            <ArrowUpRight size={45} />
-                          </div>
-                        </div>
-                      </div>
-                      {document.excerpt && (
-                        <p className={styles.documentExcerpt}>
-                          {document.excerpt}
-                        </p>
-                      )}
-                    </div>
-                  </Link>
-                );
-              })}
-        </div>
+                    )
+                  );
+                })}
+          </div>
+        )}
       </article>
     </section>
   );

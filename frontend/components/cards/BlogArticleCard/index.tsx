@@ -6,7 +6,21 @@ import { ArticleItem } from "@/types";
 import Link from "next/link";
 import styles from "./styles.module.css";
 
-export function BlogArticleCard({ article }: { article: ArticleItem }) {
+type BlogArticleProps = {
+  article: ArticleItem;
+  className?: string;
+  index?: number;
+  layout?: string;
+  limit?: number;
+};
+
+export function BlogArticleCard({
+  article,
+  className = "",
+  index,
+  layout,
+  limit,
+}: BlogArticleProps) {
   const imageUrl =
     article.featuredImage &&
     urlForImage(article.featuredImage).quality(100).url();
@@ -16,10 +30,11 @@ export function BlogArticleCard({ article }: { article: ArticleItem }) {
     ? article.categories[0]
     : null;
 
-  console.log(article);
-
   return (
-    <Link href={href} className={styles.item}>
+    <Link
+      href={href}
+      className={`${styles.item} ${className ?? ""} ${index === 0 ? styles.first : styles.notFirst} ${layout ? styles[layout] : ""} ${limit === 1 ? styles.single : ""}`}
+    >
       <div className={styles.itemImage}>
         {article.articleType && (
           <div className={styles.category}>{article.articleType}</div>
@@ -45,7 +60,9 @@ export function BlogArticleCard({ article }: { article: ArticleItem }) {
             </div>
           </div>
         </div>
-        {article.excerpt && <p>{article.excerpt}</p>}
+        {article.excerpt && (
+          <p className={styles.itemExcerpt}>{article.excerpt}</p>
+        )}
       </div>
     </Link>
   );

@@ -1,8 +1,9 @@
 "use client";
-import { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { type NavItem } from "quirk-ui";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
+import ReactDOM from "react-dom";
 
 import styles from "./styles.module.css";
 
@@ -11,6 +12,69 @@ type BlogHeaderProps = {
   navItems: NavItem[];
   alignment: "left" | "center" | "right";
 };
+
+type DropdownMenuProps = {
+  anchorRef: React.RefObject<HTMLElement | null>;
+  scrollContainerRef?: React.RefObject<HTMLElement | null>;
+  isOpen: boolean;
+  children: React.ReactNode;
+};
+
+function DropdownMenu({
+  anchorRef,
+  scrollContainerRef,
+  isOpen,
+  children,
+}: DropdownMenuProps) {
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+
+  const updatePosition = useCallback(() => {
+    if (anchorRef.current) {
+      const rect = anchorRef.current.getBoundingClientRect();
+      setPosition({
+        top: rect.bottom + window.scrollY,
+        left: rect.left + window.scrollX,
+      });
+    }
+  }, [anchorRef]);
+
+  useEffect(() => {
+    if (isOpen && anchorRef.current) {
+      updatePosition();
+    }
+  }, [isOpen, anchorRef]);
+
+  useEffect(() => {
+    const scrollEl = scrollContainerRef?.current;
+
+    if (!scrollEl || !isOpen) return;
+
+    scrollEl.addEventListener("scroll", updatePosition);
+    window.addEventListener("resize", updatePosition);
+
+    return () => {
+      scrollEl.removeEventListener("scroll", updatePosition);
+      window.removeEventListener("resize", updatePosition);
+    };
+  }, [scrollContainerRef, isOpen, updatePosition]);
+
+  if (!isOpen) return null;
+
+  return ReactDOM.createPortal(
+    <div
+      ref={menuRef}
+      className={styles.sublinks}
+      style={{
+        top: position.top,
+        left: position.left,
+      }}
+    >
+      {children}
+    </div>,
+    document.body
+  );
+}
 
 export default function BlogHeader({
   title = "Blog",
@@ -75,6 +139,8 @@ export default function BlogHeader({
         buttonRefs.current.set(path, el);
       };
 
+      const anchorEl = buttonRefs.current.get(path);
+
       return (
         <div
           key={path}
@@ -110,7 +176,12 @@ export default function BlogHeader({
                 } ${isAnySubLinkActive ? styles.active : ""}`}
                 onClick={() => togglePath(path)}
                 onMouseEnter={() => {
-                  setOpenPath(path);
+                  if (
+                    typeof window !== "undefined" &&
+                    window.innerWidth > 767 &&
+                    openPath !== path
+                  )
+                    setOpenPath(path);
                 }}
               >
                 {link.label}
@@ -121,21 +192,16 @@ export default function BlogHeader({
             )}
           </div>
 
-          {hasSublinks && (
-            <div
-              className={`${styles.sublinks} ${isOpen ? styles.show : ""}`}
-              onMouseLeave={() => togglePath(path)}
-              role="menu"
-              aria-label={`${link.label} submenu`}
+          {hasSublinks && anchorEl && (
+            <DropdownMenu
+              anchorRef={{ current: anchorEl as HTMLButtonElement }}
+              scrollContainerRef={navRef}
+              isOpen={isOpen}
             >
-              <div>
-                <div className={styles.sublinksInner}>
-                  <div className={styles.sublinksColumn}>
-                    {renderLinks(link.sublinks!, path)}
-                  </div>
-                </div>
+              <div className={styles.sublinksColumn}>
+                {renderLinks(link.sublinks!, path)}
               </div>
-            </div>
+            </DropdownMenu>
           )}
         </div>
       );
@@ -147,7 +213,7 @@ export default function BlogHeader({
       <nav className={styles.blogHeader}>
         <div className={styles.container}>
           <div className={styles.title}>{title}</div>
-          <div ref={mobileNavRef} className={styles.itemsMobile}>
+          {/* <div ref={mobileNavRef} className={styles.itemsMobile}>
             <ChevronRight size={16} className={styles.chevronBreadcrumb} />
             <button
               className={styles.mobileItemsToggle}
@@ -162,7 +228,7 @@ export default function BlogHeader({
             >
               {renderLinks(navItems)}
             </div>
-          </div>
+          </div> */}
           <div ref={navRef} className={styles.items}>
             {renderLinks(navItems)}
           </div>

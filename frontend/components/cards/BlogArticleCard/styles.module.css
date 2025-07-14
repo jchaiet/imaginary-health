@@ -34,6 +34,103 @@
       }
     }
   }
+
+  &.single {
+    &.first {
+      .itemContent {
+        flex: 0.5;
+      }
+
+      .itemImage {
+        min-height: 350px;
+        flex: 1;
+      }
+    }
+  }
+
+  &.twoColumn {
+    .itemImage {
+      flex: 0.5;
+    }
+
+    .itemContent {
+      flex: 1;
+    }
+  }
+
+  &.first {
+    &.featuredTop {
+      .itemImage {
+        min-height: 350px;
+        flex: 1;
+      }
+
+      .itemContent {
+        flex: 0.5;
+      }
+    }
+
+    &.featuredLeft {
+      .itemImage {
+        min-height: 350px;
+      }
+
+      .itemContent {
+        flex: 1;
+      }
+    }
+  }
+
+  &:not(&.first) {
+    &.featuredLeft,
+    &.featuredTop {
+      .itemExcerpt {
+        /* display: none; */
+      }
+
+      .itemImage {
+        flex: 0.5;
+
+        height: auto;
+        max-height: 175px;
+
+        @media (max-width: 767px) {
+          max-height: 250px;
+        }
+      }
+
+      .itemContent {
+        flex: 1;
+      }
+    }
+
+    &.featuredTop {
+      .itemImage {
+        flex: 1;
+      }
+    }
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+
+      .itemExcerpt {
+        display: block;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .itemImage {
+      flex: unset !important;
+      max-height: 250px;
+      height: 250px;
+      min-height: unset !important;
+    }
+
+    .itemContent {
+      display: flex !important;
+    }
+  }
 }
 
 .itemContent {

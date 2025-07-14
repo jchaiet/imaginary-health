@@ -360,27 +360,31 @@ export function HeroBlock({
                         {pageData.articleType}
                       </div>
                     )}
-                    {mainCategory && (
-                      <span className={styles.mainCategory}>
-                        {mainCategory.title}
-                      </span>
-                    )}
+                    <div className={styles.articleCategories}>
+                      {mainCategory && (
+                        <span className={styles.category}>
+                          {mainCategory.title}
+                        </span>
+                      )}
 
-                    {secondaryCategory &&
-                      secondaryCategory.title.toLowerCase() !== "library" && (
-                        <>
-                          <span className={styles.pipe}>|</span>
+                      {secondaryCategory &&
+                        secondaryCategory.title.toLowerCase() !== "library" && (
                           <span className={styles.category}>
                             {secondaryCategory.title}
                           </span>
-                        </>
-                      )}
+                        )}
+                    </div>
 
                     {pageData.timeToRead && (
                       <>
-                        <span className={styles.pipe}>|</span>
+                        {/* <span className={`${styles.pipe} ${styles.hide}`}>
+                          |
+                        </span> */}
                         <span className={styles.timeToRead}>
-                          {pageData.timeToRead} min read
+                          <span className={styles.number}>
+                            {pageData.timeToRead}
+                          </span>
+                          min read
                         </span>
                       </>
                     )}

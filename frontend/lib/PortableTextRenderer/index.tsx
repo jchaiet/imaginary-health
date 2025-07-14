@@ -11,6 +11,9 @@ import type { TypedObject } from "@portabletext/types";
 import { AnimatedSpan } from "@/components/ui/AnimatedSpan";
 import { Heading, Text } from "quirk-ui";
 
+import Image from "next/image";
+import { urlForImage } from "@/sanity/client";
+
 import styles from "./styles.module.css";
 
 // const getAlignClass = (value: PortableTextBlock) => {
@@ -130,6 +133,26 @@ const createPortableTextComponents = (
     block,
     list: {
       bullet: CustomUL,
+    },
+    types: {
+      image: ({ value }) => {
+        if (!value?.asset?._ref) return null;
+
+        const imageUrl = urlForImage(value).url();
+        const altText = value.alt || "Content image";
+
+        return (
+          <div className={`${baseClassName} ${styles.richTextImage}`}>
+            <Image
+              src={imageUrl}
+              alt={altText}
+              width={1000}
+              height={800}
+              style={{ maxWidth: "100%", height: "auto" }}
+            />
+          </div>
+        );
+      },
     },
   };
 };

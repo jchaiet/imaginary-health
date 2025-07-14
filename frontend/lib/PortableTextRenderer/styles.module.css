@@ -9,3 +9,11 @@
 .container :global(*:last-child) {
   margin-bottom: 0;
 }
+
+.container .richTextImage {
+  border-radius: var(--radius-md);
+  margin: 0 auto;
+  overflow: hidden;
+  line-height: 0;
+  margin-bottom: 1rem;
+}

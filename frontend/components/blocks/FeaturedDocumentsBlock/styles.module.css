@@ -74,6 +74,15 @@
   font-size: var(--font-size-sm);
 }
 
+.carousel {
+  display: block;
+
+  .document {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
 .documents {
   display: grid;
   gap: var(--spacing-md);
@@ -83,6 +92,7 @@
 
     .document {
       display: flex;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
       gap: var(--spacing-lg);
