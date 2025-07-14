@@ -86,7 +86,7 @@ export default function BlogHeader({
   const pathname = usePathname();
 
   const navRef = useRef<HTMLDivElement>(null);
-  const mobileNavRef = useRef<HTMLDivElement>(null);
+  // const mobileNavRef = useRef<HTMLDivElement>(null);
   const buttonRefs = useRef<Map<string, HTMLButtonElement | null>>(new Map());
 
   const handleClickOutside = useCallback((e: MouseEvent) => {
