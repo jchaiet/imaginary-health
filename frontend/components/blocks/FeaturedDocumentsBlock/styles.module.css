@@ -299,6 +299,10 @@
       }
     }
   }
+
+  @media (max-width: 767px) {
+    gap: var(--spacing-xl);
+  }
 }
 
 .multiple {
