@@ -81,6 +81,7 @@
   input {
     min-width: 250px;
     padding-right: 40px;
+    min-height: 40px;
   }
 
   @media (max-width: 767px) {
@@ -140,6 +141,7 @@
     border-radius: var(--radius-md);
     background-color: var(--color-background);
     color: var(--color-text-primary);
+    min-height: 40px;
 
     &:disabled {
       background-color: var(--color-muted);

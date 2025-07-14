@@ -30,8 +30,8 @@ dependencies:
     specifier: ^9.11.1
     version: 9.12.0(@sanity/client@7.4.1)(@sanity/icons@3.7.0)(@sanity/types@3.91.0)(@sanity/ui@2.15.18)(next@15.3.2)(react-dom@19.1.0)(react-is@19.1.0)(react@19.1.0)(sanity@3.91.0)(styled-components@6.1.18)(typescript@5.8.3)
   quirk-ui:
-    specifier: ^0.0.163
-    version: 0.0.163(path@0.12.7)(react-dom@19.1.0)(react@19.1.0)
+    specifier: ^0.0.164
+    version: 0.0.164(path@0.12.7)(react-dom@19.1.0)(react@19.1.0)
   react-icons:
     specifier: ^5.5.0
     version: 5.5.0(react@19.1.0)
@@ -8353,8 +8353,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /quirk-ui@0.0.163(path@0.12.7)(react-dom@19.1.0)(react@19.1.0):
-    resolution: {integrity: sha512-9I5TJiW0vwJu8i88YPkdx5A5Spti6vc+W0imuze6dK/rFqgtJLpBO8qwNRakGo9kJfEK8zen0SxEnjNYZP61JQ==}
+  /quirk-ui@0.0.164(path@0.12.7)(react-dom@19.1.0)(react@19.1.0):
+    resolution: {integrity: sha512-mzInx3Q1PfJUp02kfpRbTXi1cKdi4pUvTvAG/k0kky0FDreW7AG99Pvz8pO4NFUIUVtuVFopEK+zNKA7+YXuBA==}
     peerDependencies:
       path: ^0.12.7
       react: ^19.0.0

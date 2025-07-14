@@ -95,7 +95,7 @@
         max-height: 175px;
 
         @media (max-width: 767px) {
-          max-height: 250px;
+          max-height: 200px;
         }
       }
 
@@ -122,8 +122,8 @@
   @media (max-width: 767px) {
     .itemImage {
       flex: unset !important;
-      max-height: 250px;
-      height: 250px;
+      max-height: 200px;
+      height: 200px;
       min-height: unset !important;
     }
 
