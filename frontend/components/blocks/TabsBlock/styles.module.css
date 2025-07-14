@@ -178,7 +178,9 @@
 
 .fullBleed {
   position: relative;
-  padding: 0;
+  padding-top: var(--spacing-md);
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
 
   .container {
     max-width: var(--layout-width);
@@ -192,7 +194,7 @@
     flex-grow: 1;
     padding: var(--nav-height) 0 0;
     /* margin-top: var(--spacing-sm); */
-    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    border-radius: var(--radius-md);
 
     img {
       transition:
