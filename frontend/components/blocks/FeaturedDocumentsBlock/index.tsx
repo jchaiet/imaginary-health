@@ -5,7 +5,7 @@ import { FeaturedDocumentsBlockProps } from "@/types";
 import { ArticleItem } from "@/types";
 
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { BlogArticleCard } from "@/components/cards/BlogArticleCard";
 
 import styles from "./styles.module.css";
@@ -68,7 +68,7 @@ export function FeaturedDocumentsBlock({
       : undefined;
 
   const getCardComponent = (type: string) => {
-    switch (documentType?.toLowerCase()) {
+    switch (type?.toLowerCase()) {
       case "blog":
         return BlogArticleCard;
       default:

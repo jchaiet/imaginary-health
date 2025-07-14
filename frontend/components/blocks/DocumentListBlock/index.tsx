@@ -133,7 +133,6 @@ export function DocumentListBlock({
 
   useEffect(() => {
     const hasWindow = typeof window !== "undefined";
-    const hasDocument = typeof document !== "undefined";
 
     if (hasWindow) {
       window.addEventListener("resize", handleResize);

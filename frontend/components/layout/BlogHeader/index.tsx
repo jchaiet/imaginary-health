@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { type NavItem } from "quirk-ui";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 import ReactDOM from "react-dom";
 
@@ -82,7 +82,6 @@ export default function BlogHeader({
   // alignment = "right",
 }: BlogHeaderProps) {
   const [openPath, setOpenPath] = useState<string | null>(null);
-  const [showMobileItems, setShowMobileItems] = useState(false);
 
   const pathname = usePathname();
 
@@ -93,13 +92,6 @@ export default function BlogHeader({
   const handleClickOutside = useCallback((e: MouseEvent) => {
     if (navRef.current && !navRef.current.contains(e.target as Node)) {
       setOpenPath(null);
-    }
-
-    if (
-      mobileNavRef.current &&
-      !mobileNavRef.current.contains(e.target as Node)
-    ) {
-      setShowMobileItems(false);
     }
   }, []);
 
@@ -116,10 +108,6 @@ export default function BlogHeader({
       }
     };
   }, []);
-
-  const toggleMobileItems = () => {
-    setShowMobileItems((prev) => !prev);
-  };
 
   const togglePath = (path: string) => {
     setOpenPath((prev) => (prev === path ? null : path));
