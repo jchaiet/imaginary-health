@@ -22,7 +22,7 @@ body {
 
 main {
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 * {
