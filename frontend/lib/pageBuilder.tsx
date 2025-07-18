@@ -5,13 +5,20 @@ import { CardGridBlock } from "@/components/blocks/CardGridBlock";
 import { CarouselBlock } from "@/components/blocks/CarouselBlock";
 import { ContentBlock } from "@/components/blocks/ContentBlock";
 import { StickyScrollBlock } from "@/components/blocks/StickyScrollBlock";
-import { PageSection } from "@/types/page";
+import { PageSection } from "@/types/pageSection";
 import { FaqBlock } from "@/components/blocks/FaqBlock";
 import { TabsBlock } from "@/components/blocks/TabsBlock";
-import { DisclaimerBlock } from "@/components/blocks/DisclaimerBlock";
+import { RichTextBlock } from "@/components/blocks/RichTextBlock";
 import { AccordionBlock } from "@/components/blocks/AccordionBlock";
 import { DocumentListBlock } from "@/components/blocks/DocumentListBlock";
 import { FeaturedDocumentsBlock } from "@/components/blocks/FeaturedDocumentsBlock";
+import { SingletonBlock } from "@/types/singleton";
+import { ContentBlockProps } from "@/types";
+import { RichTextBlockProps } from "@/types/richText";
+import { QuoteBlock } from "@/components/blocks/QuoteBlock";
+import { QuoteBlockProps } from "@/types/quote";
+import { AdditionalCategories } from "@/components/blocks/AdditionalCategories";
+import WasHelpfulBlock from "@/components/blocks/WasHelpfulBlock";
 
 export function PageBuilder({
   sections,
@@ -47,14 +54,61 @@ export function PageBuilder({
             return <FaqBlock key={i} {...section} />;
           case "tabsBlock":
             return <TabsBlock key={i} {...section} />;
-          case "disclaimerBlock":
-            return <DisclaimerBlock key={i} {...section} />;
+          case "richTextBlock":
+            return <RichTextBlock key={i} {...section} />;
+          case "quoteBlock":
+            return <QuoteBlock key={i} {...section} />;
           case "accordionBlock":
             return <AccordionBlock key={i} {...section} />;
           case "documentListBlock":
             return <DocumentListBlock key={i} {...section} />;
           case "featuredDocumentsBlock":
             return <FeaturedDocumentsBlock key={i} {...section} />;
+          case "additionalCategoriesBlock":
+            return <AdditionalCategories key={i} {...section} />;
+          case "wasHelpfulBlock":
+            return <WasHelpfulBlock key={i} {...section} />;
+
+          case "singletonBlock":
+            const singletonBlock = section as SingletonBlock;
+            const fetchedSingleton = singletonBlock.singleton;
+
+            switch (fetchedSingleton.blockSelection) {
+              case "contentBlock":
+                return (
+                  <ContentBlock
+                    key={i}
+                    {...(fetchedSingleton.blockContent as ContentBlockProps)}
+                  />
+                );
+              case "richTextBlock":
+                return (
+                  <RichTextBlock
+                    key={i}
+                    {...(fetchedSingleton.blockContent as RichTextBlockProps)}
+                  />
+                );
+              case "quoteBlock":
+                return (
+                  <QuoteBlock
+                    key={i}
+                    {...(fetchedSingleton.blockContent as QuoteBlockProps)}
+                  />
+                );
+              default:
+                console.warn(
+                  "Unknown singleton block type",
+                  fetchedSingleton.blockSelection,
+                  fetchedSingleton
+                );
+                return (
+                  <div key={i}>
+                    Unknown singleton block type:{" "}
+                    {fetchedSingleton.blockSelection}
+                  </div>
+                );
+            }
+
           default:
             const unknownSection = section as { _type?: string };
             console.warn("Unknown block type", unknownSection._type, section);

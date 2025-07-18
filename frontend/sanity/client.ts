@@ -6,6 +6,11 @@ import { Link } from "@/types";
 import { navigationQuery } from "./queries";
 
 export const sanityClient = createClient(sanityConfig);
+export const writeSanityClient = createClient({
+  ...sanityConfig,
+  useCdn: false,
+  token: process.env.SANITY_API_READ_WRITE_TOKEN,
+});
 
 const builder = imageUrlBuilder(sanityClient);
 

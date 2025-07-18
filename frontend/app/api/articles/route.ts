@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
       count(categories[title match "*${escaped}*"]) > 0 ||
       count(pageBuilder[(_type == "contentBlock" && text[].children[].text match "*${escaped}*")]) > 0 ||
       count(pageBuilder[(_type == "accordionBlock" && items[].content[].children[].text match "*${escaped}*")]) > 0 ||
-      count(pageBuilder[(_type == "disclaimerBlock" && disclaimer[].children[].text match "*${escaped}*")]) > 0
+      count(pageBuilder[(_type == "richTextBlock" && text[].children[].text match "*${escaped}*")]) > 0
     )`;
   }
 

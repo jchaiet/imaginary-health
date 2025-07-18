@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ButtonGroup, CallToAction, Modal } from "quirk-ui";
 import { Link } from "@/types";
+import { resolveLinkURL } from "@/sanity/client";
 
 type CallToActionsProps = {
   items: Link[];
@@ -14,9 +15,26 @@ export function CallToActions({
   className,
 }: CallToActionsProps) {
   if (!items?.length) return null;
+
+  const [hrefs, setHrefs] = useState<(string | undefined)[]>([]);
+
+  useEffect(() => {
+    async function getHrefs() {
+      const results = await Promise.all(
+        items.map((cta) => resolveLinkURL(cta))
+      );
+
+      setHrefs(results);
+    }
+
+    getHrefs();
+  }, [items]);
+
   return (
     <ButtonGroup className={className} alignment={alignment}>
       {items.slice(0, 3).map((cta, index) => {
+        const href = hrefs[index] ?? "#";
+
         switch (cta.type) {
           case "link":
             return (
@@ -24,7 +42,7 @@ export function CallToActions({
                 key={index}
                 as="a"
                 variant={cta.variant ?? "primary"}
-                href={cta.resolvedUrl || "#"}
+                href={href}
                 target={
                   cta.linkOptions?.linkType === "external" ? "_blank" : "_self"
                 }
@@ -68,7 +86,7 @@ export function CallToActions({
                 key={index}
                 as="a"
                 variant={cta.variant ?? "primary"}
-                href={cta.resolvedUrl || "#"}
+                href={href}
                 download
                 target="_blank"
                 rel="noopener noreferrer"

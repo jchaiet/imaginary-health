@@ -1,6 +1,5 @@
-.disclaimer {
+.richText {
   width: 100%;
-  padding: var(--spacing-xl) 0;
 }
 
 .container {
@@ -9,6 +8,7 @@
   padding: 0 var(--spacing-md);
 }
 
-.disclaimerText {
-  font-size: var(--font-size-sm);
+/* Style Options Override */
+:global(.blog) .container {
+  max-width: var(--blog-width);
 }

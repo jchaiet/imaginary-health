@@ -129,6 +129,34 @@ const createPortableTextComponents = (
       left: ({ children }) => <span className="textLeft">{children}</span>,
       center: ({ children }) => <span className="textCenter">{children}</span>,
       right: ({ children }) => <span className="textRight">{children}</span>,
+      link: ({ children, value }) => {
+        const { linkType, internalLink, href, blank } = value;
+
+        let url = "#";
+
+        if (linkType === "external" && href) {
+          url = href;
+        } else if (linkType === "internal" && internalLink?.slug.current) {
+          url = `/${internalLink?.slug.current}`;
+        }
+
+        const isExternal = linkType === "external";
+
+        return (
+          <a
+            href={url}
+            target={blank ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
+            className={styles.richTextLink}
+          >
+            {children}
+          </a>
+        );
+      },
+      textSize: ({ children, value }) => {
+        const sizeClass = value?.size ? `text-${value.size}` : "";
+        return <span className={sizeClass}>{children}</span>;
+      },
     },
     block,
     list: {

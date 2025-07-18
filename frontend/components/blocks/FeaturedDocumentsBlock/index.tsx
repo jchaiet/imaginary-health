@@ -93,77 +93,81 @@ export function FeaturedDocumentsBlock({
       : [];
 
   return (
-    <section
-      className={`${styles.featuredDocuments} ${classNames} ${styleClass}`}
-    >
-      <article className={styles.container}>
-        <div className={`${styles.heading} ${headingLayoutClass}`}>
-          <div className={styles.flex}>
-            {heading.eyebrow && (
-              <RichText className={styles.eyebrow} blocks={heading.eyebrow} />
+    articlesToDisplay?.length && (
+      <section
+        className={`${styles.featuredDocuments} ${classNames} ${styleClass}`}
+      >
+        <article className={styles.container}>
+          <div className={`${styles.heading} ${headingLayoutClass}`}>
+            <div className={styles.flex}>
+              {heading.eyebrow && (
+                <RichText className={styles.eyebrow} blocks={heading.eyebrow} />
+              )}
+              <RichText className={styles.title} blocks={heading.title} />
+
+              {callToAction?.label && (
+                <Link
+                  href={
+                    internalSlug ? `/${internalSlug}` : (externalUrl ?? "/")
+                  }
+                >
+                  {label}
+                  <ArrowRight size={18} />
+                </Link>
+              )}
+            </div>
+
+            {heading.description && (
+              <RichText
+                className={styles.subheading}
+                blocks={heading.description}
+              />
             )}
-            <RichText className={styles.title} blocks={heading.title} />
-
-            {callToAction?.label && (
-              <Link
-                href={internalSlug ? `/${internalSlug}` : (externalUrl ?? "/")}
-              >
-                {label}
-                <ArrowRight size={18} />
-              </Link>
+            {heading.disclaimer && (
+              <RichText
+                className={styles.disclaimer}
+                blocks={heading.disclaimer}
+              />
             )}
           </div>
 
-          {heading.description && (
-            <RichText
-              className={styles.subheading}
-              blocks={heading.description}
-            />
+          {layout === "carousel" ? (
+            <div className={styles.carousel} ref={containerRef}>
+              <Carousel
+                autoplay={false}
+                itemsPerPage={4}
+                itemsPerRow={4}
+                items={carouselItems ?? []}
+                isSplit={false}
+                externalRef={containerRef as React.RefObject<HTMLElement>}
+              />
+            </div>
+          ) : (
+            <div
+              className={`${styles.documents} ${layoutClassMap} ${columnClassMap}`}
+            >
+              {/* GROQ does not allow us to pass limit value dynamically, so we limit the query here */}
+              {articlesToDisplay?.length &&
+                articlesToDisplay
+                  .slice(0, displayLimit)
+                  .map((document: ArticleItem, index) => {
+                    return (
+                      document?._type?.toLowerCase() === "blog" && (
+                        <BlogArticleCard
+                          key={document._id}
+                          article={document}
+                          className={styles.document}
+                          index={index}
+                          layout={layout}
+                          limit={displayLimit}
+                        />
+                      )
+                    );
+                  })}
+            </div>
           )}
-          {heading.disclaimer && (
-            <RichText
-              className={styles.disclaimer}
-              blocks={heading.disclaimer}
-            />
-          )}
-        </div>
-
-        {layout === "carousel" ? (
-          <div className={styles.carousel} ref={containerRef}>
-            <Carousel
-              autoplay={false}
-              itemsPerPage={4}
-              itemsPerRow={4}
-              items={carouselItems ?? []}
-              isSplit={false}
-              externalRef={containerRef as React.RefObject<HTMLElement>}
-            />
-          </div>
-        ) : (
-          <div
-            className={`${styles.documents} ${layoutClassMap} ${columnClassMap}`}
-          >
-            {/* GROQ does not allow us to pass limit value dynamically, so we limit the query here */}
-            {articlesToDisplay?.length &&
-              articlesToDisplay
-                .slice(0, displayLimit)
-                .map((document: ArticleItem, index) => {
-                  return (
-                    document?._type?.toLowerCase() === "blog" && (
-                      <BlogArticleCard
-                        key={document._id}
-                        article={document}
-                        className={styles.document}
-                        index={index}
-                        layout={layout}
-                        limit={displayLimit}
-                      />
-                    )
-                  );
-                })}
-          </div>
-        )}
-      </article>
-    </section>
+        </article>
+      </section>
+    )
   );
 }

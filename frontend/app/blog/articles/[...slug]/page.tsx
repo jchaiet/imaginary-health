@@ -4,6 +4,8 @@ import { sanityClient } from "@/sanity/client";
 import { articleBySlugQuery } from "@/sanity/queries";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
+import React from "react";
+import { CategoryProps, PageSection } from "@/types";
 
 interface PageProps {
   params: Promise<{ slug: string[] }>;
@@ -27,8 +29,6 @@ export default async function Page({ params }: PageProps) {
       : undefined
   );
 
-  console.log(page);
-
   if (!page) notFound();
 
   const { pageBuilder = [], hideHeader = false, hideFooter = false } = page;
@@ -39,9 +39,49 @@ export default async function Page({ params }: PageProps) {
   //   pageBuilder
   // )) as PageSection[];
 
+  const type = page?._type === "blog" ? "article" : "other";
+
+  const staticBlocks: PageSection[] = [
+    {
+      _type: "wasHelpfulBlock",
+      page: page,
+      type: type,
+    },
+  ];
+
+  const hasKeywordsCategory = page.categories?.some((cat: CategoryProps) =>
+    cat.slug?.current?.includes("/keywords")
+  );
+
+  const sectionsWithStaticComponents = pageBuilder.flatMap(
+    (section: PageSection) => {
+      if (section._type === "featuredDocumentsBlock") {
+        const newSections: PageSection[] = [];
+
+        if (hasKeywordsCategory) {
+          newSections.push({
+            _type: "additionalCategoriesBlock",
+            categories: page.categories ?? [],
+            type,
+          });
+        }
+
+        newSections.push({
+          _type: "wasHelpfulBlock",
+          page: page,
+          type: type,
+        });
+
+        newSections.push(section);
+        return newSections;
+      }
+      return [section];
+    }
+  );
+
   return (
     <PageTemplate isBlog={true} hideHeader={hideHeader} hideFooter={hideFooter}>
-      <PageBuilder sections={pageBuilder} pageData={page} />
+      <PageBuilder sections={sectionsWithStaticComponents} pageData={page} />
     </PageTemplate>
   );
 }

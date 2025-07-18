@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RichText } from "@/lib/PortableTextRenderer";
 import Image from "next/image";
-import { urlForImage } from "@/sanity/client";
+import { resolveLinkURL, urlForImage } from "@/sanity/client";
 //import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
 import styles from "./styles.module.css";
 import { TabsBlockProps } from "@/types/tabs";
@@ -17,6 +17,24 @@ export function TabsBlock({
   callToAction,
   styleOptions,
 }: TabsBlockProps) {
+  const [tabLinkUrls, setTabLinkUrls] = useState<(string | undefined)[]>([]);
+
+  useEffect(() => {
+    async function getTabUrls() {
+      const results = await Promise.all(
+        items.map((item) =>
+          item?.content?.tabLink
+            ? resolveLinkURL(item?.content?.tabLink)
+            : undefined
+        )
+      );
+
+      setTabLinkUrls(results);
+    }
+
+    getTabUrls();
+  }, [items]);
+
   const imageUrl = image ? urlForImage(image).quality(100).url() : null;
   //const prefersReducedMotion = usePrefersReducedMotion();
   const classNames = useStyleClasses(styleOptions);
@@ -125,12 +143,12 @@ export function TabsBlock({
                   </div>
                 )}
 
-              {item.content?.tabLink?.resolvedUrl && (
+              {item.content?.tabLink && (
                 <CallToAction
                   key={index}
                   as="a"
                   variant={item.content?.tabLink.variant ?? "primary"}
-                  href={item.content?.tabLink.resolvedUrl || "#"}
+                  href={tabLinkUrls[index] ?? "#"}
                   target={
                     item.content?.tabLink.linkOptions?.linkType === "external"
                       ? "_blank"

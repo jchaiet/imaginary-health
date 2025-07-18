@@ -55,3 +55,53 @@ export const articleFragment = `
     ${imageAssetFragment}
   }
 `;
+
+export const richTextFragment = `
+  ...,
+  markDefs[]{
+    ...,
+    _type == "link" => {
+      ...,
+      internalLink->{
+        _id,
+        slug { current },
+        title
+      }
+    }
+  }
+`;
+
+export const singletonFragment = `
+  "singleton": referencedSingleton->{
+    _id,
+    identifier,
+    title,
+    blockSelection,
+    "blockContent": select(
+      blockSelection == "heroBlock" => blockContent.heroBlock{
+        ...,
+        _type,
+        callToAction{
+          ${callToActionFragment}
+        }
+      },
+      blockSelection == "contentBlock" => blockContent.contentBlock{
+        ...,
+        _type,
+        callToAction{
+          ${callToActionFragment}
+        }
+      },
+      blockSelection == "richTextBlock" => blockContent.richTextBlock{
+        ...,
+        _type,
+        text[]{
+          ${richTextFragment}
+        },
+        callToAction{
+          ${callToActionFragment}
+        }
+      },
+    )
+  }
+`;

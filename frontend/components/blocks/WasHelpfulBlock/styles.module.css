@@ -1,0 +1,22 @@
+.wasHelpful {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: calc(var(--spacing-xl) + 1rem) var(--spacing-md) var(--spacing-xl);
+  max-width: var(--layout-width);
+  margin: 0 auto;
+}
+
+.heading {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Style Options Override */
+:global(.blog) .container {
+  max-width: var(--blog-width);
+}

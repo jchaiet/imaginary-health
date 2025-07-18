@@ -54,6 +54,25 @@ export default function Header({
     return null;
   }
 
+  const formattedUtilityItems = utilityItems.map((item) => {
+    const linkOptions = item.linkOptions;
+
+    let href;
+    if (linkOptions?.linkType === "internal" && "internalUrl" in linkOptions) {
+      href = `/${linkOptions.internalUrl?.slug?.current ?? ""}`;
+    } else if (
+      linkOptions?.linkType === "external" &&
+      "externalUrl" in linkOptions
+    ) {
+      href = linkOptions.externalUrl ?? "/";
+    }
+
+    return {
+      ...item,
+      href,
+    };
+  });
+
   return (
     <Navbar
       isTransparent
@@ -61,7 +80,7 @@ export default function Header({
       variant="default"
       alignment={alignment}
       items={navItems ?? []}
-      utilityItems={utilityItems ?? []}
+      utilityItems={formattedUtilityItems ?? []}
       logo={
         logoLinkSlug ? (
           <ImageContainer>{LogoImage}</ImageContainer>

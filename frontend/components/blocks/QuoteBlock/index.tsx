@@ -3,20 +3,16 @@ import React from "react";
 import { RichText } from "@/lib/PortableTextRenderer";
 import styles from "./styles.module.css";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
-import { DisclaimerBlockProps } from "@/types/disclaimer";
+import { QuoteBlockProps } from "@/types/quote";
 
-export function DisclaimerBlock({
-  disclaimer,
-  styleOptions,
-}: DisclaimerBlockProps) {
+export function QuoteBlock({ quote, author, styleOptions }: QuoteBlockProps) {
   const classNames = useStyleClasses(styleOptions);
 
   return (
-    <section className={`${styles.disclaimer} ${classNames}`}>
+    <section className={`${styles.quote} ${classNames}`}>
       <article className={styles.container}>
-        {disclaimer && (
-          <RichText className={styles.disclaimerText} blocks={disclaimer} />
-        )}
+        {quote && <RichText className={styles.quoteText} blocks={quote} />}
+        {author && <p className={styles.author}>— {author}</p>}
       </article>
     </section>
   );

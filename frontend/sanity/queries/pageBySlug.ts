@@ -28,6 +28,27 @@ export const pageBySlugQuery = `
       callToAction {
         ${callToActionFragment}
       },
+      grid {
+        ...,
+        items[]{
+          ...,
+          callToAction{
+            ${linkFragment}
+          }
+        }
+      }
+    },
+    _type == "carouselBlock" => {
+      ...,
+      callToAction {
+        ${callToActionFragment}
+      },
+      items[]{
+        ...,
+        callToAction{
+          ${linkFragment}
+        }
+      }
     },
     _type == "contentBlock" => {
       ...,
@@ -47,11 +68,11 @@ export const pageBySlugQuery = `
         _type == ^.documentType && 
         parent._ref == ^.id &&
         (
-          count(coalesce(^.^.includeFilters, [])) == 0 ||
+          !defined(^.includeFilters) ||
           count(categories[@._ref in ^.^.includeFilters[]._ref]) > 0
         ) &&
         (
-          count(coalesce(^.^.excludeFilters, [])) == 0 ||
+          !defined(^.excludeFilters) ||
           count(categories[@._ref in ^.^.excludeFilters[]._ref]) == 0
         )
       ] | order(publishDate desc) {
@@ -73,11 +94,11 @@ export const pageBySlugQuery = `
         _type == ^.documentType && 
         parent._ref == ^.id &&
         (
-          count(coalesce(^.^.includeFilters, [])) == 0 ||
+          !defined(^.includeFilters) ||
           count(categories[@._ref in ^.^.includeFilters[]._ref]) > 0
         ) &&
         (
-          count(coalesce(^.^.excludeFilters, [])) == 0 ||
+          !defined(^.excludeFilters) ||
           count(categories[@._ref in ^.^.excludeFilters[]._ref]) == 0
         )
       ] | order(publishDate desc)[0...25] {

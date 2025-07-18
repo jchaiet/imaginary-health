@@ -368,7 +368,10 @@ export function HeroBlock({
                       )}
 
                       {secondaryCategory &&
-                        secondaryCategory.title.toLowerCase() !== "library" && (
+                        secondaryCategory.title.toLowerCase() !== "library" &&
+                        !secondaryCategory.slug.current.includes(
+                          "keywords"
+                        ) && (
                           <span className={styles.category}>
                             {secondaryCategory.title}
                           </span>

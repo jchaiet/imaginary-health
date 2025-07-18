@@ -17,3 +17,24 @@
   line-height: 0;
   margin-bottom: 1rem;
 }
+
+.container .richTextLink {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.container :global(.text-small) {
+  font-size: var(--font-size-sm);
+}
+
+.container :global(.text-medium) {
+  font-size: var(--font-size-md);
+}
+
+.container :global(.text-large) {
+  font-size: var(--font-size-lg);
+}
+
+.container :global(.text-xlarge) {
+  font-size: var(--font-size-xl);
+}

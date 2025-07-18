@@ -37,6 +37,7 @@ export const navigationQuery = `
     ...,  
     _key,
     linkOptions{
+      linkType,
       internalUrl->{
         slug { current }
       }
