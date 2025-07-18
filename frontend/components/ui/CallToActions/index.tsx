@@ -14,8 +14,6 @@ export function CallToActions({
   alignment,
   className,
 }: CallToActionsProps) {
-  if (!items?.length) return null;
-
   const [hrefs, setHrefs] = useState<(string | undefined)[]>([]);
 
   useEffect(() => {
@@ -27,8 +25,12 @@ export function CallToActions({
       setHrefs(results);
     }
 
-    getHrefs();
+    if (items.length) {
+      getHrefs();
+    }
   }, [items]);
+
+  if (!items?.length) return null;
 
   return (
     <ButtonGroup className={className} alignment={alignment}>

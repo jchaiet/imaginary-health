@@ -41,14 +41,6 @@ export default async function Page({ params }: PageProps) {
 
   const type = page?._type === "blog" ? "article" : "other";
 
-  const staticBlocks: PageSection[] = [
-    {
-      _type: "wasHelpfulBlock",
-      page: page,
-      type: type,
-    },
-  ];
-
   const hasKeywordsCategory = page.categories?.some((cat: CategoryProps) =>
     cat.slug?.current?.includes("/keywords")
   );
