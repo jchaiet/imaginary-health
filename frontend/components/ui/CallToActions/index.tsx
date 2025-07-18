@@ -17,6 +17,7 @@ export function CallToActions({
   const [hrefs, setHrefs] = useState<(string | undefined)[]>([]);
 
   useEffect(() => {
+    if (!items?.length) return;
     async function getHrefs() {
       const results = await Promise.all(
         items.map((cta) => resolveLinkURL(cta))
@@ -25,9 +26,7 @@ export function CallToActions({
       setHrefs(results);
     }
 
-    if (items.length) {
-      getHrefs();
-    }
+    getHrefs();
   }, [items]);
 
   if (!items?.length) return null;
