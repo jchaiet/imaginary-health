@@ -1,9 +1,10 @@
 .additionalCategories {
   width: 100%;
+  margin-bottom: var(--spacing-md);
 }
 
 .container {
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--spacing-md) var(--spacing-md);
   max-width: var(--layout-width);
   margin: 0 auto;
 }

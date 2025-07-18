@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonGroup, CallToAction } from "quirk-ui";
 import { WasHelpfulProps } from "@/types";
 
@@ -9,16 +9,23 @@ export default function WasHelpfulBlock({ page, type }: WasHelpfulProps) {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log("PAGE", page);
+  const localStorageKey = `wasHelpful:${page._id}`;
+
+  useEffect(() => {
+    const submissionStatus = localStorage.getItem(localStorageKey);
+    if (submissionStatus === "yes" || submissionStatus === "no") {
+      setSubmitted(true);
+    }
+  }, [localStorageKey]);
 
   async function handleClick(isHelpful: boolean) {
     setIsLoading(true);
-    console.log("ID", page._id);
     await fetch("/api/helpful", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ postId: page._id, isHelpful }),
     });
+    localStorage.setItem(localStorageKey, isHelpful ? "yes" : "no");
     setSubmitted(true);
     setIsLoading(false);
   }
@@ -52,15 +59,14 @@ export default function WasHelpfulBlock({ page, type }: WasHelpfulProps) {
                 No
               </CallToAction>
             </ButtonGroup>
-
-            {page.helpfulYesCount > 0 && (
-              <p>
-                {page.helpfulYesCount.toLocaleString()}
-                {page.helpfulYesCount === 1 ? " person" : " people"} found this
-                article helpful
-              </p>
-            )}
           </>
+        )}
+        {page.helpfulYesCount > 0 && (
+          <p>
+            {page.helpfulYesCount.toLocaleString()}
+            {page.helpfulYesCount === 1 ? " person" : " people"} found this
+            article helpful
+          </p>
         )}
       </article>
     </section>
