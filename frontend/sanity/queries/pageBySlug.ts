@@ -90,20 +90,6 @@ export const pageBySlugQuery = `
     },
     _type == "featuredDocumentsBlock" => {
       ...,
-      "articles": *[
-        _type == ^.documentType && 
-        parent._ref == ^.id &&
-        (
-          !defined(^.includeFilters) ||
-          count(categories[@._ref in ^.^.includeFilters[]._ref]) > 0
-        ) &&
-        (
-          !defined(^.excludeFilters) ||
-          count(categories[@._ref in ^.^.excludeFilters[]._ref]) == 0
-        )
-      ] | order(publishDate desc)[0...25] {
-        ${articleFragment}
-      },
       manualArticles[]->{
         ${articleFragment}
       },
@@ -118,6 +104,32 @@ export const pageBySlugQuery = `
       },
       excludeFilters[]->{
         ${categoryFragment}
+      },
+      "articles": *[
+        _type == ^.documentType && 
+        (
+          (
+            ^.filterMode == "any" &&
+            (
+              !defined(^.includeFilters) ||
+              count(categories[@._ref in ^.^.includeFilters[]._ref]) > 0
+            )
+          ) ||
+          (
+            ^.filterMode == "all" &&             
+            !defined(^.includeFilters) ||
+            (
+              count(^.includeFilters) > 0 &&
+              count(categories[@._ref in ^.^.includeFilters[]._ref]) == count(coalesce(^.includeFilters, []))
+            )
+          )
+        ) &&
+        (
+          !defined(^.excludeFilters) ||
+          count(categories[@._ref in ^.^.excludeFilters[]._ref]) == 0
+        )
+      ] | order(publishDate desc)[0...25] {
+        ${articleFragment}
       }
     }
   }

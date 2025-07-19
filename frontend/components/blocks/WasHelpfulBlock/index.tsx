@@ -35,13 +35,18 @@ export default function WasHelpfulBlock({ page, type }: WasHelpfulProps) {
       className={`${styles.wasHelpful} ${type == "article" ? "blog" : ""}`}
     >
       <article className={styles.container}>
+        <hr />
         {submitted ? (
           <p className={styles.heading}>Thanks for your feedback!</p>
         ) : (
           <>
             <p className={styles.heading}>Was this article helpful?</p>
 
-            <ButtonGroup orientation="horizontal">
+            <ButtonGroup
+              className={styles.buttons}
+              orientation="horizontal"
+              alignment="center"
+            >
               <CallToAction
                 as="button"
                 variant="primary"
@@ -68,6 +73,7 @@ export default function WasHelpfulBlock({ page, type }: WasHelpfulProps) {
             article helpful
           </p>
         )}
+        <hr />
       </article>
     </section>
   );
