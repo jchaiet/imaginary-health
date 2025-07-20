@@ -18,6 +18,7 @@ export async function GET(req: NextRequest) {
     "date-asc": "publishDate asc",
     "title-asc": "title asc",
     "title-desc": "title desc",
+    "popular-desc": "helpfulYesCount desc",
   };
 
   const order = sortFieldMap[sort] ?? "publishDate desc";

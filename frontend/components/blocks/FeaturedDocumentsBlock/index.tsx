@@ -19,6 +19,7 @@ export function FeaturedDocumentsBlock({
   articles,
   manualArticles,
   documentType,
+  sortBy,
   // filterMode,
   callToAction,
   styleOptions,
@@ -67,6 +68,23 @@ export function FeaturedDocumentsBlock({
       ? callToAction?.linkOptions?.externalUrl
       : undefined;
 
+  const sortDocuments = (
+    documents: ArticleItem[],
+    sortBy: string = "newest"
+  ) => {
+    return [...documents].sort((a, b) => {
+      switch (sortBy) {
+        case "title":
+          return (a.title || "").localeCompare(b.title || "");
+        case "popular":
+          return (b.helpfulYesCount || 0) - (a.helpfulYesCount || 0);
+        case "newest":
+        default:
+          return (b.publishDate || "").localeCompare(a.publishDate || "");
+      }
+    });
+  };
+
   const getCardComponent = (type: string) => {
     switch (type?.toLowerCase()) {
       case "blog":
@@ -78,9 +96,13 @@ export function FeaturedDocumentsBlock({
 
   const CardComponent = documentType ? getCardComponent(documentType) : null;
 
+  const sortedDocuments = articlesToDisplay?.length
+    ? sortDocuments(articlesToDisplay, sortBy)
+    : [];
+
   const carouselItems =
-    CardComponent && articlesToDisplay
-      ? articlesToDisplay.map((article, index) => (
+    CardComponent && sortedDocuments
+      ? sortedDocuments.map((article, index) => (
           <CardComponent
             key={article._id}
             article={article}
@@ -147,8 +169,8 @@ export function FeaturedDocumentsBlock({
               className={`${styles.documents} ${layoutClassMap} ${columnClassMap}`}
             >
               {/* GROQ does not allow us to pass limit value dynamically, so we limit the query here */}
-              {articlesToDisplay?.length &&
-                articlesToDisplay
+              {sortedDocuments?.length &&
+                sortedDocuments
                   .slice(0, displayLimit)
                   .map((document: ArticleItem, index) => {
                     return (

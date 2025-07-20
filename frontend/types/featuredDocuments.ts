@@ -27,6 +27,8 @@ export interface FeaturedDocumentsBlockProps {
   limit?: number;
   documentType?: string;
   filterMode?: string;
+  sortBy?: string;
+  helpfulYesCount?: number;
   articles?: ArticleItem[];
   manualArticles?: ArticleItem[];
   callToAction?: {

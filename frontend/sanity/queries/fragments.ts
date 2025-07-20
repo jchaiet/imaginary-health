@@ -105,3 +105,122 @@ export const singletonFragment = `
     )
   }
 `;
+
+export const featuredDocumentsBlockFragment = `
+  ...,
+  manualArticles[]->{
+    ${articleFragment}
+  },
+  callToAction {
+    ${linkFragment}
+  },
+  includeFilters[]->{
+    ${categoryFragment}
+  },
+  excludeFilters[]->{
+    ${categoryFragment}
+  },
+  "articles": *[
+    _type == ^.documentType && 
+    _id != ^.^._id &&
+    (
+      (
+        ^.filterMode == "any" &&
+        (
+          !defined(^.includeFilters) ||
+          count(categories[@._ref in ^.^.includeFilters[]._ref]) > 0
+        )
+      ) ||
+      (
+        ^.filterMode == "all" &&             
+        !defined(^.includeFilters) ||
+        (
+          count(^.includeFilters) > 0 &&
+          count(categories[@._ref in ^.^.includeFilters[]._ref]) == count(coalesce(^.includeFilters, []))
+        )
+      )
+    ) &&
+    (
+      !defined(^.excludeFilters) ||
+      count(categories[@._ref in ^.^.excludeFilters[]._ref]) == 0
+    )
+  ] | order(publishDate desc)[0...25] {
+    ${articleFragment}
+  },
+`;
+
+export const accordionBlockFragment = `
+ ...,
+  callToAction {
+    ${callToActionFragment}
+  },
+},
+_type == "cardGridBlock" => {
+  ...,
+  callToAction {
+    ${callToActionFragment}
+  },
+  grid {
+    ...,
+    items[]{
+      ...,
+      callToAction{
+        ${linkFragment}
+      }
+    }
+  }
+`;
+
+export const carouselBlockFragment = `
+  ...,
+  callToAction {
+    ${callToActionFragment}
+  },
+  items[]{
+    ...,
+    callToAction{
+      ${linkFragment}
+    }
+  }
+`;
+
+export const contentBlockFragment = `
+  ...,
+  callToAction {
+    ${callToActionFragment}
+  },
+`;
+
+export const heroBlockFragment = `
+  ...,
+  callToAction {
+    ${callToActionFragment}
+  },
+`;
+
+export const documentListBlockFragment = `
+  ...,
+  "articles": *[
+    _type == ^.documentType && 
+    parent._ref == ^.id &&
+    (
+      !defined(^.includeFilters) ||
+      count(categories[@._ref in ^.^.includeFilters[]._ref]) > 0
+    ) &&
+    (
+      !defined(^.excludeFilters) ||
+      count(categories[@._ref in ^.^.excludeFilters[]._ref]) == 0
+    )
+  ] | order(publishDate desc) {
+    ${articleFragment}
+  },
+  categoryFilters[]->{
+    ${categoryFragment}
+  },
+  includeFilters[]->{
+    ${categoryFragment}
+  },
+  excludeFilters[]->{
+    ${categoryFragment}
+  }
+`;

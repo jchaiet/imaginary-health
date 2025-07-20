@@ -9,6 +9,7 @@ export type ArticleItem = {
   excerpt?: string;
   timeToRead: number;
   articleType: string;
+  helpfulYesCount?: number;
   categories?: {
     _id: string;
     title: string;

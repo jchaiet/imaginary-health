@@ -84,8 +84,13 @@
   display: block;
 
   .document {
-    max-width: 300px;
+    /* max-width: 350px; */
+    max-width: 288.5px; /* 4 card carousel, card width */
     margin: 0 auto;
+
+    @media (max-width: 767px) {
+      max-width: unset;
+    }
   }
 }
 

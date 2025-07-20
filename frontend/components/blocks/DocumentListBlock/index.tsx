@@ -13,6 +13,7 @@ const sortOptions = [
   { label: "Oldest", value: "date-asc" },
   { label: "Title A-Z", value: "title-asc" },
   { label: "Title Z-A", value: "title-desc" },
+  { label: "Most Popular", value: "popular-desc" },
 ];
 
 export function DocumentListBlock({
@@ -29,7 +30,7 @@ export function DocumentListBlock({
   const [articles, setArticles] = useState<ArticleItem[]>([]);
   const [totalCount, setTotalCount] = useState<number | null>(null);
   const [sort, setSort] = useState<
-    "date-desc" | "data-asc" | "title-asc" | "title-desc"
+    "date-desc" | "data-asc" | "title-asc" | "title-desc" | "popular-desc"
   >("date-desc");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   // const [filterMode, setFilterMode] = useState<"any" | "all">("any");

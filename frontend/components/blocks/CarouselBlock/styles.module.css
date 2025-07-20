@@ -48,6 +48,6 @@
 
 :global(.backgroundPrimary) .carouselComponent {
   .indicator {
-    background-color: red;
+    background-color: var(--color-primary);
   }
 }
