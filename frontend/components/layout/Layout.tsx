@@ -7,7 +7,7 @@ import Footer from "./Footer";
 import { Link } from "@/types";
 import { SanityImage } from "@/types";
 import { PortableTextBlock } from "next-sanity";
-import { UtilityItem } from "@/types/utilityItem";
+import type { UtilityItem } from "quirk-ui";
 
 type LayoutProps = {
   children: ReactNode;
