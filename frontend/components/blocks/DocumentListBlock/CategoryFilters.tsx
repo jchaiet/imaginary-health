@@ -1,14 +1,13 @@
-import { useEffect, useState, useCallback } from "react";
-import { DocumentListBlockProps } from "@/types/documentList";
 import { XIcon } from "lucide-react";
 import styles from "./styles.module.css";
-import { CallToAction, Input, Select } from "quirk-ui";
+import { CallToAction } from "quirk-ui";
+import { ArticleItem } from "@/types";
 
 interface CategoryFiltersProps {
   categoryFilters: { _id: string; title: string }[];
   selectedCategories: string[];
   setSelectedCategories: (cats: string[]) => void;
-  setArticles: React.Dispatch<React.SetStateAction<any[]>>;
+  setArticles: React.Dispatch<React.SetStateAction<ArticleItem[]>>;
   setStart: React.Dispatch<React.SetStateAction<number>>;
   setHasMore: React.Dispatch<React.SetStateAction<boolean>>;
   showFilters: boolean;
