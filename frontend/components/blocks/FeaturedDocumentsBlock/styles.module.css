@@ -13,6 +13,20 @@
   gap: var(--spacing-md);
   padding-left: var(--spacing-md);
   padding-right: var(--spacing-md);
+
+  &:has(.carousel) {
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+
+    @media (max-width: 767px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .heading {
+      padding-left: var(--spacing-md);
+      padding-right: var(--spacing-md);
+    }
+  }
 }
 
 .heading {

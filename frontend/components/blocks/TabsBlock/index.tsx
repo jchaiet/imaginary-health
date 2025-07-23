@@ -143,28 +143,28 @@ export function TabsBlock({
                   </div>
                 )}
 
-              {item.content?.tabLink && (
+              {tabLinkUrls[index] && tabLinkUrls[index] !== "#" && (
                 <CallToAction
                   key={index}
                   as="a"
-                  variant={item.content?.tabLink.variant ?? "primary"}
+                  variant={item.content?.tabLink?.variant ?? "primary"}
                   href={tabLinkUrls[index] ?? "#"}
                   target={
-                    item.content?.tabLink.linkOptions?.linkType === "external"
+                    item.content?.tabLink?.linkOptions?.linkType === "external"
                       ? "_blank"
                       : "_self"
                   }
                   rel={
-                    item.content?.tabLink.linkOptions?.linkType === "external"
+                    item.content?.tabLink?.linkOptions?.linkType === "external"
                       ? "noopener noreferrer"
                       : ""
                   }
                   aria-label={
-                    item.content?.tabLink.ariaLabel ||
-                    item.content?.tabLink.label
+                    item.content?.tabLink?.ariaLabel ||
+                    item.content?.tabLink?.label
                   }
                 >
-                  {item.content?.tabLink.label}
+                  {item.content?.tabLink?.label}
                 </CallToAction>
               )}
 

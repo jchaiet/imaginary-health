@@ -102,16 +102,18 @@ export function FeaturedDocumentsBlock({
 
   const carouselItems =
     CardComponent && sortedDocuments
-      ? sortedDocuments.map((article, index) => (
-          <CardComponent
-            key={article._id}
-            article={article}
-            className={styles.document}
-            index={index}
-            layout={layout}
-            limit={displayLimit}
-          />
-        ))
+      ? sortedDocuments
+          .slice(0, displayLimit)
+          .map((article, index) => (
+            <CardComponent
+              key={article._id}
+              article={article}
+              className={styles.document}
+              index={index}
+              layout={layout}
+              limit={displayLimit}
+            />
+          ))
       : [];
 
   return (

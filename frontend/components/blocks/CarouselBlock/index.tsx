@@ -78,17 +78,19 @@ export function CarouselBlock({
           )}
         </div>
 
-        <Carousel
-          autoplay={carouselOptions?.autoplay}
-          autoplayInterval={carouselOptions?.autoplayInterval}
-          itemsPerPage={carouselOptions?.itemsPerPage}
-          itemsPerRow={carouselOptions?.itemsPerRow}
-          items={mappedItems}
-          externalRef={containerRef as React.RefObject<HTMLElement>}
-          siblingRef={siblingRef as React.RefObject<HTMLElement>}
-          isSplit={isSplit}
-          className={styles.carouselComponent}
-        />
+        <div className={styles.carousel}>
+          <Carousel
+            autoplay={carouselOptions?.autoplay}
+            autoplayInterval={carouselOptions?.autoplayInterval}
+            itemsPerPage={carouselOptions?.itemsPerPage}
+            itemsPerRow={carouselOptions?.itemsPerRow}
+            items={mappedItems}
+            externalRef={containerRef as React.RefObject<HTMLElement>}
+            siblingRef={siblingRef as React.RefObject<HTMLElement>}
+            isSplit={isSplit}
+            className={styles.carouselComponent}
+          />
+        </div>
       </article>
     </section>
   );

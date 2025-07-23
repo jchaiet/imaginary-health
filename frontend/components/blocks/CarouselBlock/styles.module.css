@@ -36,6 +36,20 @@
   }
 }
 
+.carousel {
+  display: block;
+
+  /* .document {
+    /* max-width: 350px; 
+    max-width: 288.5px; /* 4 card carousel, card width 
+    margin: 0 auto;
+
+    @media (max-width: 767px) {
+      max-width: unset;
+    }
+  } */
+}
+
 /* Style Options Override */
 :global(.split) .carousel {
   margin-top: 0;

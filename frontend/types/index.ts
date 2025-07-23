@@ -20,3 +20,5 @@ export * from "./category";
 export * from "./wasHelpful";
 export * from "./additionalCategories";
 export * from "./page";
+export * from "./utilityItem";
+export * from "./social";

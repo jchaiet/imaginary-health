@@ -1,6 +1,7 @@
 import type { Navigation } from "@/types/navigation";
 import type { NavigationItem } from "@/types/navigationItem";
 import type { NavItem } from "quirk-ui";
+import { ExternalLink } from "lucide-react";
 
 async function resolveNavItemHref(item: NavigationItem): Promise<string> {
   if (item.itemType === "external" && item.externalLink) {
@@ -22,13 +23,21 @@ export async function mapNavigation(navData: Navigation): Promise<NavItem[]> {
       const label = item.title;
       const key = item._key;
 
-      if (item.itemType === "dropdown" && item.children?.length) {
+      if (
+        (item.itemType === "list" || item.itemType === "dropdown") &&
+        item.children?.length
+      ) {
         const subLinks = await Promise.all(
           item.children.map(async (child) => {
             const href = await resolveNavItemHref(child);
 
             if (!href) return null;
-            return { _key: child._key, label: child.title, href };
+            return {
+              _key: child._key,
+              label: child.title,
+              href,
+              isExternal: child.itemType === "external",
+            };
           })
         );
 
@@ -47,7 +56,12 @@ export async function mapNavigation(navData: Navigation): Promise<NavItem[]> {
 
       const href = await resolveNavItemHref(item);
       if (href) {
-        return { _key: key, label, href };
+        return {
+          _key: key,
+          label,
+          href,
+          isExternal: item.itemType === "external",
+        };
       }
 
       return null;

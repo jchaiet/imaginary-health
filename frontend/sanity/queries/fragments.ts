@@ -19,6 +19,9 @@ export const linkFragment = `
   variant,
   label,
   ariaLabel,
+  image {
+    ${imageAssetFragment}
+  },
   linkOptions {
     linkType,
     internalUrl->{
@@ -29,7 +32,8 @@ export const linkFragment = `
   },
   modalContent,
   videoUrl,
-  assetUrl
+  assetUrl,
+  icon
 `;
 
 export const callToActionFragment = `

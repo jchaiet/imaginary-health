@@ -7,6 +7,7 @@ import { RefreshCw, XIcon, Settings2Icon } from "lucide-react";
 import styles from "./styles.module.css";
 import { CallToAction, Input, Select } from "quirk-ui";
 import { BlogArticleCard } from "@/components/cards/BlogArticleCard";
+import { CategoryFilters } from "./CategoryFilters";
 
 const sortOptions = [
   { label: "Newest", value: "date-desc" },
@@ -210,49 +211,17 @@ export function DocumentListBlock({
             </div>
           )}
           {categoryFilters && (
-            <div
-              className={`${styles.listFilters} ${showFilters ? styles.show : styles.hide}`}
-            >
-              <div className={styles.filterHeader}>
-                <h5>Filters</h5>
-                <button onClick={() => toggleFilters()}>
-                  <XIcon size={24} />
-                </button>
-              </div>
-              <div className={styles.filterList}>
-                {categoryFilters?.map((filter) => (
-                  <label key={filter._id}>
-                    <input
-                      type="checkbox"
-                      value={filter._id}
-                      checked={selectedCategories.includes(filter._id)}
-                      onChange={(e) => {
-                        const checked = e.target.checked;
-                        const newSelection = checked
-                          ? [...selectedCategories, filter._id]
-                          : selectedCategories.filter((f) => f !== filter._id);
-
-                        setArticles([]);
-                        setStart(0);
-                        setHasMore(true);
-                        setSelectedCategories(newSelection);
-                      }}
-                    />
-                    {filter.title}
-                  </label>
-                ))}
-              </div>
-
-              <CallToAction
-                as="button"
-                variant="secondary"
-                onClick={toggleFilters}
-                disabled={isLoading}
-                className={styles.applyFilters}
-              >
-                Apply Filters
-              </CallToAction>
-            </div>
+            <CategoryFilters
+              categoryFilters={categoryFilters}
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
+              setArticles={setArticles}
+              setStart={setStart}
+              setHasMore={setHasMore}
+              showFilters={showFilters}
+              toggleFilters={toggleFilters}
+              isLoading={isLoading}
+            />
           )}
 
           <div className={styles.listWrapper}>

@@ -3,8 +3,11 @@ export interface SanityImage {
   url: string;
   alt?: string;
   asset: {
-    _ref: string;
-    _type: string;
+    _id: string;
+    url: string;
+    altText: string;
+    title: string;
+    description: string;
   };
   description?: string;
   display?: "default" | "max-width" | "full-bleed";

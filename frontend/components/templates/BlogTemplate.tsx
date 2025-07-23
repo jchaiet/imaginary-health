@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Layout from "@/components/layout/Layout";
-import { mapNavigation } from "@/lib/navigation";
+import { mapNavigation } from "@/lib/mapNavigation";
 import { fetchNavigation, urlForImage } from "@/sanity/client";
 import BlogHeader from "../layout/BlogHeader";
 

@@ -1,4 +1,4 @@
-import { imageAssetFragment } from "./fragments";
+import { imageAssetFragment, linkFragment } from "./fragments";
 
 export const navigationQuery = `
 *[_type == "navigation" && slug.current == $slug][0]{
@@ -35,12 +35,6 @@ export const navigationQuery = `
   },
   utilityItems[]{
     ...,  
-    _key,
-    linkOptions{
-      linkType,
-      internalUrl->{
-        slug { current }
-      }
-    }
+    ${linkFragment}
   }
 }`;
