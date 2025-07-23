@@ -15,7 +15,7 @@ type LayoutProps = {
   hideFooter?: boolean;
   navItems: NavItem[];
   alignment: "left" | "center" | "right";
-  utilityItems: Link[];
+  utilityItems: UtilityItem[];
   logo: SanityImage;
   logoLinkSlug?: string;
   variant: "default" | "minimal";

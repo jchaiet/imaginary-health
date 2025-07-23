@@ -1,8 +1,5 @@
-import React from "react";
 import { SocialLink } from "@/types";
 import type { NavItem } from "quirk-ui";
-
-export type SocialNavItem = NavItem & { icon: React.ElementType };
 
 export async function mapSocialLinks(
   socialLinks: SocialLink[]

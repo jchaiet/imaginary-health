@@ -27,7 +27,7 @@ export default async function PageTemplate({
   const navItems = await mapNavigation(navigationData);
   console.log("MAPPED", navItems);
 
-  const utilityItems = navigationData.utilityItems;
+  const utilityItems = await mapUtilityItems(navigationData.utilityItems);
   const logoLinkSlug = navigationData.logoLink?.slug?.current;
 
   const footerNavigationData = await fetchNavigation("main-footer");
