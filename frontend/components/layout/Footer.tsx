@@ -1,6 +1,5 @@
 import { Footer as FooterNav } from "quirk-ui";
-import { type NavItem } from "quirk-ui";
-import { UtilityItem } from "@/types";
+import type { NavItem, UtilityItem } from "quirk-ui";
 import Image from "next/image";
 import { PortableTextBlock } from "next-sanity";
 import { RichText } from "@/lib/PortableTextRenderer";
@@ -21,7 +20,7 @@ export type FooterProps = {
 export default function Footer({
   navItems,
   utilityItems,
-  alignment = "left",
+  // alignment = "left",
   logoUrl,
   logoAlt,
   logoLinkSlug,

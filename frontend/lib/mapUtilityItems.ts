@@ -1,6 +1,5 @@
 import type { Link } from "@/types";
 import { UtilityItem } from "@/types/utilityItem";
-import { ExternalLink } from "lucide-react";
 
 export async function mapUtilityItems(links: Link[]): Promise<UtilityItem[]> {
   return links.map((link) => {

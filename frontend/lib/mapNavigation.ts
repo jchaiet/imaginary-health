@@ -1,7 +1,6 @@
 import type { Navigation } from "@/types/navigation";
 import type { NavigationItem } from "@/types/navigationItem";
 import type { NavItem } from "quirk-ui";
-import { ExternalLink } from "lucide-react";
 
 async function resolveNavItemHref(item: NavigationItem): Promise<string> {
   if (item.itemType === "external" && item.externalLink) {

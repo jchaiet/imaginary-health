@@ -1,11 +1,7 @@
 import { ReactNode } from "react";
 import Layout from "@/components/layout/Layout";
 import { mapNavigation } from "@/lib/mapNavigation";
-import {
-  fetchNavigation,
-  fetchSiteSettings,
-  urlForImage,
-} from "@/sanity/client";
+import { fetchNavigation, fetchSiteSettings } from "@/sanity/client";
 import BlogHeader from "../layout/BlogHeader";
 import { mapUtilityItems } from "@/lib/mapUtilityItems";
 import { mapSocialLinks } from "@/lib/mapSocialLinks";
