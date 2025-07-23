@@ -22,6 +22,28 @@ export const linkType = defineType({
       initialValue: "none",
     }),
     defineField({
+      name: "displayType",
+      title: "Display Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Text", value: "text" },
+          { title: "Image", value: "image" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "text",
+      hidden: ({ parent }) => parent?.type === "none",
+    }),
+    defineField({
+      name: "image",
+      title: "Image",
+      type: "image",
+      options: { hotspot: true },
+      hidden: ({ parent }) =>
+        parent?.type === "none" || parent?.displayType !== "image",
+    }),
+    defineField({
       name: "variant",
       title: "Variant",
       type: "string",
@@ -41,7 +63,8 @@ export const linkType = defineType({
         layout: "radio",
       },
       initialValue: "primary",
-      hidden: ({ parent }) => parent?.type === "none",
+      hidden: ({ parent }) =>
+        parent?.type === "none" || parent?.displayType === "image",
     }),
     defineField({
       name: "label",

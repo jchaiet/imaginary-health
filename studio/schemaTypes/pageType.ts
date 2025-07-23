@@ -9,6 +9,8 @@ import {
   DoubleChevronDownIcon,
   ListIcon,
   StarIcon,
+  BlockquoteIcon,
+  BlockContentIcon,
 } from "@sanity/icons";
 import asyncSlugifier from "../lib/asyncSlugifier";
 
@@ -89,6 +91,12 @@ export const pageType = defineType({
           icon: InlineIcon,
         }),
         defineArrayMember({
+          type: "richTextBlock",
+          name: "richTextBlock",
+          title: "RichText Block",
+          icon: BlockContentIcon,
+        }),
+        defineArrayMember({
           type: "documentListBlock",
           name: "documentListBlock",
           title: "Document List Block",
@@ -125,10 +133,10 @@ export const pageType = defineType({
           icon: DoubleChevronDownIcon,
         }),
         defineArrayMember({
-          type: "disclaimerBlock",
-          name: "disclaimerBlock",
-          title: "Disclaimer Block",
-          icon: InfoOutlineIcon,
+          type: "quoteBlock",
+          name: "quoteBlock",
+          title: "Quote Block",
+          icon: BlockquoteIcon,
         }),
       ],
     }),

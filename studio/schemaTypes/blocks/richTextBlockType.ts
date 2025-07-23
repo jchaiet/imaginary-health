@@ -4,15 +4,15 @@ import { paddingOptionType } from "../styles/paddingOptionType";
 import { layoutOptionType } from "../styles/layoutOptionType";
 import { backgroundOptionType } from "../styles/backgroundOptionType";
 
-export const disclaimerBlockType = defineType({
-  name: "disclaimerBlock",
-  title: "Disclaimer Block",
+export const richTextBlockType = defineType({
+  name: "richTextBlock",
+  title: "RichText Block",
   type: "object",
   icon: TextIcon,
   fields: [
     defineField({
-      name: "disclaimer",
-      title: "Disclaimer",
+      name: "text",
+      title: "Text",
       type: "richText",
     }),
     defineField({
@@ -38,7 +38,7 @@ export const disclaimerBlockType = defineType({
   preview: {
     prepare() {
       return {
-        title: "Disclaimer Block",
+        title: "RichText Block",
       };
     },
   },

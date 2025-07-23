@@ -2,7 +2,7 @@ import { defineType, defineField } from "sanity";
 import { LinkIcon, HomeIcon, EarthGlobeIcon } from "@sanity/icons";
 
 interface NavigationItemValidationContext {
-  itemType?: "internal" | "external" | "dropdown";
+  itemType?: "internal" | "external" | "dropdown" | "list";
 }
 
 export const navigationItemType = defineType({
@@ -27,6 +27,7 @@ export const navigationItemType = defineType({
           { title: "Internal Link", value: "internal" },
           { title: "External Link", value: "external" },
           { title: "Dropdown", value: "dropdown" },
+          { title: "List", value: "list" },
         ],
         layout: "radio",
       },
@@ -68,12 +69,13 @@ export const navigationItemType = defineType({
     }),
     defineField({
       name: "children",
-      title: "Dropdown Items",
-      description: "Items that appear in the dropdown",
+      title: "Child Items",
+      description: "Items that appear in the dropdown or list",
       type: "array",
       of: [{ type: "navigationItem" }],
       hidden: ({ parent }) =>
-        (parent as NavigationItemValidationContext)?.itemType !== "dropdown",
+        (parent as NavigationItemValidationContext)?.itemType !== "dropdown" &&
+        (parent as NavigationItemValidationContext)?.itemType !== "list",
     }),
   ],
   preview: {

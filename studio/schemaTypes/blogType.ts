@@ -6,6 +6,11 @@ import {
   InlineIcon,
   ThLargeIcon,
   DoubleChevronDownIcon,
+  StarIcon,
+  ImageIcon,
+  SunIcon,
+  BlockquoteIcon,
+  BlockContentIcon,
 } from "@sanity/icons";
 import asyncSlugifier from "../lib/asyncSlugifier";
 
@@ -109,6 +114,20 @@ export const blogType = defineType({
       ],
     }),
     defineField({
+      name: "helpfulYesCount",
+      title: "Helpful - Yes Count",
+      type: "number",
+      initialValue: 0,
+      readOnly: true,
+    }),
+    defineField({
+      name: "helpfulNoCount",
+      title: "Helpful - No Count",
+      type: "number",
+      initialValue: 0,
+      readOnly: true,
+    }),
+    defineField({
       name: "pageBuilder",
       title: "Article Body",
       type: "array",
@@ -118,18 +137,23 @@ export const blogType = defineType({
           name: "heroBlock",
           title: "Hero",
           icon: InlineIcon,
+          initialValue: {
+            styleOptions: {
+              layout: "blog",
+            },
+          },
         }),
         defineArrayMember({
-          type: "cardGridBlock",
-          name: "cardGridBlock",
-          title: "Card Grid",
-          icon: ThLargeIcon,
-        }),
-        defineArrayMember({
-          type: "carouselBlock",
-          name: "carouselBlock",
-          title: "Carousel",
-          icon: InlineElementIcon,
+          type: "richTextBlock",
+          name: "richTextBlock",
+          title: "RichText Block",
+          icon: BlockContentIcon,
+          initialValue: {
+            styleOptions: {
+              padding: ["paddingTop4", "paddingBottom2"],
+              layout: "blog",
+            },
+          },
         }),
         defineArrayMember({
           type: "contentBlock",
@@ -138,7 +162,49 @@ export const blogType = defineType({
           icon: InlineIcon,
           initialValue: {
             styleOptions: {
-              padding: ["paddingTop4", "paddingBottom4"],
+              padding: ["paddingTop4", "paddingBottom2"],
+              layout: "blog",
+            },
+          },
+        }),
+        defineArrayMember({
+          type: "quoteBlock",
+          name: "quoteBlock",
+          title: "Quote Block",
+          icon: BlockquoteIcon,
+        }),
+        defineArrayMember({
+          type: "carouselBlock",
+          name: "carouselBlock",
+          title: "Carousel",
+          icon: InlineElementIcon,
+        }),
+        defineArrayMember({
+          type: "featuredDocumentsBlock",
+          name: "featuredDocumentsBlock",
+          title: "Featured Documents",
+          icon: StarIcon,
+          initialValue: {
+            heading: {
+              title: [
+                {
+                  _type: "block",
+                  style: "h2",
+                  markDefs: [],
+                  children: [
+                    {
+                      _type: "span",
+                      text: "You might also like",
+                      marks: [],
+                    },
+                  ],
+                },
+              ],
+            },
+            selectionMode: "dynamic",
+            layout: "carousel",
+            styleOptions: {
+              padding: ["paddingTop2", "paddingBottom4"],
             },
           },
         }),
@@ -149,10 +215,10 @@ export const blogType = defineType({
           icon: DoubleChevronDownIcon,
         }),
         defineArrayMember({
-          type: "disclaimerBlock",
-          name: "disclaimerBlock",
-          title: "Disclaimer Block",
-          icon: InfoOutlineIcon,
+          name: "singletonBlock",
+          type: "singletonBlock",
+          title: "Singleton Block",
+          icon: SunIcon,
         }),
       ],
       initialValue: [
@@ -160,7 +226,24 @@ export const blogType = defineType({
           _type: "heroBlock",
         },
         {
-          _type: "contentBlock",
+          _type: "richTextBlock",
+        },
+        {
+          _type: "featuredDocumentsBlock",
+        },
+        {
+          _type: "singletonBlock",
+          referencedSingleton: {
+            _type: "reference",
+            _ref: "cabf4035-2723-4cf5-b43e-74ff124cee4f",
+          },
+        },
+        {
+          _type: "singletonBlock",
+          referencedSingleton: {
+            _type: "reference",
+            _ref: "254b6640-82d7-4f55-8b16-007492beff8b",
+          },
         },
       ],
     }),

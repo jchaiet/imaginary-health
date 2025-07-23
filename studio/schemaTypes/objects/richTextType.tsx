@@ -7,6 +7,7 @@ import {
   ImageIcon,
   LinkIcon,
   NumberIcon,
+  SortIcon,
 } from "@sanity/icons";
 import { AlignLeft, AlignCenter, AlignRight } from "lucide-react";
 
@@ -81,15 +82,59 @@ export const richTextType = defineField({
         ],
         annotations: [
           {
+            name: "textSize",
+            title: "Text Size",
+            type: "object",
+            icon: SortIcon,
+            fields: [
+              defineField({
+                name: "size",
+                title: "Size",
+                type: "string",
+                options: {
+                  list: [
+                    { title: "Small", value: "small" },
+                    { title: "Medium", value: "medium" },
+                    { title: "Large", value: "large" },
+                    { title: "XLarge", value: "xlarge" },
+                  ],
+                  layout: "radio",
+                },
+                initialValue: "medium",
+              }),
+            ],
+          },
+          {
             name: "link",
             type: "object",
             title: "Link",
             icon: LinkIcon,
             fields: [
               defineField({
+                name: "linkType",
+                title: "Link Type",
+                type: "string",
+                options: {
+                  list: [
+                    { title: "Internal Link", value: "internal" },
+                    { title: "External Link", value: "external" },
+                  ],
+                  layout: "radio",
+                },
+                initialValue: "internal",
+              }),
+              defineField({
+                name: "internalLink",
+                title: "Internal Link",
+                type: "reference",
+                to: [{ type: "page" }, { type: "blog" }],
+                hidden: ({ parent }) => parent?.linkType !== "internal",
+              }),
+              defineField({
                 name: "href",
+                title: "External URL",
                 type: "url",
-                title: "URL",
+                hidden: ({ parent }) => parent?.linkType !== "external",
               }),
               defineField({
                 name: "blank",

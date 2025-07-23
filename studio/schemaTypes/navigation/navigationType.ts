@@ -76,6 +76,16 @@ export const navigationType = defineType({
       type: "reference",
       to: [{ type: "page" }],
     }),
+    defineField({
+      name: "primaryInfo",
+      type: "richText",
+      title: "Primary Info",
+    }),
+    defineField({
+      name: "secondaryInfo",
+      type: "richText",
+      title: "Secondary Info",
+    }),
   ],
   preview: {
     select: {

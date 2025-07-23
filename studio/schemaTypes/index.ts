@@ -23,10 +23,15 @@ import { contentBlockType } from "./blocks/contentBlockType";
 import { stickyScrollBlockType } from "./blocks/stickyScrollBlockType";
 import { faqBlockType } from "./blocks/faqBlockType";
 import { tabsBlockType } from "./blocks/tabsBlocktType";
-import { disclaimerBlockType } from "./blocks/disclaimerBlockType";
+import { richTextBlockType } from "./blocks/richTextBlockType";
 import { accordionBlockType } from "./blocks/accordionBlockType";
 import { documentBlockType } from "./blocks/documentListBlockType";
 import { featuredDocumentsBlockType } from "./blocks/featuredDocumentsBlockType";
+import { quoteBlockType } from "./blocks/quoteBlockType";
+
+/* Singletons */
+import { singletonType } from "./singletonType";
+import { singletonBlockType } from "./blocks/singletonBlockType";
 
 export const schemaTypes = [
   siteSettingsType,
@@ -51,8 +56,12 @@ export const schemaTypes = [
   stickyScrollBlockType,
   faqBlockType,
   tabsBlockType,
-  disclaimerBlockType,
+  richTextBlockType,
   accordionBlockType,
   documentBlockType,
   featuredDocumentsBlockType,
+  quoteBlockType,
+
+  singletonType,
+  singletonBlockType,
 ];

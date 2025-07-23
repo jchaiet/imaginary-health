@@ -14,6 +14,7 @@ import { deskContent } from "./deskStructure";
 import { slugPrefixTpl } from "./lib/slugPrefixTemplate";
 import { SetSlugAndPublishAction } from "./lib/setSlugAndPublishAction";
 import { customStudioStyles } from "./plugins/customStudioStyles";
+import { SyncCategories } from "./plugins/syncCategories";
 
 export default defineConfig({
   name: "default",
@@ -51,6 +52,24 @@ export default defineConfig({
       default:
         return prev;
     }
+  },
+  document: {
+    actions: (prev, context) => {
+      if (["blog"].includes(context.schemaType)) {
+        const publishAction = prev.find(
+          (action) => action.action === "publish"
+        );
+
+        const otherActions = prev.filter(
+          (action) => action.action !== "publish"
+        );
+
+        return publishAction
+          ? [publishAction, SyncCategories, ...otherActions]
+          : [SyncCategories, ...prev];
+      }
+      return prev;
+    },
   },
   schema: {
     types: schemaTypes,

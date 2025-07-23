@@ -8,6 +8,7 @@ import {
   ComposeSparklesIcon,
   ControlsIcon,
   DocumentsIcon,
+  SunIcon,
   TagsIcon,
 } from "@sanity/icons";
 import parentChild from "./lib/parentChild";
@@ -22,6 +23,17 @@ export const defaultDocumentNode: DefaultDocumentNodeResolver = (
 
   return S.document();
 };
+
+const authorableSingletons = ["contentBlock", "heroBlock"];
+
+const customHandledTypes = [
+  "siteSettings",
+  "navigation",
+  ...authorableSingletons,
+  "page",
+  "blog",
+  "category",
+];
 
 export const deskContent = structureTool({
   name: "content",
@@ -53,10 +65,19 @@ export const deskContent = structureTool({
         S.divider(),
 
         S.documentTypeListItem("navigation").title("Navigation"),
+
         parentChild(
           "category",
           "Categories",
           TagsIcon,
+          S,
+          context.documentStore
+        ),
+
+        parentChild(
+          "singleton",
+          "Singletons",
+          SunIcon,
           S,
           context.documentStore
         ),

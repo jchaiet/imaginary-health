@@ -3,6 +3,7 @@ import { StarIcon } from "@sanity/icons";
 import { layoutOptionType } from "../styles/layoutOptionType";
 import { paddingOptionType } from "../styles/paddingOptionType";
 import { backgroundOptionType } from "../styles/backgroundOptionType";
+import IncludeFiltersWithDefaults from "../../components/IncludeFiltersWithDefaults";
 
 export const featuredDocumentsBlockType = defineType({
   name: "featuredDocumentsBlock",
@@ -39,7 +40,7 @@ export const featuredDocumentsBlockType = defineType({
     }),
     defineField({
       name: "manualArticles",
-      title: "Manually Selected Articles (Optional)",
+      title: "Manually Selected Articles",
       type: "array",
       group: "settings",
       of: [{ type: "reference", to: [{ type: "page" }, { type: "blog" }] }],
@@ -67,9 +68,9 @@ export const featuredDocumentsBlockType = defineType({
       title: "Maximum number of articles",
       group: "settings",
       type: "number",
-      description: "Optional: Limit the number of articles shown (4 max)",
+      description: "Optional: Limit the number of articles shown (25 max)",
       hidden: ({ parent }) => parent?.selectionMode === "manual",
-      validation: (Rule) => Rule.min(1).max(4),
+      validation: (Rule) => Rule.min(1).max(25),
     }),
     defineField({
       name: "layout",
@@ -83,6 +84,7 @@ export const featuredDocumentsBlockType = defineType({
           { title: "Featured Left", value: "featuredLeft" },
           { title: "Featured Top", value: "featuredTop" },
           { title: "Two Column", value: "twoColumn" },
+          { title: "Carousel", value: "carousel" },
         ],
         layout: "radio",
       },
@@ -125,7 +127,23 @@ export const featuredDocumentsBlockType = defineType({
         ],
         layout: "radio",
       },
+      initialValue: "any",
       hidden: ({ parent }) => parent?.selectionMode === "manual",
+    }),
+    defineField({
+      name: "sortBy",
+      title: "Sort By",
+      group: "settings",
+      type: "string",
+      options: {
+        list: [
+          { title: "Newest", value: "newest" },
+          { title: "Title A-Z", value: "title" },
+          { title: "Most Popular", value: "popular" },
+        ],
+        layout: "dropdown",
+      },
+      initialValue: "newest",
     }),
     defineField({
       name: "callToAction",
