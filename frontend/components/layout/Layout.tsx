@@ -1,6 +1,6 @@
 "use client";
 import { ReactNode } from "react";
-import type { NavItem } from "quirk-ui";
+import type { NavGroup, NavItem } from "quirk-ui";
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -13,12 +13,14 @@ type LayoutProps = {
   children: ReactNode;
   hideHeader?: boolean;
   hideFooter?: boolean;
-  navItems: NavItem[];
+  navItems?: NavItem[];
+  navGroups?: NavGroup[];
   alignment: "left" | "center" | "right";
   utilityItems: UtilityItem[];
   logo: SanityImage;
   logoLinkSlug?: string;
   variant: "default" | "minimal";
+  navigationType: "default" | "advanced";
   socialItems: Link[];
   primaryInfo?: string;
   secondaryInfo?: string;
@@ -37,11 +39,13 @@ export default function Layout({
   hideHeader,
   hideFooter,
   navItems,
+  navGroups,
   alignment,
   utilityItems,
   logo,
   logoLinkSlug,
   variant,
+  navigationType,
   footerNavItems,
   footerUtilityItems,
   footerLogo,
@@ -56,12 +60,14 @@ export default function Layout({
       {!hideHeader && (
         <Header
           utilityItems={utilityItems}
-          navItems={navItems}
+          navItems={navItems ?? []}
+          navGroups={navGroups ?? []}
           alignment={alignment}
           logoUrl={logo?.asset?.url}
           logoAlt={logo?.asset?.altText}
           logoLinkSlug={logoLinkSlug}
           variant={variant}
+          navigationType={navigationType}
         />
       )}
       <main>{children}</main>

@@ -1,7 +1,7 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { ButtonGroup, CallToAction, Modal } from "quirk-ui";
 import { Link } from "@/types";
-import { resolveLinkURL } from "@/sanity/client";
 
 type CallToActionsProps = {
   items: Link[];
@@ -9,7 +9,7 @@ type CallToActionsProps = {
   className?: string;
 };
 
-export function CallToActions({
+export async function CallToActions({
   items,
   alignment,
   className,
@@ -18,15 +18,23 @@ export function CallToActions({
 
   useEffect(() => {
     if (!items?.length) return;
-    async function getHrefs() {
-      const results = await Promise.all(
-        items.map((cta) => resolveLinkURL(cta))
-      );
+    const results = items.map((item) => {
+      if (item.type !== "link") return undefined;
 
-      setHrefs(results);
-    }
+      const options = item.linkOptions;
 
-    getHrefs();
+      if (options?.linkType === "external" && options.externalUrl) {
+        return options.externalUrl;
+      }
+
+      if (options?.linkType === "internal" && options.internalUrl?.slug) {
+        return `/${options.internalUrl?.slug.current}`;
+      }
+
+      return "#";
+    });
+
+    setHrefs(results);
   }, [items]);
 
   if (!items?.length) return null;

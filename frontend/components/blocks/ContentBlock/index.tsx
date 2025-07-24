@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { RichText } from "@/lib/PortableTextRenderer";
+import { RichText } from "@/components/ui/PortableTextRenderer";
 import { CallToActions } from "@/components/ui/CallToActions";
 import Image from "next/image";
 import { urlForImage } from "@/sanity/client";

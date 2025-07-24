@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { urlForImage } from "@/sanity/client";
-import { RichText } from "@/lib/PortableTextRenderer";
+import { RichText } from "@/components/ui/PortableTextRenderer";
 import { toPlainText } from "next-sanity";
 import { StickyScrollBlockProps } from "@/types";
 

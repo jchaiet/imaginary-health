@@ -1,29 +1,36 @@
 "use client";
 import Image from "next/image";
-import { Navbar, type UtilityItem, type NavItem } from "quirk-ui";
+import {
+  Navbar,
+  type UtilityItem,
+  type NavItem,
+  type NavGroup,
+} from "quirk-ui";
 // import styles from "./styles.module.css";
 
 type HeaderProps = {
   navItems: NavItem[];
+  navGroups: NavGroup[];
   utilityItems: UtilityItem[];
   alignment: "left" | "center" | "right";
   logoUrl: string | null;
   logoAlt: string;
   logoLinkSlug?: string;
   variant: "default" | "minimal";
+  navigationType: "default" | "advanced";
 };
 
 export default function Header({
   navItems,
+  navGroups,
   utilityItems,
   alignment,
   logoUrl,
   logoAlt,
   logoLinkSlug,
+  navigationType = "default",
   // variant,
 }: HeaderProps) {
-  // const { isFullbleedHeroAtTop } = useHeroContext();
-
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
 
@@ -53,32 +60,15 @@ export default function Header({
     return null;
   }
 
-  // const formattedUtilityItems = utilityItems.map((item) => {
-  //   const linkOptions = item.linkOptions;
-
-  //   let href;
-  //   if (linkOptions?.linkType === "internal" && "internalUrl" in linkOptions) {
-  //     href = `/${linkOptions.internalUrl?.slug?.current ?? ""}`;
-  //   } else if (
-  //     linkOptions?.linkType === "external" &&
-  //     "externalUrl" in linkOptions
-  //   ) {
-  //     href = linkOptions.externalUrl ?? "/";
-  //   }
-
-  //   return {
-  //     ...item,
-  //     href,
-  //   };
-  // });
-
   return (
     <Navbar
       isTransparent
       isSticky
       variant="default"
+      navigationType={navigationType}
       alignment={alignment}
       items={navItems ?? []}
+      groups={navGroups ?? []}
       utilityItems={utilityItems ?? []}
       logo={
         logoLinkSlug ? (

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RichText } from "@/lib/PortableTextRenderer";
+import { RichText } from "@/components/ui/PortableTextRenderer";
 import { resolveLinkURL, urlForImage } from "@/sanity/client";
 import Image from "next/image";
 import { ItemType } from "@/types";

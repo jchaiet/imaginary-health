@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { RichText } from "@/lib/PortableTextRenderer";
+import { RichText } from "@/components/ui/PortableTextRenderer";
 import { DocumentListBlockProps } from "@/types/documentList";
 import { ArticleItem } from "@/types";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";

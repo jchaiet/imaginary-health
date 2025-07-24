@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { useHeroContext } from "@/context/HeroContext";
-import { RichText } from "@/lib/PortableTextRenderer";
+import { RichText } from "@/components/ui/PortableTextRenderer";
 import { CallToActions } from "@/components/ui/CallToActions";
 import Image from "next/image";
 import { Pause, Play } from "lucide-react";

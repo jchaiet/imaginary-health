@@ -2,7 +2,7 @@
 import React from "react";
 import { Accordion } from "quirk-ui";
 import type { AccordionItem } from "quirk-ui";
-import { RichText } from "@/lib/PortableTextRenderer";
+import { RichText } from "@/components/ui/PortableTextRenderer";
 import styles from "./styles.module.css";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
 import { FaqBlockProps, FaqItem } from "@/types/faq";

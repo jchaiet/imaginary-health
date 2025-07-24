@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { Grid } from "quirk-ui";
-import { RichText } from "@/lib/PortableTextRenderer";
+import { RichText } from "@/components/ui/PortableTextRenderer";
 import { CallToActions } from "@/components/ui/CallToActions";
 import { CardGridBlockProps } from "@/types";
 import styles from "./styles.module.css";

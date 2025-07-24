@@ -5,6 +5,7 @@ import { fetchNavigation, fetchSiteSettings } from "@/sanity/client";
 import BlogHeader from "../layout/BlogHeader";
 import { mapUtilityItems } from "@/lib/mapUtilityItems";
 import { mapSocialLinks } from "@/lib/mapSocialLinks";
+import { mapGroups } from "@/lib/mapGroups";
 
 type PageTemplateProps = {
   children: ReactNode;
@@ -24,8 +25,13 @@ export default async function PageTemplate({
   const settings = await fetchSiteSettings();
 
   const navigationData = await fetchNavigation("main-navigation");
-  const navItems = await mapNavigation(navigationData);
-  console.log("MAPPED", navItems);
+  const navItems = navigationData.primaryItems?.length
+    ? await mapNavigation(navigationData.primaryItems)
+    : [];
+  const navGroups = navigationData.navigationGroups?.length
+    ? await mapGroups(navigationData.navigationGroups)
+    : [];
+  console.log("MAPPED", navGroups);
 
   const utilityItems = await mapUtilityItems(navigationData.utilityItems);
   const logoLinkSlug = navigationData.logoLink?.slug?.current;
@@ -33,19 +39,17 @@ export default async function PageTemplate({
   const footerNavigationData = await fetchNavigation("main-footer");
   const footerLinkSlug = footerNavigationData.logoLink?.slug?.current;
 
-  const footerNavItems = footerNavigationData
-    ? await mapNavigation(footerNavigationData)
+  const footerNavItems = footerNavigationData?.primaryItems?.length
+    ? await mapNavigation(footerNavigationData.primaryItems)
     : [];
 
   const footerUtilityItems = await mapUtilityItems(
     footerNavigationData.utilityItems
   );
 
-  console.log("U", settings);
-
   const blogNavigationData = isBlog ? await fetchNavigation("blog") : null;
-  const blogNavItems = blogNavigationData
-    ? await mapNavigation(blogNavigationData)
+  const blogNavItems = blogNavigationData?.primaryItems?.length
+    ? await mapNavigation(blogNavigationData.primaryItems)
     : [];
 
   const socialItems = await mapSocialLinks(settings.socialLinks);
@@ -58,8 +62,10 @@ export default async function PageTemplate({
   return (
     <Layout
       variant={navigationData.variant}
+      navigationType={navigationData.navigationType}
       utilityItems={utilityItems}
       navItems={navItems}
+      navGroups={navGroups}
       alignment={navigationData.alignment}
       logo={navigationData.logo}
       logoLinkSlug={logoLinkSlug}

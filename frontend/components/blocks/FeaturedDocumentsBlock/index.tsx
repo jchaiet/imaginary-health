@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { RichText } from "@/lib/PortableTextRenderer";
+import { RichText } from "@/components/ui/PortableTextRenderer";
 import Link from "next/link";
 import { FeaturedDocumentsBlockProps } from "@/types";
 import { ArticleItem } from "@/types";

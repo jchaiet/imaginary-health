@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { RichText } from "@/lib/PortableTextRenderer";
+import { RichText } from "@/components/ui/PortableTextRenderer";
 import { resolveLinkURL, urlForImage } from "@/sanity/client";
 import Image from "next/image";
 import { ArrowRight, Play } from "lucide-react";

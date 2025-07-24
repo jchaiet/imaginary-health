@@ -1,24 +1,13 @@
 import type { Navigation } from "@/types/navigation";
-import type { NavigationItem } from "@/types/navigationItem";
 import type { NavItem } from "quirk-ui";
+import { resolveNavItemHref } from "./resolveNavItemHref";
+import { NavigationItem } from "@/types";
 
-async function resolveNavItemHref(item: NavigationItem): Promise<string> {
-  if (item.itemType === "external" && item.externalLink) {
-    return item.externalLink;
-  }
-
-  if (item.itemType === "internal" && item.internalLink?.slug?.current) {
-    if (item.internalLink?.slug?.current) {
-      return `/${item.internalLink.slug.current}`;
-    }
-  }
-
-  return "#";
-}
-
-export async function mapNavigation(navData: Navigation): Promise<NavItem[]> {
+export async function mapNavigation(
+  items: NavigationItem[]
+): Promise<NavItem[]> {
   const navItems = await Promise.all(
-    navData.primaryItems.map(async (item) => {
+    items.map(async (item) => {
       const label = item.title;
       const key = item._key;
 

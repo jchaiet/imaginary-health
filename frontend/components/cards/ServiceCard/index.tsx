@@ -1,5 +1,5 @@
 import React from "react";
-import { RichText } from "@/lib/PortableTextRenderer";
+import { RichText } from "@/components/ui/PortableTextRenderer";
 //import { urlForImage } from "@/sanity/client";
 import { ItemType } from "@/types";
 import styles from "./styles.module.css";

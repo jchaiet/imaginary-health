@@ -22,3 +22,4 @@ export * from "./additionalCategories";
 export * from "./page";
 export * from "./utilityItem";
 export * from "./social";
+export * from "./spotlight";

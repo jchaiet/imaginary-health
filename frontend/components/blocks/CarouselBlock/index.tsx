@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo, useRef, useEffect, useState } from "react";
 import { Carousel } from "quirk-ui";
-import { RichText } from "@/lib/PortableTextRenderer";
+import { RichText } from "@/components/ui/PortableTextRenderer";
 import { CarouselBlockProps } from "@/types";
 import { SegmentCard } from "@/components/cards/SegmentCard";
 import { TestimonialCard } from "@/components/cards/TestimonialCard";
