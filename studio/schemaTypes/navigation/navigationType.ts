@@ -29,10 +29,32 @@ export const navigationType = defineType({
         Rule.required().error("A unique identifier is required for the menu"),
     }),
     defineField({
-      name: "primaryItems",
-      title: "Menu Items",
+      name: "navigationType",
+      title: "Navigation Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Default", value: "default" },
+          { title: "Advanced", value: "advanced" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "default",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "navigationItems",
+      title: "Navigation Items",
       type: "array",
       of: [{ type: "navigationItem" }],
+      hidden: ({ parent }) => parent?.navigationType !== "default",
+    }),
+    defineField({
+      name: "navigationGroups",
+      title: "Navigation Groups",
+      type: "array",
+      of: [{ type: "navigationGroup" }],
+      hidden: ({ parent }) => parent?.navigationType !== "advanced",
     }),
     defineField({
       name: "alignment",

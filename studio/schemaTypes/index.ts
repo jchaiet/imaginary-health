@@ -2,6 +2,8 @@
 import { siteSettingsType } from "./siteSettingsType";
 import { navigationType } from "./navigation/navigationType";
 import { navigationItemType } from "./navigation/navigationItemType";
+import { navigationGroupType } from "./navigation/navigationGroupType";
+
 import { pageType } from "./pageType";
 import { pageMetadataType } from "./pageMetadataType";
 import { blogType } from "./blogType";
@@ -40,6 +42,7 @@ export const schemaTypes = [
   blogType,
   navigationType,
   navigationItemType,
+  navigationGroupType,
 
   categoryType,
   headingType,
