@@ -124,7 +124,7 @@ export const richTextType = defineField({
                 initialValue: "internal",
               }),
               defineField({
-                name: "internalLink",
+                name: "internalUrl",
                 title: "Internal Link",
                 type: "reference",
                 to: [{ type: "page" }, { type: "blog" }],

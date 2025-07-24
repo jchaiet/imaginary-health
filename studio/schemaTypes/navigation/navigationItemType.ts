@@ -35,7 +35,7 @@ export const navigationItemType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "internalLink",
+      name: "internalUrl",
       title: "Internal Page",
       description: "Select an internal page to link to",
       type: "reference",
@@ -52,7 +52,7 @@ export const navigationItemType = defineType({
         }),
     }),
     defineField({
-      name: "externalLink",
+      name: "externalUrl",
       title: "External URL",
       description: "Full URL for an external website",
       type: "url",
@@ -82,9 +82,9 @@ export const navigationItemType = defineType({
     select: {
       title: "title",
       itemType: "itemType",
-      internalTitle: "internalLink.title",
-      internalSlug: "internalLink.slug.current",
-      externalLink: "externalLink",
+      internalTitle: "internalUrl.title",
+      internalSlug: "internalUrl.slug.current",
+      externalUrl: "externalUrl",
       children: "children",
     },
     prepare({
@@ -92,7 +92,7 @@ export const navigationItemType = defineType({
       itemType,
       internalTitle,
       internalSlug,
-      externalLink,
+      externalUrl,
       children,
     }) {
       let subtitle = itemType;
@@ -106,7 +106,7 @@ export const navigationItemType = defineType({
           icon = HomeIcon;
           break;
         case "external":
-          subtitle = `External: ${externalLink || "no URL"} `;
+          subtitle = `External: ${externalUrl || "no URL"} `;
           icon = EarthGlobeIcon;
           break;
         case "dropdown":

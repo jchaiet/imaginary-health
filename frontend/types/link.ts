@@ -1,7 +1,7 @@
 import { LucideIcon } from "lucide-react";
 import { SanityImage } from "./image";
 
-export type InternalLinkOptions = {
+export type internalUrlOptions = {
   linkType: "internal";
   internalUrl: {
     slug: {
@@ -10,12 +10,12 @@ export type InternalLinkOptions = {
   };
 };
 
-export type ExternalLinkOptions = {
+export type externalUrlOptions = {
   linkType: "external";
   externalUrl: string;
 };
 
-export type LinkOptions = InternalLinkOptions | ExternalLinkOptions;
+export type LinkOptions = internalUrlOptions | externalUrlOptions;
 
 export type Link = {
   _key: string;

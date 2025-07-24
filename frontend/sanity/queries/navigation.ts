@@ -67,12 +67,12 @@ export const navigationQuery = `
     title,
     slug { current }
   },
-  primaryItems[]{
+  navigationItems[]{
     _key,
     title,
     itemType,
-    externalLink,
-    internalLink->{
+    externalUrl,
+    internalUrl->{
       _type,
       title,
       slug { current }
@@ -81,8 +81,8 @@ export const navigationQuery = `
       _key,
       title,
       itemType,
-      externalLink,
-      internalLink->{
+      externalUrl,
+      internalUrl->{
        _type,
        title,
        slug { current }

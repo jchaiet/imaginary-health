@@ -66,7 +66,7 @@ export const richTextFragment = `
     ...,
     _type == "link" => {
       ...,
-      internalLink->{
+      internalUrl->{
         _id,
         slug { current },
         title

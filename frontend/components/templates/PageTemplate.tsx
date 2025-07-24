@@ -31,7 +31,6 @@ export default async function PageTemplate({
   const navGroups = navigationData.navigationGroups?.length
     ? await mapGroups(navigationData.navigationGroups)
     : [];
-  console.log("MAPPED", navGroups);
 
   const utilityItems = await mapUtilityItems(navigationData.utilityItems);
   const logoLinkSlug = navigationData.logoLink?.slug?.current;
@@ -39,8 +38,8 @@ export default async function PageTemplate({
   const footerNavigationData = await fetchNavigation("main-footer");
   const footerLinkSlug = footerNavigationData.logoLink?.slug?.current;
 
-  const footerNavItems = footerNavigationData?.primaryItems?.length
-    ? await mapNavigation(footerNavigationData.primaryItems)
+  const footerNavItems = footerNavigationData?.navigationItems?.length
+    ? await mapNavigation(footerNavigationData.navigationItems)
     : [];
 
   const footerUtilityItems = await mapUtilityItems(
@@ -48,9 +47,11 @@ export default async function PageTemplate({
   );
 
   const blogNavigationData = isBlog ? await fetchNavigation("blog") : null;
-  const blogNavItems = blogNavigationData?.primaryItems?.length
-    ? await mapNavigation(blogNavigationData.primaryItems)
+  const blogNavItems = blogNavigationData?.navigationItems?.length
+    ? await mapNavigation(blogNavigationData.navigationItems)
     : [];
+
+  console.log("MAPPED", blogNavigationData);
 
   const socialItems = await mapSocialLinks(settings.socialLinks);
 

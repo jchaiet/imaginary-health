@@ -5,8 +5,8 @@ export interface NavigationItem {
   _ref: string;
   title: string;
   itemType: "internal" | "external" | "dropdown" | "list";
-  externalLink?: string;
-  internalLink?: {
+  externalUrl?: string;
+  internalUrl?: {
     _type: string;
     _ref: string;
     title: string;
