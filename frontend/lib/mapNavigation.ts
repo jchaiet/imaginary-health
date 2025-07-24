@@ -1,4 +1,3 @@
-import type { Navigation } from "@/types/navigation";
 import type { NavItem } from "quirk-ui";
 import { resolveNavItemHref } from "./resolveNavItemHref";
 import { NavigationItem } from "@/types";
