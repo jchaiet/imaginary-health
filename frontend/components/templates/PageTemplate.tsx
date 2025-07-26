@@ -51,7 +51,7 @@ export default async function PageTemplate({
     ? await mapNavigation(blogNavigationData.navigationItems)
     : [];
 
-  console.log("MAPPED", blogNavigationData);
+  console.log("MAPPED", navGroups);
 
   const socialItems = await mapSocialLinks(settings.socialLinks);
 

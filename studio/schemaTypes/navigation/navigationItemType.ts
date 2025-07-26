@@ -19,6 +19,11 @@ export const navigationItemType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "subtitle",
+      title: "Subtitle",
+      type: "string",
+    }),
+    defineField({
       name: "description",
       title: "Description",
       type: "richText",

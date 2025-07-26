@@ -131,12 +131,12 @@ const createPortableTextComponents = (
       center: ({ children }) => <span className="textCenter">{children}</span>,
       right: ({ children }) => <span className="textRight">{children}</span>,
       link: ({ children, value }) => {
-        const { linkType, internalUrl, href, blank } = value;
+        const { linkType, internalUrl, externalUrl, blank } = value;
 
         let url = "#";
 
-        if (linkType === "external" && href) {
-          url = href;
+        if (linkType === "external" && externalUrl) {
+          url = externalUrl;
         } else if (linkType === "internal" && internalUrl?.slug.current) {
           url = `/${internalUrl?.slug.current}`;
         }

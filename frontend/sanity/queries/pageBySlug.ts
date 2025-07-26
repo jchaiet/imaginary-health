@@ -7,6 +7,7 @@ import {
   contentBlockFragment,
   heroBlockFragment,
   documentListBlockFragment,
+  tabsBlockFragment,
 } from "./fragments";
 
 export const pageBySlugQuery = `
@@ -37,6 +38,9 @@ export const pageBySlugQuery = `
     },
     _type == "featuredDocumentsBlock" => {
       ${featuredDocumentsBlockFragment}
+    },
+    _type == "tabsBlock" => {
+      ${tabsBlockFragment}
     }
   }
 }`;

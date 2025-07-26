@@ -1,7 +1,7 @@
 import {
   imageAssetFragment,
   linkFragment,
-  callToActionFragment,
+  richTextFragment,
 } from "./fragments";
 
 export const navigationQuery = `
@@ -14,6 +14,10 @@ export const navigationQuery = `
     title,
     primaryItems[]{
       title,
+      subtitle,
+      description[]{
+        ${richTextFragment}
+      },
       itemType,
       internalUrl->{
         _type,
@@ -68,6 +72,7 @@ export const navigationQuery = `
     slug { current }
   },
   navigationItems[]{
+    ...,
     _key,
     title,
     itemType,

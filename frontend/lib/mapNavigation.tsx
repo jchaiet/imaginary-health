@@ -1,4 +1,5 @@
 import type { NavItem } from "quirk-ui";
+import { RichText } from "@/components/ui/PortableTextRenderer";
 import { resolveNavItemHref } from "./resolveNavItemHref";
 import { NavigationItem } from "@/types";
 
@@ -9,6 +10,8 @@ export async function mapNavigation(
     items.map(async (item) => {
       const label = item.title;
       const key = item._key;
+      const description = <RichText blocks={item.description ?? []} />;
+      const subtitle = item.subtitle;
 
       if (
         (item.itemType === "list" || item.itemType === "dropdown") &&
@@ -37,6 +40,8 @@ export async function mapNavigation(
         return {
           _key: key,
           label,
+          subtitle,
+          description,
           sublinks: validSubLinks,
         };
       }

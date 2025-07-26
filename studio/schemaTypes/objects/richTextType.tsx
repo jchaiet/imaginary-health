@@ -131,7 +131,7 @@ export const richTextType = defineField({
                 hidden: ({ parent }) => parent?.linkType !== "internal",
               }),
               defineField({
-                name: "href",
+                name: "externalUrl",
                 title: "External URL",
                 type: "url",
                 hidden: ({ parent }) => parent?.linkType !== "external",

@@ -75,6 +75,27 @@ export const richTextFragment = `
   }
 `;
 
+export const headingFragment = `
+  eyebrow[]{
+    ...,
+    ${richTextFragment}
+  },
+  title[]{
+    ...,
+    ${richTextFragment}
+  },
+  description[]{
+    ...,
+    ${richTextFragment}
+  },
+  disclaimer[]{
+    ...,
+    ${richTextFragment}
+  },
+  animateText,
+  headingLayout
+`;
+
 export const singletonFragment = `
   "singleton": referencedSingleton->{
     _id,
@@ -112,6 +133,9 @@ export const singletonFragment = `
 
 export const featuredDocumentsBlockFragment = `
   ...,
+  heading {
+    ${headingFragment}
+  },
   manualArticles[]->{
     ${articleFragment}
   },
@@ -155,6 +179,9 @@ export const featuredDocumentsBlockFragment = `
 
 export const accordionBlockFragment = `
  ...,
+ heading {
+    ${headingFragment}
+  },
   callToAction {
     ${callToActionFragment}
   },
@@ -177,6 +204,9 @@ _type == "cardGridBlock" => {
 
 export const carouselBlockFragment = `
   ...,
+  heading {
+    ${headingFragment}
+  },
   callToAction {
     ${callToActionFragment}
   },
@@ -190,6 +220,9 @@ export const carouselBlockFragment = `
 
 export const contentBlockFragment = `
   ...,
+  heading {
+    ${headingFragment}
+  },
   callToAction {
     ${callToActionFragment}
   },
@@ -197,6 +230,9 @@ export const contentBlockFragment = `
 
 export const heroBlockFragment = `
   ...,
+  heading {
+    ${headingFragment}
+  },
   callToAction {
     ${callToActionFragment}
   },
@@ -204,6 +240,9 @@ export const heroBlockFragment = `
 
 export const documentListBlockFragment = `
   ...,
+  heading {
+    ${headingFragment}
+  },
   "articles": *[
     _type == ^.documentType && 
     parent._ref == ^.id &&
@@ -226,5 +265,47 @@ export const documentListBlockFragment = `
   },
   excludeFilters[]->{
     ${categoryFragment}
+  }
+`;
+
+export const tabsBlockFragment = `
+  ...,
+  heading {
+    ${headingFragment}
+  },
+  image {
+    ${imageAssetFragment}
+  },
+  callToAction {
+    ${callToActionFragment}
+  },
+  items[]{
+    ...,
+    tabText[]{
+      ...,
+      ${richTextFragment}
+    },
+    tabImage {
+      ${imageAssetFragment}
+    },
+    tabLink {
+      ${linkFragment}
+    },
+    tabGridItem[]{
+      itemText[]{
+        ...,
+        ${richTextFragment}
+      },
+      itemImage {
+        ${imageAssetFragment}
+      }
+    },
+    tabDisclaimer[]{
+      ...,
+      ${richTextFragment}
+    },
+    callToAction{
+      ${linkFragment}
+    }
   }
 `;
