@@ -16,11 +16,13 @@ type HeaderProps = {
   logoUrl: string | null;
   logoAlt: string;
   logoLinkSlug?: string;
-  variant: "default" | "minimal";
+  variant: "standard" | "transparent" | "minimal";
   navigationType: "default" | "advanced";
 };
 
 export default function Header({
+  variant,
+  navigationType = "default",
   navItems,
   navGroups,
   utilityItems,
@@ -28,8 +30,6 @@ export default function Header({
   logoUrl,
   logoAlt,
   logoLinkSlug,
-  navigationType = "default",
-  // variant,
 }: HeaderProps) {
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
@@ -62,9 +62,8 @@ export default function Header({
 
   return (
     <Navbar
-      isTransparent
       isSticky
-      variant="default"
+      variant={variant}
       navigationType={navigationType}
       alignment={alignment}
       items={navItems ?? []}

@@ -19,7 +19,7 @@ type LayoutProps = {
   utilityItems: UtilityItem[];
   logo: SanityImage;
   logoLinkSlug?: string;
-  variant: "default" | "minimal";
+  variant: "standard" | "transparent" | "minimal";
   navigationType: "default" | "advanced";
   socialItems: Link[];
   primaryInfo?: string;

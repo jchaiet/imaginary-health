@@ -43,6 +43,21 @@ export const navigationType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "variant",
+      title: "Variant",
+      type: "string",
+      options: {
+        list: [
+          { title: "Default", value: "default" },
+          { title: "Transparent", value: "transparent" },
+          { title: "Minimal", value: "minimal" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "default",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "navigationItems",
       title: "Navigation Items",
       type: "array",
