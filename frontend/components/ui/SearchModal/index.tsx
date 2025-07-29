@@ -29,14 +29,14 @@ export function SearchModal() {
   const [filter, setFilter] = useState<string | null>(null);
   const [groups, setGroups] = useState<GroupedResult[] | null>(null);
   // const [filterMode, setFilterMode] = useState<"any" | "all">("any");
-  const [start, setStart] = useState(0);
+  // const [start, setStart] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
 
   const limit = 3;
-  const sort = "date-desc";
+
   const fetchArticles = async () => {
     if (isLoading || !hasMore) return;
 
@@ -61,7 +61,7 @@ export function SearchModal() {
         console.error("Unexpected response format:", data);
       }
 
-      setStart((prev) => prev + limit);
+      //setStart((prev) => prev + limit);
 
       // setTotalCount(data.totalCount);
 
