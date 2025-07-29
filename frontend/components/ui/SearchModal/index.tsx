@@ -35,7 +35,7 @@ export function SearchModal() {
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
 
-  const limit = 3;
+  // const limit = 3;
 
   const fetchArticles = async () => {
     if (isLoading || !hasMore) return;
