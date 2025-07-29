@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
           count(pageBuilder[(_type == "accordionBlock" && items[].content[].children[].text match "*${searchTerm}*")]) > 0 ||
           count(pageBuilder[(_type == "richTextBlock" && text[].children[].text match "*${searchTerm}*")]) > 0
         )
-      ]{
+      ] | order(title asc){
         _id,
         _type,
         title,

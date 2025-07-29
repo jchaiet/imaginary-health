@@ -27,31 +27,20 @@ type GroupedResult = {
 export function SearchModal() {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [filter, setFilter] = useState<string | null>(null);
-  const [totalCount, setTotalCount] = useState<number | null>(null);
-  const [sort, setSort] = useState<
-    "date-desc" | "data-asc" | "title-asc" | "title-desc" | "popular-desc"
-  >("date-desc");
   const [groups, setGroups] = useState<GroupedResult[] | null>(null);
   // const [filterMode, setFilterMode] = useState<"any" | "all">("any");
   const [start, setStart] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [showFilters, setShowFilters] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
 
   const limit = 3;
-
+  const sort = "date-desc";
   const fetchArticles = async () => {
     if (isLoading || !hasMore) return;
 
     setIsLoading(true);
-
-    const queryParams = new URLSearchParams({
-      start: String(start),
-      limit: String(limit),
-      sort: sort,
-    });
 
     try {
       const res = await fetch(
@@ -74,7 +63,7 @@ export function SearchModal() {
 
       setStart((prev) => prev + limit);
 
-      setTotalCount(data.totalCount);
+      // setTotalCount(data.totalCount);
 
       // if (start + data.articles.length >= data.totalCount) {
       //   setHasMore(false);
@@ -108,16 +97,6 @@ export function SearchModal() {
 
     setGroups(groupedArray);
   }
-
-  useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.body.style.overflow = showFilters ? "hidden" : "";
-
-      return () => {
-        document.body.style.overflow = "";
-      };
-    }
-  }, [showFilters]);
 
   useEffect(() => {
     const handler = setTimeout(() => {
