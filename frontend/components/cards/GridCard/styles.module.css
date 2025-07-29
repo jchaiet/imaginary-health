@@ -30,7 +30,7 @@
 .cardLink:hover,
 .modalTrigger:hover {
   .card {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-100);
   }
 
   .callToAction {
@@ -40,9 +40,9 @@
     }
 
     .cardIcon {
-      background-color: var(--color-primary);
+      background-color: var(--color-primary-100);
       color: #fff;
-      border: 5px solid var(--color-primary);
+      border: 5px solid var(--color-primary-100);
     }
   }
 
@@ -100,7 +100,7 @@
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  color: var(--color-primary);
+  color: var(--color-primary-100);
   width: 30px;
   height: 30px;
   border-radius: var(--radius-full);
@@ -122,8 +122,8 @@
 
   &:hover {
     .cardIcon {
-      background-color: var(--color-primary);
-      border-color: var(--color-primary);
+      background-color: var(--color-primary-100);
+      border-color: var(--color-primary-100);
       color: #fff;
     }
 
@@ -150,7 +150,7 @@
     padding: var(--spacing-xs);
 
     background-color: #fff;
-    color: var(--color-primary);
+    color: var(--color-primary-100);
     border: 5px solid #fff;
     border-radius: var(--radius-full);
     transition:
@@ -160,7 +160,7 @@
   }
 
   .label {
-    color: var(--color-primary);
+    color: var(--color-primary-100);
     font-weight: var(--font-weight-semibold);
     opacity: 0;
     transform: translateY(-10px);
@@ -199,7 +199,7 @@
   }
 
   .innerCircle {
-    stroke: var(--color-primary);
+    stroke: var(--color-primary-100);
     fill: none;
     stroke-width: 10px;
   }
@@ -208,7 +208,7 @@
     position: relative;
     font-weight: var(--font-weight-bold);
     font-size: 1.75rem;
-    fill: var(--color-primary);
+    fill: var(--color-primary-100);
   }
 }
 
@@ -216,7 +216,7 @@
   background-color: transparent;
 
   .title {
-    color: var(--color-primary);
+    color: var(--color-primary-100);
   }
 
   .description {
@@ -227,7 +227,7 @@
   .cardLink:hover,
   .modalTrigger:hover {
     .card {
-      background-color: var(--color-primary);
+      background-color: var(--color-primary-100);
     }
 
     .callToAction {
@@ -239,7 +239,7 @@
 
       .cardIcon {
         background-color: #e0eaf9;
-        color: var(--color-primary);
+        color: var(--color-primary-100);
         border: 5px solid #e0eaf9;
       }
     }
@@ -356,7 +356,7 @@
 
 /* Variant Styles */
 .image {
-  /* background-color: var(--color-secondary); */
+  /* background-color: var(--color-secondary-100); */
   width: 100%;
   min-height: unset;
 
@@ -374,7 +374,7 @@
 
 /* Cust ClassName Styles */
 :global(.homeGrid) .textOnly {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-100);
 
   .title {
     color: #fff;

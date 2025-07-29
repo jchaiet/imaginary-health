@@ -13,6 +13,8 @@ type LayoutProps = {
   children: ReactNode;
   hideHeader?: boolean;
   hideFooter?: boolean;
+  showSearch?: boolean;
+  searchComponent?: React.ReactNode;
   navItems?: NavItem[];
   navGroups?: NavGroup[];
   alignment: "left" | "center" | "right";
@@ -38,6 +40,8 @@ export default function Layout({
   children,
   hideHeader,
   hideFooter,
+  showSearch,
+  searchComponent,
   navItems,
   navGroups,
   alignment,
@@ -68,6 +72,8 @@ export default function Layout({
           logoLinkSlug={logoLinkSlug}
           variant={variant}
           navigationType={navigationType}
+          showSearch={showSearch}
+          searchComponent={searchComponent}
         />
       )}
       <main>{children}</main>

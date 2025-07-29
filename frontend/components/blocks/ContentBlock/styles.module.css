@@ -57,7 +57,7 @@
   &:after {
     content: "";
     display: block;
-    background-color: var(--color-secondary);
+    background-color: var(--color-secondary-100);
     width: 35px;
     height: 35px;
     position: absolute;
@@ -289,7 +289,7 @@
     color: #fff;
 
     &:after {
-      background-color: var(--color-secondary);
+      background-color: var(--color-secondary-100);
     }
   }
 

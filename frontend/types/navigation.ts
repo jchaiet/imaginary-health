@@ -12,4 +12,6 @@ export interface Navigation {
   utilityItems: Link[];
   variant: "standard" | "transparent" | "minimal";
   navigationType: "default" | "advanced";
+  showSearch: boolean;
+  searchComponent?: React.ReactNode;
 }

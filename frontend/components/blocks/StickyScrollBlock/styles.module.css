@@ -94,10 +94,10 @@
       transition: color 0.3s ease-in-out;
 
       &.active {
-        color: var(--color-primary);
+        color: var(--color-primary-100);
 
         .number {
-          background-color: var(--color-primary);
+          background-color: var(--color-primary-100);
           color: #fff;
         }
       }

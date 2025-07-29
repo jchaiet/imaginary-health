@@ -58,6 +58,11 @@ export const navigationType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "showSearch",
+      type: "boolean",
+      title: "Show Search Button",
+    }),
+    defineField({
       name: "navigationItems",
       title: "Navigation Items",
       type: "array",

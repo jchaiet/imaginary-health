@@ -8,7 +8,7 @@
   transition: border-color 0.3s ease-in-out;
 
   &:hover {
-    border-color: var(--color-primary);
+    border-color: var(--color-primary-100);
 
     .itemImage {
       img {
@@ -18,7 +18,7 @@
 
     .itemTitle {
       h3 {
-        color: var(--color-primary);
+        color: var(--color-primary-100);
       }
     }
 
@@ -30,7 +30,7 @@
       }
 
       .icon {
-        color: var(--color-primary);
+        color: var(--color-primary-100);
       }
     }
   }
@@ -204,7 +204,7 @@
   }
 
   .label {
-    color: var(--color-primary);
+    color: var(--color-primary-100);
     font-weight: var(--font-weight-semibold);
     opacity: 0;
     transform: translateY(10px);
@@ -235,6 +235,6 @@
 
 .itemEyebrow {
   font-size: var(--font-size-sm);
-  color: var(--color-secondary);
+  color: var(--color-secondary-100);
   text-transform: capitalize;
 }

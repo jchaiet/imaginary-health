@@ -17,7 +17,7 @@
 
 .cardLink:hover {
   .card {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-100);
   }
 
   .title {
@@ -71,7 +71,7 @@
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  color: var(--color-primary);
+  color: var(--color-primary-100);
   min-width: 35px;
   min-height: 35px;
   border-radius: var(--radius-full);

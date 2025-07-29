@@ -19,7 +19,7 @@
     transform 0.3s ease-in-out,
     opacity 0.3s ease-in-out;
 
-  color: var(--color-primary);
+  color: var(--color-primary-100);
 
   &::first-letter {
     text-transform: capitalize;

@@ -75,7 +75,7 @@ body header > div {
 
 /* Text Color Overrides */
 .textPrimary {
-  color: var(--color-primary);
+  color: var(--color-primary-100);
 }
 
 /* Text Styles */
@@ -180,7 +180,7 @@ body .centered {
 }
 
 body .backgroundPrimary {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-100);
 
   .textPrimary,
   h1,

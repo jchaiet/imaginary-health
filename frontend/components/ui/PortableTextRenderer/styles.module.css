@@ -19,7 +19,7 @@
 }
 
 .container .richTextLink {
-  color: var(--color-primary);
+  color: var(--color-primary-100);
   text-decoration: none;
 }
 

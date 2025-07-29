@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { SearchModal } from "../ui/SearchModal";
 import {
   Navbar,
   type UtilityItem,
@@ -18,6 +19,8 @@ type HeaderProps = {
   logoLinkSlug?: string;
   variant: "standard" | "transparent" | "minimal";
   navigationType: "default" | "advanced";
+  showSearch?: boolean;
+  searchComponent?: React.ReactNode;
 };
 
 export default function Header({
@@ -30,6 +33,8 @@ export default function Header({
   logoUrl,
   logoAlt,
   logoLinkSlug,
+  showSearch,
+  searchComponent,
 }: HeaderProps) {
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
@@ -62,6 +67,8 @@ export default function Header({
 
   return (
     <Navbar
+      searchComponent={<SearchModal />}
+      showSearch={showSearch}
       isSticky
       variant={variant}
       navigationType={navigationType}

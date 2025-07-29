@@ -86,7 +86,7 @@
   padding: var(--spacing-sm) 0;
 
   &.active {
-    color: var(--color-primary);
+    color: var(--color-primary-100);
   }
 
   @media (max-width: 767px) {
@@ -109,7 +109,7 @@
     0.3s ease-in-out;
 
   &.active {
-    color: var(--color-primary);
+    color: var(--color-primary-100);
     /* background-color: rgba(var(--color-primary-rgb), 0.15); */
   }
 
@@ -189,7 +189,7 @@
     font-weight: var(--font-weight-semibold);
     background-color: transparent;
     border: none;
-    color: var(--color-primary);
+    color: var(--color-primary-100);
   }
 
   .links {
@@ -231,7 +231,7 @@
       display: block;
       border-radius: 0;
       font-size: var(--font-size-sm);
-      color: var(--color-primary);
+      color: var(--color-primary-100);
     }
 
     .sublinkToggle {

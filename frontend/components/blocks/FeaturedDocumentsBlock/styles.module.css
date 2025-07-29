@@ -59,13 +59,13 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    color: var(--color-primary);
+    color: var(--color-primary-100);
     font-weight: var(--font-weight-semibold);
     text-decoration: none;
     transition: color 0.3s ease-in-out;
 
     &:hover {
-      color: var(--color-secondary);
+      color: var(--color-secondary-100);
     }
   }
 }
@@ -350,7 +350,7 @@
   transition: border-color 0.3s ease-in-out;
 
   &:hover {
-    border-color: var(--color-primary);
+    border-color: var(--color-primary-100);
 
     .documentImage {
       img {
@@ -360,7 +360,7 @@
 
     .documentTitle {
       h3 {
-        color: var(--color-primary);
+        color: var(--color-primary-100);
       }
     }
 
@@ -372,7 +372,7 @@
       }
 
       .icon {
-        color: var(--color-primary);
+        color: var(--color-primary-100);
       }
     }
   }
@@ -380,7 +380,7 @@
 
 .documentEyebrow {
   font-size: var(--font-size-sm);
-  color: var(--color-secondary);
+  color: var(--color-secondary-100);
 }
 
 .documentImage {
@@ -456,7 +456,7 @@
   }
 
   .label {
-    color: var(--color-primary);
+    color: var(--color-primary-100);
     font-weight: var(--font-weight-semibold);
     opacity: 0;
     transform: translateY(10px);
