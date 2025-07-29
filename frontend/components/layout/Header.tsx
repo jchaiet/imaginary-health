@@ -34,7 +34,7 @@ export default function Header({
   logoAlt,
   logoLinkSlug,
   showSearch,
-  searchComponent,
+  // searchComponent,
 }: HeaderProps) {
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;

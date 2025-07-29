@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { sanityClient } from "@/sanity/client";
-import {
-  imageAssetFragment,
-  richTextFragment,
-} from "@/sanity/queries/fragments";
+import { imageAssetFragment } from "@/sanity/queries/fragments";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
