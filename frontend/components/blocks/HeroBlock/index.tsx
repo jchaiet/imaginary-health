@@ -111,6 +111,7 @@ export function HeroBlock({
 
   const videoControl = (
     <button
+      title={`${isPlaying ? "Pause the video" : "Play the video"}`}
       className={styles.videoControl}
       onClick={() => {
         const video = videoRef.current;

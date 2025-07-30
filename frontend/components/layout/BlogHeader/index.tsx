@@ -150,7 +150,7 @@ export default function BlogHeader({
                 onMouseEnter={() => {
                   if (!parentPath) setOpenPath(null);
                 }}
-                role="menuitem"
+                role="link"
               >
                 {link.label}
               </a>
@@ -201,22 +201,6 @@ export default function BlogHeader({
       <nav className={styles.blogHeader}>
         <div className={styles.container}>
           <div className={styles.title}>{title}</div>
-          {/* <div ref={mobileNavRef} className={styles.itemsMobile}>
-            <ChevronRight size={16} className={styles.chevronBreadcrumb} />
-            <button
-              className={styles.mobileItemsToggle}
-              onClick={() => toggleMobileItems()}
-            >
-              {navItems &&
-                navItems.find((item) => item.href === pathname)?.label}
-              <ChevronDown size={16} />
-            </button>
-            <div
-              className={`${styles.links} ${showMobileItems ? styles.open : ""}`}
-            >
-              {renderLinks(navItems)}
-            </div>
-          </div> */}
           <div ref={navRef} className={styles.items}>
             {renderLinks(navItems)}
           </div>

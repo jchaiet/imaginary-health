@@ -80,7 +80,7 @@
   justify-content: center;
   gap: var(--spacing-xs);
   cursor: pointer;
-  color: var(--color-muted);
+  color: var(--color-secondary-75);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-sm);
   padding: var(--spacing-sm) 0;
@@ -97,7 +97,7 @@
 
 .link {
   cursor: pointer;
-  color: var(--color-muted);
+  color: var(--color-secondary-75);
   justify-content: flex-end;
   text-decoration: none;
   font-weight: var(--font-weight-semibold);

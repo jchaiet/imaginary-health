@@ -41,7 +41,7 @@
 }
 
 .articleDetails {
-  color: var(--color-muted);
+  color: var(--color-secondary-75);
   display: flex;
   align-items: center;
   margin-bottom: var(--spacing-md);
@@ -57,7 +57,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary-75);
   padding: 0 var(--spacing-md);
   color: #fff;
   width: auto;
@@ -73,14 +73,14 @@
 }
 
 .category {
-  border: 1px solid var(--color-secondary);
+  border: 1px solid var(--color-secondary-75);
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
   padding: 0 var(--spacing-md);
-  color: var(--color-secondary);
+  color: var(--color-secondary-75);
   width: auto;
   height: 36px;
   border-radius: var(--radius-full);
@@ -91,7 +91,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary-75);
   color: #fff;
   width: 25px;
   height: 25px;

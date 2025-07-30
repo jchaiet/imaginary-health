@@ -145,8 +145,8 @@
     height: 40px;
 
     &:disabled {
-      background-color: var(--color-muted);
-      color: var(--color-secondary);
+      background-color: var(--color-secondary-25);
+      color: var(--color-secondary-75);
       cursor: not-allowed;
     }
   }
