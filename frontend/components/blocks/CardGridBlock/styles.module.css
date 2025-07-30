@@ -67,10 +67,16 @@ h3.description {
 }
 
 /* Style Options Override */
-:global(.split) .grid {
-  margin-top: 0;
-  flex: 1;
-  flex-direction: row;
+:global(.split).container {
+  .heading {
+    flex: 0.35;
+  }
+
+  .grid {
+    margin-top: 0;
+    flex: 1;
+    flex-direction: row;
+  }
 }
 
 .grid {

@@ -57,7 +57,7 @@
   &:after {
     content: "";
     display: block;
-    background-color: var(--color-secondary-100);
+    background-color: var(--color-secondary);
     width: 35px;
     height: 35px;
     position: absolute;
@@ -149,8 +149,8 @@
 }
 
 .title {
-  flex: 1;
-  text-wrap: balance;
+  /* flex: 1; */
+  text-wrap: pretty;
 }
 
 .text {
@@ -190,6 +190,10 @@
 
   .title {
     margin-bottom: 0;
+  }
+
+  p.title {
+    margin-top: 1rem;
   }
 
   @media (max-width: 768px) {
@@ -289,7 +293,7 @@
     color: #fff;
 
     &:after {
-      background-color: var(--color-secondary-100);
+      background-color: var(--color-secondary);
     }
   }
 
@@ -298,4 +302,9 @@
       background-color: #fff;
     }
   }
+}
+
+/* Style Options Override */
+:global(.split-35-65) .heading {
+  flex: 0.35;
 }

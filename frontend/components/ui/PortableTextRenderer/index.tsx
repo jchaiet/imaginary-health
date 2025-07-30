@@ -16,6 +16,7 @@ import Image from "next/image";
 import { urlForImage } from "@/sanity/client";
 
 import styles from "./styles.module.css";
+import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 
 // const getAlignClass = (value: PortableTextBlock) => {
 //   const markSet = value.children?.[0]?.marks ?? [];
@@ -78,7 +79,8 @@ const createPortableTextComponents = (
   baseClassName?: string,
   previousTextRef?: React.RefObject<string | undefined>,
   textOverride?: string,
-  animateText?: boolean
+  animateText?: boolean,
+  isMobile?: boolean
 ): PortableTextComponents => {
   const block = getBlockComponents(baseClassName);
   const coloredText: PortableTextMarkComponent<ColoredTextValue> = ({
@@ -110,7 +112,7 @@ const createPortableTextComponents = (
     return (
       <ul
         style={{
-          columnCount: itemCount > 5 ? 2 : 1,
+          columnCount: isMobile ? 1 : itemCount > 5 ? 2 : 1,
         }}
         className={baseClassName}
       >
@@ -137,7 +139,7 @@ const createPortableTextComponents = (
 
         if (linkType === "external" && externalUrl) {
           url = externalUrl;
-        } else if (linkType === "internal" && internalUrl?.slug.current) {
+        } else if (linkType === "internal" && internalUrl?.slug?.current) {
           url = `/${internalUrl?.slug.current}`;
         }
 
@@ -182,6 +184,7 @@ const createPortableTextComponents = (
           </div>
         );
       },
+      divider: () => <hr className={styles.divider} />,
     },
   };
 };
@@ -199,6 +202,8 @@ export const RichText: React.FC<RichTextProps> = ({
   textOverride,
   animateText,
 }) => {
+  const isMobile = useMediaQuery("(max-width: 767px)");
+
   const previousTextRef = useRef(textOverride);
   useEffect(() => {
     previousTextRef.current = textOverride;
@@ -210,9 +215,10 @@ export const RichText: React.FC<RichTextProps> = ({
         className,
         previousTextRef,
         textOverride,
-        animateText
+        animateText,
+        isMobile
       ),
-    [className, previousTextRef, textOverride, animateText]
+    [className, previousTextRef, textOverride, animateText, isMobile]
   );
 
   if (!blocks) return null;

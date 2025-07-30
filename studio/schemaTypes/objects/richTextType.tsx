@@ -181,5 +181,8 @@ export const richTextType = defineField({
         withFilename: true,
       },
     }),
+    defineArrayMember({
+      type: "divider",
+    }),
   ],
 });

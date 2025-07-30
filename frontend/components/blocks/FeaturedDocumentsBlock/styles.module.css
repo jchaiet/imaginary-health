@@ -65,7 +65,7 @@
     transition: color 0.3s ease-in-out;
 
     &:hover {
-      color: var(--color-secondary-100);
+      color: var(--color-secondary);
     }
   }
 }
@@ -380,7 +380,7 @@
 
 .documentEyebrow {
   font-size: var(--font-size-sm);
-  color: var(--color-secondary-100);
+  color: var(--color-secondary);
 }
 
 .documentImage {

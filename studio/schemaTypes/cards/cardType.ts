@@ -20,6 +20,7 @@ export const cardType = defineType({
           { title: "Testimonial", value: "testimonial" },
           { title: "Image", value: "image" },
           { title: "Review", value: "review" },
+          { title: "Bio", value: "bio" },
         ],
         layout: "radio",
       },
@@ -43,7 +44,9 @@ export const cardType = defineType({
       },
       initialValue: "text",
       hidden: ({ parent }) =>
-        parent?.variant !== "grid" && parent?.variant !== "testimonial",
+        parent?.variant !== "bio" &&
+        parent?.variant !== "grid" &&
+        parent?.variant !== "testimonial",
     }),
     defineField({
       name: "rating",

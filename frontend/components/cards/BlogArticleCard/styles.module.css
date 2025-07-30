@@ -235,6 +235,6 @@
 
 .itemEyebrow {
   font-size: var(--font-size-sm);
-  color: var(--color-secondary-100);
+  color: var(--color-secondary);
   text-transform: capitalize;
 }

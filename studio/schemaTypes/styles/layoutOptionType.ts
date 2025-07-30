@@ -26,8 +26,12 @@ export const layoutOptionType = [
           value: "full-bleed",
         },
         {
-          title: "Split Layout",
+          title: "Split 50/50",
           value: "split",
+        },
+        {
+          title: "Split 35/65",
+          value: "split-35-65",
         },
       ],
     },

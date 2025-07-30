@@ -194,6 +194,21 @@ body .backgroundPrimary {
   }
 }
 
+body .backgroundPrimaryLight {
+  background-color: var(--color-primary-10);
+
+  .textPrimary,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    color: var(--color-text-primary);
+  }
+}
+
 /* Custom ClassNames */
 body .homeGrid,
 body .startMetricGrid {

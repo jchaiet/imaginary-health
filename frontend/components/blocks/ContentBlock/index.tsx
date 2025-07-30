@@ -103,7 +103,9 @@ export function ContentBlock({
         style={layout.gap ? gap : {}}
       >
         <div className={`${styles.heading} ${headingLayoutClass}`}>
-          <RichText className={styles.title} blocks={heading.title} />
+          {heading.title && (
+            <RichText className={styles.title} blocks={heading.title} />
+          )}
 
           {(heading?.description || callToAction?.items) && (
             <div className={styles.text}>
@@ -113,6 +115,7 @@ export function ContentBlock({
                   blocks={heading.description}
                 />
               )}
+
               {metrics && (
                 <div className={styles.metrics}>
                   {metrics.map((metric) => (
@@ -138,15 +141,18 @@ export function ContentBlock({
                   alignment={callToAction.alignment}
                 />
               )}
+
               {disclaimer && (
                 <RichText className={styles.disclaimer} blocks={disclaimer} />
               )}
             </div>
           )}
         </div>
-        {video
+
+        {layout?.orientation !== "no-image" && video
           ? VideoBlock()
-          : image &&
+          : layout?.orientation !== "no-image" &&
+            image &&
             imageUrl && (
               <div
                 className={`${styles.image} ${imageDisplayClass}`}

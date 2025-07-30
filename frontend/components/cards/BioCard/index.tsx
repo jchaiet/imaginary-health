@@ -13,7 +13,7 @@ type CustomCardProps = ItemType & {
   onLeave?: () => void;
 };
 
-export function GridCard({
+export function BioCard({
   style,
   variant,
   metricValue,

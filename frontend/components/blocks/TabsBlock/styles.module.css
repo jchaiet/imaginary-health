@@ -95,7 +95,7 @@
   }
 
   &.vertical {
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--spacing-lg);

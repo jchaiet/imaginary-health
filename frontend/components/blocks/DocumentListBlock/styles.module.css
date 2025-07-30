@@ -110,7 +110,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: var(--color-secondary-100);
+    background-color: var(--color-secondary);
   }
 }
 
@@ -146,7 +146,7 @@
 
     &:disabled {
       background-color: var(--color-muted);
-      color: var(--color-secondary-100);
+      color: var(--color-secondary);
       cursor: not-allowed;
     }
   }

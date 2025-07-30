@@ -6,6 +6,7 @@ import { CarouselBlockProps } from "@/types";
 import { SegmentCard } from "@/components/cards/SegmentCard";
 import { TestimonialCard } from "@/components/cards/TestimonialCard";
 import { GridCard } from "@/components/cards/GridCard";
+import { BioCard } from "@/components/cards/BioCard";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
 import styles from "./styles.module.css";
 
@@ -27,7 +28,8 @@ export function CarouselBlock({
     if (!el) return;
 
     const checkSplit = () => {
-      setIsSplit(el.classList.contains("split"));
+      const splitState = el.classList.contains("split");
+      setIsSplit(splitState);
     };
 
     checkSplit();
@@ -55,6 +57,8 @@ export function CarouselBlock({
         return <SegmentCard key={item._key} {...item} />;
       case "testimonial":
         return <TestimonialCard key={item._key} {...item} />;
+      case "bio":
+        return <BioCard key={item._key} {...item} />;
       default:
         return <div key={item._key}>Unknown item type: {item._type}</div>;
     }
@@ -79,17 +83,19 @@ export function CarouselBlock({
         </div>
 
         <div className={styles.carousel}>
-          <Carousel
-            autoplay={carouselOptions?.autoplay}
-            autoplayInterval={carouselOptions?.autoplayInterval}
-            itemsPerPage={carouselOptions?.itemsPerPage}
-            itemsPerRow={carouselOptions?.itemsPerRow}
-            items={mappedItems}
-            externalRef={containerRef as React.RefObject<HTMLElement>}
-            siblingRef={siblingRef as React.RefObject<HTMLElement>}
-            isSplit={isSplit}
-            className={styles.carouselComponent}
-          />
+          {mappedItems && (
+            <Carousel
+              autoplay={carouselOptions?.autoplay}
+              autoplayInterval={carouselOptions?.autoplayInterval}
+              itemsPerPage={carouselOptions?.itemsPerPage}
+              itemsPerRow={carouselOptions?.itemsPerRow}
+              items={mappedItems}
+              externalRef={containerRef as React.RefObject<HTMLElement>}
+              siblingRef={siblingRef as React.RefObject<HTMLElement>}
+              isSplit={isSplit}
+              className={styles.carouselComponent}
+            />
+          )}
         </div>
       </article>
     </section>

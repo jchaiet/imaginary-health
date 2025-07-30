@@ -140,7 +140,7 @@ export function SearchModal() {
                 setSearch("");
               }}
             >
-              <XIcon size={21} />
+              <XIcon size={16} />
             </button>
           )}
         </div>

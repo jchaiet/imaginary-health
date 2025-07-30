@@ -128,20 +128,21 @@ export function CardGridBlock({
               }
             })}
           </Grid>
-        </div>
-        {callToAction && (
-          <CallToActions
-            items={callToAction.items}
-            alignment={callToAction.alignment}
-          />
-        )}
-        <div className={styles.footer}>
-          {heading?.disclaimer && (
-            <RichText
-              className={styles.disclaimer}
-              blocks={heading?.disclaimer}
+
+          {callToAction && (
+            <CallToActions
+              items={callToAction.items}
+              alignment={callToAction.alignment}
             />
           )}
+          <div className={styles.footer}>
+            {heading?.disclaimer && (
+              <RichText
+                className={styles.disclaimer}
+                blocks={heading?.disclaimer}
+              />
+            )}
+          </div>
         </div>
       </article>
     </section>

@@ -16,6 +16,7 @@ import { linkType } from "./objects/linkType";
 import { richTextType } from "./objects/richTextType";
 import { cardType } from "./cards/cardType";
 import { gridType } from "./objects/gridType";
+import { dividerType } from "./objects/dividerType";
 
 /* Blocks */
 import { heroBlockType } from "./blocks/heroBlockType";
@@ -51,6 +52,7 @@ export const schemaTypes = [
   richTextType,
   cardType,
   gridType,
+  dividerType,
 
   heroBlockType,
   cardGridBlockType,

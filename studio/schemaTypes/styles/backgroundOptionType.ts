@@ -18,6 +18,10 @@ export const backgroundOptionType = [
           value: "backgroundPrimary",
         },
         {
+          title: "Primary - Light",
+          value: "backgroundPrimaryLight",
+        },
+        {
           title: "Secondary",
           value: "backgroundSecondary",
         },
