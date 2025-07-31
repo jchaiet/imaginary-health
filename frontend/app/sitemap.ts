@@ -1,6 +1,12 @@
 import { MetadataRoute } from "next";
 import groq from "groq";
 import { sanityClient } from "@/sanity/client";
+import { PageProps } from "@/types";
+
+type SitemapPage = {
+  slug: string;
+  _updatedAt: string;
+};
 
 const query = groq`*{
   "pages": *[_type == "page" && defined(slug.current) && !(_id in path("drafts.**"))]{
@@ -18,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const baseUrl = process.env.NEXT_PUBLIC_SANITY_BASE_URL;
 
-  const pageEntries = data.pages.map((page: any) => {
+  const pageEntries = data.pages.map((page: SitemapPage) => {
     const slug = page.slug === "home" ? "" : page.slug;
     const priority = page.slug === "home" ? 1 : 0.9;
 
