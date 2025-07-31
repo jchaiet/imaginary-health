@@ -1,7 +1,6 @@
 import { MetadataRoute } from "next";
 import groq from "groq";
 import { sanityClient } from "@/sanity/client";
-import { PageProps } from "@/types";
 
 type SitemapPage = {
   slug: string;
