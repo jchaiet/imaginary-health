@@ -1,3 +1,4 @@
+import { cache } from "react";
 import PageTemplate from "@/components/templates/PageTemplate";
 import { PageBuilder } from "@/lib/pageBuilder";
 import { sanityClient } from "@/sanity/client";
@@ -9,15 +10,12 @@ interface PageProps {
   params: Promise<{ slug: string[] }>;
 }
 
-export default async function Page({ params }: PageProps) {
-  const { slug } = await params;
+const getPage = cache(async (slug: string) => {
   const { isEnabled } = await draftMode();
 
-  const formattedSlug = slug.join("/") ?? "/";
-
-  const page = await sanityClient.fetch(
+  return sanityClient.fetch(
     pageBySlugQuery,
-    { slug: formattedSlug },
+    { slug },
     isEnabled
       ? {
           perspective: "drafts",
@@ -26,16 +24,32 @@ export default async function Page({ params }: PageProps) {
         }
       : undefined
   );
+});
+
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params;
+  const formattedSlug = slug.join("/") ?? "/";
+  const page = await getPage(formattedSlug);
+
+  if (!page) return {};
+
+  return {
+    title: page.metadata?.title ?? "Home",
+    description: page.metadata?.description ?? "",
+    robots: page.metadata?.robots ?? "index, follow",
+  };
+}
+
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params;
+  const formattedSlug = slug.join("/") ?? "/";
+  const page = await getPage(formattedSlug);
 
   if (!page) notFound();
 
   const { pageBuilder = [], hideHeader = false, hideFooter = false } = page;
 
   const isBlog = page?.slug?.current?.startsWith("blog");
-
-  // const resolvedSections = (await resolveSections(
-  //   pageBuilder
-  // )) as PageSection[];
 
   return (
     <PageTemplate

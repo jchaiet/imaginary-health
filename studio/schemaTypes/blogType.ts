@@ -19,17 +19,25 @@ export const blogType = defineType({
   title: "Blog Article",
   type: "document",
   icon: DocumentTextIcon,
+  groups: [
+    { name: "details", title: "Details" },
+    { name: "metadata", title: "Metadata" },
+    { name: "settings", title: "Settings" },
+    { name: "content", title: "Content" },
+  ],
   fields: [
     defineField({
       name: "title",
       title: "Article Title",
       type: "string",
+      group: "details",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "parent",
       title: "Parent Page",
       type: "reference",
+      group: "details",
       to: [
         {
           type: "blog",
@@ -41,6 +49,7 @@ export const blogType = defineType({
       title: "Slug",
       description: "Used for the page URL",
       type: "slug",
+      group: "details",
       options: {
         source: "title",
         isUnique: (value, context) => context.defaultIsUnique(value, context),
@@ -52,12 +61,14 @@ export const blogType = defineType({
       name: "metadata",
       title: "Metadata",
       type: "pageMetadata",
+      group: "metadata",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "children",
       title: "Children",
       type: "array",
+      group: "details",
       of: [{ type: "string" }],
       hidden: true,
     }),
@@ -65,11 +76,13 @@ export const blogType = defineType({
       name: "publishDate",
       title: "Publish Date",
       type: "date",
+      group: "details",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "excerpt",
       title: "Excerpt",
+      group: "details",
       description: "Short summary of the article for previews and SEO",
       type: "text",
       rows: 3,
@@ -79,6 +92,7 @@ export const blogType = defineType({
       name: "featuredImage",
       title: "Featured Image",
       type: "image",
+      group: "details",
       options: {
         hotspot: true,
       },
@@ -87,11 +101,13 @@ export const blogType = defineType({
       name: "timeToRead",
       title: "Time to Read",
       type: "number",
+      group: "settings",
     }),
     defineField({
       name: "articleType",
       title: "Article Type",
       type: "string",
+      group: "settings",
       options: {
         list: [
           { title: "Article", value: "article" },
@@ -105,6 +121,7 @@ export const blogType = defineType({
       name: "categories",
       title: "Categories",
       type: "array",
+      group: "settings",
       of: [{ type: "reference", to: [{ type: "category" }] }],
       initialValue: [
         {
@@ -119,6 +136,7 @@ export const blogType = defineType({
       type: "number",
       initialValue: 0,
       readOnly: true,
+      group: "details",
     }),
     defineField({
       name: "helpfulNoCount",
@@ -126,11 +144,13 @@ export const blogType = defineType({
       type: "number",
       initialValue: 0,
       readOnly: true,
+      group: "details",
     }),
     defineField({
       name: "pageBuilder",
       title: "Article Body",
       type: "array",
+      group: "content",
       of: [
         defineArrayMember({
           type: "heroBlock",

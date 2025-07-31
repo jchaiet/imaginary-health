@@ -21,5 +21,20 @@ export const pageMetadataType = defineType({
       type: "string",
       validation: (rule) => rule.max(155),
     }),
+    defineField({
+      name: "robots",
+      title: "Robots Settings",
+      type: "string",
+      options: {
+        list: [
+          { title: "Index, Follow (Default)", value: "index, follow" },
+          { title: "No Index, Follow", value: "noindex, follow" },
+          { title: "Index, No Follow", value: "index, nofollow" },
+          { title: "No Index, No Follow", value: "noindex, nofollow" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "index, follow",
+    }),
   ],
 });

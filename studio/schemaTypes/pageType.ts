@@ -19,17 +19,24 @@ export const pageType = defineType({
   title: "Page",
   type: "document",
   icon: DocumentsIcon,
+  groups: [
+    { name: "details", title: "Details" },
+    { name: "metadata", title: "Metadata" },
+    { name: "content", title: "Content" },
+  ],
   fields: [
     defineField({
       name: "title",
       title: "Page Name",
       type: "string",
+      group: "details",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "parent",
       title: "Parent Page",
       type: "reference",
+      group: "details",
       to: [
         {
           type: "page",
@@ -41,6 +48,7 @@ export const pageType = defineType({
       title: "Slug",
       description: "Used for the page URL",
       type: "slug",
+      group: "details",
       options: {
         source: "title",
         isUnique: (value, context) => context.defaultIsUnique(value, context),
@@ -52,12 +60,14 @@ export const pageType = defineType({
       name: "metadata",
       title: "Metadata",
       type: "pageMetadata",
+      group: "metadata",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "children",
       title: "Children",
       type: "array",
+      group: "details",
       of: [{ type: "string" }],
       hidden: true,
     }),
@@ -65,6 +75,7 @@ export const pageType = defineType({
       name: "pageBuilder",
       type: "array",
       title: "Page Content",
+      group: "content",
       of: [
         defineArrayMember({
           type: "heroBlock",

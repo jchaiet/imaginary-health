@@ -13,6 +13,7 @@ import {
 export const pageBySlugQuery = `
 *[_type == "page" && slug.current == $slug][0]{
   ...,
+  metadata { title, robots, description },
   image {
     ${imageAssetFragment}
   },
