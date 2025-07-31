@@ -283,7 +283,7 @@ export function DocumentListBlock({
                   as="button"
                   variant="primary"
                   onClick={fetchArticles}
-                  disabled={!isLoading}
+                  disabled={isLoading}
                   icon={<RefreshCw size={21} />}
                   iconAlignemnt="left"
                   className={isLoading ? styles.buttonIsLoading : ""}
