@@ -1,4 +1,4 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
 import groq from "groq";
 import { sanityClient } from "@/sanity/client";
 
