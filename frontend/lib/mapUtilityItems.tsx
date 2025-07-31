@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Link } from "@/types";
 import type { UtilityItem } from "quirk-ui";
 
@@ -18,6 +19,15 @@ export async function mapUtilityItems(links: Link[]): Promise<UtilityItem[]> {
       href = linkOptions.externalUrl;
     }
 
+    const image = link.image?.asset?.url ? (
+      <Image
+        src={link.image?.asset?.url}
+        alt={link.image?.asset.altText || link.ariaLabel || link.label}
+        width={175}
+        height={59}
+      />
+    ) : null;
+
     return {
       _key: link._key,
       label: link.label,
@@ -27,6 +37,7 @@ export async function mapUtilityItems(links: Link[]): Promise<UtilityItem[]> {
       displayType: link.displayType,
       imageSrc: link.image?.asset?.url,
       imageAlt: link.image?.asset.altText || link.ariaLabel || link.label,
+      ImageComponent: image,
     };
   });
 }
