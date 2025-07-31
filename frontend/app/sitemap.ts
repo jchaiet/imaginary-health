@@ -35,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     };
   });
 
-  const articleEntries = data.articles.map((article: any) => {
+  const articleEntries = data.articles.map((article: SitemapPage) => {
     return {
       url: `${baseUrl}/blog/articles/${article.slug}`,
       lastModified: article._updatedAt,
