@@ -16,13 +16,35 @@ const roboto = Roboto_Flex({
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await fetchSiteSettings();
+
+  const faviconUrl = settings?.siteIcon?.favicon
+    ? urlForImage(settings.siteIcon.favicon)
+        .width(32)
+        .height(32)
+        .quality(100)
+        .url()
+    : "/favicon.ico";
+
   return {
     title: settings?.title || "My Site",
     description: settings?.description,
     icons: {
-      icon: settings?.favicon
-        ? urlForImage(settings?.favicon).quality(100).url()
-        : "/favicon.ico",
+      icon: [faviconUrl && { url: faviconUrl, sizes: "32x32" }].filter(
+        Boolean
+      ) as { url: string; sizes?: string }[],
+      apple: settings?.siteIcon?.appleTouchIcon
+        ? urlForImage(settings?.siteIcon?.appleTouchIcon).quality(100).url()
+        : undefined,
+      other: settings?.siteIcon?.maskIcon
+        ? [
+            {
+              rel: "mask-icon",
+              url: urlForImage(settings?.siteIcon?.appleTouchIcon)
+                .quality(100)
+                .url(),
+            },
+          ]
+        : [],
     },
     openGraph: {
       title: settings?.defaultSEO?.title,

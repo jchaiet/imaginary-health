@@ -1,9 +1,9 @@
-import { createClient, defineLive } from "next-sanity";
+import { createClient } from "next-sanity";
 import { sanityConfig } from "./config";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { Link } from "@/types";
-import { navigationQuery } from "./queries";
+import { navigationQuery, siteSettingsQuery } from "./queries";
 
 export const sanityClient = createClient(sanityConfig);
 export const writeSanityClient = createClient({
@@ -15,7 +15,7 @@ export const writeSanityClient = createClient({
 const builder = imageUrlBuilder(sanityClient);
 
 export async function fetchSiteSettings() {
-  return await sanityClient.fetch(`*[_type == "siteSettings"][0]`);
+  return await sanityClient.fetch(siteSettingsQuery);
 }
 
 export async function fetchNavigation(slug = "main-navigation") {

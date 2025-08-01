@@ -32,11 +32,30 @@ export const siteSettingsType = defineType({
       options: { hotspot: true },
     }),
     defineField({
-      name: "favicon",
-      title: "Favicon",
-      type: "image",
+      name: "siteIcon",
+      title: "Site Icons / Favicon",
+      type: "object",
       group: "general",
-      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "favicon",
+          title: "Favicon (32x32 PNG or SVG)",
+          type: "image",
+          options: { hotspot: true },
+        }),
+        defineField({
+          name: "appleTouchIcon",
+          title: "Apple Touch Icon (180x180 PNG)",
+          type: "image",
+          options: { hotspot: true },
+        }),
+        defineField({
+          name: "maskIcon",
+          title: "Safari Mask Icon (SVG, monochrome)",
+          type: "image",
+          options: { hotspot: true },
+        }),
+      ],
     }),
     defineField({
       name: "defaultSEO",
