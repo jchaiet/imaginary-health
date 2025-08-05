@@ -64,7 +64,7 @@ export const heroBlockType = defineType({
       type: "object",
       options: {
         collapsible: true,
-        collapsed: true,
+        collapsed: false,
       },
       groups: [
         { name: "layout", title: "Layout" },

@@ -33,7 +33,8 @@ export const linkFragment = `
   modalContent,
   videoUrl,
   assetUrl,
-  icon
+  icon,
+  iconAlignment
 `;
 
 export const callToActionFragment = `
@@ -127,6 +128,22 @@ export const singletonFragment = `
           ${callToActionFragment}
         }
       },
+      blockSelection == "rating" => blockContent.rating{
+        ...,
+        _type,
+        image{
+          ${imageAssetFragment}
+        },
+        eyebrow[]{
+          ...,
+          ${richTextFragment}
+        },
+        rating,
+        description[]{
+          ...,
+          ${richTextFragment}
+        },
+      },
     )
   }
 `;
@@ -214,6 +231,31 @@ export const carouselBlockFragment = `
     ...,
     callToAction{
       ${linkFragment}
+    }
+  },
+  carouselOptions{
+    ...,
+    ratingSingleton->{
+      blockSelection == "rating" => blockContent.rating{
+        ...,
+        _type,
+        image{
+          ${imageAssetFragment}
+        },
+        eyebrow[]{
+          ...,
+          ${richTextFragment}
+        },
+        rating,
+        description[]{
+          ...,
+          ${richTextFragment}
+        },
+      },
+    },
+    description[]{
+      ...,
+      ${richTextFragment}
     }
   }
 `;

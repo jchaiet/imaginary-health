@@ -124,10 +124,15 @@ export function FeaturedDocumentsBlock({
         <article className={styles.container}>
           <div className={`${styles.heading} ${headingLayoutClass}`}>
             <div className={styles.flex}>
-              {heading.eyebrow && (
-                <RichText className={styles.eyebrow} blocks={heading.eyebrow} />
-              )}
-              <RichText className={styles.title} blocks={heading.title} />
+              <div>
+                {heading.eyebrow && (
+                  <RichText
+                    className={styles.eyebrow}
+                    blocks={heading.eyebrow}
+                  />
+                )}
+                <RichText className={styles.title} blocks={heading.title} />
+              </div>
 
               {callToAction?.label && (
                 <Link

@@ -116,11 +116,13 @@ export function BioCard({
       <div className={styles.container}>
         {variant !== "image" && (
           <div className={styles.content}>
-            {metricValue && <Metric value={metricValue} />}
-            {eyebrow && (
-              <RichText className={styles.eyebrow} blocks={eyebrow} />
-            )}
-            {title && <RichText className={styles.title} blocks={title} />}
+            <div>
+              {metricValue && <Metric value={metricValue} />}
+              {eyebrow && (
+                <RichText className={styles.eyebrow} blocks={eyebrow} />
+              )}
+              {title && <RichText className={styles.title} blocks={title} />}
+            </div>
             {description && (
               <RichText className={styles.description} blocks={description} />
             )}

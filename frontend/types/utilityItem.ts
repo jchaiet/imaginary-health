@@ -10,4 +10,5 @@ export type UtilityItem = {
   imageSrc?: string;
   imageAlt?: string;
   icon?: string;
+  iconAlignment?: "left" | "right" | undefined;
 };

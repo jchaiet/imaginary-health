@@ -17,6 +17,7 @@ export interface FaqBlockProps {
     headingLayout?: "horizontal" | "vertical";
   };
   items?: FaqItem[];
+  openMultiple?: boolean;
   className?: string;
   styleOptions: Styles;
 }

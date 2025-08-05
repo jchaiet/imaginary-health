@@ -1,6 +1,7 @@
 import { Link } from "./link";
 import { PortableTextBlock } from "@portabletext/types";
 import { SanityImage } from "./image";
+import { Styles } from "./styles";
 
 export type ItemType = {
   _key: string;
@@ -17,4 +18,5 @@ export type ItemType = {
   icon?: string;
   callToAction?: Link;
   gridArea?: string;
+  styleOptions: Styles;
 };

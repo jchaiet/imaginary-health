@@ -9,16 +9,24 @@ export const faqBlockType = defineType({
   title: "FAQ Block",
   type: "object",
   icon: HelpCircleIcon,
+  groups: [
+    { name: "heading", title: "Heading" },
+    { name: "settings", title: "Settings" },
+    { name: "content", title: "Content" },
+    { name: "styles", title: "Styles" },
+  ],
   fields: [
     defineField({
       name: "heading",
       type: "heading",
       title: "Heading",
+      group: "heading",
     }),
     defineField({
       name: "items",
       title: "Items",
       type: "array",
+      group: "content",
       of: [
         {
           name: "faqItem",
@@ -44,12 +52,20 @@ export const faqBlockType = defineType({
       ],
     }),
     defineField({
+      name: "openMulitple",
+      title: "Open Multiple Items",
+      type: "boolean",
+      group: "settings",
+      initialValue: true,
+    }),
+    defineField({
       name: "styleOptions",
       title: "Style Options",
       type: "object",
+      group: "styles",
       options: {
         collapsible: true,
-        collapsed: true,
+        collapsed: false,
       },
       groups: [
         { name: "padding", title: "Padding" },

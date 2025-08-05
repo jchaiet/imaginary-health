@@ -151,7 +151,7 @@ export const tabsBlockType = defineType({
       type: "object",
       options: {
         collapsible: true,
-        collapsed: true,
+        collapsed: false,
       },
       groups: [
         { name: "orientation", title: "Orientation" },

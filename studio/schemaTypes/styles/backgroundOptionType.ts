@@ -10,6 +10,10 @@ export const backgroundOptionType = [
       layout: "radio",
       list: [
         {
+          title: "Transparent",
+          value: "backgroundTransparent",
+        },
+        {
           title: "White",
           value: "backgroundWhite",
         },

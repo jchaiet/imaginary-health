@@ -36,7 +36,7 @@
   text-decoration: underline;
   font-weight: var(--font-weight-semibold);
   transition:
-    color 0.3 ease-in-out,
+    color 0.3s ease-in-out,
     text-decoration 0.3s ease-in-out;
 
   &:hover {

@@ -44,6 +44,10 @@ export const singletonType = defineType({
             title: "RichText Block",
             value: "richTextBlock",
           },
+          {
+            title: "Rating",
+            value: "rating",
+          },
         ],
         layout: "dropdown",
       },
@@ -75,6 +79,13 @@ export const singletonType = defineType({
           type: "richTextBlock",
           hidden: ({ parent, document }) =>
             document?.blockSelection !== "richTextBlock",
+        }),
+        defineField({
+          name: "rating",
+          title: "Rating",
+          type: "rating",
+          hidden: ({ parent, document }) =>
+            document?.blockSelection !== "rating",
         }),
       ],
       validation: (Rule) =>

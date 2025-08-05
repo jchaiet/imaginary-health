@@ -11,8 +11,9 @@ export const cardGridBlockType = defineType({
   icon: ThLargeIcon,
   groups: [
     { name: "heading", title: "Heading" },
-    { name: "settings", title: "Settings" },
+    { name: "content", title: "Content" },
     { name: "callToAction", title: "Call To Action" },
+    { name: "styles", title: "Styles" },
   ],
   fields: [
     defineField({
@@ -24,7 +25,7 @@ export const cardGridBlockType = defineType({
     defineField({
       name: "grid",
       type: "grid",
-      group: "settings",
+      group: "content",
       title: "Grid",
     }),
     defineField({
@@ -60,9 +61,10 @@ export const cardGridBlockType = defineType({
       name: "styleOptions",
       title: "Style Options",
       type: "object",
+      group: "styles",
       options: {
         collapsible: true,
-        collapsed: true,
+        collapsed: false,
       },
       groups: [
         { name: "padding", title: "Padding" },

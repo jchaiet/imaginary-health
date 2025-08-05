@@ -8,6 +8,8 @@ import { TestimonialCard } from "@/components/cards/TestimonialCard";
 import { GridCard } from "@/components/cards/GridCard";
 import { BioCard } from "@/components/cards/BioCard";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
+import { FaStar } from "react-icons/fa6";
+
 import styles from "./styles.module.css";
 
 export function CarouselBlock({
@@ -64,6 +66,32 @@ export function CarouselBlock({
     }
   });
 
+  const RatingStars = () => {
+    const width = (Number(carouselOptions?.ratingSingleton?.rating) / 5) * 100;
+
+    return (
+      <div className={styles.ratingOuter}>
+        <FaStar />
+        <FaStar />
+        <FaStar />
+        <FaStar />
+        <FaStar />
+        <div className={styles.ratingInner} style={{ width: `${width}%` }}>
+          <FaStar />
+          <FaStar />
+          <FaStar />
+          <FaStar />
+          <FaStar />
+        </div>
+      </div>
+    );
+  };
+
+  const hasNoHeading =
+    !heading?.title &&
+    !heading?.description &&
+    !carouselOptions?.ratingSingleton?.rating;
+
   return (
     <section
       className={`${classNames.replace("split", "")} ${styles.carousel}`}
@@ -72,15 +100,35 @@ export function CarouselBlock({
         ref={containerRef}
         className={`${classNames.includes("split") ? "split" : "default"} ${styles.container}`}
       >
-        <div ref={siblingRef} className={styles.heading}>
-          {heading?.title && titleBlock}
-          {heading?.description && (
-            <RichText
-              className={styles.description}
-              blocks={heading?.description}
-            />
-          )}
-        </div>
+        {!hasNoHeading && (
+          <div ref={siblingRef} className={styles.heading}>
+            {heading?.title && titleBlock}
+            {carouselOptions?.ratingSingleton?.rating && (
+              <div className={styles.rating}>
+                {RatingStars()}
+
+                <div className={styles.ratingContent}>
+                  {carouselOptions?.ratingSingleton?.description ? (
+                    <RichText
+                      className={styles.ratingDescription}
+                      blocks={carouselOptions?.ratingSingleton?.description}
+                    />
+                  ) : (
+                    <div className={styles.ratingValue}>
+                      {carouselOptions?.ratingSingleton?.rating}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+            {heading?.description && (
+              <RichText
+                className={styles.description}
+                blocks={heading?.description}
+              />
+            )}
+          </div>
+        )}
 
         <div className={styles.carousel}>
           {mappedItems && (

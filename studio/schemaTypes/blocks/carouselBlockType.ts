@@ -9,21 +9,25 @@ export const carouselBlockType = defineType({
   type: "object",
   title: "Carousel",
   icon: InlineElementIcon,
+  groups: [
+    { name: "heading", title: "Heading" },
+    { name: "settings", title: "Settings" },
+    { name: "content", title: "Content" },
+    { name: "cta", title: "Call To Action" },
+    { name: "styles", title: "Styles" },
+  ],
   fields: [
     defineField({
       name: "heading",
       type: "heading",
       title: "Heading",
-    }),
-    defineField({
-      name: "description",
-      type: "richText",
-      title: "Description",
+      group: "heading",
     }),
     defineField({
       name: "carouselOptions",
       type: "object",
       title: "Carousel Options",
+      group: "settings",
       fields: [
         defineField({
           name: "itemsPerPage",
@@ -47,21 +51,46 @@ export const carouselBlockType = defineType({
           type: "number",
           description: "Time in seconds before carousel moves to next item.",
         }),
+        defineField({
+          name: "showReview",
+          type: "boolean",
+          title: "Show review",
+        }),
+        defineField({
+          name: "ratingSingleton",
+          title: "Rating Singleton",
+          type: "reference",
+          to: [{ type: "singleton" }],
+          hidden: ({ parent }) => !parent?.showReview,
+        }),
+        // defineField({
+        //   name: "rating",
+        //   title: "Rating (out of 5)",
+        //   type: "number",
+        // }),
+        // defineField({
+        //   name: "description",
+        //   title: "Description",
+        //   type: "richText",
+        //   hidden: ({ parent }) => !parent?.showReview,
+        // }),
       ],
     }),
     defineField({
       name: "items",
       title: "Items",
       type: "array",
+      group: "content",
       of: [{ type: "card" }],
     }),
     defineField({
       name: "styleOptions",
       title: "Style Options",
       type: "object",
+      group: "styles",
       options: {
         collapsible: true,
-        collapsed: true,
+        collapsed: false,
       },
       groups: [
         { name: "padding", title: "Padding" },

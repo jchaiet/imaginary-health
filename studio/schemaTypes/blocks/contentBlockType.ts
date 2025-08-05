@@ -3,16 +3,26 @@ import { ImageIcon } from "@sanity/icons";
 import { paddingOptionType } from "../styles/paddingOptionType";
 import { layoutOptionType } from "../styles/layoutOptionType";
 import { backgroundOptionType } from "../styles/backgroundOptionType";
+import { widthOptionType } from "../styles/widthOptionType";
 
 export const contentBlockType = defineType({
   name: "contentBlock",
   title: "Content Block",
   type: "object",
   icon: ImageIcon,
+  groups: [
+    { name: "layout", title: "Layout" },
+    { name: "heading", title: "Heading" },
+    { name: "media", title: "Media" },
+    { name: "content", title: "Content" },
+    { name: "cta", title: "Call To Action" },
+    { name: "styles", title: "Styles" },
+  ],
   fields: [
     defineField({
       name: "layout",
       title: "Layout",
+      group: "layout",
       type: "object",
       options: {
         collapsible: true,
@@ -56,12 +66,14 @@ export const contentBlockType = defineType({
     defineField({
       name: "heading",
       type: "heading",
+      group: "heading",
       title: "Heading",
     }),
     defineField({
       name: "image",
       title: "Image",
       type: "image",
+      group: "media",
       options: { hotspot: true },
       fields: [
         defineField({
@@ -81,6 +93,7 @@ export const contentBlockType = defineType({
         defineField({
           name: "maxWidth",
           title: "Max Width",
+          description: "Max-width for the image (e.g. '600px')",
           type: "string",
           hidden: ({ parent }) => parent?.display !== "max-width",
         }),
@@ -91,11 +104,13 @@ export const contentBlockType = defineType({
       name: "video",
       title: "Video",
       type: "string",
+      group: "media",
     }),
     defineField({
       name: "metrics",
       title: "Metrics",
       type: "array",
+      group: "content",
       of: [
         {
           name: "metricItem",
@@ -119,27 +134,32 @@ export const contentBlockType = defineType({
       name: "callToAction",
       type: "callToAction",
       title: "Call To Action",
+      group: "cta",
     }),
     defineField({
       name: "disclaimer",
       title: "Disclaimer",
       type: "richText",
+      group: "content",
     }),
     defineField({
       name: "styleOptions",
       title: "Style Options",
       type: "object",
+      group: "styles",
       options: {
         collapsible: true,
-        collapsed: true,
+        collapsed: false,
       },
       groups: [
         { name: "padding", title: "Padding" },
+        { name: "width", title: "Width" },
         { name: "layout", title: "Layout" },
         { name: "background", title: "Background" },
       ],
       fields: [
         ...paddingOptionType,
+        ...widthOptionType,
         ...layoutOptionType,
         ...backgroundOptionType,
       ],

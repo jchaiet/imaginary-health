@@ -11,7 +11,7 @@
   flex-direction: column;
   /* gap: 5rem; */
   width: 100%;
-  max-width: var(--layout-width);
+  max-width: var(--container-max-width, var(--layout-width));
   margin: 0 auto;
   padding-left: var(--spacing-md);
   padding-right: var(--spacing-md);
@@ -184,6 +184,10 @@
     gap: var(--spacing-md);
   }
 
+  .titleWrapper {
+    flex: 1;
+  }
+
   :global(.portableTextContainer) {
     flex: 1;
   }
@@ -207,10 +211,12 @@
 }
 
 .image {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: 1;
   width: 100%;
-  max-width: 800px;
+  /* max-width: 800px; */
   margin: 0 auto;
   line-height: 0;
 
@@ -250,10 +256,11 @@
 
 .maxWidth {
   margin: 0 auto;
-  max-width: var(--max-width, var(--layout-width));
 
   img {
+    max-width: var(--max-width, var(--layout-width));
     border-radius: var(--radius-md);
+    height: auto;
   }
 }
 

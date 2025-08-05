@@ -23,13 +23,18 @@ export function ContentBlock({
 
   const classNames = useStyleClasses(styleOptions);
 
+  const customCssVars = {
+    "--container-max-width": styleOptions?.maxWidth ?? "unset",
+    "--gap": layout?.gap,
+  } as React.CSSProperties;
+
   const style = {
     "--max-width": image?.display === "max-width" ? image?.maxWidth : "unset",
   } as React.CSSProperties;
 
-  const gap = {
-    "--gap": layout?.gap,
-  } as React.CSSProperties;
+  // const gap = {
+  //   "--gap": layout?.gap,
+  // } as React.CSSProperties;
 
   const orientationClass = {
     "no-image": styles.noImage,
@@ -100,12 +105,17 @@ export function ContentBlock({
     <section className={`${classNames} ${styles.content}`}>
       <article
         className={`${styles.container} ${orientationClass}`}
-        style={layout.gap ? gap : {}}
+        style={customCssVars ? customCssVars : {}}
       >
         <div className={`${styles.heading} ${headingLayoutClass}`}>
-          {heading.title && (
-            <RichText className={styles.title} blocks={heading.title} />
-          )}
+          <div className={styles.titleWrapper}>
+            {heading.eyebrow && (
+              <RichText className={styles.eyebrow} blocks={heading.eyebrow} />
+            )}
+            {heading.title && (
+              <RichText className={styles.title} blocks={heading.title} />
+            )}
+          </div>
 
           {(heading?.description || callToAction?.items) && (
             <div className={styles.text}>

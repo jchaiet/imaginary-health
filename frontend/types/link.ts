@@ -1,4 +1,3 @@
-import { LucideIcon } from "lucide-react";
 import { SanityImage } from "./image";
 
 export type internalUrlOptions = {
@@ -26,6 +25,7 @@ export type Link = {
   ariaLabel: string;
   linkOptions?: LinkOptions;
   icon?: string;
+  iconAlignment?: "left" | "right" | undefined;
   modalContent?: string;
   videoUrl?: string;
   assetUrl?: string;

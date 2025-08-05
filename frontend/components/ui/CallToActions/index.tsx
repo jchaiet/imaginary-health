@@ -53,6 +53,8 @@ export function CallToActions({
                     : ""
                 }
                 aria-label={cta.ariaLabel || cta.label}
+                icon={cta.icon}
+                iconAlignment={cta.iconAlignment ?? "right"}
               >
                 {cta.label}
               </CallToAction>
@@ -62,7 +64,12 @@ export function CallToActions({
               <Modal
                 key={index}
                 trigger={
-                  <CallToAction as="button" variant={cta.variant ?? "primary"}>
+                  <CallToAction
+                    as="button"
+                    variant={cta.variant ?? "primary"}
+                    icon={cta.icon}
+                    iconAlignment={cta.iconAlignment ?? "right"}
+                  >
                     {cta.label}
                   </CallToAction>
                 }
@@ -74,7 +81,12 @@ export function CallToActions({
               <Modal
                 key={index}
                 trigger={
-                  <CallToAction as="button" variant={cta.variant ?? "primary"}>
+                  <CallToAction
+                    as="button"
+                    variant={cta.variant ?? "primary"}
+                    icon={cta.icon}
+                    iconAlignment={cta.iconAlignment ?? "right"}
+                  >
                     {cta.label}
                   </CallToAction>
                 }
@@ -92,6 +104,8 @@ export function CallToActions({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={cta.ariaLabel || cta.label}
+                icon={cta.icon}
+                iconAlignment={cta.iconAlignment ?? "right"}
               >
                 {cta.label}
               </CallToAction>

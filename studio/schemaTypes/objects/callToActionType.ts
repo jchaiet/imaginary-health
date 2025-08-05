@@ -6,7 +6,7 @@ export const callToActionType = defineType({
   title: "Call To Action",
   options: {
     collapsible: true,
-    collapsed: true,
+    collapsed: false,
   },
   fields: [
     defineField({

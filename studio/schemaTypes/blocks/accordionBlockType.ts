@@ -13,6 +13,7 @@ export const accordionBlockType = defineType({
     { name: "heading", title: "Heading" },
     { name: "settings", title: "Settings" },
     { name: "callToAction", title: "Call To Action" },
+    { name: "styles", title: "Styles" },
   ],
   fields: [
     defineField({
@@ -89,9 +90,10 @@ export const accordionBlockType = defineType({
       name: "styleOptions",
       title: "Style Options",
       type: "object",
+      group: "styles",
       options: {
         collapsible: true,
-        collapsed: true,
+        collapsed: false,
       },
       groups: [
         { name: "padding", title: "Padding" },

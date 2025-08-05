@@ -17,6 +17,8 @@ import { richTextType } from "./objects/richTextType";
 import { cardType } from "./cards/cardType";
 import { gridType } from "./objects/gridType";
 import { dividerType } from "./objects/dividerType";
+import { ratingType } from "./objects/ratingType";
+import { imageWithLayoutType } from "./objects/imageWidthLayoutType";
 
 /* Blocks */
 import { heroBlockType } from "./blocks/heroBlockType";
@@ -53,6 +55,8 @@ export const schemaTypes = [
   cardType,
   gridType,
   dividerType,
+  ratingType,
+  imageWithLayoutType,
 
   heroBlockType,
   cardGridBlockType,

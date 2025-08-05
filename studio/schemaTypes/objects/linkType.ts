@@ -36,6 +36,42 @@ export const linkType = defineType({
       hidden: ({ parent }) => parent?.type === "none",
     }),
     defineField({
+      name: "icon",
+      title: "Icon",
+      type: "string",
+      options: {
+        list: [
+          { title: "Apps", value: "apps" },
+          { title: "Arrow Right", value: "arrow-right" },
+          { title: "Arrow Left", value: "arrow-left" },
+          { title: "Chevron Down", value: "chevron-down" },
+          { title: "Chevron Left", value: "chevron-left" },
+          { title: "Chevron Right", value: "chevron-right" },
+          { title: "Envelope", value: "envelope" },
+          { title: "Phone", value: "phone" },
+          { title: "Play", value: "play" },
+          { title: "New Tab", value: "new-tab" },
+          { title: "Sign In", value: "sign-in" },
+        ],
+        layout: "dropdown",
+      },
+      hidden: ({ parent }) => parent?.displayType !== "text",
+    }),
+    defineField({
+      name: "iconAlignment",
+      title: "Icon Alignment",
+      type: "string",
+      options: {
+        list: [
+          { title: "Right", value: "right" },
+          { title: "Left", value: "left" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "right",
+      hidden: ({ parent }) => parent?.displayType !== "text",
+    }),
+    defineField({
       name: "image",
       title: "Image",
       type: "image",

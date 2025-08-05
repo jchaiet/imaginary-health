@@ -85,8 +85,8 @@ body header > div {
 
 .inlineNumber {
   border-radius: var(--radius-full);
-  background-color: var(--color-muted);
-  color: var(--color-text-primary);
+  background-color: var(--color-primary-75);
+  color: #fff;
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-lg);
   width: 35px;
@@ -179,6 +179,14 @@ body .centered {
   }
 }
 
+body .backgroundTransparent {
+  background-color: transparent;
+}
+
+body .backgroundWhite {
+  background-color: #fff;
+}
+
 body .backgroundPrimary {
   background-color: var(--color-primary-100);
 
@@ -197,7 +205,6 @@ body .backgroundPrimary {
 body .backgroundPrimaryLight {
   background-color: var(--color-primary-10);
 
-  .textPrimary,
   h1,
   h2,
   h3,
@@ -206,6 +213,21 @@ body .backgroundPrimaryLight {
   h6,
   p {
     color: var(--color-text-primary);
+  }
+}
+
+body .backgroundSecondary {
+  background-color: var(--color-secondary-100);
+
+  .textPrimary,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    color: #fff;
   }
 }
 

@@ -1,16 +1,26 @@
 import { defineType, defineField } from "sanity";
 import { InlineElementIcon } from "@sanity/icons";
+import { backgroundOptionType } from "../styles/backgroundOptionType";
 
 export const cardType = defineType({
   name: "card",
   type: "object",
   title: "Card",
   icon: InlineElementIcon,
+  groups: [
+    { name: "heading", title: "Heading" },
+    { name: "settings", title: "Settings" },
+    { name: "media", title: "Media" },
+    { name: "content", title: "Content" },
+    { name: "cta", title: "Call To Action" },
+    { name: "styles", title: "Styles" },
+  ],
   fields: [
     defineField({
       name: "variant",
       title: "Variant",
       type: "string",
+      group: "settings",
       options: {
         list: [
           { title: "Grid", value: "grid" },
@@ -30,6 +40,7 @@ export const cardType = defineType({
       name: "style",
       title: "Style",
       type: "string",
+      group: "settings",
       options: {
         list: [
           { title: "Full Bleed", value: "full-bleed" },
@@ -49,21 +60,17 @@ export const cardType = defineType({
         parent?.variant !== "testimonial",
     }),
     defineField({
-      name: "rating",
-      title: "Rating (out of 5)",
-      type: "number",
-      hidden: ({ parent }) => parent?.variant !== "review",
-    }),
-    defineField({
-      name: "metricValue",
-      title: "Metric Value",
+      name: "gridArea",
+      title: "Grid Area",
+      description: "The corresponding grid area name from the parent grid.",
       type: "string",
-      hidden: ({ parent }) => parent?.style !== "metric",
+      group: "settings",
     }),
     defineField({
       name: "eyebrow",
       title: "Eyebrow",
       type: "richText",
+      group: "content",
       hidden: ({ parent }) => parent?.variant === "review",
     }),
     defineField({
@@ -76,34 +83,63 @@ export const cardType = defineType({
       name: "description",
       title: "Description",
       type: "richText",
+      group: "content",
     }),
     defineField({
       name: "person",
       title: "Person",
       type: "richText",
+      group: "content",
       hidden: ({ parent }) => parent?.variant !== "testimonial",
+    }),
+    defineField({
+      name: "rating",
+      title: "Rating (out of 5)",
+      type: "number",
+      group: "content",
+      hidden: ({ parent }) => parent?.variant !== "review",
+    }),
+    defineField({
+      name: "metricValue",
+      title: "Metric Value",
+      type: "string",
+      group: "content",
+      hidden: ({ parent }) => parent?.style !== "metric",
     }),
     defineField({
       name: "image",
       title: "Image",
-      type: "image",
-      options: { hotspot: true },
+      type: "imageWithLayout",
+      group: "media",
     }),
     defineField({
       name: "icon",
       title: "Icon",
+      description: "FontAwesome class (e.g. 'fas fa-link')",
       type: "string",
+      group: "media",
     }),
     defineField({
       name: "callToAction",
       title: "Call to Action",
       type: "link",
+      group: "cta",
+      options: {
+        collapsible: true,
+        collapsed: false,
+      },
     }),
     defineField({
-      name: "gridArea",
-      title: "Grid Area",
-      description: "The corresponding grid area name from the parent grid.",
-      type: "string",
+      name: "styleOptions",
+      title: "Style Options",
+      type: "object",
+      group: "styles",
+      options: {
+        collapsible: true,
+        collapsed: false,
+      },
+      groups: [{ name: "background", title: "Background" }],
+      fields: [...backgroundOptionType],
     }),
   ],
   preview: {

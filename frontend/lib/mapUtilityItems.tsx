@@ -38,6 +38,8 @@ export async function mapUtilityItems(links: Link[]): Promise<UtilityItem[]> {
       imageSrc: link.image?.asset?.url,
       imageAlt: link.image?.asset.altText || link.ariaLabel || link.label,
       ImageComponent: image,
+      icon: link.icon,
+      iconAlignment: link.iconAlignment,
     };
   });
 }

@@ -65,6 +65,8 @@ export default function Header({
     return null;
   }
 
+  console.log("U", utilityItems);
+
   return (
     <Navbar
       searchComponent={<SearchModal />}

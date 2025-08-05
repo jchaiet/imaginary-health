@@ -102,7 +102,7 @@ export const documentBlockType = defineType({
       type: "object",
       options: {
         collapsible: true,
-        collapsed: true,
+        collapsed: false,
       },
       groups: [
         { name: "padding", title: "Padding" },

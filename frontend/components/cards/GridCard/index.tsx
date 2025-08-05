@@ -4,9 +4,12 @@ import { resolveLinkURL, urlForImage } from "@/sanity/client";
 import Image from "next/image";
 import { ItemType } from "@/types";
 import { ArrowRight, Play } from "lucide-react";
-import styles from "./styles.module.css";
 import { Modal } from "quirk-ui";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
+import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
+
+import styles from "./styles.module.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 type CustomCardProps = ItemType & {
   onHover?: () => void;
@@ -21,13 +24,16 @@ export function GridCard({
   title,
   description,
   image,
-  //icon,
+  icon,
   callToAction,
   onHover,
   onLeave,
   gridArea,
+  styleOptions,
 }: CustomCardProps) {
   const [resolvedUrl, setResolvedUrl] = useState<string | undefined>(undefined);
+
+  const classNames = useStyleClasses(styleOptions);
 
   useEffect(() => {
     async function resolveCtaUrl() {
@@ -40,8 +46,29 @@ export function GridCard({
     resolveCtaUrl();
   }, [callToAction]);
 
-  const imageUrl = image ? urlForImage(image).quality(100).url() : null;
   const isMobile = useMediaQuery("(max-width: 768px)");
+
+  const isFullBleed = image?.asset && image?.layout === "cover";
+
+  const imageUrl = image?.asset ? urlForImage(image).quality(100).url() : null;
+  const imageStyle: React.CSSProperties = {};
+  if (image?.layout === "cover") {
+    imageStyle.objectFit = "cover";
+    if (image?.position) imageStyle.objectPosition = image?.position;
+  } else if (image?.layout === "contain") {
+    imageStyle.objectFit = "contain";
+
+    if (image?.width === "half") imageStyle.width = "50%";
+    else if (image?.width === "inset") imageStyle.width = "75%";
+    else imageStyle.width = "100%";
+
+    if (image?.aspectRatio) {
+      const [w, h] = image?.aspectRatio.split(":").map(Number);
+      imageStyle.aspectRatio = `${w}/${h}`;
+    }
+  } else {
+    imageStyle.objectFit = "none";
+  }
 
   const styleClass = {
     "full-bleed": styles.fullBleed,
@@ -63,6 +90,7 @@ export function GridCard({
             width={600}
             height={658}
             priority={true}
+            style={imageStyle}
           />
         </div>
       ) : null}
@@ -111,11 +139,20 @@ export function GridCard({
     return <div className={styles.metric}></div>;
   };
 
+  const hasNoContent = !metricValue && !eyebrow && !title && !description;
+
   const content = (
     <>
-      <div className={styles.container}>
-        {variant !== "image" && (
+      <div
+        className={`${styles.container} ${isFullBleed ? styles.fullBleedImage : ""} `}
+      >
+        {variant !== "image" && !hasNoContent && (
           <div className={styles.content}>
+            {icon && (
+              <div className={styles.icon}>
+                <i className={icon} />
+              </div>
+            )}
             {metricValue && <Metric value={metricValue} />}
             {eyebrow && (
               <RichText className={styles.eyebrow} blocks={eyebrow} />
@@ -205,7 +242,7 @@ export function GridCard({
 
   return (
     <div
-      className={`${styles.card} ${styleClass ?? ""} ${styles[variant]}`}
+      className={`${classNames} ${styles.card} ${styleClass ?? ""} ${styles[variant]}`}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
       style={gridArea && !isMobile ? { gridArea: gridArea } : {}}

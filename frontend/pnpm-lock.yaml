@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@fortawesome/fontawesome-free':
+    specifier: ^7.0.0
+    version: 7.0.0
   '@portabletext/react':
     specifier: ^3.2.1
     version: 3.2.1(react@19.1.0)
@@ -30,8 +33,8 @@ dependencies:
     specifier: ^9.11.1
     version: 9.12.0(@sanity/client@7.4.1)(@sanity/icons@3.7.0)(@sanity/types@3.91.0)(@sanity/ui@2.15.18)(next@15.3.2)(react-dom@19.1.0)(react-is@19.1.0)(react@19.1.0)(sanity@3.91.0)(styled-components@6.1.18)(typescript@5.8.3)
   quirk-ui:
-    specifier: ^0.0.270
-    version: 0.0.270(path@0.12.7)(react-dom@19.1.0)(react@19.1.0)
+    specifier: ^0.0.273
+    version: 0.0.273(path@0.12.7)(react-dom@19.1.0)(react@19.1.0)
   react-icons:
     specifier: ^5.5.0
     version: 5.5.0(react@19.1.0)
@@ -1789,6 +1792,11 @@ packages:
 
   /@floating-ui/utils@0.2.9:
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
+    dev: false
+
+  /@fortawesome/fontawesome-free@7.0.0:
+    resolution: {integrity: sha512-X48nISrSOa89zu2VMljC4XaRf8NmgTwQBVHfS2Nu5G00ZwM31oOVrAtGxZF3b6wDYf9lJsf/Eq4cCSFKIkOWPQ==}
+    engines: {node: '>=6'}
     dev: false
 
   /@humanfs/core@0.19.1:
@@ -8353,8 +8361,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /quirk-ui@0.0.270(path@0.12.7)(react-dom@19.1.0)(react@19.1.0):
-    resolution: {integrity: sha512-BfYhZMBEzdwCFDQz5dqHOkAFlx+KwpAV/8RzPlxToCBdOOmrEvowAGdknhiCTnrZZo9NBFt9qZyNl2+FwZcTiA==}
+  /quirk-ui@0.0.273(path@0.12.7)(react-dom@19.1.0)(react@19.1.0):
+    resolution: {integrity: sha512-HJ5MvEiX4ys+F7Wiu7YkBgwpcbKRlS0I/s20a8ll62+VnwomwZxKTIKB8pISGB6YkRGUx55IApjykAFfvJHkZQ==}
     peerDependencies:
       path: ^0.12.7
       react: ^19.0.0
