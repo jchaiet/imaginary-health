@@ -51,6 +51,8 @@ export const linkType = defineType({
           { title: "Phone", value: "phone" },
           { title: "Play", value: "play" },
           { title: "New Tab", value: "new-tab" },
+          { title: "Refresh", value: "refresh" },
+          { title: "Settings", value: "settings" },
           { title: "Sign In", value: "sign-in" },
         ],
         layout: "dropdown",

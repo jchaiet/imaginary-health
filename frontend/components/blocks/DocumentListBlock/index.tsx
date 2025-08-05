@@ -3,7 +3,7 @@ import { RichText } from "@/components/ui/PortableTextRenderer";
 import { DocumentListBlockProps } from "@/types/documentList";
 import { ArticleItem } from "@/types";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
-import { RefreshCw, XIcon, Settings2Icon } from "lucide-react";
+import { XIcon } from "lucide-react";
 import styles from "./styles.module.css";
 import { CallToAction, Input, Select } from "quirk-ui";
 import { BlogArticleCard } from "@/components/cards/BlogArticleCard";
@@ -192,8 +192,8 @@ export function DocumentListBlock({
                 variant="secondary"
                 onClick={toggleFilters}
                 disabled={isLoading}
-                icon={<Settings2Icon size={21} />}
-                iconAlignemnt="left"
+                icon="settings"
+                iconAlignment="left"
               >
                 Filters
               </CallToAction>
@@ -284,8 +284,8 @@ export function DocumentListBlock({
                   variant="primary"
                   onClick={fetchArticles}
                   disabled={isLoading}
-                  icon={<RefreshCw size={21} />}
-                  iconAlignemnt="left"
+                  icon="refresh"
+                  iconAlignment="left"
                   className={isLoading ? styles.buttonIsLoading : ""}
                 >
                   {isLoading ? "Loading..." : "Load more"}
