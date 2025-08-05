@@ -69,7 +69,7 @@
 }
 
 .disclaimer {
-  color: var(--color-secondary-50);
+  color: var(--color-text-primary);
   font-size: var(--font-size-sm);
 }
 
