@@ -90,7 +90,7 @@
 }
 
 .disclaimer {
-  color: var(--color-muted);
+  color: var(--color-secondary-50);
   font-size: var(--font-size-sm);
 }
 
@@ -345,7 +345,7 @@
   display: flex;
   /* gap: var(--spacing-md); */
   text-decoration: none;
-  /* border: 2px solid var(--color-muted); */
+  /* border: 2px solid var(--color-secondary-50); */
   overflow: hidden;
   transition: border-color 0.3s ease-in-out;
 

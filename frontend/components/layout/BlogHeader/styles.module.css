@@ -197,7 +197,7 @@
     top: 30px;
     left: 0;
     z-index: 5;
-    border: 1px solid var(--color-muted);
+    border: 1px solid var(--color-secondary-50);
     width: max-content;
     background-color: #fff;
     border-radius: var(--radius-md);
@@ -217,7 +217,7 @@
   }
 
   .linkWrapper {
-    border-bottom: 1px solid var(--color-muted);
+    border-bottom: 1px solid var(--color-secondary-50);
 
     &:last-of-type {
       border-bottom: none;
@@ -238,10 +238,10 @@
       display: block;
       border-radius: 0;
       font-size: var(--font-size-sm);
-      color: var(--color-muted);
+      color: var(--color-secondary-50);
 
       @media (max-width: 767px) {
-        color: var(--color-muted);
+        color: var(--color-secondary-50);
         pointer-events: none;
         cursor: default;
       }

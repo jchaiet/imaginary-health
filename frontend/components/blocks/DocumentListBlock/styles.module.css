@@ -280,7 +280,7 @@
     }
 
     &:disabled {
-      background-color: var(--color-muted);
+      background-color: var(--color-secondary-50);
       cursor: not-allowed;
     }
   }

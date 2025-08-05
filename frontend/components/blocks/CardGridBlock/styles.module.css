@@ -62,7 +62,7 @@ h3.description {
 
 .disclaimer {
   font-size: var(--font-size-sm);
-  color: var(--color-muted);
+  color: var(--color-secondary-50);
   line-height: var(--line-height-tight);
 }
 

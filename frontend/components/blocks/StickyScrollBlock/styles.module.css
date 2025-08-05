@@ -64,7 +64,7 @@
   li {
     .number {
       border-radius: var(--radius-full);
-      background-color: var(--color-muted);
+      background-color: var(--color-secondary-50);
       color: var(--color-text-primary);
       font-weight: var(--font-weight-semibold);
       font-size: var(--font-size-lg);
