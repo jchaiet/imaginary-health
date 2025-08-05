@@ -23,8 +23,10 @@
       padding-right: 0;
     }
     .heading {
-      padding-left: var(--spacing-md);
-      padding-right: var(--spacing-md);
+      @media (max-width: 767px) {
+        padding-left: var(--spacing-md);
+        padding-right: var(--spacing-md);
+      }
     }
   }
 }
@@ -99,7 +101,8 @@
 
   .document {
     /* max-width: 350px; */
-    max-width: 288.5px; /* 4 card carousel, card width */
+    /*max-width: 288.5px;  4 card carousel, card width */
+    max-width: 300px;
     margin: 0 auto;
 
     @media (max-width: 767px) {
