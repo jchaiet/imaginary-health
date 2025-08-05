@@ -6,6 +6,7 @@
   /* border: 2px solid var(--color-secondary-50); */
   overflow: hidden;
   transition: border-color 0.3s ease-in-out;
+  max-width: var(--max-item-width);
 
   &:hover {
     border-color: var(--color-primary-100);
