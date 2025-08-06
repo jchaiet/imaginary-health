@@ -144,7 +144,7 @@ export function GridCard({
   const content = (
     <>
       <div
-        className={`${styles.container} ${isFullBleed ? styles.fullBleedImage : ""} `}
+        className={`${styles.container} ${isFullBleed ? styles.fullBleedImage : styles.containImage} `}
       >
         {variant !== "image" && !hasNoContent && (
           <div className={styles.content}>
