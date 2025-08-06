@@ -76,7 +76,7 @@ export function CardGridBlock({
     [heading?.title, hoveredText, heading?.animateText]
   );
 
-  const hasNoHeading = !heading?.title && !heading.description;
+  const hasNoHeading = !heading?.title && !heading?.description;
 
   return (
     <section
