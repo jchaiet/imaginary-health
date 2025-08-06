@@ -17,7 +17,6 @@ export function SyncCategoriesOnChange({
   published,
 }: SyncCategoriesProps) {
   const client = useClient({ apiVersion: "2023-01-01" });
-  console.log(id);
 
   useEffect(() => {
     if (!currentCategories) return;

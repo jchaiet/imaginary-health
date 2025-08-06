@@ -31,7 +31,6 @@ export function SpotlightCard({ spotlight }: SpotlightCardProps) {
     href = `/${spotlight.callToAction.linkOptions?.internalUrl?.slug.current}`;
   }
 
-  console.log("CTA", href);
   return (
     <div className={styles.spotlight}>
       {spotlight.image && (

@@ -9,7 +9,6 @@ import { useClient, useDocumentValues } from "sanity";
 export function BlogEditorWrapper(props: any) {
   const { value, renderDefault } = props;
 
-  console.log(value);
   const client = useClient({ apiVersion: "2023-01-01" });
 
   const [draftDoc, setDraftDoc] = useState(null);
