@@ -73,6 +73,30 @@ You can redirect to one of two types of destinations:
 
 ⚡ Only one destination is required. If you select a page, you can leave the slug empty.
 
+3️⃣ Set Permanent or Temporary Redirect
+
+- Permanent (301): Use if the old URL will never return. Recommended for SEO.
+- Temporary (302): Use if the redirect is short-term.
+
+4️⃣ Publish the Redirect
+
+- Click Publish in the bottom-right corner.
+- Sanity will trigger a site rebuild.
+- Your redirect will be active after the site deploys (usually within 30–60 seconds).
+
+### Important Notes
+
+- Redirects must start with / for internal pages.
+- Only one destination is required.
+- Changes go live after a site rebuild triggered by our Sanity webhook.
+- Avoid redirect loops (don’t redirect a page to itself).
+
+### Troubleshooting
+
+- If the redirect doesn’t work immediately, wait for the Vercel deployment to finish.
+- Check that the source path is correct and starts with /.
+- If it still doesn’t work, contact the web team to verify the Sanity webhook and Next.js redirects.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

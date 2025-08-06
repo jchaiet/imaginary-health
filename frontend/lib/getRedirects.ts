@@ -1,7 +1,22 @@
 import { sanityClient } from "../sanity/client";
 
-export async function getRedirects() {
-  const redirects = await sanityClient.fetch(`
+interface SanityRedirect {
+  source: string;
+  permanent?: boolean;
+  destinationSlug?: { current: string };
+  destinationPage?: {
+    slug?: string;
+  };
+}
+
+interface NextRedirect {
+  source: string;
+  destination: string;
+  permanent: boolean;
+}
+
+export async function getRedirects(): Promise<NextRedirect[]> {
+  const redirects = await sanityClient.fetch<SanityRedirect[]>(`
     *[_type == "redirect"]{
       "source": source.current,
       permanent,
@@ -13,7 +28,7 @@ export async function getRedirects() {
   `);
 
   return redirects
-    .map((redirect: any) => {
+    .map((redirect) => {
       const destination = redirect.destinationPage?.slug
         ? `/${redirect.destinationPage.slug}`
         : redirect.destinationSlug?.current;
@@ -26,5 +41,5 @@ export async function getRedirects() {
         permanent: redirect.permanent ?? true,
       };
     })
-    .filter(Boolean);
+    .filter((r): r is NextRedirect => r !== null);
 }
