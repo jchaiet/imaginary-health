@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { getRedirects } from "./lib/getRedirects";
 
 const nextConfig: NextConfig = {
   images: {
@@ -10,6 +11,9 @@ const nextConfig: NextConfig = {
         pathname: "/images/m4mnm2dh/production/**",
       },
     ],
+  },
+  async redirects() {
+    return await getRedirects();
   },
 };
 

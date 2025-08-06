@@ -76,6 +76,8 @@ export function CardGridBlock({
     [heading?.title, hoveredText, heading?.animateText]
   );
 
+  const hasNoHeading = !heading?.title && !heading.description;
+
   return (
     <section
       className={`${styles.cardGrid} ${grid?.className ?? ""} ${classNames}`}
@@ -83,15 +85,17 @@ export function CardGridBlock({
       <article
         className={`${styles.container} ${classNames.includes("split") ? "split" : "default"}`}
       >
-        <div className={`${styles.heading} ${headingLayoutClass ?? ""}`}>
-          {heading?.title && titleBlock}
-          {heading?.description && (
-            <RichText
-              className={styles.description}
-              blocks={heading?.description}
-            />
-          )}
-        </div>
+        {!hasNoHeading && (
+          <div className={`${styles.heading} ${headingLayoutClass ?? ""}`}>
+            {heading?.title && titleBlock}
+            {heading?.description && (
+              <RichText
+                className={styles.description}
+                blocks={heading?.description}
+              />
+            )}
+          </div>
+        )}
         <div
           className={`${styles.grid} ${grid?.className && styles[grid?.className] ? styles[grid?.className] : (grid?.className ?? "")}`}
         >

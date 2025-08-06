@@ -61,6 +61,10 @@ h3.description {
 }
 
 .disclaimer {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: var(--spacing-md);
   font-size: var(--font-size-sm);
   color: var(--color-text-primary);
   line-height: var(--line-height-tight);

@@ -8,6 +8,7 @@ import {
   ComposeSparklesIcon,
   ControlsIcon,
   DocumentsIcon,
+  LeaveIcon,
   SunIcon,
   TagsIcon,
 } from "@sanity/icons";
@@ -23,17 +24,6 @@ export const defaultDocumentNode: DefaultDocumentNodeResolver = (
 
   return S.document();
 };
-
-const authorableSingletons = ["contentBlock", "heroBlock"];
-
-const customHandledTypes = [
-  "siteSettings",
-  "navigation",
-  ...authorableSingletons,
-  "page",
-  "blog",
-  "category",
-];
 
 export const deskContent = structureTool({
   name: "content",
@@ -81,6 +71,8 @@ export const deskContent = structureTool({
           S,
           context.documentStore
         ),
+
+        S.documentTypeListItem("redirect").title("Redirects").icon(LeaveIcon),
       ]);
   },
 });
