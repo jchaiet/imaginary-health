@@ -60,10 +60,18 @@ You can redirect to one of two types of destinations:
 - Use this if you want to redirect to a custom internal URL.
 - Must start with /.
   Example:
+  ```bash
+  /new-blog-post
+  ```
 
-```bash
-/new-blog-post
-```
+3. External URL (Optional)
+
+- If the redirect should point to an external website, enter the full URL:
+  ```bash
+  http://example.com/new-page
+  ```
+
+⚡ Only one destination is required. If you select a page, you can leave the slug empty.
 
 ## Learn More
 
