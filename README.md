@@ -1,7 +1,7 @@
 ## Table of Contents
 
-[Getting Started](#getting-started)
-[Redirects](#redirects)
+[Getting Started](#getting-started)  
+[Redirects](#redirects)  
 [Additional Info](#learn-more)
 
 ## Getting Started
@@ -40,7 +40,7 @@ Redirects help prevent broken links and improve SEO.
 _Source Path_
 
 - This is the old URL that users are visiting.
-- Must start with a forward slash (/).
+- Must start with a forward slash (/).  
   Example:
   ```bash
   /old-blog-post
@@ -58,7 +58,7 @@ You can redirect to one of two types of destinations:
 2. Destination Path (Manual Slug)
 
 - Use this if you want to redirect to a custom internal URL.
-- Must start with /.
+- Must start with /.  
   Example:
   ```bash
   /new-blog-post
