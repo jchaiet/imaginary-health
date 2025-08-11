@@ -40,7 +40,10 @@ export function LocaleModal({ currentLocale }: { currentLocale: string }) {
                   href={links[locale.id] || `/${locale.id}`}
                   className={styles.locale}
                 >
-                  {locale.title} ({locale.id})
+                  <span>
+                    {locale.title}
+                    <span>({locale.id})</span>
+                  </span>
                 </a>
               </li>
             );
