@@ -13,5 +13,7 @@ export interface Navigation {
   variant: "standard" | "transparent" | "minimal";
   navigationType: "default" | "advanced";
   showSearch: boolean;
+  showLocaleSelect: boolean;
+  localeSelectComponent?: React.ReactNode;
   searchComponent?: React.ReactNode;
 }

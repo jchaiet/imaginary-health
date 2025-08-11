@@ -11,10 +11,20 @@ export default function parentChild(
   title: string = "Pages",
   icon: React.ComponentType = FolderIcon,
   S: StructureBuilder,
-  documentStore: DocumentStore
+  documentStore: DocumentStore,
+  customFilter?: string
 ) {
-  const filterWithoutParent = `_type == "${schemaType}" && !defined(parent) && !(_id in path("drafts.**"))`;
-  const filterAll = `_type == "${schemaType}" && !(_id in path("drafts.**"))`;
+  const appendFilter = (base: string) =>
+    customFilter ? `${base} && (${customFilter})` : base;
+
+  const filterWithoutParent = appendFilter(
+    `_type == "${schemaType}" && !defined(parent) && !(_id in path("drafts.**"))`
+  );
+
+  const filterAll = appendFilter(
+    `_type == "${schemaType}" && !(_id in path("drafts.**"))`
+  );
+
   const query = `*[${filterWithoutParent}]{ _id, title, slug }`;
   const queryId = (id: string) =>
     `*[${filterAll} && _id == "${id}"][0]{ _id, title, slug, parent, children }`;

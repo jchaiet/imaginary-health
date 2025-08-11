@@ -14,6 +14,11 @@ import {
 } from "@sanity/icons";
 import parentChild from "./lib/parentChild";
 
+const locales = [
+  { id: "en-us", title: "English (US)" },
+  { id: "es-us", title: "Spanish (US)" },
+];
+
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (
   S: StructureBuilder,
   context
@@ -43,14 +48,52 @@ export const deskContent = structureTool({
 
         S.divider(),
 
-        parentChild("page", "Pages", DocumentsIcon, S, context.documentStore),
-        parentChild(
-          "blog",
-          "Articles",
-          ComposeSparklesIcon,
-          S,
-          context.documentStore
-        ),
+        S.listItem()
+          .title("Pages by Locale")
+          .child(
+            S.list()
+              .title("Pages by Locale")
+              .items(
+                locales.map((locale) => {
+                  const filter =
+                    locale.id === "en-us"
+                      ? `locale == "${locale.id}" || !defined(locale)`
+                      : `locale == "${locale.id}"`;
+
+                  return parentChild(
+                    "page",
+                    `Pages (${locale.title})`,
+                    DocumentsIcon,
+                    S,
+                    context.documentStore,
+                    filter
+                  ).id(`pages-${locale.id}`);
+                })
+              )
+          ),
+        S.listItem()
+          .title("Articles by Locale")
+          .child(
+            S.list()
+              .title("Articles by Locale")
+              .items(
+                locales.map((locale) => {
+                  const filter =
+                    locale.id === "en-us"
+                      ? `locale == "${locale.id}" || !defined(locale)`
+                      : `locale == "${locale.id}"`;
+
+                  return parentChild(
+                    "blog",
+                    `Articles (${locale.title})`,
+                    ComposeSparklesIcon,
+                    S,
+                    context.documentStore,
+                    filter
+                  ).id(`pages-${locale.id}`);
+                })
+              )
+          ),
 
         S.divider(),
 

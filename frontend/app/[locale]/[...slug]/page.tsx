@@ -7,15 +7,15 @@ import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
 
 interface PageProps {
-  params: Promise<{ slug: string[] }>;
+  params: Promise<{ slug: string[]; locale: string }>;
 }
 
-const getPage = cache(async (slug: string) => {
+const getPage = cache(async (slug: string, locale: string) => {
   const { isEnabled } = await draftMode();
 
   return sanityClient.fetch(
     pageBySlugQuery,
-    { slug },
+    { slug, locale },
     isEnabled
       ? {
           perspective: "drafts",
@@ -27,9 +27,9 @@ const getPage = cache(async (slug: string) => {
 });
 
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const formattedSlug = slug.join("/") ?? "/";
-  const page = await getPage(formattedSlug);
+  const page = await getPage(formattedSlug, locale);
 
   if (!page) return {};
 
@@ -41,9 +41,13 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const formattedSlug = slug.join("/") ?? "/";
-  const page = await getPage(formattedSlug);
+  let page = await getPage(formattedSlug, locale);
+
+  if (!page && locale !== "en-us") {
+    page = await getPage(formattedSlug, "en-us");
+  }
 
   if (!page) notFound();
 
@@ -56,6 +60,7 @@ export default async function Page({ params }: PageProps) {
       isBlog={isBlog}
       hideHeader={hideHeader}
       hideFooter={hideFooter}
+      locale={locale}
     >
       <PageBuilder sections={pageBuilder} pageData={page} />
     </PageTemplate>

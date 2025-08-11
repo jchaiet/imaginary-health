@@ -39,13 +39,17 @@ export function BlogArticleCard({
         {article.articleType && (
           <div className={styles.category}>{article.articleType}</div>
         )}
-        <Image
-          src={imageUrl ?? ""}
-          alt={alt || article?.featuredImage?.description || "Content image"}
-          width={600}
-          height={400}
-          priority={true}
-        />
+        {imageUrl ? (
+          <Image
+            src={imageUrl ?? ""}
+            alt={alt || article?.featuredImage?.description || "Content image"}
+            width={600}
+            height={400}
+            priority={true}
+          />
+        ) : (
+          <div className={styles.imagePlaceholder} />
+        )}
       </div>
       <div className={styles.itemContent}>
         {mainCategory && (

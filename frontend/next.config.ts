@@ -13,7 +13,15 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    return await getRedirects();
+    const sanityRedirects = await getRedirects();
+    return [
+      // {
+      //   source: "/en-us/:path*",
+      //   destination: "/:path*",
+      //   permanent: true,
+      // },
+      ...sanityRedirects,
+    ];
   },
 };
 

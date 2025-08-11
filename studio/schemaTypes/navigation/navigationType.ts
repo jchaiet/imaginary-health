@@ -63,6 +63,11 @@ export const navigationType = defineType({
       title: "Show Search Button",
     }),
     defineField({
+      name: "showLocaleSelect",
+      type: "boolean",
+      title: "Show Locale Select",
+    }),
+    defineField({
       name: "navigationItems",
       title: "Navigation Items",
       type: "array",

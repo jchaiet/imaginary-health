@@ -8,24 +8,30 @@ import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 // import { resolveSections } from "@/lib/resolveSections";
 
-const getPage = cache(async (slug: string) => {
-  const { isEnabled } = await draftMode();
+interface PageProps {
+  params: Promise<{ slug: string[]; locale: string }>;
+}
 
-  return sanityClient.fetch(
-    pageBySlugQuery,
-    { slug },
-    isEnabled
-      ? {
-          perspective: "drafts",
-          useCdn: false,
-          stega: true,
-        }
-      : undefined
-  );
-});
+const getPage = cache(
+  async (slug: string, locale: string, isDraft: boolean) => {
+    return sanityClient.fetch(
+      pageBySlugQuery,
+      { slug, locale },
+      isDraft
+        ? {
+            perspective: "drafts",
+            useCdn: false,
+            stega: true,
+          }
+        : undefined
+    );
+  }
+);
 
-export async function generateMetadata() {
-  const page = await getPage("home");
+export async function generateMetadata({ params }: PageProps) {
+  const { locale } = await params;
+  const page = await getPage("home", locale, false);
+
   if (!page) return {};
 
   return {
@@ -35,8 +41,15 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Home() {
-  const page = await getPage("home");
+export default async function Home({ params }: PageProps) {
+  const { locale } = await params;
+  const { isEnabled } = await draftMode();
+
+  let page = await getPage("home", locale, isEnabled);
+
+  if (!page && locale !== "en-us") {
+    page = await getPage("home", "en-us", isEnabled);
+  }
 
   if (!page) notFound();
 

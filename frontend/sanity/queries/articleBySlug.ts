@@ -5,7 +5,11 @@ import {
 } from "./fragments";
 
 export const articleBySlugQuery = `
-*[_type == "blog" && slug.current == $slug][0]{
+*[
+  _type == "blog" && 
+  slug.current == $slug && 
+  locale == $locale
+][0]{
   ...,
   ${articleFragment},
   pageBuilder[]{

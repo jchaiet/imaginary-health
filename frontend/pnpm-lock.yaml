@@ -29,12 +29,15 @@ dependencies:
   next:
     specifier: 15.3.2
     version: 15.3.2(@babel/core@7.27.4)(react-dom@19.1.0)(react@19.1.0)
+  next-intl:
+    specifier: ^4.3.4
+    version: 4.3.4(next@15.3.2)(react@19.1.0)(typescript@5.8.3)
   next-sanity:
     specifier: ^9.11.1
     version: 9.12.0(@sanity/client@7.4.1)(@sanity/icons@3.7.0)(@sanity/types@3.91.0)(@sanity/ui@2.15.18)(next@15.3.2)(react-dom@19.1.0)(react-is@19.1.0)(react@19.1.0)(sanity@3.91.0)(styled-components@6.1.18)(typescript@5.8.3)
   quirk-ui:
-    specifier: ^0.0.282
-    version: 0.0.282(path@0.12.7)(react-dom@19.1.0)(react@19.1.0)
+    specifier: ^0.0.284
+    version: 0.0.284(path@0.12.7)(react-dom@19.1.0)(react@19.1.0)
   react-icons:
     specifier: ^5.5.0
     version: 5.5.0(react@19.1.0)
@@ -1794,6 +1797,48 @@ packages:
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
     dev: false
 
+  /@formatjs/ecma402-abstract@2.3.4:
+    resolution: {integrity: sha512-qrycXDeaORzIqNhBOx0btnhpD1c+/qFIHAN9znofuMJX6QBwtbrmlpWfD4oiUUD2vJUOIYFA/gYtg2KAMGG7sA==}
+    dependencies:
+      '@formatjs/fast-memoize': 2.2.7
+      '@formatjs/intl-localematcher': 0.6.1
+      decimal.js: 10.5.0
+      tslib: 2.8.1
+    dev: false
+
+  /@formatjs/fast-memoize@2.2.7:
+    resolution: {integrity: sha512-Yabmi9nSvyOMrlSeGGWDiH7rf3a7sIwplbvo/dlz9WCIjzIQAfy1RMf4S0X3yG724n5Ghu2GmEl5NJIV6O9sZQ==}
+    dependencies:
+      tslib: 2.8.1
+    dev: false
+
+  /@formatjs/icu-messageformat-parser@2.11.2:
+    resolution: {integrity: sha512-AfiMi5NOSo2TQImsYAg8UYddsNJ/vUEv/HaNqiFjnI3ZFfWihUtD5QtuX6kHl8+H+d3qvnE/3HZrfzgdWpsLNA==}
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
+      '@formatjs/icu-skeleton-parser': 1.8.14
+      tslib: 2.8.1
+    dev: false
+
+  /@formatjs/icu-skeleton-parser@1.8.14:
+    resolution: {integrity: sha512-i4q4V4qslThK4Ig8SxyD76cp3+QJ3sAqr7f6q9VVfeGtxG9OhiAk3y9XF6Q41OymsKzsGQ6OQQoJNY4/lI8TcQ==}
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
+      tslib: 2.8.1
+    dev: false
+
+  /@formatjs/intl-localematcher@0.5.10:
+    resolution: {integrity: sha512-af3qATX+m4Rnd9+wHcjJ4w2ijq+rAVP3CCinJQvFv1kgSu1W6jypUmvleJxcewdxmutM8dmIRZFxO/IQBZmP2Q==}
+    dependencies:
+      tslib: 2.8.1
+    dev: false
+
+  /@formatjs/intl-localematcher@0.6.1:
+    resolution: {integrity: sha512-ePEgLgVCqi2BBFnTMWPfIghu6FkbZnnBVhO2sSxvLfrdFw7wCHAHiDoM2h4NRgjbaY7+B7HgOLZGkK187pZTZg==}
+    dependencies:
+      tslib: 2.8.1
+    dev: false
+
   /@fortawesome/fontawesome-free@7.0.0:
     resolution: {integrity: sha512-X48nISrSOa89zu2VMljC4XaRf8NmgTwQBVHfS2Nu5G00ZwM31oOVrAtGxZF3b6wDYf9lJsf/Eq4cCSFKIkOWPQ==}
     engines: {node: '>=6'}
@@ -3506,6 +3551,10 @@ packages:
       - '@sanity/types'
       - debug
       - typescript
+    dev: false
+
+  /@schummar/icu-type-parser@1.21.5:
+    resolution: {integrity: sha512-bXHSaW5jRTmke9Vd0h5P7BtWZG9Znqb8gSDxZnxaGSJnGwPLDPfS+3g0BKzeWqzgZPsIVZkM7m2tbo18cm5HBw==}
     dev: false
 
   /@sentry-internal/browser-utils@8.55.0:
@@ -6586,6 +6635,15 @@ packages:
       side-channel: 1.1.0
     dev: true
 
+  /intl-messageformat@10.7.16:
+    resolution: {integrity: sha512-UmdmHUmp5CIKKjSoE10la5yfU+AYJAaiYLsodbjL4lji83JNvgOQUjGaGhGrpFCb0Uh7sl7qfP1IyILa8Z40ug==}
+    dependencies:
+      '@formatjs/ecma402-abstract': 2.3.4
+      '@formatjs/fast-memoize': 2.2.7
+      '@formatjs/icu-messageformat-parser': 2.11.2
+      tslib: 2.8.1
+    dev: false
+
   /is-alphabetical@1.0.4:
     resolution: {integrity: sha512-DwzsA04LQ10FHTZuL0/grVDk4rFoVH1pjAToYwBrHSxcrBIGQuXrQMtD5U1b0U2XVgKZCTLLP8u2Qxqhy3l2Vg==}
     dev: false
@@ -7600,6 +7658,29 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
+  /negotiator@1.0.0:
+    resolution: {integrity: sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg==}
+    engines: {node: '>= 0.6'}
+    dev: false
+
+  /next-intl@4.3.4(next@15.3.2)(react@19.1.0)(typescript@5.8.3):
+    resolution: {integrity: sha512-VWLIDlGbnL/o4LnveJTJD1NOYN8lh3ZAGTWw2krhfgg53as3VsS4jzUVnArJdqvwtlpU/2BIDbWTZ7V4o1jFEw==}
+    peerDependencies:
+      next: ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
+      typescript: ^5.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@formatjs/intl-localematcher': 0.5.10
+      negotiator: 1.0.0
+      next: 15.3.2(@babel/core@7.27.4)(react-dom@19.1.0)(react@19.1.0)
+      react: 19.1.0
+      typescript: 5.8.3
+      use-intl: 4.3.4(react@19.1.0)
+    dev: false
+
   /next-sanity@9.12.0(@sanity/client@7.4.1)(@sanity/icons@3.7.0)(@sanity/types@3.91.0)(@sanity/ui@2.15.18)(next@15.3.2)(react-dom@19.1.0)(react-is@19.1.0)(react@19.1.0)(sanity@3.91.0)(styled-components@6.1.18)(typescript@5.8.3):
     resolution: {integrity: sha512-h9j2WA0M19jhnXZSet8JMugf8zGWyx9j586VVPcntbI/LUnFvWxzZEi+tXtS/SELJDSA6xxhOu8JpUZDo7ltWw==}
     engines: {node: '>=18.18'}
@@ -8361,8 +8442,8 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /quirk-ui@0.0.282(path@0.12.7)(react-dom@19.1.0)(react@19.1.0):
-    resolution: {integrity: sha512-cv07bqoeAjFnTGDRtTXM/WMtUGRPcBRew5VtQFLBvOHqig21YvQW/9qLnfDuZk9KKPrpBxlH+UP/o5FxqzYEZA==}
+  /quirk-ui@0.0.284(path@0.12.7)(react-dom@19.1.0)(react@19.1.0):
+    resolution: {integrity: sha512-JVp93ocHdCpaApztFqnxo3dD4Ra/3B9CfbIg+lAJGka43Y8MJ9o90wc+N1XLn6Lt+R89eOQFJvbB29ZFQk8q3g==}
     peerDependencies:
       path: ^0.12.7
       react: ^19.0.0
@@ -10160,6 +10241,17 @@ packages:
     peerDependencies:
       react: '>=17.0.0'
     dependencies:
+      react: 19.1.0
+    dev: false
+
+  /use-intl@4.3.4(react@19.1.0):
+    resolution: {integrity: sha512-sHfiU0QeJ1rirNWRxvCyvlSh9+NczcOzRnPyMeo2rtHXhVnBsvMRjE+UG4eh3lRhCxrvcqei/I0lBxsc59on1w==}
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0 || ^19.0.0
+    dependencies:
+      '@formatjs/fast-memoize': 2.2.7
+      '@schummar/icu-type-parser': 1.21.5
+      intl-messageformat: 10.7.16
       react: 19.1.0
     dev: false
 

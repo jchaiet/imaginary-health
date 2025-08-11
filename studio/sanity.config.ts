@@ -15,6 +15,7 @@ import { slugPrefixTpl } from "./lib/slugPrefixTemplate";
 import { SetSlugAndPublishAction } from "./lib/setSlugAndPublishAction";
 import { customStudioStyles } from "./plugins/customStudioStyles";
 import { SyncCategories } from "./plugins/syncCategories";
+import { documentInternationalization } from "@sanity/document-internationalization";
 
 export default defineConfig({
   name: "default",
@@ -24,6 +25,16 @@ export default defineConfig({
   dataset: "production",
 
   plugins: [
+    documentInternationalization({
+      supportedLanguages: [
+        { id: "en-us", title: "English (US)" },
+        { id: "es-us", title: "Spanish (US)" },
+        { id: "fr", title: "French" },
+      ],
+      schemaTypes: ["blog", "page"],
+      languageField: "locale",
+      allowCreateMetaDoc: true,
+    }),
     codeInput(),
     deskContent,
     visionTool(),

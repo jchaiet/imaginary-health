@@ -15,6 +15,8 @@ type LayoutProps = {
   hideFooter?: boolean;
   showSearch?: boolean;
   searchComponent?: React.ReactNode;
+  showLocaleSelect?: boolean;
+  localeSelectComponent?: React.ReactNode;
   navItems?: NavItem[];
   navGroups?: NavGroup[];
   alignment: "left" | "center" | "right";
@@ -34,6 +36,7 @@ type LayoutProps = {
   footerPrimaryInfo?: PortableTextBlock[];
   footerSecondaryInfo?: PortableTextBlock[];
   footerSocialItems?: NavItem[];
+  locale?: string;
 };
 
 export default function Layout({
@@ -42,6 +45,8 @@ export default function Layout({
   hideFooter,
   showSearch,
   searchComponent,
+  showLocaleSelect,
+  localeSelectComponent,
   navItems,
   navGroups,
   alignment,
@@ -58,6 +63,7 @@ export default function Layout({
   footerPrimaryInfo,
   footerSecondaryInfo,
   footerSocialItems,
+  locale,
 }: LayoutProps) {
   return (
     <>
@@ -74,6 +80,9 @@ export default function Layout({
           navigationType={navigationType}
           showSearch={showSearch}
           searchComponent={searchComponent}
+          showLocaleSelect={showSearch}
+          localeSelectComponent={localeSelectComponent}
+          locale={locale}
         />
       )}
       <main>{children}</main>

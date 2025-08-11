@@ -13,6 +13,7 @@ import {
   BlockContentIcon,
 } from "@sanity/icons";
 import asyncSlugifier from "../lib/asyncSlugifier";
+import { isUniqueByLocale } from "../lib/isUniqueByLocale";
 
 export const pageType = defineType({
   name: "page",
@@ -25,6 +26,14 @@ export const pageType = defineType({
     { name: "content", title: "Content" },
   ],
   fields: [
+    defineField({
+      name: "locale",
+      type: "string",
+      group: "details",
+      description: "Language for the document",
+      readOnly: true,
+      initialValue: "en-us",
+    }),
     defineField({
       name: "title",
       title: "Page Name",
@@ -51,7 +60,7 @@ export const pageType = defineType({
       group: "details",
       options: {
         source: "title",
-        isUnique: (value, context) => context.defaultIsUnique(value, context),
+        isUnique: isUniqueByLocale,
         slugify: asyncSlugifier,
       },
       validation: (rule) => rule.required(),

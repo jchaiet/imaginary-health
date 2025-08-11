@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { SearchModal } from "../ui/SearchModal";
+import { LocaleModal } from "../ui/LocaleModal";
 import {
   Navbar,
   type UtilityItem,
@@ -20,7 +21,10 @@ type HeaderProps = {
   variant: "standard" | "transparent" | "minimal";
   navigationType: "default" | "advanced";
   showSearch?: boolean;
+  showLocaleSelect?: boolean;
   searchComponent?: React.ReactNode;
+  localeSelectComponent?: React.ReactNode;
+  locale?: string;
 };
 
 export default function Header({
@@ -34,7 +38,9 @@ export default function Header({
   logoAlt,
   logoLinkSlug,
   showSearch,
+  showLocaleSelect,
   // searchComponent,
+  locale,
 }: HeaderProps) {
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
@@ -69,6 +75,8 @@ export default function Header({
     <Navbar
       searchComponent={<SearchModal />}
       showSearch={showSearch}
+      showLocaleSelect={showLocaleSelect}
+      localeSelectComponent={<LocaleModal currentLocale={locale ?? ""} />}
       isSticky
       variant={variant}
       navigationType={navigationType}

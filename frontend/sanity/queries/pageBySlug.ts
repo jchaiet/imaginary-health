@@ -11,37 +11,42 @@ import {
 } from "./fragments";
 
 export const pageBySlugQuery = `
-*[_type == "page" && slug.current == $slug][0]{
-  ...,
-  metadata { title, robots, description },
-  image {
-    ${imageAssetFragment}
-  },
-  pageBuilder[]{
+  *[
+    _type == "page" && 
+    slug.current == $slug && 
+    locale == $locale
+  ][0] {
     ...,
-    callToAction {
-      ${callToActionFragment}
+    metadata { title, robots, description },
+    image {
+      ${imageAssetFragment}
     },
-    _type == "accordionBlock" => {
-      ${accordionBlockFragment}
-    },
-    _type == "carouselBlock" => {
-      ${carouselBlockFragment}
-    },
-    _type == "contentBlock" => {
-      ${contentBlockFragment}
-    },
-    _type == "heroBlock" => {
-      ${heroBlockFragment}
-    },
-    _type == "documentListBlock" => {
-      ${documentListBlockFragment}
-    },
-    _type == "featuredDocumentsBlock" => {
-      ${featuredDocumentsBlockFragment}
-    },
-    _type == "tabsBlock" => {
-      ${tabsBlockFragment}
+    pageBuilder[]{
+      ...,
+      callToAction {
+        ${callToActionFragment}
+      },
+      _type == "accordionBlock" => {
+        ${accordionBlockFragment}
+      },
+      _type == "carouselBlock" => {
+        ${carouselBlockFragment}
+      },
+      _type == "contentBlock" => {
+        ${contentBlockFragment}
+      },
+      _type == "heroBlock" => {
+        ${heroBlockFragment}
+      },
+      _type == "documentListBlock" => {
+        ${documentListBlockFragment}
+      },
+      _type == "featuredDocumentsBlock" => {
+        ${featuredDocumentsBlockFragment}
+      },
+      _type == "tabsBlock" => {
+        ${tabsBlockFragment}
+      }
     }
   }
-}`;
+`;

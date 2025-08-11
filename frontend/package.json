@@ -18,8 +18,9 @@
     "groq": "^3.89.0",
     "lucide-react": "^0.511.0",
     "next": "15.3.2",
+    "next-intl": "^4.3.4",
     "next-sanity": "^9.11.1",
-    "quirk-ui": "^0.0.282",
+    "quirk-ui": "^0.0.284",
     "react-icons": "^5.5.0"
   },
   "devDependencies": {

@@ -8,18 +8,18 @@ import React from "react";
 import { CategoryProps, PageSection } from "@/types";
 
 interface PageProps {
-  params: Promise<{ slug: string[] }>;
+  params: Promise<{ slug: string[]; locale: string }>;
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const { isEnabled } = await draftMode();
 
   const formattedSlug = slug.join("/") ?? "/";
 
-  const page = await sanityClient.fetch(
+  let page = await sanityClient.fetch(
     articleBySlugQuery,
-    { slug: formattedSlug },
+    { slug: formattedSlug, locale },
     isEnabled
       ? {
           perspective: "drafts",
@@ -29,15 +29,23 @@ export default async function Page({ params }: PageProps) {
       : undefined
   );
 
+  if (!page && locale !== "en-us") {
+    page = await sanityClient.fetch(
+      articleBySlugQuery,
+      { slug: formattedSlug, locale: "en-us" },
+      isEnabled
+        ? {
+            perspective: "drafts",
+            useCdn: false,
+            stega: true,
+          }
+        : undefined
+    );
+  }
+
   if (!page) notFound();
 
   const { pageBuilder = [], hideHeader = false, hideFooter = false } = page;
-
-  // const isBlog = page?.slug?.current?.startsWith("blog");
-
-  // const resolvedSections = (await resolveSections(
-  //   pageBuilder
-  // )) as PageSection[];
 
   const type = page?._type === "blog" ? "article" : "other";
 

@@ -13,6 +13,7 @@ type PageTemplateProps = {
   hideHeader?: boolean;
   hideFooter?: boolean;
   isBlog?: boolean;
+  locale?: string;
 };
 
 export default async function PageTemplate({
@@ -21,6 +22,7 @@ export default async function PageTemplate({
   hideHeader = false,
   hideFooter = false,
   isBlog = false,
+  locale = "en-us",
 }: PageTemplateProps) {
   const settings = await fetchSiteSettings();
 
@@ -79,6 +81,7 @@ export default async function PageTemplate({
       footerPrimaryInfo={footerNavigationData.primaryInfo}
       footerSecondaryInfo={footerNavigationData.secondaryInfo}
       footerSocialItems={socialItems}
+      locale={locale}
     >
       {isBlog && (
         <BlogHeader title="Blog" navItems={blogNavItems} alignment="right" />

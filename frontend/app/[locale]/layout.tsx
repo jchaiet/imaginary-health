@@ -4,7 +4,7 @@ import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/preview/DisableDraftMode";
 import { fetchSiteSettings, urlForImage } from "@/sanity/client";
-import "./globals.css";
+import "../globals.css";
 import "quirk-ui/styles.css";
 import { HeroProvider } from "@/context/HeroContext";
 import { ThemeWrapper } from "@/lib/ThemeWrapper";
@@ -70,14 +70,19 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  const currentLocale = locale || "en-us";
+
   return (
     <ThemeWrapper>
       <HeroProvider>
         <html
-          lang="en"
+          lang={currentLocale}
           style={{ overflow: "visible", scrollBehavior: "smooth" }}
         >
           <body className={roboto.className}>
