@@ -80,7 +80,7 @@ export default function Layout({
           navigationType={navigationType}
           showSearch={showSearch}
           searchComponent={searchComponent}
-          showLocaleSelect={showSearch}
+          showLocaleSelect={showLocaleSelect}
           localeSelectComponent={localeSelectComponent}
           locale={locale}
         />
