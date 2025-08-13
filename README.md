@@ -31,13 +31,13 @@ Redirects help prevent broken links and improve SEO.
 
 ### Steps to Create a Redirect
 
-1️⃣ Open the Redirects Section in Sanity
+1️⃣ **Open the Redirects Section in Sanity**
 
 - Log in to Sanity Studio.
 - In the left menu, select Redirects.
 - Click “Create new”.
 
-2️⃣ Fill Out the Redirect Form
+2️⃣ **Fill Out the Redirect Form**
 _Source Path_
 
 - This is the old URL that users are visiting.
@@ -74,12 +74,12 @@ You can redirect to one of two types of destinations:
 
 ⚡ Only one destination is required. If you select a page, you can leave the slug empty.
 
-3️⃣ Set Permanent or Temporary Redirect
+3️⃣ **Set Permanent or Temporary Redirect**
 
 - Permanent (301): Use if the old URL will never return. Recommended for SEO.
 - Temporary (302): Use if the redirect is short-term.
 
-4️⃣ Publish the Redirect
+4️⃣ **Publish the Redirect**
 
 - Click Publish in the bottom-right corner.
 - Sanity will trigger a site rebuild.
