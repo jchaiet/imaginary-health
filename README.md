@@ -104,8 +104,8 @@ This guide explains how to add new redirects, translations, and locales in the p
 
 ### 1. Adding a new locale in Sanity
 
-1. Open deskStructure.ts.
-2. Add the new locale to the locales array:
+1. Open `deskStructure.ts`.
+2. Add the new locale to the `locales` array:
 
 ```ts
 const locales = [
@@ -122,15 +122,15 @@ By default, new pages will automatically be set the en-US locale. To add a new t
 2. Click the Locale Switcher (Translations) in the toolbar at the top of the document.
 3. Select the desired locale.
 4. A new document will be generated that automatically sets your locale in the document's locale property. Update as needed.
-5. The desk structure groups pages by locale automatically (via the locale field in parentChild).
-6. Once published, your document will be published under the locales id (es-US/you-document-slug).
+5. The desk structure groups pages by locale automatically (via the `locale` field in `parentChild`).
+6. Once published, your document will be published under the locales `id` (`es-US/you-document-slug`).
 
-Pages without a locale default to the en-us grouping in DeskStructure.
+Pages without a locale default to the `en-us` grouping in DeskStructure.
 
 ### 2. Add a new locale in NextJS
 
-1. Open lib.i18n.ts.
-2. Add the new locale to the locales array:
+1. Open `lib/i18n.ts`.
+2. Add the new locale to the `locales` array:
 
 ```ts
 export const locales = [
