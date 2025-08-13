@@ -2,6 +2,7 @@ export const locales = [
   { id: "en-us", title: "English (US)" },
   { id: "es-us", title: "Spanish (US)" },
 ];
+
 export const defaultLocale = "en-us";
 
 export function isValidLocale(locale: string): boolean {
