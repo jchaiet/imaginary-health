@@ -1,7 +1,8 @@
 ## Table of Contents
 
 [Getting Started](#getting-started)  
-[Redirects](#redirects)  
+[Redirects](#redirects)
+[Adding New Locales](#adding-new-locales)  
 [Additional Info](#learn-more)
 
 ## Getting Started
@@ -83,6 +84,33 @@ You can redirect to one of two types of destinations:
 - Click Publish in the bottom-right corner.
 - Sanity will trigger a site rebuild.
 - Your redirect will be active after the site deploys (usually within 30–60 seconds).
+
+## Adding New Locales
+
+This guide explains how to add a new language locale to the project, configure routing, and ensure the pages and links work correctly.
+
+### 1. Update i18n Configuration
+
+Edit frontend/lib/i18n.ts:
+
+```ts
+export const locales = [
+  { id: "en-us", title: "English (US)" },
+  { id: "es-us", title: "Spanish (US)" },
+  // Add new locale here
+  { id: "fr-fr", title: "French (FR)" },
+];
+
+export const defaultLocale = "en-us";
+
+export function isValidLocale(locale: string): boolean {
+  return locales.some((loc) => loc.id === locale);
+}
+```
+
+- id: the locale code used in URLs (e.g., /fr-fr/...).
+
+- title: the human-readable name for UI and navigation.
 
 ### Important Notes
 
