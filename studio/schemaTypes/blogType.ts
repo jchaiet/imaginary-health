@@ -129,6 +129,8 @@ export const blogType = defineType({
     defineField({
       name: "categories",
       title: "Categories",
+      description:
+        "The first 3 categories in this list will be used for the Eyebrow component in the article.",
       type: "array",
       group: "settings",
       of: [{ type: "reference", to: [{ type: "category" }] }],
