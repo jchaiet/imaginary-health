@@ -76,10 +76,12 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
+  const currentLocale = locale ?? "en-us";
+
   const { isEnabled } = await draftMode();
 
   return (
-    <html lang={locale}>
+    <html lang={currentLocale}>
       <body className={roboto.className}>
         <ThemeWrapper>
           <HeroProvider>

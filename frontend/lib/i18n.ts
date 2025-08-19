@@ -50,10 +50,6 @@ export async function getLocaleLink(
 
       //Blog articles
       if (currentPath.includes("/blog/articles/")) {
-        targetLocale === defaultLocale
-          ? console.log(`/blog/articles/${slug}`)
-          : console.log(`/${targetLocale}/blog/articles/${slug}`);
-
         return targetLocale === defaultLocale
           ? `/blog/articles/${slug}`
           : `/${targetLocale}/blog/articles/${slug}`;
