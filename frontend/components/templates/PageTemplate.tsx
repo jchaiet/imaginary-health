@@ -82,6 +82,8 @@ export default async function PageTemplate({
       footerSecondaryInfo={footerNavigationData.secondaryInfo}
       footerSocialItems={socialItems}
       locale={locale}
+      showLocaleSelect={navigationData.showLocaleSelect}
+      showSearch={navigationData.showSearch}
     >
       {isBlog && (
         <BlogHeader title="Blog" navItems={blogNavItems} alignment="right" />

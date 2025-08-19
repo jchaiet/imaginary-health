@@ -23,7 +23,14 @@ export async function GET(request: NextRequest) {
 }
 
 async function checkPageExists(locale: string, slug: string) {
-  const query = `count(*[_type == "page" && slug.current == $slug && locale == $locale]) > 0`;
+  const query = `
+  count(
+    *[
+      (_type == "page" || _type == "blog") && 
+      slug.current == $slug && 
+      locale == $locale
+    ]
+  ) > 0`;
   const exists = await sanityClient.fetch(query, { slug, locale });
   return Boolean(exists);
 }

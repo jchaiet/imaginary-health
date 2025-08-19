@@ -7,6 +7,12 @@
   --color-primary-light: #d9e2f4;
 }
 
+html {
+  overflow-x: visible;
+  overflow-y: visible;
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   font-family: "Lucida Console", "Courier New", monospace;

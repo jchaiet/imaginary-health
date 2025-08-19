@@ -167,6 +167,7 @@ export const featuredDocumentsBlockFragment = `
   },
   "articles": *[
     _type == ^.documentType && 
+    locale == $locale &&
     _id != ^.^._id &&
     (
       (

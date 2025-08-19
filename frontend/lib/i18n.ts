@@ -9,6 +9,19 @@ export function isValidLocale(locale: string): boolean {
   return locales.some((loc) => loc.id === locale);
 }
 
+function nextPathToSanitySlug(path: string, currentLocale: string) {
+  const segments = path.replace(/^\/+/, "").split("/");
+
+  //Remove locale prefix if preset
+  if (segments[0] === currentLocale) segments.shift();
+
+  if (segments[0] === "blog" && segments[1] === "articles") {
+    return segments.slice(2).join("/");
+  }
+
+  return segments.join("/");
+}
+
 async function pageExists(locale: string, slug: string): Promise<boolean> {
   return fetch(`/api/page-exists?locale=${locale}&slug=${slug}`)
     .then((res) => res.json())
@@ -24,21 +37,34 @@ export async function getLocaleLink(
     throw new Error(`Invalid locale: ${targetLocale}`);
   }
 
-  const slug =
-    currentLocale === defaultLocale
-      ? currentPath.replace(/^\/+/, "")
-      : currentPath.replace(/^\/+/, "").split("/").slice(1).join("/");
-
   if (currentLocale === targetLocale) {
     return currentPath;
   }
 
+  const slug = nextPathToSanitySlug(currentPath, currentLocale);
+
   if (slug) {
     const exists = await pageExists(targetLocale, slug);
     if (exists) {
-      return `/${targetLocale}/${slug}`;
+      console.log("S", slug, currentPath);
+
+      //Blog articles
+      if (currentPath.includes("/blog/articles/")) {
+        targetLocale === defaultLocale
+          ? console.log(`/blog/articles/${slug}`)
+          : console.log(`/${targetLocale}/blog/articles/${slug}`);
+
+        return targetLocale === defaultLocale
+          ? `/blog/articles/${slug}`
+          : `/${targetLocale}/blog/articles/${slug}`;
+      }
+
+      //Standard pages
+      return targetLocale === defaultLocale
+        ? `/${slug}`
+        : `/${targetLocale}/${slug}`;
     }
   }
 
-  return `/${targetLocale}`;
+  return targetLocale === defaultLocale ? `/` : `/${targetLocale}`;
 }

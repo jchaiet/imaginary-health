@@ -76,27 +76,26 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
-  const currentLocale = locale || "en-us";
+
+  const { isEnabled } = await draftMode();
 
   return (
-    <ThemeWrapper>
-      <HeroProvider>
-        <html
-          lang={currentLocale}
-          style={{ overflow: "visible", scrollBehavior: "smooth" }}
-        >
-          <body className={roboto.className}>
-            {(await draftMode()).isEnabled && (
+    <html lang={locale}>
+      <body className={roboto.className}>
+        <ThemeWrapper>
+          <HeroProvider>
+            {isEnabled && (
               <>
                 {/* <SanityLiveVisualEditing /> */}
                 <DisableDraftMode />
                 <VisualEditing />
               </>
             )}
+
             {children}
-          </body>
-        </html>
-      </HeroProvider>
-    </ThemeWrapper>
+          </HeroProvider>
+        </ThemeWrapper>
+      </body>
+    </html>
   );
 }

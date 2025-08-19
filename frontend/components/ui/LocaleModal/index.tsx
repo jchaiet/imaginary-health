@@ -7,8 +7,6 @@ export function LocaleModal({ currentLocale }: { currentLocale: string }) {
   const currentPath = usePathname();
   const [links, setLinks] = useState<{ [key: string]: string }>({});
 
-  console.log(currentLocale);
-
   useEffect(() => {
     async function buildLinks() {
       const result: { [key: string]: string } = {};
