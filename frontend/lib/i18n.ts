@@ -16,7 +16,7 @@ export function resolveLocale(localeParam?: string): string {
   return isValidLocale(normalized) ? normalized : defaultLocale;
 }
 
-function nextPathToSanitySlug(path: string, currentLocale: string) {
+function nextPathToSanitySlug(path: string) {
   const segments = path.replace(/^\/+/, "").split("/");
 
   //Remove locale prefix if preset
