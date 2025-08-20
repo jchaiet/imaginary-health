@@ -8,7 +8,7 @@ import "../globals.css";
 import "quirk-ui/styles.css";
 import { HeroProvider } from "@/context/HeroContext";
 import { ThemeWrapper } from "@/lib/ThemeWrapper";
-import { defaultLocale, resolveLocale } from "@/lib/i18n";
+import { resolveLocale } from "@/lib/i18n";
 import { LocaleProvider } from "@/context/LocaleContext";
 import { setRequestLocale } from "@/lib/requestLocale";
 // import { SanityLiveVisualEditing } from "@/components/preview/SanityLiveVisualEditing";
