@@ -5,30 +5,11 @@ import styles from "./styles.module.css";
 import { useLocaleContext } from "@/context/LocaleContext";
 import Link from "next/link";
 
-export function LocaleModal() {
-  const { locale } = useLocaleContext();
-  const currentPath = usePathname();
-  const [links, setLinks] = useState<{ [key: string]: string }>({});
+type LocaleModalProps = {
+  links: { [key: string]: string };
+};
 
-  const currentLocale = locale;
-
-  useEffect(() => {
-    async function buildLinks() {
-      const result: { [key: string]: string } = {};
-      for (const locale of locales) {
-        result[locale.id] = await getLocaleLink(
-          currentPath,
-          locale.id,
-          currentLocale
-        );
-      }
-      setLinks(result);
-    }
-    if (currentPath) {
-      buildLinks();
-    }
-  }, [currentPath]);
-
+export function LocaleModal({ links }: LocaleModalProps) {
   return (
     <div className={styles.locales}>
       <div className={styles.heading}>

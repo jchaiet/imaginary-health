@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { SearchModal } from "../ui/SearchModal";
 import { LocaleModal } from "../ui/LocaleModal";
@@ -8,6 +9,9 @@ import {
   type NavItem,
   type NavGroup,
 } from "quirk-ui";
+import { useLocaleContext } from "@/context/LocaleContext";
+import { usePathname } from "next/navigation";
+import { locales, getLocaleLink } from "@/lib/i18n";
 // import styles from "./styles.module.css";
 
 type HeaderProps = {
@@ -40,6 +44,8 @@ export default function Header({
   showLocaleSelect,
   // searchComponent,
 }: HeaderProps) {
+  const [localeLinks, setLocaleLinks] = useState<{ [key: string]: string }>({});
+
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
 
@@ -69,12 +75,35 @@ export default function Header({
     return null;
   }
 
+  //Prebuild locale links
+  const { locale } = useLocaleContext();
+  const currentPath = usePathname();
+
+  const currentLocale = locale;
+
+  useEffect(() => {
+    async function buildLinks() {
+      const result: { [key: string]: string } = {};
+      for (const locale of locales) {
+        result[locale.id] = await getLocaleLink(
+          currentPath,
+          locale.id,
+          currentLocale
+        );
+      }
+      setLocaleLinks(result);
+    }
+    if (currentPath) {
+      buildLinks();
+    }
+  }, [currentPath]);
+
   return (
     <Navbar
       searchComponent={<SearchModal />}
       showSearch={showSearch}
       showLocaleSelect={showLocaleSelect}
-      localeSelectComponent={<LocaleModal />}
+      localeSelectComponent={<LocaleModal links={localeLinks} />}
       isSticky
       variant={variant}
       navigationType={navigationType}
