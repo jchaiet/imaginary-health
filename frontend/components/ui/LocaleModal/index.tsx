@@ -1,8 +1,5 @@
-import { useState, useEffect } from "react";
-import { locales, getLocaleLink } from "@/lib/i18n";
-import { usePathname } from "next/navigation";
+import { locales } from "@/lib/i18n";
 import styles from "./styles.module.css";
-import { useLocaleContext } from "@/context/LocaleContext";
 import Link from "next/link";
 
 type LocaleModalProps = {
