@@ -54,12 +54,14 @@ export function GridCard({
   const imageStyle: React.CSSProperties = {};
   if (image?.layout === "cover") {
     imageStyle.objectFit = "cover";
-    if (image?.position) imageStyle.objectPosition = image?.position;
+    if (image?.position)
+      imageStyle.objectPosition = isMobile ? "top" : image?.position;
   } else if (image?.layout === "contain") {
     imageStyle.objectFit = "contain";
 
-    if (image?.width === "half") imageStyle.width = "50%";
-    else if (image?.width === "inset") imageStyle.width = "75%";
+    if (image?.width === "half") imageStyle.width = isMobile ? "100%" : "50%";
+    else if (image?.width === "inset")
+      imageStyle.width = isMobile ? "100%" : "75%";
     else imageStyle.width = "100%";
 
     if (image?.aspectRatio) {

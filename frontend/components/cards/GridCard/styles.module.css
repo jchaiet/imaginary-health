@@ -331,6 +331,10 @@
     height: auto;
     align-items: normal;
 
+    @media (max-width: 767px) {
+      max-height: 350px;
+    }
+
     img {
       width: 100%;
       height: auto;
@@ -394,7 +398,7 @@
       img {
         position: relative;
         height: 100%;
-        width: auto;
+        width: 100%;
         min-width: 150px;
       }
     }
@@ -413,7 +417,8 @@
   }
 
   .content {
-    padding: 3.25rem var(--spacing-xl);
+    padding: var(--spacing-xl);
+    /* padding: 3.25rem var(--spacing-xl); */
   }
 }
 
