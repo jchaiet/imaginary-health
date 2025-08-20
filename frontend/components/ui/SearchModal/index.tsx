@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { Input, Text } from "quirk-ui";
 import { ChevronRight, Search, XIcon, RefreshCw } from "lucide-react";
 import styles from "./styles.module.css";
 import { SanityImage } from "@/types";
+import { LocaleLink } from "../LocaleLink";
 
 type SearchResult = {
   _id: string;
@@ -180,7 +180,11 @@ export function SearchModal() {
                 }
 
                 return (
-                  <Link key={item._id} className={styles.item} href={href}>
+                  <LocaleLink
+                    key={item._id}
+                    className={styles.item}
+                    href={href}
+                  >
                     <div className={styles.image}>
                       {item.featuredImage?.asset.url ? (
                         <Image
@@ -211,7 +215,7 @@ export function SearchModal() {
                       </Text>
                       {/* <Text>{item.excerpt}</Text> */}
                     </div>
-                  </Link>
+                  </LocaleLink>
                 );
               })}
             </div>

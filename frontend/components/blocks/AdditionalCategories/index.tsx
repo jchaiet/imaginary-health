@@ -1,8 +1,8 @@
 import React from "react";
 import { CategoryProps } from "@/types";
 import { AdditionalCategoriesProps } from "@/types/additionalCategories";
-import Link from "next/link";
 import styles from "./styles.module.css";
+import { LocaleLink } from "@/components/ui/LocaleLink";
 
 export function AdditionalCategories({
   categories,
@@ -22,13 +22,13 @@ export function AdditionalCategories({
               categories.map(
                 (category: CategoryProps) =>
                   category.slug.current.includes("keyword") && (
-                    <Link
+                    <LocaleLink
                       href={`/blog?category=${category.slug.current}`}
                       className={styles.category}
                       key={category._id}
                     >
                       {category.title}
-                    </Link>
+                    </LocaleLink>
                   )
               )}
           </div>

@@ -36,7 +36,6 @@ type LayoutProps = {
   footerPrimaryInfo?: PortableTextBlock[];
   footerSecondaryInfo?: PortableTextBlock[];
   footerSocialItems?: NavItem[];
-  locale?: string;
 };
 
 export default function Layout({
@@ -63,7 +62,6 @@ export default function Layout({
   footerPrimaryInfo,
   footerSecondaryInfo,
   footerSocialItems,
-  locale,
 }: LayoutProps) {
   return (
     <>
@@ -82,7 +80,6 @@ export default function Layout({
           searchComponent={searchComponent}
           showLocaleSelect={showLocaleSelect}
           localeSelectComponent={localeSelectComponent}
-          locale={locale}
         />
       )}
       <main>{children}</main>

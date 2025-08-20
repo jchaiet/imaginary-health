@@ -2,6 +2,7 @@ import type { NavItem } from "quirk-ui";
 import { RichText } from "@/components/ui/PortableTextRenderer";
 import { resolveNavItemHref } from "./resolveNavItemHref";
 import { NavigationItem } from "@/types";
+import { localizeHref } from "./localizeHref";
 
 export async function mapNavigation(
   items: NavigationItem[]
@@ -20,12 +21,14 @@ export async function mapNavigation(
         const subLinks = await Promise.all(
           item.children.map(async (child) => {
             const href = await resolveNavItemHref(child);
+            const finalHref =
+              child.itemType === "external" ? href : localizeHref(href);
 
             if (!href) return null;
             return {
               _key: child._key,
               label: child.title,
-              href,
+              href: finalHref,
               isExternal: child.itemType === "external",
             };
           })
@@ -47,11 +50,13 @@ export async function mapNavigation(
       }
 
       const href = await resolveNavItemHref(item);
+      const finalHref =
+        item.itemType === "external" ? href : localizeHref(href);
       if (href) {
         return {
           _key: key,
           label,
-          href,
+          href: finalHref,
           isExternal: item.itemType === "external",
         };
       }

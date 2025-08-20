@@ -3,8 +3,8 @@ import { urlForImage } from "@/sanity/client";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { ArticleItem } from "@/types";
-import Link from "next/link";
 import styles from "./styles.module.css";
+import { LocaleLink } from "@/components/ui/LocaleLink";
 
 type BlogArticleProps = {
   article: ArticleItem;
@@ -31,7 +31,7 @@ export function BlogArticleCard({
     : null;
 
   return (
-    <Link
+    <LocaleLink
       href={href}
       className={`${styles.item} ${className ?? ""} ${index === 0 ? styles.first : styles.notFirst} ${layout ? styles[layout] : ""} ${limit === 1 ? styles.single : ""}`}
     >
@@ -68,6 +68,6 @@ export function BlogArticleCard({
           <p className={styles.itemExcerpt}>{article.excerpt}</p>
         )}
       </div>
-    </Link>
+    </LocaleLink>
   );
 }

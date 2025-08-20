@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { RichText } from "@/components/ui/PortableTextRenderer";
-import Link from "next/link";
+import { LocaleLink } from "@/components/ui/LocaleLink";
 import { FeaturedDocumentsBlockProps } from "@/types";
 import { ArticleItem } from "@/types";
 
@@ -135,14 +135,14 @@ export function FeaturedDocumentsBlock({
               </div>
 
               {callToAction?.label && (
-                <Link
+                <LocaleLink
                   href={
                     internalSlug ? `/${internalSlug}` : (externalUrl ?? "/")
                   }
                 >
                   {label}
                   <ArrowRight size={18} />
-                </Link>
+                </LocaleLink>
               )}
             </div>
 

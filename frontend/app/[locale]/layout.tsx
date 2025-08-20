@@ -8,6 +8,9 @@ import "../globals.css";
 import "quirk-ui/styles.css";
 import { HeroProvider } from "@/context/HeroContext";
 import { ThemeWrapper } from "@/lib/ThemeWrapper";
+import { defaultLocale, resolveLocale } from "@/lib/i18n";
+import { LocaleProvider } from "@/context/LocaleContext";
+import { setRequestLocale } from "@/lib/requestLocale";
 // import { SanityLiveVisualEditing } from "@/components/preview/SanityLiveVisualEditing";
 
 const roboto = Roboto_Flex({
@@ -76,7 +79,10 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
-  const currentLocale = locale ?? "en-us";
+
+  const currentLocale = resolveLocale(locale);
+
+  setRequestLocale(currentLocale);
 
   const { isEnabled } = await draftMode();
 
@@ -85,15 +91,17 @@ export default async function RootLayout({
       <body className={roboto.className}>
         <ThemeWrapper>
           <HeroProvider>
-            {isEnabled && (
-              <>
-                {/* <SanityLiveVisualEditing /> */}
-                <DisableDraftMode />
-                <VisualEditing />
-              </>
-            )}
+            <LocaleProvider localeParam={currentLocale}>
+              {isEnabled && (
+                <>
+                  {/* <SanityLiveVisualEditing /> */}
+                  <DisableDraftMode />
+                  <VisualEditing />
+                </>
+              )}
 
-            {children}
+              {children}
+            </LocaleProvider>
           </HeroProvider>
         </ThemeWrapper>
       </body>

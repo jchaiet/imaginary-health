@@ -24,7 +24,6 @@ type HeaderProps = {
   showLocaleSelect?: boolean;
   searchComponent?: React.ReactNode;
   localeSelectComponent?: React.ReactNode;
-  locale?: string;
 };
 
 export default function Header({
@@ -40,7 +39,6 @@ export default function Header({
   showSearch,
   showLocaleSelect,
   // searchComponent,
-  locale,
 }: HeaderProps) {
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
@@ -76,7 +74,7 @@ export default function Header({
       searchComponent={<SearchModal />}
       showSearch={showSearch}
       showLocaleSelect={showLocaleSelect}
-      localeSelectComponent={<LocaleModal currentLocale={locale ?? ""} />}
+      localeSelectComponent={<LocaleModal />}
       isSticky
       variant={variant}
       navigationType={navigationType}

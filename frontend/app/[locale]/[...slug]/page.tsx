@@ -42,6 +42,7 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params;
+
   const formattedSlug = slug.join("/") ?? "/";
   let page = await getPage(formattedSlug, locale);
 
@@ -60,7 +61,6 @@ export default async function Page({ params }: PageProps) {
       isBlog={isBlog}
       hideHeader={hideHeader}
       hideFooter={hideFooter}
-      locale={locale}
     >
       <PageBuilder sections={pageBuilder} pageData={page} />
     </PageTemplate>

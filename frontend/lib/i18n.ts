@@ -9,11 +9,18 @@ export function isValidLocale(locale: string): boolean {
   return locales.some((loc) => loc.id === locale);
 }
 
+export function resolveLocale(localeParam?: string): string {
+  if (!localeParam) return defaultLocale;
+
+  const normalized = localeParam.toLowerCase();
+  return isValidLocale(normalized) ? normalized : defaultLocale;
+}
+
 function nextPathToSanitySlug(path: string, currentLocale: string) {
   const segments = path.replace(/^\/+/, "").split("/");
 
   //Remove locale prefix if preset
-  if (segments[0] === currentLocale) segments.shift();
+  if (isValidLocale(segments[0])) segments.shift();
 
   if (segments[0] === "blog" && segments[1] === "articles") {
     return segments.slice(2).join("/");
@@ -42,12 +49,14 @@ export async function getLocaleLink(
   }
 
   const slug = nextPathToSanitySlug(currentPath, currentLocale);
+  //Special case for en-us homepage
+  if (!slug) {
+    return targetLocale === defaultLocale ? `/` : `/${targetLocale}`;
+  }
 
   if (slug) {
     const exists = await pageExists(targetLocale, slug);
     if (exists) {
-      console.log("S", slug, currentPath);
-
       //Blog articles
       if (currentPath.includes("/blog/articles/")) {
         return targetLocale === defaultLocale

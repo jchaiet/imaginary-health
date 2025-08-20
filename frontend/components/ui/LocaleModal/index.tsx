@@ -2,10 +2,15 @@ import { useState, useEffect } from "react";
 import { locales, getLocaleLink } from "@/lib/i18n";
 import { usePathname } from "next/navigation";
 import styles from "./styles.module.css";
+import { useLocaleContext } from "@/context/LocaleContext";
+import Link from "next/link";
 
-export function LocaleModal({ currentLocale }: { currentLocale: string }) {
+export function LocaleModal() {
+  const { locale } = useLocaleContext();
   const currentPath = usePathname();
   const [links, setLinks] = useState<{ [key: string]: string }>({});
+
+  const currentLocale = locale;
 
   useEffect(() => {
     async function buildLinks() {
@@ -34,7 +39,7 @@ export function LocaleModal({ currentLocale }: { currentLocale: string }) {
           {locales.map((locale) => {
             return (
               <li key={locale.id}>
-                <a
+                <Link
                   href={links[locale.id] || `/${locale.id}`}
                   className={styles.locale}
                 >
@@ -42,7 +47,7 @@ export function LocaleModal({ currentLocale }: { currentLocale: string }) {
                     {locale.title}
                     <span>({locale.id})</span>
                   </span>
-                </a>
+                </Link>
               </li>
             );
           })}

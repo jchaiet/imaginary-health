@@ -11,8 +11,12 @@ export async function middleware(req: NextRequest) {
     pathname.startsWith("/api") ||
     pathname.includes(".")
   ) {
-    return;
+    return NextResponse.next();
   }
+
+  const hasLocalePrefix = locales.some(
+    ({ id }) => pathname === `/${id}` || pathname.startsWith(`/${id}/`)
+  );
 
   //Redirect any /en-us/* path to the same path without the /en-us prefix
   if (
@@ -26,10 +30,6 @@ export async function middleware(req: NextRequest) {
   }
 
   //If pathname doesn't start with any locale, rewrite internally to /en-us
-  const hasLocalePrefix = locales.some(
-    ({ id }) => pathname === `/${id}` || pathname.startsWith(`/${id}/`)
-  );
-
   if (!hasLocalePrefix) {
     const url = req.nextUrl.clone();
     url.pathname = `/${defaultLocale}${pathname}`;
@@ -37,19 +37,6 @@ export async function middleware(req: NextRequest) {
   }
 
   return NextResponse.next();
-
-  // // Check if the pathname starts with any locale
-  // const pathnameIsMissingLocale = locales.every(
-  //   (locale) => !pathname.startsWith(`/${locale}`)
-  // );
-
-  // if (pathnameIsMissingLocale) {
-  //   // Rewrite to `/en/...` internally, but keep `/...` in the browser
-  //   const url = req.nextUrl.clone();
-  //   url.pathname = `/${defaultLocale}${pathname}`;
-  //   console.log("path", url.pathname);
-  //   return NextResponse.rewrite(url);
-  // }
 }
 
 export const config = {

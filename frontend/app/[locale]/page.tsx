@@ -6,7 +6,6 @@ import { PageBuilder } from "@/lib/pageBuilder";
 import { draftMode } from "next/headers";
 
 import { notFound } from "next/navigation";
-// import { resolveSections } from "@/lib/resolveSections";
 
 interface PageProps {
   params: Promise<{ slug: string[]; locale: string }>;
