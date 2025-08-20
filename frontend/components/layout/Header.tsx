@@ -49,6 +49,24 @@ export default function Header({
   const currentPath = usePathname();
   const currentLocale = locale;
 
+  //Prebuild locale links
+  useEffect(() => {
+    async function buildLinks() {
+      const result: { [key: string]: string } = {};
+      for (const locale of locales) {
+        result[locale.id] = await getLocaleLink(
+          currentPath,
+          locale.id,
+          currentLocale
+        );
+      }
+      setLocaleLinks(result);
+    }
+    if (currentPath) {
+      buildLinks();
+    }
+  }, [currentPath]);
+
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
 
@@ -77,23 +95,6 @@ export default function Header({
   if (!navItems || !Array.isArray(navItems)) {
     return null;
   }
-
-  useEffect(() => {
-    async function buildLinks() {
-      const result: { [key: string]: string } = {};
-      for (const locale of locales) {
-        result[locale.id] = await getLocaleLink(
-          currentPath,
-          locale.id,
-          currentLocale
-        );
-      }
-      setLocaleLinks(result);
-    }
-    if (currentPath) {
-      buildLinks();
-    }
-  }, [currentPath]);
 
   return (
     <Navbar
