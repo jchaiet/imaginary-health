@@ -45,6 +45,9 @@ export default function Header({
   // searchComponent,
 }: HeaderProps) {
   const [localeLinks, setLocaleLinks] = useState<{ [key: string]: string }>({});
+  const { locale } = useLocaleContext();
+  const currentPath = usePathname();
+  const currentLocale = locale;
 
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
@@ -74,12 +77,6 @@ export default function Header({
   if (!navItems || !Array.isArray(navItems)) {
     return null;
   }
-
-  //Prebuild locale links
-  const { locale } = useLocaleContext();
-  const currentPath = usePathname();
-
-  const currentLocale = locale;
 
   useEffect(() => {
     async function buildLinks() {
