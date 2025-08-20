@@ -48,7 +48,7 @@ export async function getLocaleLink(
     return currentPath;
   }
 
-  const slug = nextPathToSanitySlug(currentPath, currentLocale);
+  const slug = nextPathToSanitySlug(currentPath);
   //Special case for en-us homepage
   if (!slug) {
     return targetLocale === defaultLocale ? `/` : `/${targetLocale}`;
