@@ -25,7 +25,9 @@ This guide explains how to create and manage redirects in our website using Sani
 ### When to Use a Redirect
 
 - When a page is moved to a new URL.
+
 - When a page is deleted or replaced.
+
 - When you want to point users to a different page or an external link.
 
 Redirects help prevent broken links and improve SEO.
@@ -35,7 +37,9 @@ Redirects help prevent broken links and improve SEO.
 #### 1. **Open the Redirects Section in Sanity**
 
 - Log in to Sanity Studio.
+
 - In the left menu, select Redirects.
+
 - Click “Create new”.
 
 #### 2. **Fill Out the Redirect Form**
@@ -43,8 +47,8 @@ Redirects help prevent broken links and improve SEO.
 - **Source Path**
 
   - This is the old URL that users are visiting.
-  - Must start with a forward slash (/).  
-    Example:
+
+  - Must start with a forward slash (/). Example:
     ```bash
     /old-blog-post
     ```
@@ -140,6 +144,7 @@ Pages without a locale default to the `en-us` grouping in DeskStructure.
 ### 2. Add a new locale in NextJS
 
 1. Open `lib/i18n.ts`.
+
 2. Add the new locale to the `locales` array:
 
 ```ts
@@ -158,6 +163,7 @@ This project supports multiple sites powered by Sanity Studio and Next.js 15. Ea
 ### 1. Adding a new site in Sanity Studio
 
 1. Open Sanity Studio and navigate to **Sites** (`site` document type).
+
 2. Create a new document and fill out the required fields:
 
    - **Site Title** → Human-friendly name (e.g. `My Brand`).
