@@ -51,19 +51,19 @@ Redirects help prevent broken links and improve SEO.
 
 - **Destination**
 
-You can redirect to one of two types of destinations:
+  You can redirect to one of two types of destinations:
 
-1. Destination Page (Internal Reference)
+  1. Destination Page (Internal Reference)
 
-   - Use this if the redirect should point to another page on our site.
+     - Use this if the redirect should point to another page on our site.
 
-   - Click “Select a page” and pick the new page.
+     - Click “Select a page” and pick the new page.
 
-2. Destination Path (Manual Slug)
+  2. Destination Path (Manual Slug)
 
-   - Use this if you want to redirect to a custom internal URL.
+     - Use this if you want to redirect to a custom internal URL.
 
-   - Must start with /. Example:
+     - Must start with /. Example:
 
 ```bash
 /new-blog-post
