@@ -22,7 +22,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string; site: string }>;
 }>) {
-  const { locale, site } = await params;
+  const { locale } = await params;
 
   const currentLocale = resolveLocale(locale);
 
