@@ -22,6 +22,27 @@ export const pageBySlugQuery = `
     image {
       ${imageAssetFragment}
     },
+    navigationOverride->{
+      "slug": slug.current,
+      title
+    },
+    footerOverride->{
+      "slug": slug.current,
+      title
+    },
+    site->{
+      _id,
+      title,
+      identifier,
+      defaultNavigation->{
+        "slug": slug.current,
+        title
+      },
+      defaultFooter->{
+        "slug": slug.current,
+        title
+      }
+    },
     pageBuilder[]{
       ...,
       callToAction {

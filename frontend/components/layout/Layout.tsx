@@ -67,7 +67,7 @@ export default function Layout({
     <>
       {!hideHeader && (
         <Header
-          utilityItems={utilityItems}
+          utilityItems={utilityItems ?? []}
           navItems={navItems ?? []}
           navGroups={navGroups ?? []}
           alignment={alignment}

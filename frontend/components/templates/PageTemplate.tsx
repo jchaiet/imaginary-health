@@ -14,6 +14,8 @@ type PageTemplateProps = {
   hideFooter?: boolean;
   isBlog?: boolean;
   site?: string;
+  navKey?: string;
+  footerKey?: string;
 };
 
 export default async function PageTemplate({
@@ -23,33 +25,41 @@ export default async function PageTemplate({
   hideFooter = false,
   isBlog = false,
   site,
+  navKey,
+  footerKey,
 }: PageTemplateProps) {
   const settings = site ? await fetchSiteSettings(site) : null;
   const socialItems = settings?.socialLinks
     ? await mapSocialLinks(settings?.socialLinks)
     : [];
 
-  const navigationData = await fetchNavigation("main-navigation");
-  const navItems = navigationData.primaryItems?.length
-    ? await mapNavigation(navigationData.primaryItems)
-    : [];
+  const navigationData = await fetchNavigation(navKey);
+
+  const navItems =
+    navigationData.type === "advanced"
+      ? await mapNavigation(navigationData.primaryItems)
+      : ((await mapNavigation(navigationData.navigationItems)) ?? []);
+
   const navGroups = navigationData.navigationGroups?.length
     ? await mapGroups(navigationData.navigationGroups)
     : [];
 
-  const utilityItems = await mapUtilityItems(navigationData.utilityItems);
-  const logoLinkSlug = navigationData.logoLink?.slug?.current;
+  const utilityItems = navigationData.utilityItems
+    ? await mapUtilityItems(navigationData.utilityItems)
+    : [];
 
-  const footerNavigationData = await fetchNavigation("main-footer");
-  const footerLinkSlug = footerNavigationData.logoLink?.slug?.current;
+  const logoLinkSlug = navigationData.logoLink?.slug?.current ?? "#";
+
+  const footerNavigationData = await fetchNavigation(footerKey);
+  const footerLinkSlug = footerNavigationData.logoLink?.slug?.current ?? "#";
 
   const footerNavItems = footerNavigationData?.navigationItems?.length
     ? await mapNavigation(footerNavigationData.navigationItems)
     : [];
 
-  const footerUtilityItems = await mapUtilityItems(
-    footerNavigationData.utilityItems
-  );
+  const footerUtilityItems = footerNavigationData.utilityItems
+    ? await mapUtilityItems(footerNavigationData.utilityItems)
+    : [];
 
   const blogNavigationData = isBlog ? await fetchNavigation("blog") : null;
   const blogNavItems = blogNavigationData?.navigationItems?.length

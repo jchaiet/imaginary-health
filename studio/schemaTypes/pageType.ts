@@ -76,6 +76,24 @@ export const pageType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "navigationOverride",
+      title: "Navigation Override",
+      type: "reference",
+      to: [{ type: "navigation" }],
+      group: "details",
+      description:
+        "Optional: Use a different navigation menu for this page instead of the site's default.",
+    }),
+    defineField({
+      name: "footerOverride",
+      title: "Footer Override",
+      type: "reference",
+      to: [{ type: "navigation" }],
+      group: "details",
+      description:
+        "Optional: Use a different footer menu for this page instead of the site's default.",
+    }),
+    defineField({
       name: "metadata",
       title: "Metadata",
       type: "pageMetadata",

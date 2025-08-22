@@ -130,6 +130,20 @@ export const siteType = defineType({
         }),
       ],
     }),
+    defineField({
+      name: "defaultNavigation",
+      title: "Default Navigation",
+      type: "reference",
+      to: [{ type: "navigation" }],
+      group: "general",
+    }),
+    defineField({
+      name: "defaultFooter",
+      title: "Default Footer",
+      type: "reference",
+      to: [{ type: "navigation" }],
+      group: "general",
+    }),
   ],
   preview: {
     select: { title: "title", subtitle: "domain" },

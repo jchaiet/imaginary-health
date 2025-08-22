@@ -131,9 +131,24 @@ export default async function Page({ params }: PageProps) {
 
   if (!page) notFound();
 
-  const { pageBuilder = [], hideHeader = false, hideFooter = false } = page;
+  const {
+    pageBuilder = [],
+    hideHeader = false,
+    hideFooter = false,
+    navigationOverride,
+    footerOverride,
+    site: siteRef,
+  } = page;
 
   const isBlog = page?.slug?.current?.startsWith("blog");
+
+  const navKey =
+    navigationOverride?.slug ??
+    siteRef?.defaultNavigation?.slug ??
+    "main-navigation";
+
+  const footerKey =
+    footerOverride?.slug ?? siteRef?.defaultFooter?.slug ?? "main-footer";
 
   return (
     <PageTemplate
@@ -141,6 +156,8 @@ export default async function Page({ params }: PageProps) {
       hideHeader={hideHeader}
       hideFooter={hideFooter}
       site={site}
+      navKey={navKey}
+      footerKey={footerKey}
     >
       <PageBuilder sections={pageBuilder} pageData={page} />
     </PageTemplate>
