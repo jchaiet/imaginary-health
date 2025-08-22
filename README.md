@@ -3,7 +3,7 @@
 [Getting Started](#getting-started)  
 [Redirects](#redirects)  
 [Managing Locales and Translations](#managing-locales-and-translations)  
-[Multi-Site Setup](#multi-site-setup)
+[Multi-Site Setup](#multi-site-setup)  
 [Additional Info](#learn-more)
 
 ## Getting Started
