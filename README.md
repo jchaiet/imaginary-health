@@ -182,6 +182,52 @@ This project supports multiple sites powered by Sanity Studio and Next.js 15. Ea
 
    Once published, the **Identifier** (`identifier.current`) becomes the key that connects Sanity → middleware → NextJS routes.
 
+### 2. NextJS App Router Folder Structure
+
+The app uses nested dynamic segments for **site** and **locale**.
+
+```
+app/
+  [site]/            ← site identifier (from Sanity + middleware)
+    [locale]/        ← locale prefix ("en-us", "fr-fr", etc.)
+      [...slug]/     ← catch-all routes for pages
+        page.tsx     ← actual page renderer
+      layout.tsx     ← layout applied for all pages in this site/locale
+```
+
+#### How it works
+
+- Middleware rewrites incoming requests to this structure.
+
+- Example:
+
+  - Visiting https://example.com/about → rewritten internally to /example/en-us/about.
+
+    params.site = "example", params.locale = "en-us".
+
+- Pages and layouts fetch Sanity content scoped by `site` and `locale`.
+
+### 2. Local Development for New Site
+
+By default, localhost:3000 maps to whatever `SITE_ID` is set to.
+To run a specific site locally, add a dev script to the root `package.json`:
+
+```
+"scripts": {
+  "dev:newsite": "SITE_ID=new-site concurrently \"npm run dev:frontend\" \"npm run dev:studio\""
+}
+```
+
+- Replace `new-site` with your site's identifier (from the Site settings in Studio).
+
+- This runs both the **frontend** and **studio** together with the correct `SITE_ID`.
+
+Run it with:
+
+```
+npm run dev:newsite
+```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
