@@ -12,7 +12,7 @@ export async function middleware(req: NextRequest) {
   const siteMapping = {
     "imaginary-health.vercel.app": "imaginary-health",
     "thems-site.vercel.app": "thems",
-    "localhost:3000": process.env.SITE_ID,
+    "localhost:3000": process.env.SITE_ID || "imaginary-health",
   };
 
   const site = siteMapping[hostname as keyof typeof siteMapping];

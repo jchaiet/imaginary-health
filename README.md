@@ -160,7 +160,7 @@ This will generate the a link for the locale under the global locale picker, and
 
 This project supports multiple sites powered by Sanity Studio and Next.js 15. Each site is mapped to a hostname in middleware and automatically routed to its own `[site]/[locale]/` folder in the Next.js App Router.
 
-### 1. Adding a new site in Sanity Studio
+### 1. Adding a New Site in Sanity Studio
 
 1. Open Sanity Studio and navigate to **Sites** (`site` document type).
 
@@ -207,7 +207,25 @@ app/
 
 - Pages and layouts fetch Sanity content scoped by `site` and `locale`.
 
-### 2. Local Development for New Site
+### 3. Updating Middleware for New Site
+
+Open `middleware.ts` and extend the `siteMapping` object:
+
+```
+const siteMapping = {
+  "brand-a.com": "brand-a",
+  "example.com": "example",
+  "my-new-site.com": "my-new-site",
+  "localhost:3000": process.env.SITE_ID || "brand-a",
+}
+```
+
+- **Key** = hostname (domain you want to serve).
+- **Value** = site identifier slug from Sanity.
+
+If this step is skipped, requests will fall through to the default site.
+
+### 4. Local Development for New Site
 
 By default, localhost:3000 maps to whatever `SITE_ID` is set to.
 To run a specific site locally, add a dev script to the root `package.json`:
