@@ -124,10 +124,15 @@ const locales = [
 By default, new pages will automatically be set the en-US locale. To add a new translation for another locale, do the following:
 
 1. Open the document you want to create a translation for.
+
 2. Click the Locale Switcher (Translations) in the toolbar at the top of the document.
+
 3. Select the desired locale.
+
 4. A new document will be generated that automatically sets your locale in the document's locale property. Update as needed.
+
 5. The desk structure groups pages by locale automatically (via the `locale` field in `parentChild`).
+
 6. Once published, your document will be published under the locales `id` (`es-US/you-document-slug`).
 
 Pages without a locale default to the `en-us` grouping in DeskStructure.
