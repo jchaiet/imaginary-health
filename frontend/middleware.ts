@@ -11,8 +11,8 @@ export async function middleware(req: NextRequest) {
   //Site mapping
   const siteMapping = {
     "imaginary-health.vercel.app": "imaginary-health",
+    "thems-site.vercel.app": "thems",
     "localhost:3000": process.env.SITE_ID,
-    "thems.vercel.app": "thems",
   };
 
   const site = siteMapping[hostname as keyof typeof siteMapping];
