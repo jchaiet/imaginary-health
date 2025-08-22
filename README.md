@@ -203,7 +203,7 @@ app/
 
   - Visiting https://example.com/about → rewritten internally to /example/en-us/about.
 
-    params.site = "example", params.locale = "en-us".
+  - `params.site = "example"`, `params.locale = "en-us"`.
 
 - Pages and layouts fetch Sanity content scoped by `site` and `locale`.
 
