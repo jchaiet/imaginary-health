@@ -207,25 +207,7 @@ app/
 
 - Pages and layouts fetch Sanity content scoped by `site` and `locale`.
 
-### 3. Updating Middleware for New Site
-
-Open `middleware.ts` and extend the `siteMapping` object:
-
-```
-const siteMapping = {
-  "brand-a.com": "brand-a",
-  "example.com": "example",
-  "my-new-site.com": "my-new-site",
-  "localhost:3000": process.env.SITE_ID || "brand-a",
-}
-```
-
-- **Key** = hostname (domain you want to serve).
-- **Value** = site identifier slug from Sanity.
-
-If this step is skipped, requests will fall through to the default site.
-
-### 4. Local Development for New Site
+### 3. Local Development for New Site
 
 By default, localhost:3000 maps to whatever `SITE_ID` is set to.
 To run a specific site locally, add a dev script to the root `package.json`:

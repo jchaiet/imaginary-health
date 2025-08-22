@@ -1,5 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import { locales, defaultLocale } from "./lib/i18n";
+import { fetchSites } from "./sanity/client";
 
 // export default createMiddleware(routing);
 export async function middleware(req: NextRequest) {
@@ -9,13 +10,9 @@ export async function middleware(req: NextRequest) {
   if (!hostname) return NextResponse.next();
 
   //Site mapping
-  const siteMapping = {
-    "imaginary-health.vercel.app": "imaginary-health",
-    "thems-site.vercel.app": "thems",
-    "localhost:3000": process.env.SITE_ID || "imaginary-health",
-  };
+  const siteMapping = await fetchSites();
 
-  const site = siteMapping[hostname as keyof typeof siteMapping];
+  const site = siteMapping[hostname] || process.env.SITE_ID;
 
   if (!site) return NextResponse.next();
 

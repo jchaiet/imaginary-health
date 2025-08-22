@@ -15,6 +15,25 @@ export const writeSanityClient = createClient({
 
 const builder = imageUrlBuilder(sanityClient);
 
+export async function fetchSites() {
+  const sites = await sanityClient.fetch(
+    `*[_type == "site"]{"id": identifier.current, domain}`
+  );
+
+  const mapping: Record<string, string> = {};
+
+  for (const site of sites) {
+    try {
+      const hostname = new URL(site.domain).hostname;
+      mapping[hostname] = site.id;
+    } catch {
+      console.warn(`Invalid domain for site ${site.id}: ${site.domain}`);
+    }
+  }
+
+  return mapping;
+}
+
 export async function fetchSiteSettings(siteId: string) {
   if (siteId) {
     const site = await sanityClient.fetch(siteQuery, { siteId });
