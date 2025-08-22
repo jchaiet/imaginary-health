@@ -40,39 +40,43 @@ Redirects help prevent broken links and improve SEO.
 
 #### 2. **Fill Out the Redirect Form**
 
-_Source Path_
+- **Source Path**
 
-- This is the old URL that users are visiting.
-- Must start with a forward slash (/).  
-  Example:
-  ```bash
-  /old-blog-post
-  ```
+  - This is the old URL that users are visiting.
+  - Must start with a forward slash (/).  
+    Example:
+    ```bash
+    /old-blog-post
+    ```
 
-_Destination_
+- **Destination**
 
 You can redirect to one of two types of destinations:
 
 1. Destination Page (Internal Reference)
 
-- Use this if the redirect should point to another page on our site.
-- Click “Select a page” and pick the new page.
+   - Use this if the redirect should point to another page on our site.
+
+   - Click “Select a page” and pick the new page.
 
 2. Destination Path (Manual Slug)
 
-- Use this if you want to redirect to a custom internal URL.
-- Must start with /.  
-  Example:
-  ```bash
-  /new-blog-post
-  ```
+   - Use this if you want to redirect to a custom internal URL.
+
+   - Must start with /.  
+     Example:
+
+```bash
+/new-blog-post
+```
 
 #### 3. External URL (Optional)
 
-- If the redirect should point to an external website, enter the full URL:
-  ```bash
-  http://example.com/new-page
-  ```
+    - If the redirect should point to an external website, enter the full URL:
+
+```bash
+http://example.com/new-page
+```
 
 Only one destination is required. If you select a page, you can leave the slug empty.
 
@@ -149,21 +153,24 @@ This project supports multiple sites powered by Sanity Studio and Next.js 15. Ea
 
 ### 1. Adding a new site in Sanity Studio
 
-1. Open Sanity Studio and navigate to _Sites_ (`site` document type).
+1. Open Sanity Studio and navigate to **Sites** (`site` document type).
 2. Create a new document and fill out the required fields:
 
-- _Site Title_ → Human-friendly name (e.g. `My Brand`).
-- _Identifier_ → Unique slug that identifies this site (e.g. `my-brand`).
-  - _IMPORTANT_: This value maps directly to the `[site]` in the NextJS folder structure and to `siteMapping` in middleware.
-- _Primary Domain_ → The site's canonical domain (e.g. `https://my-brand.com`).
-- _Default Locale_ → The fallback locale for this site (e.g. `en-us`).
-- All other fields should be self explanatory.
+   - **Site Title** → Human-friendly name (e.g. `My Brand`).
+
+   - **Identifier** → Unique slug that identifies this site (e.g. `my-brand`).
+
+   - **IMPORTANT**: This value maps directly to the `[site]` in the NextJS folder structure and to `siteMapping` in middleware.
+
+   - **Primary Domain** → The site's canonical domain (e.g. `https://my-brand.com`).
+   - **Default Locale** → The fallback locale for this site (e.g. `en-us`).
+   - All other fields should be self explanatory.
 
 3. Publish the document.
 
-- Sanity will now expose this `site` for queries when fetching navigation, SEO or theme settings.
+   - Sanity will now expose this `site` for queries when fetching navigation, SEO or theme settings.
 
-Once published, the _Identifier_ (`identifier.current`) becomes the key that connects Sanity → middleware → NextJS routes.
+   Once published, the **Identifier** (`identifier.current`) becomes the key that connects Sanity → middleware → NextJS routes.
 
 ## Learn More
 
