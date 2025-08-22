@@ -55,16 +55,16 @@ You can redirect to one of two types of destinations:
 
 1. Destination Page (Internal Reference)
 
-   - Use this if the redirect should point to another page on our site.
+- Use this if the redirect should point to another page on our site.
 
-   - Click “Select a page” and pick the new page.
+- Click “Select a page” and pick the new page.
 
 2. Destination Path (Manual Slug)
 
-   - Use this if you want to redirect to a custom internal URL.
+- Use this if you want to redirect to a custom internal URL.
 
-   - Must start with /.  
-     Example:
+- Must start with /.  
+   Example:
 
 ```bash
 /new-blog-post
@@ -72,7 +72,7 @@ You can redirect to one of two types of destinations:
 
 #### 3. External URL (Optional)
 
-    - If the redirect should point to an external website, enter the full URL:
+- If the redirect should point to an external website, enter the full URL:
 
 ```bash
 http://example.com/new-page
@@ -160,7 +160,7 @@ This project supports multiple sites powered by Sanity Studio and Next.js 15. Ea
 
    - **Identifier** → Unique slug that identifies this site (e.g. `my-brand`).
 
-   - **IMPORTANT**: This value maps directly to the `[site]` in the NextJS folder structure and to `siteMapping` in middleware.
+     - **IMPORTANT**: This value maps directly to the `[site]` in the NextJS folder structure and to `siteMapping` in middleware.
 
    - **Primary Domain** → The site's canonical domain (e.g. `https://my-brand.com`).
    - **Default Locale** → The fallback locale for this site (e.g. `en-us`).
