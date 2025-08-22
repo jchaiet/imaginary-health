@@ -3,6 +3,7 @@
 [Getting Started](#getting-started)  
 [Redirects](#redirects)  
 [Managing Locales and Translations](#managing-locales-and-translations)  
+[Multi-Site Setup](#multi-site-setup)
 [Additional Info](#learn-more)
 
 ## Getting Started
@@ -31,13 +32,14 @@ Redirects help prevent broken links and improve SEO.
 
 ### Steps to Create a Redirect
 
-1️⃣ **Open the Redirects Section in Sanity**
+#### 1. **Open the Redirects Section in Sanity**
 
 - Log in to Sanity Studio.
 - In the left menu, select Redirects.
 - Click “Create new”.
 
-2️⃣ **Fill Out the Redirect Form**
+#### 2. **Fill Out the Redirect Form**
+
 _Source Path_
 
 - This is the old URL that users are visiting.
@@ -65,21 +67,21 @@ You can redirect to one of two types of destinations:
   /new-blog-post
   ```
 
-3. External URL (Optional)
+#### 3. External URL (Optional)
 
 - If the redirect should point to an external website, enter the full URL:
   ```bash
   http://example.com/new-page
   ```
 
-⚡ Only one destination is required. If you select a page, you can leave the slug empty.
+Only one destination is required. If you select a page, you can leave the slug empty.
 
-3️⃣ **Set Permanent or Temporary Redirect**
+#### 4. **Set Permanent or Temporary Redirect**
 
 - Permanent (301): Use if the old URL will never return. Recommended for SEO.
 - Temporary (302): Use if the redirect is short-term.
 
-4️⃣ **Publish the Redirect**
+#### 5. **Publish the Redirect**
 
 - Click Publish in the bottom-right corner.
 - Sanity will trigger a site rebuild.
@@ -140,6 +142,28 @@ export const locales = [
 ```
 
 This will generate the a link for the locale under the global locale picker, and tell NextJS to generate the path for the locale.
+
+## Mulit-Site Setup
+
+This project supports multiple sites powered by Sanity Studio and Next.js 15. Each site is mapped to a hostname in middleware and automatically routed to its own `[site]/[locale]/` folder in the Next.js App Router.
+
+### 1. Adding a new site in Sanity Studio
+
+1. Open Sanity Studio and navigate to _Sites_ (`site` document type).
+2. Create a new document and fill out the required fields:
+
+- _Site Title_ → Human-friendly name (e.g. `My Brand`).
+- _Identifier_ → Unique slug that identifies this site (e.g. `my-brand`).
+  - _IMPORTANT_: This value maps directly to the `[site]` in the NextJS folder structure and to `siteMapping` in middleware.
+- _Primary Domain_ → The site's canonical domain (e.g. `https://my-brand.com`).
+- _Default Locale_ → The fallback locale for this site (e.g. `en-us`).
+- All other fields should be self explanatory.
+
+3. Publish the document.
+
+- Sanity will now expose this `site` for queries when fetching navigation, SEO or theme settings.
+
+Once published, the _Identifier_ (`identifier.current`) becomes the key that connects Sanity → middleware → NextJS routes.
 
 ## Learn More
 
