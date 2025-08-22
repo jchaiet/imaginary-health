@@ -12,24 +12,27 @@ export default function parentChild(
   icon: React.ComponentType = FolderIcon,
   S: StructureBuilder,
   documentStore: DocumentStore,
-  customFilter?: string
+  customFilter?: string,
+  siteId?: string
 ) {
   const appendFilter = (base: string) =>
     customFilter ? `${base} && (${customFilter})` : base;
 
+  const siteFilter = siteId ? `site._ref == "${siteId}"` : "";
+
   const filterWithoutParent = appendFilter(
-    `_type == "${schemaType}" && !defined(parent) && !(_id in path("drafts.**"))`
+    `_type == "${schemaType}" && !defined(parent) && !(_id in path("drafts.**")) ${siteFilter ? `&& ${siteFilter}` : ""}`
   );
 
   const filterAll = appendFilter(
-    `_type == "${schemaType}" && !(_id in path("drafts.**"))`
+    `_type == "${schemaType}" && !(_id in path("drafts.**")) ${siteFilter ? `&& ${siteFilter}` : ""}`
   );
 
   const query = `*[${filterWithoutParent}]{ _id, title, slug }`;
   const queryId = (id: string) =>
     `*[${filterAll} && _id == "${id}"][0]{ _id, title, slug, parent, children }`;
   const queryGetChildren = (id: string, schemaType: string) =>
-    `*[_type == "${schemaType}" && (_id == "${id}" || parent._ref == "${id}") && !(_id in path("drafts.**"))]{ _id, title, slug, parent, children }`;
+    `*[_type == "${schemaType}" && site._ref == "${siteId}" && (_id == "${id}" || parent._ref == "${id}") && !(_id in path("drafts.**"))]{ _id, title, slug, parent, children }`;
 
   const options: ListenQueryOptions = { apiVersion: `2023-01-01` };
 
@@ -62,6 +65,7 @@ export default function parentChild(
                           {
                             parentId: parent?._id,
                             parentSlug: parent?.slug?.current,
+                            siteId: siteId,
                           },
                         ],
                       }),
@@ -112,7 +116,18 @@ export default function parentChild(
               S.menuItem()
                 .title("Add")
                 .icon(AddIcon)
-                .intent({ type: "create", params: { type: schemaType } }),
+                .intent({
+                  type: "create",
+                  params: [
+                    {
+                      type: schemaType,
+                      template: `${schemaType}-with-initial-slug`,
+                    },
+                    {
+                      siteId: siteId,
+                    },
+                  ],
+                }),
             ])
             .items([
               //Create a List Item for all documents

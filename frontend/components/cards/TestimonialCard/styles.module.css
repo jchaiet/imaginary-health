@@ -167,7 +167,7 @@
         max-height: 500px;
 
         &::before {
-          content: open-quote;
+          content: "“";
           font-size: var(--font-size-lg);
           display: inline-block;
           position: relative;
@@ -180,7 +180,7 @@
         }
 
         &::after {
-          content: close-quote;
+          content: "”";
           font-size: var(--font-size-lg);
           display: inline-block;
           position: relative;
@@ -414,7 +414,7 @@
     overflow: visible;
 
     &::before {
-      content: open-quote;
+      content: "“";
       font-size: 2.5rem;
       display: inline-block;
       position: relative;
@@ -428,7 +428,7 @@
     }
 
     &::after {
-      content: close-quote;
+      content: "”";
       font-size: 2.5rem;
       display: inline-block;
       position: relative;

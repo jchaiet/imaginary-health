@@ -22,6 +22,18 @@ export const pageMetadataType = defineType({
       validation: (rule) => rule.max(155),
     }),
     defineField({
+      name: "canonicalUrl",
+      title: "Canonical URL",
+      type: "url",
+    }),
+    defineField({
+      name: "keywords",
+      title: "Keywords",
+      type: "array",
+      of: [defineArrayMember({ type: "string" })],
+      options: { layout: "tags" },
+    }),
+    defineField({
       name: "robots",
       title: "Robots Settings",
       type: "string",
@@ -35,6 +47,37 @@ export const pageMetadataType = defineType({
         layout: "radio",
       },
       initialValue: "index, follow",
+    }),
+    defineField({
+      name: "ogTitle",
+      title: "OG Title",
+      description: "Title for social sharing (defaults to Page Title)",
+      type: "string",
+    }),
+    defineField({
+      name: "ogDescription",
+      title: "OG Description",
+      description: "Description for social sharing (defaults to Description)",
+      type: "string",
+    }),
+    defineField({
+      name: "ogImage",
+      title: "OG Image",
+      description: "Recommended size: 1200x630px",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: "twitterCard",
+      title: "Twitter Card Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Summary", value: "summary" },
+          { title: "Summary Large Image", value: "summary_large_image" },
+        ],
+      },
+      initialValue: "summary_large_image",
     }),
   ],
 });

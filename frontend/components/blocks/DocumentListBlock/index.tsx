@@ -8,6 +8,7 @@ import styles from "./styles.module.css";
 import { CallToAction, Input, Select } from "quirk-ui";
 import { BlogArticleCard } from "@/components/cards/BlogArticleCard";
 import { CategoryFilters } from "./CategoryFilters";
+import { useLocaleContext } from "@/context/LocaleContext";
 
 const sortOptions = [
   { label: "Newest", value: "date-desc" },
@@ -41,6 +42,8 @@ export function DocumentListBlock({
   const [hasMore, setHasMore] = useState(true);
   const [search, setSearch] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  const { locale } = useLocaleContext();
 
   const classNames = useStyleClasses(styleOptions);
 
@@ -83,6 +86,7 @@ export function DocumentListBlock({
       limit: String(limit),
       sort: sort,
       documentType: documentType,
+      locale: locale,
     });
 
     if (debouncedSearch) {

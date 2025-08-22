@@ -8,18 +8,18 @@ import React from "react";
 import { CategoryProps, PageSection } from "@/types";
 
 interface PageProps {
-  params: Promise<{ slug: string[]; locale: string }>;
+  params: Promise<{ site: string; slug: string[]; locale: string }>;
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug, locale } = await params;
+  const { slug, locale, site } = await params;
   const { isEnabled } = await draftMode();
 
   const formattedSlug = slug.join("/") ?? "/";
 
   let page = await sanityClient.fetch(
     articleBySlugQuery,
-    { slug: formattedSlug, locale },
+    { slug: formattedSlug, locale, site },
     isEnabled
       ? {
           perspective: "drafts",

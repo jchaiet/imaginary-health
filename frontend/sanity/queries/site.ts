@@ -1,7 +1,7 @@
 import { imageAssetFragment } from "./fragments";
 
-export const siteSettingsQuery = `
-*[_type == "siteSettings"][0]{
+export const siteQuery = `
+*[_type == "site" && identifier.current == $siteId][0]{
   ...,
   logo {
     ${imageAssetFragment}
@@ -16,6 +16,7 @@ export const siteSettingsQuery = `
     maskIcon {
       ${imageAssetFragment}
     },
-  }
+  },
+  "site": identifier.current
 }
 `;

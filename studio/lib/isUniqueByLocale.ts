@@ -7,12 +7,22 @@
 
 import { SlugValidationContext } from "sanity";
 
+interface SiteReference {
+  _ref: string;
+}
+
 export const isUniqueByLocale = async (
   slug: string | undefined,
   context: SlugValidationContext
 ): Promise<boolean> => {
   const { document, getClient } = context;
-  if (!document?.locale) return true;
+
+  const hasValidLocale = typeof document?.locale === "string";
+  const hasValidSiteRef =
+    document?.site && (document.site as SiteReference)._ref;
+
+  if (!hasValidLocale || !hasValidSiteRef) return true;
+
   const client = getClient({ apiVersion: "2025-02-19" });
 
   const id = document._id.replace(/^drafts\./, "");
@@ -20,6 +30,7 @@ export const isUniqueByLocale = async (
   const params = {
     id,
     locale: document.locale,
+    siteRef: (document.site as SiteReference)._ref,
     slug,
   };
   const query = `
@@ -27,43 +38,12 @@ export const isUniqueByLocale = async (
       *[
         !(sanity::versionOf($id)) &&
         slug.current == $slug &&
-        locale == $locale
+        locale == $locale &&
+        site._ref == $siteRef
       ][0]._id
     )
   `;
 
   const result = await client.fetch(query, params);
   return result;
-
-  // const locale = (document as any)?.locale || "en";
-
-  // const isDraft = document._id.startsWith("drafts.");
-  // const publishedId = isDraft ? document._id.slice(7) : document._id;
-  // const draftId = isDraft ? document._id : `drafts.${document._id}`;
-  // const query = `
-  //   !defined(
-  //     *[
-  //       _type == $type &&
-  //       slug.current == $slug &&
-  //       locale == $locale &&
-  //       !(_id in [$draftId, $publishedId])
-  //     ][0]._id
-  //   )
-  // `;
-
-  // const params = {
-  //   type: document._type,
-  //   slug,
-  //   locale,
-  //   draftId: draftId,
-  //   publishedId: publishedId,
-  // };
-
-  // try {
-  //   const result = await client.fetch(query, params);
-  //   return result;
-  // } catch (err) {
-  //   console.error("Error during slug uniqueness check", err);
-  //   return false;
-  // }
 };

@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
   const includeFilters = searchParams.getAll("include");
   const excludeFilters = searchParams.getAll("exclude");
   const search = searchParams.get("search")?.trim();
+  const locale = searchParams.get("locale") || "en-us";
 
   const sortFieldMap: Record<string, string> = {
     "date-desc": "publishDate desc",
@@ -54,10 +55,13 @@ export async function GET(req: NextRequest) {
     )`;
   }
 
+  const localeCondition = `&& locale == "${locale}"`;
+
   const query = `*[
     _type == "${documentType}" 
     ${categoryConditions}
     ${searchCondition}
+    ${localeCondition}
   ] | order(${order}) [${start}...${start + limit}] {
     _id,
     title,
@@ -74,6 +78,7 @@ export async function GET(req: NextRequest) {
     _type == "${documentType}" 
     ${categoryConditions}
     ${searchCondition}
+    ${localeCondition}
   ])`;
 
   try {

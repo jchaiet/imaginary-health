@@ -3,7 +3,23 @@ import { locales, defaultLocale } from "./lib/i18n";
 
 // export default createMiddleware(routing);
 export async function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+  const url = req.nextUrl.clone();
+  const hostname = req.headers.get("host");
+
+  if (!hostname) return NextResponse.next();
+
+  //Site mapping
+  const siteMapping = {
+    "imaginary-health.vercel.app": "imaginary-health",
+    "localhost:3000": process.env.SITE_ID,
+    "thems.vercel.app": "thems",
+  };
+
+  const site = siteMapping[hostname as keyof typeof siteMapping];
+
+  if (!site) return NextResponse.next();
+
+  const { pathname } = url;
 
   // Skip Next internals & API routes
   if (
@@ -23,20 +39,20 @@ export async function middleware(req: NextRequest) {
     pathname === `/${defaultLocale}` ||
     pathname.startsWith(`/${defaultLocale}/`)
   ) {
-    const url = req.nextUrl.clone();
-    url.pathname = pathname.replace(`/${defaultLocale}`, "") || "/";
+    const newPathname = pathname.replace(`/${defaultLocale}`, "") || "/";
+    url.pathname = `/${site}${newPathname}`;
 
     return NextResponse.redirect(url);
   }
 
   //If pathname doesn't start with any locale, rewrite internally to /en-us
   if (!hasLocalePrefix) {
-    const url = req.nextUrl.clone();
-    url.pathname = `/${defaultLocale}${pathname}`;
+    url.pathname = `/${site}/${defaultLocale}${pathname}`;
     return NextResponse.rewrite(url);
   }
 
-  return NextResponse.next();
+  url.pathname = `/${site}${pathname}`;
+  return NextResponse.rewrite(url);
 }
 
 export const config = {

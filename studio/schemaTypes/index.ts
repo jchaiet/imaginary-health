@@ -1,4 +1,5 @@
 /* Site */
+import { siteType } from "./siteType";
 import { siteSettingsType } from "./siteSettingsType";
 import { navigationType } from "./navigation/navigationType";
 import { navigationItemType } from "./navigation/navigationItemType";
@@ -40,6 +41,7 @@ import { singletonType } from "./singletonType";
 import { singletonBlockType } from "./blocks/singletonBlockType";
 
 export const schemaTypes = [
+  siteType,
   siteSettingsType,
   pageType,
   pageMetadataType,

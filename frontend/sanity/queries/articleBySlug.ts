@@ -8,7 +8,8 @@ export const articleBySlugQuery = `
 *[
   _type == "blog" && 
   slug.current == $slug && 
-  locale == $locale
+  locale == $locale &&
+  site->identifier.current == $site
 ][0]{
   ...,
   ${articleFragment},

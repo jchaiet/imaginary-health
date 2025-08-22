@@ -28,6 +28,16 @@ export const blogType = defineType({
   ],
   fields: [
     defineField({
+      name: "site",
+      title: "Site",
+      type: "reference",
+      to: [{ type: "site" }],
+      group: "details",
+      readOnly: true,
+      description: "This article belongs to the selected site",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "locale",
       type: "string",
       group: "details",

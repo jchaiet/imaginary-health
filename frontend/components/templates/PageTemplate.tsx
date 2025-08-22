@@ -13,6 +13,7 @@ type PageTemplateProps = {
   hideHeader?: boolean;
   hideFooter?: boolean;
   isBlog?: boolean;
+  site?: string;
 };
 
 export default async function PageTemplate({
@@ -21,8 +22,12 @@ export default async function PageTemplate({
   hideHeader = false,
   hideFooter = false,
   isBlog = false,
+  site,
 }: PageTemplateProps) {
-  const settings = await fetchSiteSettings();
+  const settings = site ? await fetchSiteSettings(site) : null;
+  const socialItems = settings?.socialLinks
+    ? await mapSocialLinks(settings?.socialLinks)
+    : [];
 
   const navigationData = await fetchNavigation("main-navigation");
   const navItems = navigationData.primaryItems?.length
@@ -50,8 +55,6 @@ export default async function PageTemplate({
   const blogNavItems = blogNavigationData?.navigationItems?.length
     ? await mapNavigation(blogNavigationData.navigationItems)
     : [];
-
-  const socialItems = await mapSocialLinks(settings.socialLinks);
 
   //Layout variants
   if (layoutType === "minimal") {

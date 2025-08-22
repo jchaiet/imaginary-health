@@ -168,6 +168,7 @@ export const featuredDocumentsBlockFragment = `
   "articles": *[
     _type == ^.documentType && 
     locale == $locale &&
+    site->identifier.current == $site &&
     _id != ^.^._id &&
     (
       (
@@ -288,6 +289,8 @@ export const documentListBlockFragment = `
   },
   "articles": *[
     _type == ^.documentType && 
+    locale == $locale &&
+    site->identifier.current == $site &&
     parent._ref == ^.id &&
     (
       !defined(^.includeFilters) ||

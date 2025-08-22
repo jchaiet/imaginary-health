@@ -14,7 +14,8 @@ export const pageBySlugQuery = `
   *[
     _type == "page" && 
     slug.current == $slug && 
-    locale == $locale
+    locale == $locale &&
+    site->identifier.current == $site
   ][0] {
     ...,
     metadata { title, robots, description },

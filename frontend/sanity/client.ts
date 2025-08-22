@@ -4,6 +4,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { Link } from "@/types";
 import { navigationQuery, siteSettingsQuery } from "./queries";
+import { siteQuery } from "./queries/site";
 
 export const sanityClient = createClient(sanityConfig);
 export const writeSanityClient = createClient({
@@ -14,7 +15,26 @@ export const writeSanityClient = createClient({
 
 const builder = imageUrlBuilder(sanityClient);
 
-export async function fetchSiteSettings() {
+export async function fetchSiteSettings(siteId: string) {
+  if (siteId) {
+    const site = await sanityClient.fetch(siteQuery, { siteId });
+
+    if (!site) {
+      console.warn(
+        `No site document found for domain "${siteId}". Using default fallback`
+      );
+      return {
+        title: "Default Site",
+        description: "Default description",
+        defaultSEO: {},
+        siteIcon: {},
+        socialLinks: [],
+      };
+    }
+
+    return site;
+  }
+
   return await sanityClient.fetch(siteSettingsQuery);
 }
 
