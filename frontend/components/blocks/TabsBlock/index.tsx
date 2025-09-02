@@ -3,11 +3,10 @@ import React, { useEffect, useState } from "react";
 import { RichText } from "@/components/ui/PortableTextRenderer";
 import Image from "next/image";
 import { resolveLinkURL, urlForImage } from "@/sanity/client";
-//import { usePrefersReducedMotion } from "@/lib/hooks/usePrefersReducedMotion";
 import styles from "./styles.module.css";
 import { TabsBlockProps } from "@/types/tabs";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
-import { CallToAction, Tabs } from "quirk-ui";
+import { CallToAction, Tabs } from "quirk-ui/core";
 import { CallToActions } from "@/components/ui/CallToActions";
 
 export function TabsBlock({

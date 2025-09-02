@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { CallToAction } from "quirk-ui";
+import { CallToAction } from "quirk-ui/core";
 import { SpotlightProps } from "@/types";
 import { RichText } from "@/components/ui/PortableTextRenderer";
 import { urlForImage } from "@/sanity/client";

@@ -1,11 +1,10 @@
+"use client";
 import { ReactNode } from "react";
 import Layout from "@/components/layout/Layout";
-import { mapNavigation } from "@/lib/mapNavigation";
-import { fetchNavigation, fetchSiteSettings } from "@/sanity/client";
+
 import BlogHeader from "../layout/BlogHeader";
-import { mapUtilityItems } from "@/lib/mapUtilityItems";
-import { mapSocialLinks } from "@/lib/mapSocialLinks";
-import { mapGroups } from "@/lib/mapGroups";
+import { NavItem } from "quirk-ui/core";
+import { Link } from "@/types";
 
 type PageTemplateProps = {
   children: ReactNode;
@@ -13,59 +12,25 @@ type PageTemplateProps = {
   hideHeader?: boolean;
   hideFooter?: boolean;
   isBlog?: boolean;
-  site?: string;
-  navKey?: string;
-  footerKey?: string;
+  siteSettings?: any;
+  navigationData?: any;
+  footerNavigationData?: any;
+  blogNavItems?: NavItem[];
+  socialItems?: Link[];
 };
 
-export default async function PageTemplate({
+export default function PageTemplate({
   children,
   layoutType = "default",
   hideHeader = false,
   hideFooter = false,
   isBlog = false,
-  site,
-  navKey,
-  footerKey,
+  siteSettings,
+  navigationData,
+  footerNavigationData,
+  blogNavItems,
+  socialItems,
 }: PageTemplateProps) {
-  const settings = site ? await fetchSiteSettings(site) : null;
-  const socialItems = settings?.socialLinks
-    ? await mapSocialLinks(settings?.socialLinks)
-    : [];
-
-  const navigationData = await fetchNavigation(navKey);
-
-  const navItems =
-    navigationData.type === "advanced"
-      ? await mapNavigation(navigationData.primaryItems)
-      : ((await mapNavigation(navigationData.navigationItems)) ?? []);
-
-  const navGroups = navigationData.navigationGroups?.length
-    ? await mapGroups(navigationData.navigationGroups)
-    : [];
-
-  const utilityItems = navigationData.utilityItems
-    ? await mapUtilityItems(navigationData.utilityItems)
-    : [];
-
-  const logoLinkSlug = navigationData.logoLink?.slug?.current ?? "#";
-
-  const footerNavigationData = await fetchNavigation(footerKey);
-  const footerLinkSlug = footerNavigationData.logoLink?.slug?.current ?? "#";
-
-  const footerNavItems = footerNavigationData?.navigationItems?.length
-    ? await mapNavigation(footerNavigationData.navigationItems)
-    : [];
-
-  const footerUtilityItems = footerNavigationData.utilityItems
-    ? await mapUtilityItems(footerNavigationData.utilityItems)
-    : [];
-
-  const blogNavigationData = isBlog ? await fetchNavigation("blog") : null;
-  const blogNavItems = blogNavigationData?.navigationItems?.length
-    ? await mapNavigation(blogNavigationData.navigationItems)
-    : [];
-
   //Layout variants
   if (layoutType === "minimal") {
     return <div>{children}</div>;
@@ -73,29 +38,29 @@ export default async function PageTemplate({
 
   return (
     <Layout
-      variant={navigationData.variant}
-      navigationType={navigationData.navigationType}
-      utilityItems={utilityItems}
-      navItems={navItems}
-      navGroups={navGroups}
-      alignment={navigationData.alignment}
-      logo={navigationData.logo}
-      logoLinkSlug={logoLinkSlug}
+      variant={navigationData?.variant ?? "default"}
+      navigationType={navigationData?.navigationType}
+      utilityItems={navigationData?.utilityItems}
+      navItems={navigationData?.navigationItems}
+      navGroups={navigationData?.navigationGroups}
+      alignment={navigationData?.alignment}
+      logo={navigationData?.logo}
+      logoLinkSlug={navigationData?.logoLinkSlug}
       hideHeader={hideHeader}
       hideFooter={hideFooter}
-      socialItems={settings?.socialLinks}
-      footerNavItems={footerNavItems}
-      footerUtilityItems={footerUtilityItems}
-      footerLogo={footerNavigationData.logo}
-      footerlogoLinkSlug={footerLinkSlug}
-      footerAlignment={footerNavigationData.alignment}
-      footerPrimaryInfo={footerNavigationData.primaryInfo}
-      footerSecondaryInfo={footerNavigationData.secondaryInfo}
+      socialItems={siteSettings?.socialLinks}
+      footerNavItems={footerNavigationData?.footerNavItems}
+      footerUtilityItems={footerNavigationData?.footerUtilityItems}
+      footerLogo={footerNavigationData?.logo}
+      footerlogoLinkSlug={footerNavigationData?.footerLinkSlug}
+      footerAlignment={footerNavigationData?.alignment}
+      footerPrimaryInfo={footerNavigationData?.primaryInfo}
+      footerSecondaryInfo={footerNavigationData?.secondaryInfo}
       footerSocialItems={socialItems}
-      showLocaleSelect={navigationData.showLocaleSelect}
-      showSearch={navigationData.showSearch}
+      showLocaleSelect={navigationData?.showLocaleSelect}
+      showSearch={navigationData?.showSearch}
     >
-      {isBlog && (
+      {isBlog && blogNavItems && (
         <BlogHeader title="Blog" navItems={blogNavItems} alignment="right" />
       )}
       {children}

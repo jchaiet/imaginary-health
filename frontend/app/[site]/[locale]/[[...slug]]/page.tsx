@@ -2,10 +2,21 @@ import type { Metadata } from "next";
 import { cache } from "react";
 import PageTemplate from "@/components/templates/PageTemplate";
 import { PageBuilder } from "@/lib/pageBuilder";
-import { fetchSiteSettings, urlForImage, sanityClient } from "@/sanity/client";
+import {
+  fetchSiteSettings,
+  fetchNavigation,
+  urlForImage,
+  sanityClient,
+} from "@/sanity/client";
 import { pageBySlugQuery } from "@/sanity/queries";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
+import { resolveSections } from "@/lib/resolveSections";
+import { mapNavigation } from "@/lib/mapNavigation";
+
+import { mapUtilityItems } from "@/lib/mapUtilityItems";
+import { mapSocialLinks } from "@/lib/mapSocialLinks";
+import { mapGroups } from "@/lib/mapGroups";
 
 interface PageProps {
   params: Promise<{ site: string; slug: string[]; locale: string }>;
@@ -140,26 +151,37 @@ export default async function Page({ params }: PageProps) {
     site: siteRef,
   } = page;
 
+  const resolvedSection = resolveSections(pageBuilder);
+
   const isBlog = page?.slug?.current?.startsWith("blog");
 
-  const navKey =
-    navigationOverride?.slug ??
-    siteRef?.defaultNavigation?.slug ??
-    "main-navigation";
+  //Server data
+  const settings = site ? await fetchSiteSettings(site) : null;
 
-  const footerKey =
-    footerOverride?.slug ?? siteRef?.defaultFooter?.slug ?? "main-footer";
+  const navigationData = await fetchNavigation(
+    navigationOverride?.slug ??
+      siteRef?.defaultNavigation?.slug ??
+      "main-navigation"
+  );
+
+  const footerNavigationData = await fetchNavigation(
+    footerOverride?.slug ?? siteRef?.defaultFooter?.slug ?? "main-footer"
+  );
+
+  const blogNavigationData = isBlog ? await fetchNavigation("blog") : null;
 
   return (
     <PageTemplate
       isBlog={isBlog}
       hideHeader={hideHeader}
       hideFooter={hideFooter}
-      site={site}
-      navKey={navKey}
-      footerKey={footerKey}
+      siteSettings={settings}
+      navigationData={navigationData}
+      footerNavigationData={footerNavigationData}
+      blogNavItems={blogNavigationData?.navigationItems ?? []}
+      socialItems={settings?.socialLinks ?? []}
     >
-      <PageBuilder sections={pageBuilder} pageData={page} />
+      <PageBuilder sections={resolvedSection} pageData={page} />
     </PageTemplate>
   );
 }

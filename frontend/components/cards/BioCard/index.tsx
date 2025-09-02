@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ItemType } from "@/types";
 import { ArrowRight, Play } from "lucide-react";
 import styles from "./styles.module.css";
-import { Modal } from "quirk-ui";
+import { Modal } from "quirk-ui/core";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 
 type CustomCardProps = ItemType & {

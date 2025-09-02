@@ -1,6 +1,6 @@
 import { SpotlightCard } from "@/components/cards/SpotlightCard";
 import type { NavigationItem, SpotlightProps } from "@/types";
-import type { NavGroup } from "quirk-ui";
+import type { NavGroup } from "quirk-ui/core";
 import { mapNavigation } from "./mapNavigation";
 
 export async function mapGroups(

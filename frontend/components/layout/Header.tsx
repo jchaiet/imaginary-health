@@ -8,7 +8,7 @@ import {
   type UtilityItem,
   type NavItem,
   type NavGroup,
-} from "quirk-ui";
+} from "quirk-ui/core";
 import { useLocaleContext } from "@/context/LocaleContext";
 import { usePathname } from "next/navigation";
 import { locales, getLocaleLink } from "@/lib/i18n";
@@ -22,7 +22,7 @@ type HeaderProps = {
   logoUrl: string | null;
   logoAlt: string;
   logoLinkSlug?: string;
-  variant: "standard" | "transparent" | "minimal";
+  variant: "standard" | "transparent";
   navigationType: "default" | "advanced";
   showSearch?: boolean;
   showLocaleSelect?: boolean;
@@ -82,19 +82,21 @@ export default function Header({
     );
   };
 
-  const LogoImage = (
+  const LogoImage = logoUrl ? (
     <Image
-      src={logoUrl ?? ""}
+      src={logoUrl}
       alt={logoAlt || "Content image"}
       width={100}
       height={40}
       priority={true}
     />
-  );
+  ) : null;
 
   if (!navItems || !Array.isArray(navItems)) {
     return null;
   }
+
+  console.log("HEADER", navGroups);
 
   return (
     <Navbar

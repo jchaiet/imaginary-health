@@ -277,6 +277,9 @@ export const heroBlockFragment = `
   heading {
     ${headingFragment}
   },
+  image {
+    ${imageAssetFragment}
+  },
   callToAction {
     ${callToActionFragment}
   },

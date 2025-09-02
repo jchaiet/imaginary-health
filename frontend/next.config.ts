@@ -56,14 +56,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     const sanityRedirects = await getRedirects();
-    return [
-      // {
-      //   source: "/en-us/:path*",
-      //   destination: "/:path*",
-      //   permanent: true,
-      // },
-      ...sanityRedirects,
-    ];
+    return [...sanityRedirects];
   },
   async headers() {
     return [

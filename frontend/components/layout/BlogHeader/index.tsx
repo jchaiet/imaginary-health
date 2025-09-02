@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { type NavItem } from "quirk-ui";
+import { type NavItem } from "quirk-ui/core";
 import { ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 import ReactDOM from "react-dom";

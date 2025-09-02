@@ -3,7 +3,7 @@ import { RichText } from "@/components/ui/PortableTextRenderer";
 import { resolveLinkURL, urlForImage } from "@/sanity/client";
 import Image from "next/image";
 import { ItemType } from "@/types";
-import { Modal, Avatar } from "quirk-ui";
+import { Modal, Avatar } from "quirk-ui/core";
 import { Play } from "lucide-react";
 
 import styles from "./styles.module.css";

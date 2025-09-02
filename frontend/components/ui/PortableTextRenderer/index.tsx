@@ -10,7 +10,7 @@ import {
 import type { TypedObject } from "@portabletext/types";
 
 import { AnimatedSpan } from "@/components/ui/AnimatedSpan";
-import { Heading, Text } from "quirk-ui";
+import { Heading, Text } from "quirk-ui/core";
 
 import Image from "next/image";
 import { urlForImage } from "@/sanity/client";

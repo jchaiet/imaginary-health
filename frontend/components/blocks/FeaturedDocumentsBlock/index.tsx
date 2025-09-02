@@ -9,7 +9,7 @@ import { ArrowRight } from "lucide-react";
 import { BlogArticleCard } from "@/components/cards/BlogArticleCard";
 
 import styles from "./styles.module.css";
-import { Carousel } from "quirk-ui";
+import { Carousel } from "quirk-ui/core";
 
 export function FeaturedDocumentsBlock({
   heading,

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { Accordion } from "quirk-ui";
-import type { AccordionItem } from "quirk-ui";
+import { Accordion } from "quirk-ui/core";
+import type { AccordionItem } from "quirk-ui/core";
 import { RichText } from "@/components/ui/PortableTextRenderer";
 import styles from "./styles.module.css";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";

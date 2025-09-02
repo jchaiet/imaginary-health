@@ -5,7 +5,7 @@ import { ArticleItem } from "@/types";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
 import { XIcon } from "lucide-react";
 import styles from "./styles.module.css";
-import { CallToAction, Input, Select } from "quirk-ui";
+import { CallToAction, Input, Select } from "quirk-ui/core";
 import { BlogArticleCard } from "@/components/cards/BlogArticleCard";
 import { CategoryFilters } from "./CategoryFilters";
 import { useLocaleContext } from "@/context/LocaleContext";

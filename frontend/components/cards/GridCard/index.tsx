@@ -4,7 +4,7 @@ import { resolveLinkURL, urlForImage } from "@/sanity/client";
 import Image from "next/image";
 import { ItemType } from "@/types";
 import { ArrowRight, Play } from "lucide-react";
-import { Modal } from "quirk-ui";
+import { Modal } from "quirk-ui/core";
 import { useMediaQuery } from "@/lib/hooks/useMediaQuery";
 import { useStyleClasses } from "@/lib/hooks/useStyleClasses";
 

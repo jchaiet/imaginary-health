@@ -10,7 +10,7 @@ export interface Navigation {
   primaryItems: NavigationItem[];
   alignment: "left" | "center" | "right";
   utilityItems: Link[];
-  variant: "standard" | "transparent" | "minimal";
+  variant: "standard" | "transparent";
   navigationType: "default" | "advanced";
   showSearch: boolean;
   showLocaleSelect: boolean;

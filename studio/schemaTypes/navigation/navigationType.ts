@@ -48,9 +48,8 @@ export const navigationType = defineType({
       type: "string",
       options: {
         list: [
-          { title: "Default", value: "default" },
+          { title: "Standard", value: "standard" },
           { title: "Transparent", value: "transparent" },
-          { title: "Minimal", value: "minimal" },
         ],
         layout: "radio",
       },

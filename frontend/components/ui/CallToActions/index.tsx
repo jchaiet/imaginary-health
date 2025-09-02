@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ButtonGroup, CallToAction, Modal } from "quirk-ui";
+import { ButtonGroup, CallToAction, Modal } from "quirk-ui/core";
 import { Link } from "@/types";
 import { resolveLinkURL } from "@/sanity/client";
 

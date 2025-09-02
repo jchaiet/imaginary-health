@@ -1,5 +1,4 @@
 "use client";
-
 import { HeroBlock } from "@/components/blocks/HeroBlock";
 import { CardGridBlock } from "@/components/blocks/CardGridBlock";
 import { CarouselBlock } from "@/components/blocks/CarouselBlock";

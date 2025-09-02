@@ -1,6 +1,6 @@
 import { XIcon } from "lucide-react";
 import styles from "./styles.module.css";
-import { CallToAction } from "quirk-ui";
+import { CallToAction } from "quirk-ui/core";
 import { ArticleItem } from "@/types";
 
 interface CategoryFiltersProps {

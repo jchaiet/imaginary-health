@@ -1,5 +1,5 @@
 import { SocialLink } from "@/types";
-import type { NavItem } from "quirk-ui";
+import type { NavItem } from "quirk-ui/core";
 
 export async function mapSocialLinks(
   socialLinks: SocialLink[]

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ButtonGroup, CallToAction } from "quirk-ui";
+import { ButtonGroup, CallToAction } from "quirk-ui/core";
 import { WasHelpfulProps } from "@/types";
 
 import styles from "./styles.module.css";

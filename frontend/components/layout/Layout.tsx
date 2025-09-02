@@ -1,13 +1,14 @@
 "use client";
 import { ReactNode } from "react";
-import type { NavGroup, NavItem } from "quirk-ui";
+import type { NavGroup, NavItem } from "quirk-ui/core";
 
 import Header from "./Header";
 import Footer from "./Footer";
 import { Link } from "@/types";
 import { SanityImage } from "@/types";
 import { PortableTextBlock } from "next-sanity";
-import type { UtilityItem } from "quirk-ui";
+import type { UtilityItem } from "quirk-ui/core";
+import { urlForImage } from "@/sanity/client";
 
 type LayoutProps = {
   children: ReactNode;
@@ -23,7 +24,7 @@ type LayoutProps = {
   utilityItems: UtilityItem[];
   logo: SanityImage;
   logoLinkSlug?: string;
-  variant: "standard" | "transparent" | "minimal";
+  variant: "standard" | "transparent";
   navigationType: "default" | "advanced";
   socialItems: Link[];
   primaryInfo?: string;
@@ -63,6 +64,11 @@ export default function Layout({
   footerSecondaryInfo,
   footerSocialItems,
 }: LayoutProps) {
+  const logoUrl = logo?.asset?._id
+    ? urlForImage(logo?.asset?._id).width(200).quality(100).url()
+    : null;
+
+  console.log(navGroups);
   return (
     <>
       {!hideHeader && (
@@ -71,7 +77,7 @@ export default function Layout({
           navItems={navItems ?? []}
           navGroups={navGroups ?? []}
           alignment={alignment}
-          logoUrl={logo?.asset?.url}
+          logoUrl={logoUrl}
           logoAlt={logo?.asset?.altText}
           logoLinkSlug={logoLinkSlug}
           variant={variant}
@@ -89,7 +95,7 @@ export default function Layout({
           navItems={footerNavItems}
           utilityItems={footerUtilityItems}
           alignment={footerAlignment}
-          logoUrl={footerLogo?.asset?.url}
+          logoUrl={logoUrl}
           logoAlt={footerLogo?.asset?.altText}
           logoLinkSlug={footerlogoLinkSlug}
           socialItems={footerSocialItems}
