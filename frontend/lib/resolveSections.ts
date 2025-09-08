@@ -6,7 +6,7 @@ function isSanityImage(obj: unknown): obj is SanityImage {
     typeof obj === "object" &&
     obj !== null &&
     "asset" in obj &&
-    typeof (obj as any).asset?._id === "string"
+    typeof (obj as { asset?: { _id?: unknown } }).asset?._id === "string"
   );
 }
 
