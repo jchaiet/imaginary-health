@@ -9,6 +9,7 @@ export interface SanityImage {
     title: string;
     description: string;
   };
+  imageUrl?: string;
   description?: string;
   layout?: "cover" | "contain" | "none";
   position?:
@@ -22,9 +23,9 @@ export interface SanityImage {
     | "bottom left"
     | "bottom right";
   width?: "full" | "inset" | "half";
+  maxWidth?: string;
   aspectRatio?: "1:1" | "16:9" | "4:3";
 
   /** Deprecated */
   display?: "default" | "max-width" | "full-bleed";
-  maxWidth?: number | string;
 }
