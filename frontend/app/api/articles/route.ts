@@ -1,4 +1,5 @@
 import { sanityClient, urlForImage } from "@/sanity/client";
+import { ArticleItem } from "@/types";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -95,7 +96,7 @@ export async function GET(req: NextRequest) {
       sanityClient.fetch(countQuery),
     ]);
 
-    const resolvedArticles = articles.map((article: any) => ({
+    const resolvedArticles = articles.map((article: ArticleItem) => ({
       ...article,
       featuredImage: article.featuredImage
         ? {

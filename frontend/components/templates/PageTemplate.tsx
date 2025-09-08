@@ -3,10 +3,10 @@ import { ReactNode } from "react";
 import Layout from "@/components/layout/Layout";
 
 import BlogHeader from "../layout/BlogHeader";
-import { SocialLink } from "@/types";
 
 import { type NavGroup, type NavItem, type UtilityItem } from "quirk-ui/core";
-import { resolveLinkURL } from "@/sanity/client";
+
+import { type SiteSettings, type NavigationData } from "quirk-ui/next";
 
 type PageTemplateProps = {
   children: ReactNode;
@@ -14,12 +14,12 @@ type PageTemplateProps = {
   hideHeader?: boolean;
   hideFooter?: boolean;
   isBlog?: boolean;
-  siteSettings?: any;
-  navigationData?: any;
+  siteSettings?: SiteSettings;
+  navigationData?: NavigationData;
   navItems?: NavItem[];
   navGroups?: NavGroup[];
   utilityItems?: UtilityItem[];
-  footerNavigationData?: any;
+  footerNavigationData?: NavigationData;
   footerNavItems?: NavItem[];
   footerUtilityItems?: UtilityItem[];
   footerSocialItems?: NavItem[];
@@ -49,12 +49,12 @@ export default function PageTemplate({
 
   return (
     <Layout
-      variant={navigationData?.variant ?? "default"}
-      navigationType={navigationData?.navigationType}
+      variant={navigationData?.variant ?? "standard"}
+      navigationType={navigationData?.navigationType ?? "default"}
       navItems={navItems}
       utilityItems={utilityItems ?? []}
       navGroups={navGroups}
-      alignment={navigationData?.alignment}
+      alignment={navigationData?.alignment ?? "left"}
       logo={navigationData?.logo}
       logoLinkSlug={navigationData?.logoLink?.slug.current}
       hideHeader={hideHeader}
@@ -63,7 +63,7 @@ export default function PageTemplate({
       footerUtilityItems={footerUtilityItems ?? []}
       footerSocialItems={footerSocialItems ?? []}
       footerLogo={footerNavigationData?.logo}
-      footerlogoLinkSlug={footerNavigationData?.footerLinkSlug}
+      footerlogoLinkSlug={footerNavigationData?.logoLink?.slug.current}
       footerAlignment={footerNavigationData?.alignment}
       footerPrimaryInfo={footerNavigationData?.primaryInfo}
       footerSecondaryInfo={footerNavigationData?.secondaryInfo}

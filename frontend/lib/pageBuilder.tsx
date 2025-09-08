@@ -26,7 +26,7 @@ import {
   type PageSection,
   type QuoteBlockProps,
   type RichTextBlockProps,
-  type SingletonBlock,
+  type SingletonBlockProps,
   AccordionBlock,
   AdditionalCategoriesBlock,
   CardGridBlock,
@@ -93,7 +93,7 @@ export function PageBuilder({
             return <WasHelpfulBlock key={i} {...section} />;
 
           case "singletonBlock":
-            const singletonBlock = section as SingletonBlock;
+            const singletonBlock = section as SingletonBlockProps;
             const fetchedSingleton = singletonBlock.singleton;
 
             switch (fetchedSingleton.blockSelection) {

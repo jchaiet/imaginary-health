@@ -4,7 +4,6 @@ import type { NavGroup, NavItem } from "quirk-ui/core";
 
 import Header from "./Header";
 import Footer from "./Footer";
-import { Link } from "@/types";
 import { SanityImage } from "@/types";
 import { PortableTextBlock } from "next-sanity";
 import type { UtilityItem } from "quirk-ui/core";
@@ -22,7 +21,7 @@ type LayoutProps = {
   navGroups?: NavGroup[];
   alignment: "left" | "center" | "right";
   utilityItems: UtilityItem[];
-  logo: SanityImage;
+  logo?: SanityImage;
   logoLinkSlug?: string;
   variant: "standard" | "transparent";
   navigationType: "default" | "advanced";
@@ -30,7 +29,7 @@ type LayoutProps = {
   secondaryInfo?: string;
   footerNavItems: NavItem[];
   footerUtilityItems: UtilityItem[];
-  footerLogo: SanityImage;
+  footerLogo?: SanityImage;
   footerlogoLinkSlug?: string;
   footerAlignment?: "left" | "center" | "right";
   footerPrimaryInfo?: PortableTextBlock[];
@@ -76,7 +75,7 @@ export default function Layout({
           navGroups={navGroups ?? []}
           alignment={alignment}
           logoUrl={logoUrl}
-          logoAlt={logo?.asset?.altText}
+          logoAlt={logo?.asset?.altText ?? "Company logo"}
           logoLinkSlug={logoLinkSlug}
           variant={variant}
           navigationType={navigationType}

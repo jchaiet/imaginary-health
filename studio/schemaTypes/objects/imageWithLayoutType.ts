@@ -52,12 +52,19 @@ export const imageWithLayoutType = defineType({
       options: {
         list: [
           { title: "Full Width", value: "full" },
-          { title: "Inset (Max Width)", value: "inset" },
           { title: "Half Width", value: "half" },
+          { title: "Inset (Max Width)", value: "inset" },
         ],
       },
       initialValue: "full",
       hidden: ({ parent }) => parent?.layout !== "contain",
+    }),
+    defineField({
+      name: "maxWidth",
+      title: "Max Width",
+      description: "Enter a max-width value (e.g. '150px').",
+      type: "string",
+      hidden: ({ parent }) => parent?.width !== "inset",
     }),
     defineField({
       name: "aspectRation",
