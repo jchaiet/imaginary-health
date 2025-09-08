@@ -3,8 +3,10 @@ import { ReactNode } from "react";
 import Layout from "@/components/layout/Layout";
 
 import BlogHeader from "../layout/BlogHeader";
-import { NavItem } from "quirk-ui/core";
-import { Link } from "@/types";
+import { SocialLink } from "@/types";
+
+import { type NavGroup, type NavItem, type UtilityItem } from "quirk-ui/core";
+import { resolveLinkURL } from "@/sanity/client";
 
 type PageTemplateProps = {
   children: ReactNode;
@@ -14,9 +16,14 @@ type PageTemplateProps = {
   isBlog?: boolean;
   siteSettings?: any;
   navigationData?: any;
+  navItems?: NavItem[];
+  navGroups?: NavGroup[];
+  utilityItems?: UtilityItem[];
   footerNavigationData?: any;
+  footerNavItems?: NavItem[];
+  footerUtilityItems?: UtilityItem[];
+  footerSocialItems?: NavItem[];
   blogNavItems?: NavItem[];
-  socialItems?: Link[];
 };
 
 export default function PageTemplate({
@@ -25,11 +32,15 @@ export default function PageTemplate({
   hideHeader = false,
   hideFooter = false,
   isBlog = false,
-  siteSettings,
   navigationData,
+  navItems,
+  navGroups,
+  utilityItems,
   footerNavigationData,
+  footerNavItems,
+  footerUtilityItems,
+  footerSocialItems,
   blogNavItems,
-  socialItems,
 }: PageTemplateProps) {
   //Layout variants
   if (layoutType === "minimal") {
@@ -40,23 +51,22 @@ export default function PageTemplate({
     <Layout
       variant={navigationData?.variant ?? "default"}
       navigationType={navigationData?.navigationType}
-      utilityItems={navigationData?.utilityItems}
-      navItems={navigationData?.navigationItems}
-      navGroups={navigationData?.navigationGroups}
+      navItems={navItems}
+      utilityItems={utilityItems ?? []}
+      navGroups={navGroups}
       alignment={navigationData?.alignment}
       logo={navigationData?.logo}
-      logoLinkSlug={navigationData?.logoLinkSlug}
+      logoLinkSlug={navigationData?.logoLink?.slug.current}
       hideHeader={hideHeader}
       hideFooter={hideFooter}
-      socialItems={siteSettings?.socialLinks}
-      footerNavItems={footerNavigationData?.footerNavItems}
-      footerUtilityItems={footerNavigationData?.footerUtilityItems}
+      footerNavItems={footerNavItems ?? []}
+      footerUtilityItems={footerUtilityItems ?? []}
+      footerSocialItems={footerSocialItems ?? []}
       footerLogo={footerNavigationData?.logo}
       footerlogoLinkSlug={footerNavigationData?.footerLinkSlug}
       footerAlignment={footerNavigationData?.alignment}
       footerPrimaryInfo={footerNavigationData?.primaryInfo}
       footerSecondaryInfo={footerNavigationData?.secondaryInfo}
-      footerSocialItems={socialItems}
       showLocaleSelect={navigationData?.showLocaleSelect}
       showSearch={navigationData?.showSearch}
     >

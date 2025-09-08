@@ -1,4 +1,4 @@
-import { sanityClient } from "@/sanity/client";
+import { sanityClient, urlForImage } from "@/sanity/client";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -69,7 +69,15 @@ export async function GET(req: NextRequest) {
     excerpt,
     timeToRead,
     articleType,
-    featuredImage,
+    featuredImage{
+      asset->{
+        _id,
+        url,
+        altText,
+        title,
+        description
+      }
+    },
     publishDate,
     categories[]->{ _id, title }
   }`;
@@ -86,7 +94,21 @@ export async function GET(req: NextRequest) {
       sanityClient.fetch(query),
       sanityClient.fetch(countQuery),
     ]);
-    return NextResponse.json({ articles, totalCount });
+
+    const resolvedArticles = articles.map((article: any) => ({
+      ...article,
+      featuredImage: article.featuredImage
+        ? {
+            ...article.featuredImage,
+            imageUrl: urlForImage(article.featuredImage)
+              .width(600)
+              .quality(90)
+              .url(),
+          }
+        : null,
+    }));
+
+    return NextResponse.json({ articles: resolvedArticles, totalCount });
   } catch (error) {
     console.error("Error fetching articles:", error);
     return NextResponse.json(

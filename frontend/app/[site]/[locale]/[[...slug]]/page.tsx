@@ -13,7 +13,6 @@ import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
 import { resolveSections } from "@/lib/resolveSections";
 import { mapNavigation } from "@/lib/mapNavigation";
-
 import { mapUtilityItems } from "@/lib/mapUtilityItems";
 import { mapSocialLinks } from "@/lib/mapSocialLinks";
 import { mapGroups } from "@/lib/mapGroups";
@@ -130,6 +129,7 @@ export async function generateMetadata({
     },
   };
 }
+
 export default async function Page({ params }: PageProps) {
   const { slug, locale, site } = await params;
   const { isEnabled } = await draftMode();
@@ -151,7 +151,7 @@ export default async function Page({ params }: PageProps) {
     site: siteRef,
   } = page;
 
-  const resolvedSection = resolveSections(pageBuilder);
+  const resolvedSections = resolveSections(pageBuilder);
 
   const isBlog = page?.slug?.current?.startsWith("blog");
 
@@ -164,11 +164,39 @@ export default async function Page({ params }: PageProps) {
       "main-navigation"
   );
 
+  const navItems = navigationData?.navigationItems
+    ? await mapNavigation(navigationData.navigationItems)
+    : [];
+
+  const navGroups = navigationData?.navigationGroups
+    ? await mapGroups(navigationData.navigationGroups)
+    : [];
+
+  const utilityItems = navigationData?.utilityItems
+    ? await mapUtilityItems(navigationData.utilityItems)
+    : [];
+
   const footerNavigationData = await fetchNavigation(
     footerOverride?.slug ?? siteRef?.defaultFooter?.slug ?? "main-footer"
   );
 
+  const footerNavItems = footerNavigationData?.navigationItems
+    ? await mapNavigation(footerNavigationData.navigationItems)
+    : [];
+
+  const footerUtilityItems = footerNavigationData?.utilityItems
+    ? await mapUtilityItems(footerNavigationData.utilityItems)
+    : [];
+
+  const footerSocialItems = settings?.socialLinks
+    ? await mapSocialLinks(settings?.socialLinks)
+    : [];
+
   const blogNavigationData = isBlog ? await fetchNavigation("blog") : null;
+
+  const blogNavItems = blogNavigationData?.navigationItems?.length
+    ? await mapNavigation(blogNavigationData.navigationItems)
+    : [];
 
   return (
     <PageTemplate
@@ -177,11 +205,16 @@ export default async function Page({ params }: PageProps) {
       hideFooter={hideFooter}
       siteSettings={settings}
       navigationData={navigationData}
+      navItems={navItems}
+      navGroups={navGroups}
+      utilityItems={utilityItems}
       footerNavigationData={footerNavigationData}
-      blogNavItems={blogNavigationData?.navigationItems ?? []}
-      socialItems={settings?.socialLinks ?? []}
+      footerNavItems={footerNavItems}
+      footerUtilityItems={footerUtilityItems}
+      footerSocialItems={footerSocialItems}
+      blogNavItems={blogNavItems}
     >
-      <PageBuilder sections={resolvedSection} pageData={page} />
+      <PageBuilder sections={resolvedSections} pageData={page} />
     </PageTemplate>
   );
 }

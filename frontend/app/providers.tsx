@@ -1,6 +1,17 @@
 "use client";
 import { HeroProvider } from "quirk-ui/next";
-import { LocaleProvider } from "@/context/LocaleContext";
+import { LocaleProvider, useLocaleContext } from "@/context/LocaleContext";
+import { LocaleBridgeProvider } from "quirk-ui/next";
+
+function LocaleBridgeWrapper({ children }: { children: React.ReactNode }) {
+  const { locale, isDefault } = useLocaleContext();
+
+  return (
+    <LocaleBridgeProvider value={{ locale, isDefault }}>
+      {children}
+    </LocaleBridgeProvider>
+  );
+}
 
 export function AppProviders({
   children,
@@ -11,7 +22,9 @@ export function AppProviders({
 }) {
   return (
     <HeroProvider>
-      <LocaleProvider localeParam={currentLocale}>{children}</LocaleProvider>
+      <LocaleProvider localeParam={currentLocale}>
+        <LocaleBridgeWrapper>{children}</LocaleBridgeWrapper>
+      </LocaleProvider>
     </HeroProvider>
   );
 }

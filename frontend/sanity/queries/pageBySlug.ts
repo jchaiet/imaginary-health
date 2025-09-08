@@ -8,6 +8,7 @@ import {
   heroBlockFragment,
   documentListBlockFragment,
   tabsBlockFragment,
+  cardGridBlockFragment,
 } from "./fragments";
 
 export const pageBySlugQuery = `
@@ -68,6 +69,9 @@ export const pageBySlugQuery = `
       },
       _type == "tabsBlock" => {
         ${tabsBlockFragment}
+      },
+      _type == "cardGridBlock" => {
+        ${cardGridBlockFragment}
       }
     }
   }

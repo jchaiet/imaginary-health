@@ -26,7 +26,6 @@ type LayoutProps = {
   logoLinkSlug?: string;
   variant: "standard" | "transparent";
   navigationType: "default" | "advanced";
-  socialItems: Link[];
   primaryInfo?: string;
   secondaryInfo?: string;
   footerNavItems: NavItem[];
@@ -68,7 +67,6 @@ export default function Layout({
     ? urlForImage(logo?.asset?._id).width(200).quality(100).url()
     : null;
 
-  console.log(navGroups);
   return (
     <>
       {!hideHeader && (

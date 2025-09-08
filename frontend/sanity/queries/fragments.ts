@@ -20,6 +20,7 @@ export const linkFragment = `
   label,
   ariaLabel,
   image {
+    ...,
     ${imageAssetFragment}
   },
   linkOptions {
@@ -57,6 +58,7 @@ export const articleFragment = `
     ${categoryFragment}
   },
   featuredImage {
+    ...,
     ${imageAssetFragment}
   }
 `;
@@ -73,6 +75,10 @@ export const richTextFragment = `
         title
       }
     }
+  },
+  _type == "image" => {
+    ...,
+    ${imageAssetFragment}
   }
 `;
 
@@ -97,6 +103,45 @@ export const headingFragment = `
   headingLayout
 `;
 
+export const tabItemFragment = `
+    ...,
+    tabText[]{
+      ...,
+      ${richTextFragment}
+    },
+    tabImage {
+      ${imageAssetFragment}
+    },
+    tabLink {
+      ${linkFragment}
+    },
+    tabGridItem[]{
+      itemText[]{
+        ...,
+        ${richTextFragment}
+      },
+      itemImage {
+        ${imageAssetFragment}
+      }
+    },
+    tabDisclaimer[]{
+      ...,
+      ${richTextFragment}
+    },
+    callToAction{
+      ${linkFragment}
+    },
+`;
+
+export const stylesFragment = `
+  theme,
+  orientation,
+  padding,
+  maxWidth,
+  layout,
+  background
+`;
+
 export const singletonFragment = `
   "singleton": referencedSingleton->{
     _id,
@@ -107,6 +152,10 @@ export const singletonFragment = `
       blockSelection == "heroBlock" => blockContent.heroBlock{
         ...,
         _type,
+        image {
+          ...,
+          ${imageAssetFragment}
+        },
         callToAction{
           ${callToActionFragment}
         }
@@ -114,6 +163,10 @@ export const singletonFragment = `
       blockSelection == "contentBlock" => blockContent.contentBlock{
         ...,
         _type,
+        image {
+          ...,
+          ${imageAssetFragment}
+        },
         callToAction{
           ${callToActionFragment}
         }
@@ -231,6 +284,10 @@ export const carouselBlockFragment = `
   },
   items[]{
     ...,
+    image {
+      ...,
+      ${imageAssetFragment}
+    },
     callToAction{
       ${linkFragment}
     }
@@ -266,6 +323,10 @@ export const contentBlockFragment = `
   ...,
   heading {
     ${headingFragment}
+  },
+  image {
+   ...,
+    ${imageAssetFragment}
   },
   callToAction {
     ${callToActionFragment}
@@ -323,6 +384,7 @@ export const tabsBlockFragment = `
     ${headingFragment}
   },
   image {
+    ...,
     ${imageAssetFragment}
   },
   callToAction {
@@ -330,31 +392,51 @@ export const tabsBlockFragment = `
   },
   items[]{
     ...,
-    tabText[]{
+    ${tabItemFragment}
+    content {
       ...,
-      ${richTextFragment}
+      ${tabItemFragment}
+    }
+  }
+`;
+
+export const cardGridBlockFragment = `
+  ...,
+  heading {
+    ${headingFragment}
+  },
+  grid {
+    columns {
+      xs,
+      sm,
+      md,
+      lg,
+      xl
     },
-    tabImage {
-      ${imageAssetFragment}
-    },
-    tabLink {
-      ${linkFragment}
-    },
-    tabGridItem[]{
-      itemText[]{
-        ...,
+    areas,
+    gap,
+    autoFitMinMax,
+    items[]{
+      ...,
+      description[] {
         ${richTextFragment}
       },
-      itemImage {
+      image {
+        ...,
         ${imageAssetFragment}
+      },
+      callToAction{
+        ${linkFragment}
       }
     },
-    tabDisclaimer[]{
-      ...,
-      ${richTextFragment}
-    },
-    callToAction{
-      ${linkFragment}
-    }
+    className
+  },
+  textReplaceOnHover,
+  options,
+  callToAction {
+    ${callToActionFragment}
+  },
+  styleOptions {
+    ${stylesFragment}
   }
 `;

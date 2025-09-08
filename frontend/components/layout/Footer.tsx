@@ -43,15 +43,16 @@ export default function Footer({
     );
   };
 
-  const LogoImage = (
+  const LogoImage = logoUrl ? (
     <Image
       src={logoUrl ?? ""}
       alt={logoAlt || "Content image"}
       width={200}
-      height={80}
+      height={0}
       priority={true}
+      style={{ height: "auto" }}
     />
-  );
+  ) : null;
 
   if (!navItems || !Array.isArray(navItems)) {
     return null;

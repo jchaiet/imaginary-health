@@ -86,17 +86,17 @@ export default function Header({
     <Image
       src={logoUrl}
       alt={logoAlt || "Content image"}
-      width={100}
-      height={40}
+      width={200}
+      height={73}
+      sizes="100px"
       priority={true}
+      style={{ width: "100px", height: "auto" }}
     />
   ) : null;
 
   if (!navItems || !Array.isArray(navItems)) {
     return null;
   }
-
-  console.log("HEADER", navGroups);
 
   return (
     <Navbar
