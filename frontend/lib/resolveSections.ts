@@ -1,15 +1,24 @@
 import { urlForImage } from "@/sanity/client";
-import { PageSection } from "@/types";
+import { PageSection, SanityImage } from "quirk-ui/next";
 
-function resolveImagesDeep(obj: any): any {
+function isSanityImage(obj: unknown): obj is SanityImage {
+  return (
+    typeof obj === "object" &&
+    obj !== null &&
+    "asset" in obj &&
+    typeof (obj as any).asset?._id === "string"
+  );
+}
+
+function resolveImagesDeep<T>(obj: T): T {
   if (Array.isArray(obj)) {
-    return obj.map(resolveImagesDeep);
+    return obj.map(resolveImagesDeep) as unknown as T;
   }
 
-  if (obj && typeof obj === "object") {
-    const clone: Record<string, any> = { ...obj };
+  if (obj && typeof obj === "object" && !Array.isArray(obj)) {
+    const clone = { ...(obj as Record<string, unknown>) };
 
-    if (obj.asset?._id) {
+    if (isSanityImage(obj)) {
       clone.imageUrl = urlForImage(obj).width(1600).quality(90).url();
     }
 
@@ -17,13 +26,13 @@ function resolveImagesDeep(obj: any): any {
       clone[key] = resolveImagesDeep(value);
     }
 
-    return clone;
+    return clone as T;
   }
 
   return obj;
 }
 
-export function resolveSections(sections: PageSection[]) {
+export function resolveSections(sections: PageSection[]): PageSection[] {
   return sections.map((section) => resolveImagesDeep(section));
 }
 
