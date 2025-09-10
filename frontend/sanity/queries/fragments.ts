@@ -431,7 +431,6 @@ export const cardGridBlockFragment = `
     },
     className
   },
-  textReplaceOnHover,
   options,
   callToAction {
     ${callToActionFragment}

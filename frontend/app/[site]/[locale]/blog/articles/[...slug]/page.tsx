@@ -16,7 +16,7 @@ import { mapGroups } from "@/lib/mapGroups";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
 import type { Metadata } from "next";
-import { CategoryProps, PageSection } from "@/types";
+import { type CategoryProps, type PageSection } from "quirk-ui/next";
 
 interface PageProps {
   params: Promise<{ site: string; slug: string[]; locale: string }>;

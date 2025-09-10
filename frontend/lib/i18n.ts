@@ -30,7 +30,11 @@ function nextPathToSanitySlug(path: string) {
 }
 
 async function pageExists(locale: string, slug: string): Promise<boolean> {
-  return fetch(`/api/page-exists?locale=${locale}&slug=${slug}`)
+  const encodedSlug = encodeURIComponent(slug);
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  return fetch(
+    `${baseUrl}/api/page-exists?locale=${locale}&slug=${encodedSlug}`
+  )
     .then((res) => res.json())
     .then((data) => data.exists);
 }

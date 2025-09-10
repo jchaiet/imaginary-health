@@ -35,6 +35,8 @@ export const headingType = defineType({
     }),
     defineField({
       name: "animateText",
+      description:
+        "Allow heading text to be animated. Specific animations would be handled at the component level.",
       type: "boolean",
       title: "Animate text?",
     }),

@@ -3,15 +3,17 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { SearchModal } from "../ui/SearchModal";
 import { LocaleModal } from "../ui/LocaleModal";
+import { RichText } from "quirk-ui/next";
 import {
   Navbar,
   type UtilityItem,
   type NavItem,
   type NavGroup,
 } from "quirk-ui/core";
-import { useLocaleContext } from "@/context/LocaleContext";
+import { useLocaleBridge } from "quirk-ui/next";
 import { usePathname } from "next/navigation";
 import { locales, getLocaleLink } from "@/lib/i18n";
+import { RichContent } from "quirk-ui";
 // import styles from "./styles.module.css";
 
 type HeaderProps = {
@@ -28,6 +30,7 @@ type HeaderProps = {
   showLocaleSelect?: boolean;
   searchComponent?: React.ReactNode;
   localeSelectComponent?: React.ReactNode;
+  renderText?: (content: RichContent) => React.ReactNode;
 };
 
 export default function Header({
@@ -42,10 +45,9 @@ export default function Header({
   logoLinkSlug,
   showSearch,
   showLocaleSelect,
-  // searchComponent,
 }: HeaderProps) {
   const [localeLinks, setLocaleLinks] = useState<{ [key: string]: string }>({});
-  const { locale } = useLocaleContext();
+  const { locale } = useLocaleBridge();
   const currentPath = usePathname();
   const currentLocale = locale;
 
@@ -98,8 +100,26 @@ export default function Header({
     return null;
   }
 
+  const defaultRenderText = (content?: RichContent, className?: string) => {
+    if (!content) return null;
+
+    if (typeof content === "string") return content;
+
+    if (typeof content === "object") {
+      if (content.type === "markdown") {
+        return content.content;
+      }
+
+      if (content.type === "portableText") {
+        return <RichText className={className} blocks={content.content} />;
+      }
+    }
+    return null;
+  };
+
   return (
     <Navbar
+      renderText={defaultRenderText}
       searchComponent={<SearchModal />}
       showSearch={showSearch}
       showLocaleSelect={showLocaleSelect}

@@ -26,11 +26,13 @@ export interface CardGridBlockProps {
     items?: ItemType[];
     className?: string;
   };
-  textReplaceOnHover: boolean;
   options?: string[];
   callToAction: {
     alignment: "left" | "center" | "right";
     items: Link[];
   };
   styleOptions: Styles;
+
+  /** Deprecated */
+  //textReplaceOnHover: boolean;
 }

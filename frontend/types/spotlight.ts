@@ -1,12 +1,11 @@
 import { PortableTextBlock } from "next-sanity";
 import { SanityImage } from "./image";
 import { Link } from "./link";
+import { RichContent } from "quirk-ui/core";
 
 export type SpotlightProps = {
-  _id: string;
-  _type: string;
-  title: PortableTextBlock[];
-  description?: PortableTextBlock[];
+  title?: RichContent;
+  description?: RichContent;
   image?: SanityImage;
   callToAction: Link;
 };

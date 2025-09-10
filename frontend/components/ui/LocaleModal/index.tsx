@@ -1,6 +1,6 @@
 import { locales } from "@/lib/i18n";
-import styles from "./styles.module.css";
 import Link from "next/link";
+import styles from "./styles.module.css";
 
 type LocaleModalProps = {
   links: { [key: string]: string };

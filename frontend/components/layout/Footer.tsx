@@ -1,8 +1,12 @@
-import { Footer as FooterNav } from "quirk-ui/core";
-import type { NavItem, UtilityItem } from "quirk-ui/core";
+import {
+  Footer as FooterNav,
+  type NavItem,
+  type UtilityItem,
+} from "quirk-ui/core";
+import { RichText } from "quirk-ui/next";
+
 import Image from "next/image";
 import { PortableTextBlock } from "next-sanity";
-import { RichText } from "@/components/ui/PortableTextRenderer";
 
 export type FooterProps = {
   navItems: NavItem[];

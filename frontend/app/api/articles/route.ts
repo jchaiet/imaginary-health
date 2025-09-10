@@ -1,5 +1,5 @@
 import { sanityClient, urlForImage } from "@/sanity/client";
-import { ArticleItem } from "@/types";
+import { type ArticleItem } from "quirk-ui/next";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {

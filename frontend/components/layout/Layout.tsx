@@ -1,12 +1,10 @@
 "use client";
 import { ReactNode } from "react";
-import type { NavGroup, NavItem } from "quirk-ui/core";
-
+import type { NavGroup, NavItem, UtilityItem } from "quirk-ui/core";
+import { type SanityImage } from "quirk-ui/next";
 import Header from "./Header";
 import Footer from "./Footer";
-import { SanityImage } from "@/types";
 import { PortableTextBlock } from "next-sanity";
-import type { UtilityItem } from "quirk-ui/core";
 import { urlForImage } from "@/sanity/client";
 
 type LayoutProps = {

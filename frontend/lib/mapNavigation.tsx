@@ -1,5 +1,4 @@
 import type { NavItem } from "quirk-ui/core";
-import { RichText } from "@/components/ui/PortableTextRenderer";
 import { resolveNavItemHref } from "./resolveNavItemHref";
 import { NavigationItem } from "@/types";
 import { localizeHref } from "./localizeHref";
@@ -11,7 +10,7 @@ export async function mapNavigation(
     items.map(async (item) => {
       const label = item.title;
       const key = item._key;
-      const description = <RichText blocks={item.description ?? []} />;
+      const description = { type: "portableText", content: item.description };
       const subtitle = item.subtitle;
 
       if (
