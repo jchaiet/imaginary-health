@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { SearchModal } from "../ui/SearchModal";
 import { LocaleModal } from "../ui/LocaleModal";
@@ -9,6 +10,9 @@ import {
   type NavItem,
   type NavGroup,
 } from "quirk-ui/core";
+import { useLocaleBridge } from "quirk-ui/next";
+import { usePathname } from "next/navigation";
+import { locales, getLocaleLink } from "@/lib/i18n";
 import { RichContent } from "quirk-ui";
 // import styles from "./styles.module.css";
 
@@ -26,7 +30,7 @@ type HeaderProps = {
   showLocaleSelect?: boolean;
   searchComponent?: React.ReactNode;
   localeSelectComponent?: React.ReactNode;
-  localeLinks: { [key: string]: string };
+  renderText?: (content: RichContent) => React.ReactNode;
 };
 
 export default function Header({
@@ -41,8 +45,30 @@ export default function Header({
   logoLinkSlug,
   showSearch,
   showLocaleSelect,
-  localeLinks,
 }: HeaderProps) {
+  const [localeLinks, setLocaleLinks] = useState<{ [key: string]: string }>({});
+  const { locale } = useLocaleBridge();
+  const currentPath = usePathname();
+  const currentLocale = locale;
+
+  //Prebuild locale links
+  useEffect(() => {
+    async function buildLinks() {
+      const result: { [key: string]: string } = {};
+      for (const locale of locales) {
+        result[locale.id] = await getLocaleLink(
+          currentPath,
+          locale.id,
+          currentLocale
+        );
+      }
+      setLocaleLinks(result);
+    }
+    if (currentPath) {
+      buildLinks();
+    }
+  }, [currentPath]);
+
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
 
