@@ -6,7 +6,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { PortableTextBlock } from "next-sanity";
 import { urlForImage } from "@/sanity/client";
-import HeaderWrapper from "./HeaderWrapper";
 
 type LayoutProps = {
   children: ReactNode;
@@ -68,7 +67,7 @@ export default function Layout({
   return (
     <>
       {!hideHeader && (
-        <HeaderWrapper
+        <Header
           utilityItems={utilityItems ?? []}
           navItems={navItems ?? []}
           navGroups={navGroups ?? []}

@@ -10,6 +10,7 @@ import { AppProviders } from "@/app/providers";
 import { ThemeWrapper } from "@/lib/ThemeWrapper";
 import { resolveLocale } from "@/lib/i18n";
 import { setRequestLocale } from "@/lib/requestLocale";
+import { ClientAppProviders } from "@/lib/AppProviders";
 // import { SanityLiveVisualEditing } from "@/components/preview/SanityLiveVisualEditing";
 
 const roboto = Roboto_Flex({
@@ -33,7 +34,7 @@ export default async function RootLayout({
     <html lang={currentLocale}>
       <body className={roboto.className}>
         <ThemeWrapper>
-          <AppProviders currentLocale={currentLocale}>
+          <ClientAppProviders currentLocale={currentLocale}>
             {isEnabled && (
               <>
                 {/* <SanityLiveVisualEditing /> */}
@@ -43,7 +44,7 @@ export default async function RootLayout({
             )}
 
             {children}
-          </AppProviders>
+          </ClientAppProviders>
         </ThemeWrapper>
       </body>
     </html>
