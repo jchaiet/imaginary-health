@@ -5,7 +5,6 @@ import { DisableDraftMode } from "@/components/preview/DisableDraftMode";
 import "../../globals.css";
 import "quirk-ui/styles.css";
 // import { HeroProvider } from "@/context/HeroContext";
-import { AppProviders } from "@/app/providers";
 
 import { ThemeWrapper } from "@/lib/ThemeWrapper";
 import { resolveLocale } from "@/lib/i18n";
