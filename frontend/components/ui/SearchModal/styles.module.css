@@ -78,7 +78,7 @@
   height: 650px;
   max-height: 65vh;
   overflow-y: auto;
-  padding: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg);
 
   &::-webkit-scrollbar {
     width: 12px;
