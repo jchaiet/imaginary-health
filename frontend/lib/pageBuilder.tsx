@@ -32,7 +32,7 @@ import {
   CardGridBlock,
   CarouselBlock,
   ContentBlock,
-  //DocumentListBlock,
+  DocumentListBlock,
   FaqBlock,
   FeaturedDocumentsBlock,
   HeroBlock,
@@ -83,8 +83,8 @@ export function PageBuilder({
             return <QuoteBlock key={i} {...section} />;
           case "accordionBlock":
             return <AccordionBlock key={i} {...section} />;
-          // case "documentListBlock":
-          //   return <DocumentListBlock key={i} {...section} />;
+          case "documentListBlock":
+            return <DocumentListBlock key={i} {...section} />;
           case "featuredDocumentsBlock":
             return <FeaturedDocumentsBlock key={i} {...section} />;
           case "additionalCategoriesBlock":
