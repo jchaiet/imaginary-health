@@ -14,6 +14,7 @@ import { setRequestLocale } from "@/lib/requestLocale";
 
 const roboto = Roboto_Flex({
   subsets: ["latin"],
+  display: "swap",
 });
 
 export default async function RootLayout({
