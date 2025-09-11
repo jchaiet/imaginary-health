@@ -29,12 +29,14 @@ export default async function RootLayout({
 
   const { isEnabled } = await draftMode();
 
+  const isProd = process.env.NODE_ENV === "production";
+
   return (
     <html lang={currentLocale}>
       <body className={roboto.className}>
         <ThemeWrapper>
           <AppProviders currentLocale={currentLocale}>
-            {isEnabled && (
+            {!isProd && isEnabled && (
               <>
                 {/* <SanityLiveVisualEditing /> */}
                 <DisableDraftMode />
