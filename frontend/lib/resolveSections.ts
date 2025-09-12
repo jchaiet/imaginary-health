@@ -19,7 +19,7 @@ function resolveImagesDeep<T>(obj: T): T {
     const clone = { ...(obj as Record<string, unknown>) };
 
     if (isSanityImage(obj)) {
-      clone.imageUrl = urlForImage(obj).width(1600).quality(90).url();
+      clone.imageUrl = urlForImage(obj).width(1200).quality(90).url();
     }
 
     for (const [key, value] of Object.entries(obj)) {
