@@ -51,8 +51,8 @@ export default function Footer({
     <Image
       src={logoUrl ?? ""}
       alt={logoAlt || "Content image"}
-      width={200}
-      height={0}
+      width={150}
+      height={50}
       priority={true}
       style={{ height: "auto" }}
     />
