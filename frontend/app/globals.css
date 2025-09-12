@@ -14,6 +14,14 @@ html {
   color-scheme: light;
 }
 
+html.no-scroll,
+html.no-scroll body {
+  overflow: hidden;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+}
+
 html,
 body {
   font-family: "Lucida Console", "Courier New", monospace;
