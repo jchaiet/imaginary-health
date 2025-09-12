@@ -1,7 +1,6 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import {
   DocumentsIcon,
-  InfoOutlineIcon,
   InlineElementIcon,
   InlineIcon,
   HelpCircleIcon,

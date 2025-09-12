@@ -80,7 +80,7 @@ export async function GET(req: NextRequest) {
       }
     },
     publishDate,
-    categories[]->{ _id, title }
+    categories[]->{ _id, title, slug { current } }
   }`;
 
   const countQuery = `count(*[

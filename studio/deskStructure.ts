@@ -95,29 +95,6 @@ export const deskContent = structureTool({
                 )
               )
           ),
-        // S.listItem()
-        //   .title("Pages by Locale")
-        //   .child(
-        //     S.list()
-        //       .title("Pages by Locale")
-        //       .items(
-        //         locales.map((locale) => {
-        //           const filter =
-        //             locale.id === "en-us"
-        //               ? `locale == "${locale.id}" || !defined(locale)`
-        //               : `locale == "${locale.id}"`;
-
-        //           return parentChild(
-        //             "page",
-        //             `Pages (${locale.title})`,
-        //             DocumentsIcon,
-        //             S,
-        //             context.documentStore,
-        //             filter
-        //           ).id(`pages-${locale.id}`);
-        //         })
-        //       )
-        //   ),
         S.listItem()
           .title("Articles by Site")
           .child(
@@ -154,41 +131,37 @@ export const deskContent = structureTool({
                 )
               )
           ),
-        // S.listItem()
-        //   .title("Articles by Locale")
-        //   .child(
-        //     S.list()
-        //       .title("Articles by Locale")
-        //       .items(
-        //         locales.map((locale) => {
-        //           const filter =
-        //             locale.id === "en-us"
-        //               ? `locale == "${locale.id}" || !defined(locale)`
-        //               : `locale == "${locale.id}"`;
-
-        //           return parentChild(
-        //             "blog",
-        //             `Articles (${locale.title})`,
-        //             ComposeSparklesIcon,
-        //             S,
-        //             context.documentStore,
-        //             filter
-        //           ).id(`pages-${locale.id}`);
-        //         })
-        //       )
-        //   ),
 
         S.divider(),
 
         S.documentTypeListItem("navigation").title("Navigation"),
 
-        parentChild(
-          "category",
-          "Categories",
-          TagsIcon,
-          S,
-          context.documentStore
-        ),
+        S.listItem()
+          .title("Categories by Site")
+          .child(
+            S.list()
+              .title("Categories by Site")
+              .items(
+                sites.map((site) =>
+                  parentChild(
+                    "category",
+                    site.title,
+                    TagsIcon,
+                    S,
+                    context.documentStore,
+                    `site._ref == "${site._id}"`,
+                    site._id
+                  ).id(`categories-${site._id}`)
+                )
+              )
+          ),
+        // parentChild(
+        //   "category",
+        //   "Categories",
+        //   TagsIcon,
+        //   S,
+        //   context.documentStore
+        // ),
 
         parentChild(
           "singleton",

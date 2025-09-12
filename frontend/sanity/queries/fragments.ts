@@ -1,7 +1,7 @@
 export const categoryFragment = `
   _id,
   title,
-  slug
+  slug { current }
 `;
 
 export const imageAssetFragment = `
@@ -27,7 +27,7 @@ export const linkFragment = `
     linkType,
     internalUrl->{
       _type,
-      slug
+      slug { current }
     },
     externalUrl
   },
@@ -49,7 +49,7 @@ export const articleFragment = `
   ...,
   _id,
   title,
-  slug,
+  slug { current },
   excerpt,
   timeToRead,
   articleType,

@@ -9,6 +9,15 @@ export const categoryType = defineType({
   icon: TagIcon,
   fields: [
     defineField({
+      name: "site",
+      title: "Site",
+      type: "reference",
+      to: [{ type: "site" }],
+      readOnly: true,
+      description: "This category belongs to the selected site",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "title",
       title: "Title",
       type: "string",
