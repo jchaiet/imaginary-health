@@ -35,6 +35,8 @@ export default function Footer({
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
 
+    console.log(utilityItems);
+
     return destination ? (
       <a
         href={`${destination === "home" ? `/` : `/${destination}`}`}
@@ -54,9 +56,29 @@ export default function Footer({
       width={150}
       height={50}
       priority={true}
-      style={{ height: "auto" }}
     />
   ) : null;
+
+  const enhancedUtilityItems: UtilityItem[] | undefined = utilityItems?.map(
+    (item) => {
+      if (item.imageSrc) {
+        return {
+          ...item,
+          label: (
+            <Image
+              src={item.imageSrc}
+              alt={item.imageAlt || item.ariaLabel || "Item image"}
+              width={175}
+              height={59}
+            />
+          ),
+          displayType: "image",
+        };
+      }
+
+      return item;
+    }
+  );
 
   if (!navItems || !Array.isArray(navItems)) {
     return null;
@@ -75,7 +97,7 @@ export default function Footer({
       primaryInfo={primaryInfo ? <RichText blocks={primaryInfo} /> : null}
       secondaryInfo={secondaryInfo ? <RichText blocks={secondaryInfo} /> : null}
       socialItems={socialItems}
-      utilityItems={utilityItems}
+      utilityItems={enhancedUtilityItems}
       copyright="&copy; 2025 Imaginary Health"
     />
   );
