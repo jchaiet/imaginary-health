@@ -74,7 +74,7 @@ export function resolveSections(
             {
               locale,
               site,
-              excludeCategories: excludeCategories,
+              excludeCategories,
               includeCategories,
               limit: section.limit ?? 3,
               documentType: section.documentType,
@@ -91,6 +91,7 @@ export function resolveSections(
             initialArticles: resolvedInitialArticles,
             initialTotalCount: result.count,
             initialIncludeCategories: includeCategories,
+            initialExcludeCategories: excludeCategories,
           };
         } catch (err) {
           console.error("Failed to fetch document list for section", err);
