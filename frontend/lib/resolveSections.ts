@@ -1,6 +1,7 @@
 import { urlForImage, sanityClient } from "@/sanity/client";
 import { PageSection, SanityImage } from "quirk-ui/next";
 import { documentListQuery } from "@/sanity/queries/fragments";
+import { CategoryProps } from "@/types";
 
 export type ResolveSectionOptions = {
   locale?: string;
@@ -40,7 +41,7 @@ function resolveImagesDeep<T>(obj: T): T {
   return obj;
 }
 
-function normalizeCategoryFilters(filters: any[]): string[] {
+function normalizeCategoryFilters(filters: CategoryProps[]): string[] {
   if (!filters) return [];
 
   return filters.map((f) => (typeof f === "string" ? f : f._id));
