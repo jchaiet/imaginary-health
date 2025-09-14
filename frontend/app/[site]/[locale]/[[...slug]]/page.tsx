@@ -19,6 +19,7 @@ import { mapGroups } from "@/lib/mapGroups";
 
 interface PageProps {
   params: Promise<{ site: string; slug: string[]; locale: string }>;
+  searchParams?: Promise<{ categories: string | string[] }>;
 }
 
 const getPage = cache(
@@ -59,8 +60,8 @@ export async function generateMetadata({
         .url()
     : "/favicon.ico";
 
-  const ogImageUrl = settings?.defaultSeo?.image
-    ? urlForImage(settings.defaultSeo.image)
+  const ogImageUrl = settings?.defaultSEO?.image
+    ? urlForImage(settings.defaultSEO.image)
         .width(1200)
         .height(630)
         .quality(90)
@@ -91,9 +92,7 @@ export async function generateMetadata({
         ? [
             {
               rel: "mask-icon",
-              url: urlForImage(settings?.siteIcon?.appleTouchIcon)
-                .quality(100)
-                .url(),
+              url: urlForImage(settings?.siteIcon?.maskIcon).quality(100).url(),
             },
           ]
         : [],
@@ -130,9 +129,18 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params, searchParams }: PageProps) {
   const { slug, locale, site } = await params;
   const { isEnabled } = await draftMode();
+
+  const resolvedParams = await searchParams;
+
+  let categoryOverride: string[] | undefined;
+  if (resolvedParams?.categories) {
+    categoryOverride = Array.isArray(resolvedParams.categories)
+      ? resolvedParams.categories
+      : [resolvedParams.categories];
+  }
 
   let page = await getPage(slug, locale, isEnabled, site);
 
@@ -151,7 +159,12 @@ export default async function Page({ params }: PageProps) {
     site: siteRef,
   } = page;
 
-  const resolvedSections = resolveSections(pageBuilder);
+  const resolvedSections = await resolveSections(pageBuilder ?? [], {
+    locale,
+    site,
+    isDraft: isEnabled,
+    categoryOverride,
+  });
 
   const isBlog = page?.slug?.current?.startsWith("blog");
 

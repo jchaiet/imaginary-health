@@ -1,5 +1,13 @@
-import { urlForImage } from "@/sanity/client";
+import { urlForImage, sanityClient } from "@/sanity/client";
 import { PageSection, SanityImage } from "quirk-ui/next";
+import { documentListQuery } from "@/sanity/queries/fragments";
+
+export type ResolveSectionOptions = {
+  locale?: string;
+  site: string;
+  isDraft?: boolean;
+  categoryOverride?: string[] | undefined;
+};
 
 function isSanityImage(obj: unknown): obj is SanityImage {
   return (
@@ -32,23 +40,63 @@ function resolveImagesDeep<T>(obj: T): T {
   return obj;
 }
 
-export function resolveSections(sections: PageSection[]): PageSection[] {
-  return sections.map((section) => resolveImagesDeep(section));
+function normalizeCategoryFilters(filters: any[]): string[] {
+  if (!filters) return [];
+
+  return filters.map((f) => (typeof f === "string" ? f : f._id));
 }
 
-// async function resolveItems(items: ItemType[]) {
-//   return await Promise.all(
-//     items.map(async (item: ItemType) => {
-//       if (item.callToAction) {
-//         return {
-//           ...item,
-//           callToAction: {
-//             ...item.callToAction,
-//             resolvedUrl: await resolveLinkURL(item.callToAction),
-//           },
-//         };
-//       }
-//       return item;
-//     })
-//   );
-// }
+export function resolveSections(
+  sections: PageSection[],
+  { locale, site, isDraft, categoryOverride }: ResolveSectionOptions
+): Promise<PageSection[]> {
+  return Promise.all(
+    sections.map(async (section) => {
+      let resolved = resolveImagesDeep(section);
+
+      if (section._type === "documentListBlock") {
+        try {
+          const baseInclude = normalizeCategoryFilters(
+            section.includeFilters ?? []
+          );
+          const excludeCategories = normalizeCategoryFilters(
+            section.excludeFilters ?? []
+          );
+
+          const includeCategories =
+            categoryOverride && categoryOverride?.length > 0
+              ? [...baseInclude, ...categoryOverride]
+              : baseInclude;
+
+          const result = await sanityClient.fetch(
+            documentListQuery,
+            {
+              locale,
+              site,
+              excludeCategories: excludeCategories,
+              includeCategories,
+              limit: section.limit ?? 3,
+              documentType: section.documentType,
+            },
+            isDraft
+              ? { perspective: "drafts", useCdn: false, stega: true }
+              : undefined
+          );
+
+          const resolvedInitialArticles = resolveImagesDeep(result.articles);
+
+          resolved = {
+            ...resolved,
+            initialArticles: resolvedInitialArticles,
+            initialTotalCount: result.count,
+            initialIncludeCategories: includeCategories,
+          };
+        } catch (err) {
+          console.error("Failed to fetch document list for section", err);
+        }
+      }
+
+      return resolved;
+    })
+  );
+}

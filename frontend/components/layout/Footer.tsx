@@ -34,9 +34,6 @@ export default function Footer({
 }: FooterProps) {
   const ImageContainer = ({ children }: { children: React.ReactNode }) => {
     const destination = logoLinkSlug;
-
-    console.log(utilityItems);
-
     return destination ? (
       <a
         href={`${destination === "home" ? `/` : `/${destination}`}`}
@@ -56,6 +53,7 @@ export default function Footer({
       width={150}
       height={50}
       priority={true}
+      style={{ width: "auto" }}
     />
   ) : null;
 

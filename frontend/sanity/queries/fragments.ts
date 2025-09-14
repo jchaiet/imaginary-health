@@ -439,3 +439,36 @@ export const cardGridBlockFragment = `
     ${stylesFragment}
   }
 `;
+
+export const documentListQuery = `
+  {
+    "articles": *[
+      _type == $documentType &&
+      locale == $locale &&
+      site->identifier.current == $site &&
+      (
+        !defined($includeCategories) ||
+        count(categories[@._ref in $includeCategories]) > 0
+      ) &&
+      (
+        !defined($excludeCategories) ||
+        count(categories[@._ref in $excludeCategories]) == 0
+      )
+    ] | order(publishDate desc) [0...$limit] {
+      ${articleFragment}
+    },
+    "count": count(*[
+      _type == $documentType &&
+      locale == $locale &&
+      site->identifier.current == $site &&
+      (
+        !defined($includeCategories) ||
+        count(categories[@._ref in $includeCategories]) > 0
+      ) &&
+      (
+        !defined($excludeCategories) ||
+        count(categories[@._ref in $excludeCategories]) == 0
+      )
+    ])
+  }
+`;

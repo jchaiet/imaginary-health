@@ -37,8 +37,8 @@ export async function generateMetadata({
         .url()
     : "/favicon.ico";
 
-  const ogImageUrl = settings?.defaultSeo?.image
-    ? urlForImage(settings.defaultSeo.image)
+  const ogImageUrl = settings?.defaultSEO?.image
+    ? urlForImage(settings.defaultSEO.image)
         .width(1200)
         .height(630)
         .quality(90)
@@ -151,8 +151,11 @@ export default async function Page({ params }: PageProps) {
     site: siteRef,
   } = page;
 
-  const resolvedSections = resolveSections(pageBuilder);
-
+  const resolvedSections = await resolveSections(pageBuilder ?? [], {
+    locale,
+    site,
+    isDraft: isEnabled,
+  });
   const type = page?._type === "blog" ? "article" : "other";
 
   const hasKeywordsCategory = page.categories?.some((cat: CategoryProps) =>
