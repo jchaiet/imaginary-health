@@ -1,11 +1,8 @@
 "use client";
 import { ReactNode } from "react";
 import Layout from "@/components/layout/Layout";
-
 import BlogHeader from "../layout/BlogHeader";
-
 import { type NavGroup, type NavItem, type UtilityItem } from "quirk-ui/core";
-
 import { type SiteSettings, type NavigationData } from "quirk-ui/next";
 
 type PageTemplateProps = {

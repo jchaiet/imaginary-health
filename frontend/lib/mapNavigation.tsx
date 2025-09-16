@@ -1,6 +1,6 @@
 import type { NavItem } from "quirk-ui/core";
-import { resolveNavItemHref } from "./resolveNavItemHref";
 import { NavigationItem } from "@/types";
+import { resolveNavItemHref } from "./resolveNavItemHref";
 import { localizeHref } from "./localizeHref";
 
 export async function mapNavigation(

@@ -2,7 +2,7 @@ import { createClient } from "next-sanity";
 import { sanityConfig } from "./config";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { Link } from "@/types";
+import { Link } from "quirk-ui/next";
 import { navigationQuery, siteSettingsQuery } from "./queries";
 import { siteQuery } from "./queries/site";
 

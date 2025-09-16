@@ -40,10 +40,20 @@ export async function mapGroups(
         image: group.spotlight.image
           ? {
               ...group.spotlight.image,
-              imageUrl: urlForImage(group.spotlight?.image)
-                .width(600)
-                .quality(90)
-                .url(),
+              imageUrls: {
+                small: urlForImage(group.spotlight?.image)
+                  .width(300)
+                  .quality(90)
+                  .url(),
+                medium: urlForImage(group.spotlight?.image)
+                  .width(600)
+                  .quality(90)
+                  .url(),
+                large: urlForImage(group.spotlight?.image)
+                  .width(800)
+                  .quality(90)
+                  .url(),
+              },
             }
           : undefined,
       };

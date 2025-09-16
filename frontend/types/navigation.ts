@@ -1,6 +1,5 @@
-import { SanityImage } from "./image";
 import { NavigationItem } from "./navigationItem";
-import { Link } from "./link";
+import type { Link, SanityImage } from "quirk-ui/next";
 
 export interface Navigation {
   title: string;

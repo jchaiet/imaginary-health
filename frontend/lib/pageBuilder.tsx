@@ -1,26 +1,4 @@
 "use client";
-// import { HeroBlock } from "@/components/blocks/HeroBlock";
-//import { CardGridBlock } from "@/components/blocks/CardGridBlock";
-//import { CarouselBlock } from "@/components/blocks/CarouselBlock";
-//import { ContentBlock } from "@/components/blocks/ContentBlock";
-//import { StickyScrollBlock } from "@/components/blocks/StickyScrollBlock";
-
-//import { FaqBlock } from "@/components/blocks/FaqBlock";
-//import { TabsBlock } from "@/components/blocks/TabsBlock";
-//import { RichTextBlock } from "@/components/blocks/RichTextBlock";
-//import { AccordionBlock } from "@/components/blocks/AccordionBlock";
-//import { DocumentListBlock } from "@/components/blocks/DocumentListBlock";
-// import { FeaturedDocumentsBlock } from "@/components/blocks/FeaturedDocumentsBlock";
-// import { QuoteBlock } from "@/components/blocks/QuoteBlock";
-// import { AdditionalCategories } from "@/components/blocks/AdditionalCategories";
-// import WasHelpfulBlock from "@/components/blocks/WasHelpfulBlock";
-
-// import { PageSection } from "@/types/pageSection";
-// import { SingletonBlock } from "@/types/singleton";
-// import { ContentBlockProps } from "@/types";
-// import { RichTextBlockProps } from "@/types/richText";
-// import { QuoteBlockProps } from "@/types/quote";
-
 import {
   type ContentBlockProps,
   type PageSection,

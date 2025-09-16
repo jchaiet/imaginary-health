@@ -1,7 +1,6 @@
 import { urlForImage, sanityClient } from "@/sanity/client";
-import { PageSection, SanityImage } from "quirk-ui/next";
+import type { PageSection, SanityImage, CategoryProps } from "quirk-ui/next";
 import { documentListQuery } from "@/sanity/queries/fragments";
-import { CategoryProps } from "@/types";
 
 export type ResolveSectionOptions = {
   locale?: string;

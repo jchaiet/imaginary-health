@@ -1,10 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { SanityImage } from "@/types";
-
 import Image from "next/image";
 import { Input, Text } from "quirk-ui/core";
-import { LocaleLink } from "quirk-ui/next";
+import { LocaleLink, type SanityImage } from "quirk-ui/next";
 import { ChevronRight, Search, XIcon, RefreshCw } from "lucide-react";
 import styles from "./styles.module.css";
 
