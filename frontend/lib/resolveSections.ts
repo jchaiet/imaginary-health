@@ -28,7 +28,12 @@ function resolveImagesDeep<T>(obj: T): T {
     const clone = { ...(obj as Record<string, unknown>) };
 
     if (isSanityImage(obj)) {
-      clone.imageUrl = urlForImage(obj).quality(90).url();
+      clone.imageUrl = urlForImage(obj).width(1200).quality(90).url();
+      clone.imageUrls = {
+        small: urlForImage(obj).width(300).quality(90).url(),
+        medium: urlForImage(obj).width(600).quality(90).url(),
+        large: urlForImage(obj).width(1200).quality(90).url(),
+      };
     }
 
     for (const [key, value] of Object.entries(obj)) {
