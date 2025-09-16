@@ -1,5 +1,6 @@
-import type { NavigationItem, SpotlightProps } from "@/types";
+import type { NavigationItem } from "@/types";
 import type { NavGroup } from "quirk-ui/core";
+import type { SpotlightProps } from "quirk-ui/next";
 import { mapNavigation } from "./mapNavigation";
 import { urlForImage } from "@/sanity/client";
 
