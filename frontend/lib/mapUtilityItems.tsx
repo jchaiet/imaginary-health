@@ -1,6 +1,6 @@
 import Image from "next/image";
-import type { Link } from "@/types";
 import type { UtilityItem } from "quirk-ui/core";
+import type { Link } from "quirk-ui/next";
 
 export async function mapUtilityItems(links: Link[]): Promise<UtilityItem[]> {
   return links.map((link) => {
