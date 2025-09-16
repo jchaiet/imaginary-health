@@ -101,10 +101,20 @@ export async function GET(req: NextRequest) {
       featuredImage: article.featuredImage
         ? {
             ...article.featuredImage,
-            imageUrl: urlForImage(article.featuredImage)
-              .width(600)
-              .quality(90)
-              .url(),
+            imageUrls: {
+              small: urlForImage(article.featuredImage)
+                .width(300)
+                .quality(90)
+                .url(),
+              medium: urlForImage(article.featuredImage)
+                .width(600)
+                .quality(90)
+                .url(),
+              large: urlForImage(article.featuredImage)
+                .width(1200)
+                .quality(90)
+                .url(),
+            },
           }
         : null,
     }));
